@@ -42,14 +42,48 @@ document.addEventListener('mouseenter', () => {
     cursor.style.opacity = '1';
 });
 
-// Castle Portal Click
+// Clean URL parameters
+if (window.location.search.includes('fbclid')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// Hide loading screen when page loads
+window.addEventListener('load', () => {
+    // Show body content
+    document.body.style.transition = 'opacity 0.5s ease-in';
+    document.body.style.opacity = '1';
+    
+    // Show cursor
+    const cursor = document.getElementById('customCursor');
+    if (cursor) {
+        cursor.style.opacity = '1';
+    }
+    
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }, 300);
+});
+
+// Castle Portal Password Protection
 const castlePortal = document.getElementById('castlePortal');
 if (castlePortal) {
     castlePortal.addEventListener('click', (e) => {
         e.preventDefault();
-        // For now, just alert - you can add your login page later
-        alert('Castle portal clicked! Add login page here.');
-        // window.location.href = '/login';
+        const password = prompt('Speak the password to enter the castle:');
+        
+        // You can change this password to whatever you want
+        if (password && password.toLowerCase() === 'excalibur') {
+            alert('Welcome to the inner realm! (This would redirect to your main site)');
+            // window.location.href = '/main'; // Uncomment when you have the main site ready
+        } else if (password) {
+            alert('The castle remains sealed. Try again, brave one.');
+        }
     });
 }
 
@@ -65,11 +99,11 @@ document.addEventListener('mousemove', (e) => {
     const angleX = (e.clientX - centerX) / window.innerWidth;
     const angleY = (e.clientY - centerY) / window.innerHeight;
     
-    // Very subtle rotation for head (max 4 degrees)
-    const headRotation = angleX * 4;
+    // Very subtle rotation for head (max 6 degrees)
+    const headRotation = angleX * 6;
     
-    // Pure rotation for sword (max 15 degrees from hand)
-    const swordRotation = angleX * 15;
+    // Pure rotation for sword (max 20 degrees from hand)
+    const swordRotation = angleX * 20;
     
     gsap.to(knightHead, {
         rotation: headRotation,
