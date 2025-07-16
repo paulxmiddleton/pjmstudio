@@ -193,12 +193,12 @@ body {
         .dragon-link {
             position: absolute;
             top: 5%;
-            left: 38%; // Moved left from 48%
+            left: 38%;
             transform: translateX(-50%);
             display: block;
             z-index: 5;
-            width: 400px;
-            height: auto;
+            width: 200px; // Much smaller
+            height: 150px; // Fixed height
             overflow: hidden;
             
             // Invisible box to limit click area
@@ -381,6 +381,8 @@ body {
 // Mobile Adjustments
 @media (max-width: 768px) {
     .herald-message {
+        top: 50%;
+        
         .coming-soon {
             font-size: clamp(2rem, 10vw, 3.5rem);
         }
@@ -390,20 +392,49 @@ body {
         }
     }
     
-    .dragon-silhouette {
-        width: 100px;
+    .dragon-link {
+        width: 80px !important; // Tiny on mobile
+        height: 60px !important;
+        left: 45%;
         top: 10%;
-        right: 10%;
+    }
+    
+    .dragon-silhouette {
+        width: 500px;
     }
     
     .knight-container {
-        bottom: 25%;
-        left: 10%;
-        width: 200px;
-        height: 270px;
+        bottom: 15%;
+        left: 5%; // Move left on mobile
+        width: 350px;
+        height: 189px; // Maintain aspect ratio
         
-        img {
-            transform: scale(0.8);
+        .knight-body {
+            top: 0;
+            left: 0;
+        }
+        
+        .knight-head {
+            top: -15%; // Adjust for mobile
+            left: 3%;
+        }
+        
+        .knight-sword {
+            left: 10%;
+            top: -10%;
+        }
+    }
+    
+    .flying-birds {
+        display: none; // Hide on mobile for performance
+    }
+    
+    .footer-socials {
+        gap: 1rem;
+        
+        svg, img {
+            width: 18px;
+            height: 18px;
         }
     }
 }
