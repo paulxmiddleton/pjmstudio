@@ -193,16 +193,17 @@ body {
         .dragon-link {
             position: absolute;
             top: 5%;
-            left: 38%;
+            left: 30%; // Move left
             transform: translateX(-50%);
             display: block;
             z-index: 5;
-            width: 400px; // Back to visible size
-            height: 300px; // Taller for dragon
-            overflow: visible; // Make sure dragon shows
+            width: 200px; // Much smaller
+            height: 150px; // Smaller height
+            overflow: visible;
+            pointer-events: none; // Disable entire link
             
-            &::after {
-                display: none; // Remove the limiter
+            .dragon-silhouette {
+                pointer-events: auto; // Only dragon is clickable
             }
         }
         
@@ -373,9 +374,18 @@ body {
 
 // Mobile Adjustments
 @media (max-width: 768px) {
+    // Hide cursor initially on mobile
+    .sword-cursor {
+        display: none;
+    }
+    
+    body.touched .sword-cursor {
+        display: block;
+    }
+    
     .herald-message {
-        top: 50%;
-        pointer-events: none !important; // Disable parallax on mobile
+        top: 35%; // Raised into sky
+        pointer-events: none !important;
         
         .coming-soon {
             font-size: clamp(2rem, 10vw, 3.5rem);
@@ -387,10 +397,10 @@ body {
     }
     
     .dragon-link {
-        width: 150px !important; // Small on mobile
-        height: 100px !important;
-        left: 45%;
-        top: 10%;
+        width: 100px !important; // Tiny on mobile
+        height: 80px !important;
+        left: 25%; // More left
+        top: 8%;
     }
     
     .dragon-silhouette {
@@ -399,7 +409,7 @@ body {
     
     .knight-container {
         bottom: 15%;
-        left: -15% !important; // Much more left (33% position)
+        left: -15% !important;
         width: 350px;
         height: 189px;
         
@@ -419,29 +429,31 @@ body {
         }
     }
     
-    .bird-container {
-        display: none; // Hide birds on mobile
-    }
-    
     .realm-footer {
-        bottom: 3%;
+        bottom: 5%; // Raised up
         
         .middleton-crest {
-            display: none; // Hide crest on mobile
+            display: none;
         }
         
         .footer-socials {
-            margin-bottom: 0; // Move socials down
-            gap: 1.2rem;
+            margin-bottom: 0;
+            gap: 1.5rem;
             
-            svg, img {
-                width: 20px;
-                height: 20px;
+            svg {
+                width: 22px;
+                height: 22px;
+            }
+            
+            img {
+                width: 26px;
+                height: 26px;
             }
         }
         
         .copyright {
             margin-top: 0.5rem;
+            font-size: 0.7rem;
         }
     }
 }

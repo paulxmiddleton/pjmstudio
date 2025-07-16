@@ -42,6 +42,13 @@ document.addEventListener('mouseenter', () => {
     cursor.style.opacity = '1';
 });
 
+// Mobile cursor fix - hide until first touch
+if (window.innerWidth <= 768) {
+    document.addEventListener('touchstart', () => {
+        document.body.classList.add('touched');
+    }, { once: true });
+}
+
 // Clean URL parameters
 if (window.location.search.includes('fbclid')) {
     window.history.replaceState({}, document.title, window.location.pathname);
