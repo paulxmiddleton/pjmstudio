@@ -177,31 +177,34 @@ document.addEventListener('DOMContentLoaded', () => {
         background: mainBg
     });
     
-    document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX - window.innerWidth / 2) / 200;
-        const y = (e.clientY - window.innerHeight / 2) / 200;
-        
-        // Background moves normally (slightly increased)
-        if (mainBg) {
-            mainBg.style.transform = `scale(1.05) translate(${x * 0.4}px, ${y * 0.4}px)`;
-        }
-        
-        // Text moves opposite (slightly decreased)
-        if (heraldMsg) {
-            const currentLeft = 40; // base percentage
-            const currentTop = 40; // Updated base percentage (raised more)
-            heraldMsg.style.left = `${currentLeft + (x * -0.08)}%`;
-            heraldMsg.style.top = `${currentTop + (y * -0.08)}%`;
-        }
-        
-        // Social buttons move opposite (slightly decreased)
-        if (socialBtns) {
-            const currentLeft = 40; // base percentage
-            const currentTop = 20; // Updated base percentage
-            socialBtns.style.left = `${currentLeft + (x * -0.05)}%`;
-            socialBtns.style.top = `${currentTop + (y * -0.05)}%`;
-        }
-    });
+    // Only add mousemove listener on desktop
+    if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) / 200;
+            const y = (e.clientY - window.innerHeight / 2) / 200;
+            
+            // Background moves normally (slightly increased)
+            if (mainBg) {
+                mainBg.style.transform = `scale(1.05) translate(${x * 0.4}px, ${y * 0.4}px)`;
+            }
+            
+            // Text moves opposite (slightly decreased)
+            if (heraldMsg) {
+                const currentLeft = 40;
+                const currentTop = 40;
+                heraldMsg.style.left = `${currentLeft + (x * -0.08)}%`;
+                heraldMsg.style.top = `${currentTop + (y * -0.08)}%`;
+            }
+            
+            // Social buttons move opposite (slightly decreased)
+            if (socialBtns) {
+                const currentLeft = 40;
+                const currentTop = 20;
+                socialBtns.style.left = `${currentLeft + (x * -0.05)}%`;
+                socialBtns.style.top = `${currentTop + (y * -0.05)}%`;
+            }
+        });
+    }
 });
 
 // Medieval Sparkles Effect with Multiple Styles

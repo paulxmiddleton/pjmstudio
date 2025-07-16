@@ -197,19 +197,12 @@ body {
             transform: translateX(-50%);
             display: block;
             z-index: 5;
-            width: 200px; // Much smaller
-            height: 150px; // Fixed height
-            overflow: hidden;
+            width: 400px; // Back to visible size
+            height: 300px; // Taller for dragon
+            overflow: visible; // Make sure dragon shows
             
-            // Invisible box to limit click area
             &::after {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 50%;
-                height: 50%;
-                transform: translate(-50%, -50%);
+                display: none; // Remove the limiter
             }
         }
         
@@ -382,6 +375,7 @@ body {
 @media (max-width: 768px) {
     .herald-message {
         top: 50%;
+        pointer-events: none !important; // Disable parallax on mobile
         
         .coming-soon {
             font-size: clamp(2rem, 10vw, 3.5rem);
@@ -393,8 +387,8 @@ body {
     }
     
     .dragon-link {
-        width: 80px !important; // Tiny on mobile
-        height: 60px !important;
+        width: 150px !important; // Small on mobile
+        height: 100px !important;
         left: 45%;
         top: 10%;
     }
@@ -405,9 +399,9 @@ body {
     
     .knight-container {
         bottom: 15%;
-        left: 5%; // Move left on mobile
+        left: -15% !important; // Much more left (33% position)
         width: 350px;
-        height: 189px; // Maintain aspect ratio
+        height: 189px;
         
         .knight-body {
             top: 0;
@@ -415,7 +409,7 @@ body {
         }
         
         .knight-head {
-            top: -15%; // Adjust for mobile
+            top: -15%;
             left: 3%;
         }
         
@@ -425,16 +419,29 @@ body {
         }
     }
     
-    .flying-birds {
-        display: none; // Hide on mobile for performance
+    .bird-container {
+        display: none; // Hide birds on mobile
     }
     
-    .footer-socials {
-        gap: 1rem;
+    .realm-footer {
+        bottom: 3%;
         
-        svg, img {
-            width: 18px;
-            height: 18px;
+        .middleton-crest {
+            display: none; // Hide crest on mobile
+        }
+        
+        .footer-socials {
+            margin-bottom: 0; // Move socials down
+            gap: 1.2rem;
+            
+            svg, img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        .copyright {
+            margin-top: 0.5rem;
         }
     }
 }
