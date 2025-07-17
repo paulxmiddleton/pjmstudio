@@ -42,7 +42,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #F4E8D0;
+    background: #FFFFFF; // Plain white
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -50,14 +50,7 @@ body {
     transition: opacity 0.5s ease-out;
     
     .loading-content {
-        text-align: center;
-        
-        p {
-            font-family: 'Cinzel', serif;
-            color: #8B2500;
-            font-size: 1.2rem;
-            letter-spacing: 0.1em;
-        }
+        // Empty - no text
     }
     
     &.fade-out {
@@ -87,6 +80,27 @@ body {
     &.swiping {
         img {
             animation: sword-swipe 0.3s ease-out;
+        }
+        
+        // Mobile dragon (no link)
+        .mobile-dragon {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .dragon-link {
+                display: none !important;
+            }
+            
+            .mobile-dragon {
+                display: block;
+                position: absolute;
+                width: 500px;
+                left: -10%;
+                top: 8%;
+                z-index: 5;
+                opacity: 1;
+            }
         }
     }
 }
@@ -384,27 +398,33 @@ body {
     }
     
     .herald-message {
-        top: 35%; // Raised into sky
+        top: 15%; // Top of screen
+        left: 50%; // Centered
+        transform: translateX(-50%);
+        text-align: center;
         pointer-events: none !important;
         
         .coming-soon {
-            font-size: clamp(2rem, 10vw, 3.5rem);
+            font-size: clamp(3rem, 12vw, 4rem); // Bigger
+            letter-spacing: 0;
         }
         
         .subtitle {
-            font-size: clamp(0.7rem, 2vw, 1rem);
+            font-size: clamp(0.9rem, 3vw, 1.3rem); // Bigger
+            margin-top: 0.5rem;
         }
     }
     
     .dragon-link {
-        width: 100px !important; // Tiny on mobile
-        height: 80px !important;
-        left: 25%; // More left
-        top: 8%;
+        display: none !important; // Remove dragon link on mobile
     }
     
     .dragon-silhouette {
+        position: absolute;
         width: 500px;
+        left: -10%; // 45% from right = -10% from left
+        top: 8%;
+        pointer-events: none; // Not clickable
     }
     
     .knight-container {
@@ -430,7 +450,10 @@ body {
     }
     
     .realm-footer {
-        bottom: 5%; // Raised up
+        position: fixed; // Fixed to viewport
+        bottom: 20px; // Raised significantly
+        left: 50%;
+        transform: translateX(-50%);
         
         .middleton-crest {
             display: none;
@@ -441,13 +464,13 @@ body {
             gap: 1.5rem;
             
             svg {
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
             }
             
             img {
-                width: 26px;
-                height: 26px;
+                width: 28px;
+                height: 28px;
             }
         }
         
