@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul Middleton - Creative Professional | PJM Studio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: #2B2B2B;
+            color: #F4E8D0;
+            overflow-x: hidden;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FFFFFF;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .sword-cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+        
+        .sword-cursor img {
+            width: 32px;
+            height: 32px;
+            transform: rotate(-10deg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .medieval-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(43, 43, 43, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #8B8680;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .nav-crest {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .nav-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #F4E8D0;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: #F4E8D0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #87CEEB;
+        }
+        
+        .hero-realm {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #2B2B2B, #8B8680);
+        }
+        
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: #F4E8D0;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #87CEEB;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-badge {
+            background: rgba(139, 134, 128, 0.8);
+            color: #F4E8D0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #8B8680;
+        }
+        
+        .about-realm {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, rgba(43, 43, 43, 0.9), rgba(139, 134, 128, 0.1));
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: #F4E8D0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .about-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #F4E8D0;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content"></div>
+    </div>
+
+    <!-- Custom Sword Cursor -->
+    <div class="sword-cursor" id="customCursor">
+        <img src="/src/assets/images/cursor-sword.png" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="medieval-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="/src/assets/images/middleton-crest.png" alt="PJM Studio" class="nav-crest">
+                <span class="nav-title">PJM Studio</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-realm">
+        <div class="hero-content">
+            <h1 class="hero-title">Paul Middleton</h1>
+            <p class="hero-subtitle">Creative Professional & Visual Storyteller</p>
+            <div class="hero-skills">
+                <span class="skill-badge">Director</span>
+                <span class="skill-badge">Video Editor</span>
+                <span class="skill-badge">Photographer</span>
+                <span class="skill-badge">Graphic Designer</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-realm">
+        <div class="container">
+            <h2 class="section-title">About the Creator</h2>
+            <p class="about-description">
+                Welcome to my creative realm. I'm Paul Middleton, a multi-disciplinary creative professional 
+                specializing in visual storytelling across multiple mediums. From directing compelling narratives 
+                to crafting stunning visuals, I bring stories to life through the lens of medieval-inspired artistry 
+                and modern technical excellence.
+            </p>
+            <p class="about-description">
+                When not creating, you'll find me skateboarding through city streets, experimenting in the kitchen, 
+                tending to my garden, or diving deep into virtual worlds. These passions fuel my creative vision 
+                and bring authenticity to every project.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Simple loading screen management
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            const cursor = document.getElementById('customCursor');
+            if (cursor) cursor.style.opacity = '1';
+            
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }
+            }, 300);
+        });
+        
+        // Simple cursor tracking
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('customCursor');
+            if (cursor) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

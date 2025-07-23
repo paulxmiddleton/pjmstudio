@@ -203,25 +203,60 @@ body {
             }
         }
         
-        // Dragon link wrapper
+        // Dragon link wrapper (invisible clickable area at dragon center)
         .dragon-link {
             position: absolute;
-            top: 5%;
-            left: 30%; // Move left
-            transform: translateX(-50%);
+            top: 7%; // Position at dragon center
+            left: 30%; // Match dragon position exactly
+            transform: translate(-50%, -50%); // Center the clickbox
             display: block;
-            z-index: 5;
-            width: 200px; // Much smaller
-            height: 150px; // Smaller height
-            overflow: visible;
-            pointer-events: none; // Disable entire link
+            z-index: 6; // Above dragon image
+            width: 25px; // Larger for easier targeting
+            height: 20px; // Larger for easier targeting
+            background: rgba(255, 215, 0, 0.05); // Very subtle gold tint always visible
+            pointer-events: auto; // This container is clickable
+            border-radius: 50%; // Round area
+            cursor: pointer; // Show pointer cursor
+            border: 1px solid rgba(255, 215, 0, 0.1); // Very subtle border
+            
+            // Add hover indication
+            &:hover {
+                background: rgba(255, 215, 0, 0.2); // More visible gold highlight
+                border: 1px solid rgba(255, 215, 0, 0.3); // More visible border
+                transform: translate(-50%, -50%) scale(1.2); // Slightly larger on hover
+                transition: all 0.2s ease;
+            }
             
             .dragon-silhouette {
-                pointer-events: auto; // Only dragon is clickable
+                display: none; // Hide the image in the link, we'll show it separately
             }
         }
         
-        // Dragon in the sky
+        // Visual dragon (not clickable)
+        .dragon-visual {
+            position: absolute;
+            top: 5%;
+            left: 30%;
+            transform: translateX(-50%);
+            display: block;
+            width: 800px; // Original large size for visibility
+            height: auto;
+            opacity: 1;
+            z-index: 5;
+            pointer-events: none; // Not clickable
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; // Irregular timing
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+        
+        // Dragon hover effect when clickable area is hovered
+        .dragon-link:hover ~ .dragon-visual,
+        .dragon-link:hover + .dragon-visual {
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, 
+                      dragon-wiggle 1.2s ease-in-out infinite;
+        }
+        
+        // Dragon in the sky (legacy - keep for any other references)
         .dragon-silhouette {
             display: block;
             width: 800px;
@@ -229,22 +264,31 @@ body {
             opacity: 1;
             cursor: pointer;
             position: relative;
-            animation: dragon-float 6s ease-in-out infinite; // Constant floating
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
             
             &:hover {
-                animation: dragon-float 6s ease-in-out infinite, dragon-wiggle 0.5s ease-in-out infinite;
+                animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, 
+                          dragon-wiggle 1.2s ease-in-out infinite;
             }
         }
         
         @keyframes dragon-float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(1deg); }
-            75% { transform: translateY(10px) rotate(-1deg); }
+            0% { transform: translateY(0) rotate(0deg) scaleX(1); }
+            15% { transform: translateY(-8px) rotate(1.5deg) scaleX(0.98); }
+            30% { transform: translateY(-12px) rotate(-0.5deg) scaleX(1.02); }
+            45% { transform: translateY(-6px) rotate(2deg) scaleX(0.99); }
+            60% { transform: translateY(8px) rotate(-1.5deg) scaleX(1.01); }
+            75% { transform: translateY(14px) rotate(0.8deg) scaleX(0.97); }
+            90% { transform: translateY(3px) rotate(-2.2deg) scaleX(1.03); }
+            100% { transform: translateY(0) rotate(0deg) scaleX(1); }
         }
         
         @keyframes dragon-wiggle {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.02); }
+            0% { transform: translateY(0) scale(1) rotate(0deg); }
+            25% { transform: translateY(-1px) scale(1.005) rotate(0.3deg); }
+            50% { transform: translateY(-2px) scale(1.01) rotate(-0.2deg); }
+            75% { transform: translateY(-1px) scale(1.005) rotate(0.4deg); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); }
         }
         
         // Complete Knight Container
@@ -352,14 +396,14 @@ body {
                 width: 20px;
                 height: 20px;
                 fill: currentColor;
-                filter: brightness(0) invert(1);
+                filter: brightness(0) invert(1) opacity(0.7);
                 opacity: 1;
             }
             
             img {
                 width: 24px;
                 height: 24px;
-                filter: brightness(0) invert(1) opacity(0.85); // Match SVG opacity
+                filter: brightness(0) invert(1) opacity(0.7);
                 opacity: 1;
             }
             
@@ -421,8 +465,8 @@ body {
     
     .dragon-silhouette {
         position: absolute;
-        width: 500px;
-        left: -10%; // 45% from right = -10% from left
+        width: 500px; // Original mobile size
+        left: -10%; // Original position
         top: 8%;
         pointer-events: none; // Not clickable
     }

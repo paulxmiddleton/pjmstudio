@@ -1,0 +1,524 @@
+// home.scss - Home page specific styles
+@import './main.scss';
+
+// Allow body to scroll for home page
+html, body {
+    overflow: auto;
+    height: auto;
+}
+
+// Container for consistent spacing
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+    }
+}
+
+// Navigation Styles
+.medieval-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(43, 43, 43, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid $castle-stone;
+    z-index: 1000;
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        @media (max-width: 768px) {
+            padding: 1rem;
+        }
+    }
+    
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        
+        .nav-crest {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .nav-title {
+            font-family: 'Tempting', serif;
+            font-size: 1.5rem;
+            color: $parchment;
+            text-decoration: none;
+        }
+    }
+    
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        
+        @media (max-width: 768px) {
+            gap: 1rem;
+        }
+    }
+    
+    .nav-link {
+        color: $parchment;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-weight: 400;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+        
+        &:hover {
+            color: $sky-blue;
+        }
+        
+        @media (max-width: 768px) {
+            font-size: 0.9rem;
+        }
+    }
+    
+    // Dropdown functionality
+    .nav-dropdown {
+        position: relative;
+        
+        .dropdown-toggle {
+            cursor: pointer;
+            
+            &:after {
+                content: '⏷';
+                margin-left: 0.5rem;
+                font-size: 0.8rem;
+                transition: transform 0.3s ease;
+            }
+            
+            &.active:after {
+                transform: rotate(180deg);
+            }
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(43, 43, 43, 0.98);
+            border: 1px solid $castle-stone;
+            border-radius: 4px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            
+            &.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            
+            .dropdown-link {
+                display: block;
+                padding: 0.75rem 1rem;
+                color: $parchment;
+                text-decoration: none;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                border-bottom: 1px solid rgba(139, 134, 128, 0.3);
+                transition: background-color 0.3s ease;
+                
+                &:last-child {
+                    border-bottom: none;
+                }
+                
+                &:hover {
+                    background-color: rgba(139, 198, 235, 0.1);
+                    color: $sky-blue;
+                }
+            }
+        }
+    }
+}
+
+// Hero Section
+.hero-realm {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    .hero-content {
+        text-align: center;
+        z-index: 10;
+        max-width: 800px;
+        padding: 0 2rem;
+        
+        .hero-title {
+            font-family: 'Tempting', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: $parchment;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: $sky-blue;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            
+            .skill-badge {
+                background: rgba(139, 134, 128, 0.8);
+                color: $parchment;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                border: 1px solid $castle-stone;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+    
+    .hero-illustration {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        
+        .hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
+// Section Styles
+.section-title {
+    font-family: 'Tempting', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: $parchment;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+// About Section
+.about-realm {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(43, 43, 43, 0.9), rgba(139, 134, 128, 0.1));
+    
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+    
+    .about-text {
+        .about-description {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: $parchment;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-interests {
+            margin-top: 2rem;
+            
+            h3 {
+                font-family: 'Cinzel', serif;
+                font-size: 1.3rem;
+                color: $sky-blue;
+                margin-bottom: 1rem;
+            }
+            
+            .interest-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                
+                .interest-tag {
+                    background: rgba(139, 198, 235, 0.2);
+                    color: $sky-blue;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 15px;
+                    font-size: 0.85rem;
+                    border: 1px solid rgba(139, 198, 235, 0.3);
+                }
+            }
+        }
+    }
+    
+    .about-visual {
+        display: flex;
+        justify-content: center;
+        
+        .knight-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            
+            img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}
+
+// Featured Work Section
+.featured-realm {
+    padding: 6rem 0;
+    background: rgba(43, 43, 43, 0.8);
+    
+    .work-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+    
+    .work-item {
+        background: rgba(139, 134, 128, 0.1);
+        border-radius: 8px;
+        border: 1px solid $castle-stone;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .work-image {
+            height: 200px;
+            overflow: hidden;
+            
+            .work-placeholder {
+                height: 100%;
+                background: linear-gradient(135deg, $castle-stone, $deep-red);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 2rem;
+                
+                .work-icon {
+                    font-size: 3rem;
+                    margin-bottom: 1rem;
+                }
+                
+                h3 {
+                    font-family: 'Cinzel', serif;
+                    color: $parchment;
+                    font-size: 1.3rem;
+                    margin-bottom: 0.5rem;
+                }
+                
+                p {
+                    color: rgba(244, 232, 208, 0.8);
+                    font-size: 0.9rem;
+                }
+            }
+        }
+        
+        .work-info {
+            padding: 1.5rem;
+            
+            h4 {
+                font-family: 'Cinzel', serif;
+                color: $parchment;
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            p {
+                color: rgba(244, 232, 208, 0.8);
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+            
+            .work-link {
+                color: $sky-blue;
+                text-decoration: none;
+                font-family: 'Cinzel', serif;
+                font-weight: 600;
+                transition: color 0.3s ease;
+                
+                &:hover {
+                    color: $parchment;
+                }
+                
+                &:after {
+                    content: ' →';
+                    transition: transform 0.3s ease;
+                }
+                
+                &:hover:after {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}
+
+// Contact Section
+.contact-realm {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(139, 50, 0, 0.2), rgba(43, 43, 43, 0.9));
+    text-align: center;
+    
+    .contact-description {
+        font-family: 'Cinzel', serif;
+        font-size: 1.2rem;
+        color: $parchment;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .contact-methods {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: $sky-blue;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            
+            &:hover {
+                color: $parchment;
+            }
+            
+            .contact-icon {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .social-scrolls {
+            display: flex;
+            gap: 1rem;
+            
+            .scroll-link {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(139, 134, 128, 0.3);
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: $parchment;
+                    transition: fill 0.3s ease;
+                }
+                
+                img {
+                    width: 20px;
+                    height: 20px;
+                    filter: brightness(0) invert(1);
+                }
+                
+                &:hover {
+                    background: $sky-blue;
+                    transform: translateY(-2px);
+                    
+                    svg {
+                        fill: $ink-black;
+                    }
+                    
+                    img {
+                        filter: brightness(0);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Footer
+.realm-footer {
+    padding: 2rem 0;
+    background: rgba(43, 43, 43, 0.95);
+    border-top: 1px solid $castle-stone;
+    text-align: center;
+    
+    .middleton-crest {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+    }
+    
+    .copyright {
+        font-family: 'Cinzel', serif;
+        color: rgba(244, 232, 208, 0.6);
+        font-size: 0.9rem;
+    }
+}
+
+// Sword cursor animations
+.sword-cursor {
+    &.swiping img {
+        animation: sword-swipe 0.3s ease-out;
+    }
+}
+
+@keyframes sword-swipe {
+    0% { transform: rotate(-10deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.1); }
+    100% { transform: rotate(-10deg) scale(1); }
+}
+
+.fade-out {
+    opacity: 0 !important;
+    pointer-events: none;
+}
