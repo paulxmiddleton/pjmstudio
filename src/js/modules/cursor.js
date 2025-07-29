@@ -2,17 +2,22 @@
 export class SwordCursor {
     constructor() {
         this.cursor = document.getElementById('customCursor');
-        this.mouseX = 0;
-        this.mouseY = 0;
-        this.cursorX = 0;
-        this.cursorY = 0;
+        this.mouseX = -100; // Start off-screen
+        this.mouseY = -100;
+        this.cursorX = -100;
+        this.cursorY = -100;
         this.smoothness = 0.25; // Cursor following smoothness
+        this.hasMouseMoved = false;
         
         this.init();
     }
     
     init() {
         if (!this.cursor) return;
+        
+        // Hide cursor initially and position off-screen
+        this.cursor.style.opacity = '0';
+        this.cursor.style.transform = 'translate(-100px, -100px)';
         
         this.bindEvents();
         this.animate();
@@ -24,6 +29,12 @@ export class SwordCursor {
         document.addEventListener('mousemove', (e) => {
             this.mouseX = e.clientX;
             this.mouseY = e.clientY;
+            
+            // Show cursor after first mouse movement
+            if (!this.hasMouseMoved) {
+                this.hasMouseMoved = true;
+                this.cursor.style.opacity = '1';
+            }
         });
         
         // Sword swipe animation on click
@@ -34,13 +45,17 @@ export class SwordCursor {
             }, 300);
         });
         
-        // Hide cursor when leaving window
+        // Hide cursor when leaving window (only after first movement)
         document.addEventListener('mouseleave', () => {
-            this.cursor.style.opacity = '0';
+            if (this.hasMouseMoved) {
+                this.cursor.style.opacity = '0';
+            }
         });
         
         document.addEventListener('mouseenter', () => {
-            this.cursor.style.opacity = '1';
+            if (this.hasMouseMoved) {
+                this.cursor.style.opacity = '1';
+            }
         });
     }
     

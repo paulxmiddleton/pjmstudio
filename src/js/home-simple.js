@@ -68,13 +68,29 @@ class SimpleHomePage {
         if (!dropdown || !dropdownToggle || !dropdownMenu) return;
         
         let isOpen = false;
+        let hoverTimeout;
         
-        // Toggle dropdown on click
+        // Show dropdown on hover
+        dropdown.addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimeout);
+            isOpen = true;
+            dropdownMenu.classList.add('active');
+            dropdownToggle.classList.add('active');
+        });
+        
+        // Hide dropdown on leave with delay
+        dropdown.addEventListener('mouseleave', () => {
+            hoverTimeout = setTimeout(() => {
+                isOpen = false;
+                dropdownMenu.classList.remove('active');
+                dropdownToggle.classList.remove('active');
+            }, 200);
+        });
+        
+        // Navigate to portfolio overview on click
         dropdownToggle.addEventListener('click', (e) => {
             e.preventDefault();
-            isOpen = !isOpen;
-            dropdownMenu.classList.toggle('active', isOpen);
-            dropdownToggle.classList.toggle('active', isOpen);
+            window.location.href = '/src/pages/portfolio.html';
         });
         
         // Close dropdown when clicking outside

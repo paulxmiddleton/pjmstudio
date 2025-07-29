@@ -31,8 +31,9 @@
     <nav class="medieval-nav">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="/src/assets/images/middleton-crest.png" alt="PJM Studio" class="nav-crest">
-                <span class="nav-title">PJM Studio</span>
+                <a href="/home.html" class="nav-brand-link">
+                    <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="nav-logo">
+                </a>
             </div>
             
             <div class="nav-menu">
@@ -50,12 +51,6 @@
 
     <!-- Main Content -->
     <main class="portfolio-realm directing-realm">
-        <!-- Background -->
-        <div class="illustration-layer">
-            <img class="page-illustration" src="/src/assets/images/landing-illustration.png" alt="">
-            <div class="sparkles-container" id="sparklesContainer"></div>
-        </div>
-
         <!-- Content -->
         <section class="portfolio-content">
             <div class="portfolio-header">
@@ -67,8 +62,14 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Demo Reel Coming Soon</p>
+                        <!-- YouTube Embed Example -->
+                        <div class="video-embed">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                    title="Demo Reel" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
                         </div>
                     </div>
                     <div class="item-details">
@@ -79,25 +80,58 @@
 
                 <div class="portfolio-item">
                     <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Project 1 Coming Soon</p>
+                        <!-- Vimeo Embed Example -->
+                        <div class="video-embed">
+                            <iframe src="https://player.vimeo.com/video/148751763" 
+                                    title="Featured Project" 
+                                    frameborder="0" 
+                                    allow="autoplay; fullscreen; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
                         </div>
                     </div>
                     <div class="item-details">
-                        <h3>Featured Project</h3>
-                        <p>Description of directing project will go here</p>
+                        <h3>Featured Project - Vimeo</h3>
+                        <p>Cinematic storytelling with professional production values</p>
                     </div>
                 </div>
 
                 <div class="portfolio-item">
                     <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Project 2 Coming Soon</p>
+                        <!-- Instagram Embed Example -->
+                        <div class="instagram-embed">
+                            <blockquote class="instagram-media" 
+                                        data-instgrm-permalink="https://www.instagram.com/p/placeholder/" 
+                                        data-instgrm-version="13">
+                                <div class="video-placeholder instagram-placeholder">
+                                    <p>📸 Instagram Video</p>
+                                    <small>Embedded Instagram content</small>
+                                </div>
+                            </blockquote>
                         </div>
                     </div>
                     <div class="item-details">
-                        <h3>Featured Project</h3>
-                        <p>Description of directing project will go here</p>
+                        <h3>Behind the Scenes</h3>
+                        <p>Instagram content showcasing the directing process</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="item-media">
+                        <!-- Dropbox/Direct Video Example -->
+                        <div class="video-embed">
+                            <video controls poster="/src/assets/images/video-poster.jpg">
+                                <source src="https://example.dropbox.com/video.mp4" type="video/mp4">
+                                <div class="video-placeholder">
+                                    <p>🎬 Direct Video File</p>
+                                    <small>Dropbox hosted content</small>
+                                </div>
+                            </video>
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Raw Footage</h3>
+                        <p>Uncompressed directing samples from recent projects</p>
                     </div>
                 </div>
             </div>
@@ -105,6 +139,9 @@
 
         <!-- Footer -->
         <footer class="realm-footer">
+            <div class="footer-logo">
+                <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="footer-logo-img">
+            </div>
             <div class="footer-socials">
                 <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="scroll-link">
                     <svg viewBox="0 0 24 24">
@@ -117,7 +154,7 @@
                     </svg>
                 </a>
                 <a href="https://www.itsnova.com/pm" target="_blank" class="scroll-link">
-                    <img src="/src/assets/images/nova-logo.png" alt="Nova">
+                    <img src="/src/assets/images/nova-logo.svg" alt="Nova">
                 </a>
                 <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="scroll-link">
                     <svg viewBox="0 0 24 24">
@@ -125,12 +162,14 @@
                     </svg>
                 </a>
             </div>
-            <img class="middleton-crest" src="/src/assets/images/middleton-crest.png" alt="Middleton Crest">
-            <p class="copyright">© 2025 Paul Middleton</p>
+            <p class="copyright">© 2025 PAUL MIDDLETON - PJM STUDIO</p>
         </footer>
     </main>
 
     <link rel="stylesheet" href="/src/styles/portfolio.scss">
     <script type="module" src="/src/js/main.js"></script>
+    
+    <!-- Instagram Embed Script -->
+    <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>

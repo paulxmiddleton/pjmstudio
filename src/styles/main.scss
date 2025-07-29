@@ -1,19 +1,13 @@
 // main.scss
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&display=swap');
+@import 'variables';
+
 @font-face {
     font-family: 'Tempting';
     src: url('/src/assets/fonts/Tempting.woff2') format('woff2'),
          url('/src/assets/fonts/Tempting.woff') format('woff'),
          url('/src/assets/fonts/Tempting.ttf') format('truetype');
 }
-
-// Medieval Color Palette
-$parchment: #F4E8D0;
-$ink-black: #2B2B2B;
-$castle-stone: #8B8680;
-$sky-blue: #87CEEB;
-$grass-gold: #D4A574;
-$deep-red: #8B2500;
 
 // Base Reset
 * {
@@ -24,15 +18,37 @@ $deep-red: #8B2500;
 
 html, body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: auto;
+    overflow: auto;
 }
 
 body {
     font-family: 'Cinzel', serif;
-    background: $ink-black;
-    color: $parchment;
+    background: linear-gradient(135deg, 
+        #CDB995 0%, 
+        #D4C2A1 50%, 
+        #CDB995 100%);
+    color: $ink-black;
     position: relative;
+    
+    // Authentic medieval manuscript texture
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 25% 25%, rgba($royal-blue, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 75% 25%, rgba($vermillion, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 25% 75%, rgba($forest-green, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 75% 75%, rgba($illuminated-gold, 0.05) 1px, transparent 1px);
+        background-size: 80px 80px, 60px 60px, 40px 40px, 100px 100px;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.6;
+    }
 }
 
 // Loading Screen
@@ -347,20 +363,38 @@ body {
         font-family: 'UnifrakturMaguntia', cursive;
         font-size: clamp(3rem, 8vw, 5rem);
         font-weight: 300;
-        color: #8B2500;
+        color: $vermillion;
         text-transform: none;
         letter-spacing: -0.02em;
-        filter: blur(0.5px);
-        transition: filter 0.3s;
+        transition: all 0.3s;
         pointer-events: auto;
+        position: relative;
+        
+        // Illuminated manuscript drop shadow
+        text-shadow: 
+            2px 2px 0px $illuminated-gold,
+            1px 1px 3px rgba($ink-black, 0.3);
+        
+        
+        // Medieval manuscript first letter styling
+        &::first-letter {
+            font-size: 1.3em;
+            color: $royal-blue;
+            text-shadow: 1px 1px 0px $illuminated-gold;
+        }
     }
     
     .subtitle {
         margin-top: 0.5rem;
         font-size: clamp(0.8rem, 2vw, 1.2rem);
-        color: rgba(139, 37, 0, 0.8);
-        font-weight: 300;
+        color: $royal-blue;
+        font-weight: 400;
         letter-spacing: 0.1em;
+        text-shadow: 1px 1px 0px $illuminated-gold;
+        
+        // Medieval manuscript styling
+        font-family: 'Cinzel', serif;
+        font-style: italic;
     }
 }
 
