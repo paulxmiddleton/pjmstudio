@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PJM Studio - Coming Soon</title>
-    
-    <!-- Custom Cursor -->
+    <title>Photography - PJM Studio</title>
     <style>
         * {
             cursor: none !important;
         }
-        /* Hide everything until loaded */
         body {
             opacity: 0;
         }
@@ -21,6 +18,7 @@
   <script type="module" crossorigin src="/js/modulepreload-polyfill-B5Qt9EMX.js"></script>
   <script type="module" crossorigin src="/js/main-jl4HhWeA.js"></script>
   <link rel="stylesheet" crossorigin href="/css/main-B5epvj8r.css">
+  <link rel="stylesheet" crossorigin href="/css/portfolio-C4-FvWwk.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -33,45 +31,82 @@
         <img src="/images/cursor-sword-BjyZtuTY.png" alt="">
     </div>
 
-    <!-- Main Landing -->
-    <section class="landing-realm">
-        <!-- Full Illustration Background -->
-        <div class="illustration-layer">
-            <img class="main-illustration" src="/images/landing-illustration-CgUv4h0u.jpg" alt="">
+    <!-- Navigation -->
+    <nav class="medieval-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/home" class="nav-brand-link">
+                    <img src="/images/pjm-logo-CYakVmQC.svg" alt="PJM Studio" class="nav-logo">
+                </a>
+            </div>
             
-            <!-- Sparkles Layer -->
-            <div class="sparkles-container" id="sparklesContainer"></div>
-            
-            <!-- Castle Click Area (invisible) -->
-            <div class="castle-portal" id="castlePortal" title="Enter the castle..."></div>
-            
-            <!-- Tiny invisible dragon click area -->
-            <a href="https://www.instagram.com/lumpythedragon" target="_blank" class="dragon-link" title="Lumpy the Dragon"></a>
-            
-            <!-- Visual Dragon (not clickable) -->
-            <img class="dragon-silhouette dragon-visual" id="dragon" src="/images/dragon-silhouette-MiXlcnI5.png" alt="">
-            
-            <!-- Complete Knight as Separate Entity -->
-            <div class="knight-container" id="knightContainer">
-                <img class="knight-body" src="/images/knight-body-centered-BESVVslf.png" alt="">
-                <img class="knight-head" id="knightHead" src="/images/knight-head-centered-OCRApSKD.png" alt="">
-                <img class="knight-sword" id="knightSword" src="/images/knight-sword-centered-Bft_V1K7.png" alt="">
+            <div class="nav-menu">
+                <a href="/home" class="nav-link">← Home</a>
+                <div class="nav-links">
+                    <a href="/portfolio/directing" class="nav-link">Directing</a>
+                    <a href="/portfolio/videography" class="nav-link">Videography</a>
+                    <a href="/portfolio/photography" class="nav-link active">Photography</a>
+                    <a href="/portfolio/video-editing" class="nav-link">Video Editing</a>
+                    <a href="/portfolio/graphic-design" class="nav-link">Graphic Design</a>
+                </div>
             </div>
         </div>
+    </nav>
 
-        <!-- Coming Soon Text -->
-        <div class="herald-message">
-            <h1 class="coming-soon" id="comingSoon">Coming Soon</h1>
-            <p class="subtitle">website + portfolio in development</p>
-        </div>
+    <!-- Main Content -->
+    <main class="portfolio-realm photography-realm">
+        <!-- Content -->
+        <section class="portfolio-content">
+            <div class="portfolio-header">
+                <h1 class="page-title">Photography</h1>
+                <p class="page-subtitle">Freezing time with light, shadow, and emotion</p>
+            </div>
 
-        <!-- Social Scrolls -->
-        <div class="social-scrolls">
-            <!-- Social links removed from here -->
-        </div>
-        
-        <!-- Copyright Footer -->
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="item-media">
+                        <div class="video-placeholder">
+                            <p>Demo Reel Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Demo Reel</h3>
+                        <p>A showcase of directing work across various projects</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="item-media">
+                        <div class="video-placeholder">
+                            <p>Project 1 Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Featured Project</h3>
+                        <p>Description of photography project will go here</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="item-media">
+                        <div class="video-placeholder">
+                            <p>Project 2 Coming Soon</p>
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <h3>Featured Project</h3>
+                        <p>Description of photography project will go here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
         <footer class="realm-footer">
+            <div class="footer-logo">
+                <img src="/images/pjm-logo-CYakVmQC.svg" alt="PJM Studio" class="footer-logo-img">
+            </div>
             <div class="footer-socials">
                 <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="scroll-link">
                     <svg viewBox="0 0 24 24">
@@ -92,10 +127,9 @@
                     </svg>
                 </a>
             </div>
-            <img class="middleton-crest" src="/images/middleton-crest-DauzNVy_.png" alt="Middleton Crest">
             <p class="copyright">© 2025 Paul Middleton</p>
         </footer>
-    </section>
+    </main>
 
 </body>
 </html>

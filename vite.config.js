@@ -12,6 +12,13 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         home: resolve(__dirname, 'home.html'),
         homeSimple: resolve(__dirname, 'home-simple.html'),
+        portfolio: resolve(__dirname, 'portfolio.html'),
+        store: resolve(__dirname, 'store.html'),
+        directing: resolve(__dirname, 'portfolio/directing.html'),
+        videography: resolve(__dirname, 'portfolio/videography.html'),
+        photography: resolve(__dirname, 'portfolio/photography.html'),
+        videoEditing: resolve(__dirname, 'portfolio/video-editing.html'),
+        graphicDesign: resolve(__dirname, 'portfolio/graphic-design.html'),
       },
       output: {
         // Organize assets by type
