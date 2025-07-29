@@ -1,0 +1,512 @@
+// Store Page - Clean & E-commerce Focused
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+@import 'variables';
+
+// Allow body to scroll for store page - prevent horizontal scroll
+html, body {
+    overflow-x: hidden;  // Prevent horizontal scrolling
+    overflow-y: auto;    // Allow vertical scrolling
+    height: auto;
+    background: $parchment;
+}
+
+// Container for consistent spacing
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+    }
+}
+
+// Clean Navigation
+.medieval-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba($royal-blue, 0.1);
+    z-index: 1000;
+    height: 55px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 3rem;  // Increased padding for more spacing
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        
+        @media (max-width: 768px) {
+            padding: 1rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+    
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        
+        .nav-brand-link {
+            text-decoration: none;
+            color: inherit;
+            
+            &:hover .nav-title {
+                color: darken($royal-blue, 10%);
+            }
+        }
+        
+        .nav-title {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: 1.3rem;
+            color: $royal-blue;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-logo {
+            height: 73px !important;  // 8px smaller (81px - 8px)
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin: 6px 0 0 0;  // Top margin for better vertical centering
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+    
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        height: 100%;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            
+            @media (max-width: 768px) {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    }
+    
+    .nav-link {
+        color: $ink-black;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-size: 0.8rem;
+        font-weight: 400;
+        padding: 0;
+        position: relative;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        
+        &:hover {
+            color: $royal-blue;
+        }
+        
+        &.active {
+            color: $royal-blue;
+            font-weight: 500;
+        }
+    }
+}
+
+// Store Realm
+.store-realm {
+    padding-top: 80px;
+    min-height: 100vh;
+    background: $parchment;
+}
+
+// Store Header
+.store-header {
+    padding: 4rem 0 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba($royal-blue, 0.05) 0%, rgba($illuminated-gold, 0.03) 100%);
+    
+    .page-title {
+        font-family: 'UnifrakturMaguntia', 'Old English Text MT', 'Blackletter', serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        color: $royal-blue;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+    
+    .page-subtitle {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(1rem, 2.5vw, 1.4rem);
+        color: rgba($ink-black, 0.6);
+        max-width: 600px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+}
+
+// Store Categories Filter
+.store-categories {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba($royal-blue, 0.1);
+    
+    .category-filter {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        
+        .filter-btn {
+            background: white;
+            border: 1px solid rgba($royal-blue, 0.2);
+            color: $ink-black;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                border-color: $royal-blue;
+                transform: translateY(-1px);
+            }
+            
+            &.active {
+                background: $royal-blue;
+                color: white;
+                border-color: $royal-blue;
+            }
+            
+            @media (max-width: 768px) {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+// Products Section
+.products-section {
+    padding: 3rem 0 6rem;
+    
+    .featured-banner {
+        text-align: center;
+        margin-bottom: 3rem;
+        
+        .section-title {
+            font-family: 'UnifrakturMaguntia', 'Old English Text MT', 'Blackletter', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: $royal-blue;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        
+        p {
+            color: rgba($ink-black, 0.6);
+            font-family: 'Cinzel', serif;
+        }
+    }
+    
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+}
+
+// Product Card
+.product-card {
+    background: white;
+    border: 1px solid rgba($royal-blue, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba($ink-black, 0.1);
+        border-color: $royal-blue;
+    }
+    
+    .product-image {
+        position: relative;
+        height: 250px;
+        background: rgba($royal-blue, 0.02);
+        
+        .product-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: relative;
+            
+            .product-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                opacity: 0.6;
+            }
+            
+            .coming-soon-overlay {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba($royal-blue, 0.9);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+            
+            .test-product-badge {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba($illuminated-gold, 0.9);
+                color: $ink-black;
+                padding: 0.25rem 0.75rem;
+                border-radius: 15px;
+                font-family: 'Cinzel', serif;
+                font-size: 0.75rem;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+        }
+    }
+    
+    .product-info {
+        padding: 1.5rem;
+        
+        .product-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: $ink-black;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: rgba($ink-black, 0.6);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: $royal-blue;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            background: $royal-blue;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover:not(:disabled) {
+                background: #1734AE;
+                transform: translateY(-1px);
+            }
+            
+            &:disabled {
+                background: rgba($ink-black, 0.3);
+                cursor: not-allowed;
+                transform: none;
+            }
+        }
+    }
+}
+
+// Store Notice
+.store-notice {
+    background: linear-gradient(135deg, rgba($royal-blue, 0.05) 0%, rgba($illuminated-gold, 0.03) 100%);
+    border: 1px solid rgba($royal-blue, 0.1);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 3rem;
+    
+    .notice-content {
+        max-width: 500px;
+        margin: 0 auto;
+        
+        h3 {
+            font-family: 'UnifrakturMaguntia', 'Old English Text MT', 'Blackletter', serif !important;
+            font-size: 1.8rem;
+            color: $royal-blue;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        p {
+            color: rgba($ink-black, 0.6);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            
+            &.notice-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+                margin-top: 1rem;
+                font-style: italic;
+            }
+        }
+        
+        .newsletter-signup {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 400px;
+            margin: 0 auto 1rem;
+            
+            @media (max-width: 768px) {
+                flex-direction: column;
+            }
+            
+            .email-input {
+                flex: 1;
+                padding: 0.75rem 1rem;
+                border: 1px solid rgba($royal-blue, 0.2);
+                border-radius: 8px;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                
+                &::placeholder {
+                    color: rgba($ink-black, 0.4);
+                }
+                
+                &:focus {
+                    outline: none;
+                    border-color: $royal-blue;
+                }
+            }
+            
+            .signup-btn {
+                background: $royal-blue;
+                color: white;
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+                
+                &:hover {
+                    background: #1734AE;
+                    transform: translateY(-1px);
+                }
+            }
+        }
+    }
+    
+    @media (max-width: 768px) {
+        padding: 2rem 1.5rem;
+    }
+}
+
+// Footer
+.realm-footer {
+    background: transparent;
+    border-top: none;
+    padding: 3rem 0;
+    text-align: center;
+    margin-top: 4rem;
+    
+    .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        
+        .scroll-link {
+            @include social-icon-standard;
+        }
+    }
+    
+    .footer-logo {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .copyright {
+        font-family: 'Cinzel', serif;
+        font-size: 0.9rem;
+        color: rgba($ink-black, 0.4);
+        font-weight: 300;
+    }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+    .store-header {
+        padding: 3rem 0 1.5rem;
+    }
+    
+    .store-categories {
+        padding: 1.5rem 0;
+        
+        .category-filter {
+            gap: 0.75rem;
+        }
+    }
+    
+    .products-section {
+        padding: 2rem 0 4rem;
+        
+        .featured-banner {
+            margin-bottom: 2rem;
+        }
+    }
+}

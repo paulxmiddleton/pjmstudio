@@ -1,0 +1,540 @@
+// main.scss
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&display=swap');
+@import 'variables';
+
+@font-face {
+    font-family: 'Tempting';
+    src: url('/src/assets/fonts/Tempting.woff2') format('woff2'),
+         url('/src/assets/fonts/Tempting.woff') format('woff'),
+         url('/src/assets/fonts/Tempting.ttf') format('truetype');
+}
+
+// Base Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+body {
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(135deg, 
+        #CDB995 0%, 
+        #D4C2A1 50%, 
+        #CDB995 100%);
+    color: $ink-black;
+    position: relative;
+    
+    // Authentic medieval manuscript texture
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 25% 25%, rgba($royal-blue, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 75% 25%, rgba($vermillion, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 25% 75%, rgba($forest-green, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 75% 75%, rgba($illuminated-gold, 0.05) 1px, transparent 1px);
+        background-size: 80px 80px, 60px 60px, 40px 40px, 100px 100px;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.6;
+    }
+}
+
+// Loading Screen
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF; // Plain white
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out;
+    
+    .loading-content {
+        // Empty - no text
+    }
+    
+    &.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+// Custom Cursor
+.sword-cursor {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0; // Start hidden
+    transition: opacity 0.3s;
+    transform: scale(1); // Prevent size issues
+    
+    img {
+        width: 32px; // Fixed size
+        height: 32px;
+        transform: rotate(-10deg);
+        transition: transform 0.2s ease-out;
+    }
+    
+    &.swiping {
+        img {
+            animation: sword-swipe 0.3s ease-out;
+        }
+        
+        // Mobile dragon (no link)
+        .mobile-dragon {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .dragon-link {
+                display: none !important;
+            }
+            
+            .mobile-dragon {
+                display: block;
+                position: absolute;
+                width: 500px;
+                left: -10%;
+                top: 8%;
+                z-index: 5;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@keyframes sword-swipe {
+    0% { transform: rotate(-10deg) translateX(0); }
+    50% { transform: rotate(-50deg) translateX(-5px); }
+    100% { transform: rotate(-10deg) translateX(0); }
+}
+
+// Landing Realm
+.landing-realm {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    
+    .illustration-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        .main-illustration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.05);
+        }
+        
+        // Castle Click Area
+        .castle-portal {
+            position: absolute;
+            top: 30%;
+            left: 60%;
+            width: 300px;
+            height: 250px;
+            cursor: pointer;
+            z-index: 6;
+            opacity: 0; // Invisible hitbox
+            
+            &:hover {
+                opacity: 0.1;
+                background: rgba(255, 215, 0, 0.2);
+                border: 2px dashed #FFD700;
+            }
+        }
+        
+        // Birds video
+        .birds-video {
+            position: absolute;
+            top: 15%;
+            left: 65%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: auto;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+            z-index: 4;
+            pointer-events: none;
+        }
+        
+        // Sparkles Container
+        .sparkles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 8; // Higher z-index
+            
+            .sparkle-element {
+                position: absolute;
+                color: #8B2500;
+                font-size: 20px;
+                text-shadow: 0 0 3px rgba(139, 37, 0, 0.5);
+                pointer-events: none;
+                animation: sparkle-life 3s ease-in-out;
+            }
+        }
+        
+        @keyframes sparkle-life {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(0deg);
+            }
+            20% {
+                opacity: 0.9;
+                transform: scale(1.2) rotate(90deg);
+            }
+            80% {
+                opacity: 0.9;
+                transform: scale(1) rotate(270deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3) rotate(360deg);
+            }
+        }
+        
+        // Dragon link wrapper (invisible clickable area at dragon center)
+        .dragon-link {
+            position: absolute;
+            top: 7%; // Position at dragon center
+            left: 30%; // Match dragon position exactly
+            transform: translate(-50%, -50%); // Center the clickbox
+            display: block;
+            z-index: 6; // Above dragon image
+            width: 25px; // Larger for easier targeting
+            height: 20px; // Larger for easier targeting
+            background: rgba(255, 215, 0, 0.05); // Very subtle gold tint always visible
+            pointer-events: auto; // This container is clickable
+            border-radius: 50%; // Round area
+            cursor: pointer; // Show pointer cursor
+            border: 1px solid rgba(255, 215, 0, 0.1); // Very subtle border
+            
+            // Add hover indication
+            &:hover {
+                background: rgba(255, 215, 0, 0.2); // More visible gold highlight
+                border: 1px solid rgba(255, 215, 0, 0.3); // More visible border
+                transform: translate(-50%, -50%) scale(1.2); // Slightly larger on hover
+                transition: all 0.2s ease;
+            }
+            
+            .dragon-silhouette {
+                display: none; // Hide the image in the link, we'll show it separately
+            }
+        }
+        
+        // Visual dragon (not clickable)
+        .dragon-visual {
+            position: absolute;
+            top: 5%;
+            left: 30%;
+            transform: translateX(-50%);
+            display: block;
+            width: 800px; // Original large size for visibility
+            height: auto;
+            opacity: 1;
+            z-index: 5;
+            pointer-events: none; // Not clickable
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; // Irregular timing
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+        
+        // Dragon hover effect when clickable area is hovered
+        .dragon-link:hover ~ .dragon-visual,
+        .dragon-link:hover + .dragon-visual {
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, 
+                      dragon-wiggle 1.2s ease-in-out infinite;
+        }
+        
+        // Dragon in the sky (legacy - keep for any other references)
+        .dragon-silhouette {
+            display: block;
+            width: 800px;
+            height: auto;
+            opacity: 1;
+            cursor: pointer;
+            position: relative;
+            animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+            
+            &:hover {
+                animation: dragon-float 7.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, 
+                          dragon-wiggle 1.2s ease-in-out infinite;
+            }
+        }
+        
+        @keyframes dragon-float {
+            0% { transform: translateY(0) rotate(0deg) scaleX(1); }
+            15% { transform: translateY(-8px) rotate(1.5deg) scaleX(0.98); }
+            30% { transform: translateY(-12px) rotate(-0.5deg) scaleX(1.02); }
+            45% { transform: translateY(-6px) rotate(2deg) scaleX(0.99); }
+            60% { transform: translateY(8px) rotate(-1.5deg) scaleX(1.01); }
+            75% { transform: translateY(14px) rotate(0.8deg) scaleX(0.97); }
+            90% { transform: translateY(3px) rotate(-2.2deg) scaleX(1.03); }
+            100% { transform: translateY(0) rotate(0deg) scaleX(1); }
+        }
+        
+        @keyframes dragon-wiggle {
+            0% { transform: translateY(0) scale(1) rotate(0deg); }
+            25% { transform: translateY(-1px) scale(1.005) rotate(0.3deg); }
+            50% { transform: translateY(-2px) scale(1.01) rotate(-0.2deg); }
+            75% { transform: translateY(-1px) scale(1.005) rotate(0.4deg); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); }
+        }
+        
+        // Complete Knight Container
+        .knight-container {
+            position: absolute;
+            bottom: 3%;
+            left: 25%;
+            width: 600px;
+            height: 324px;
+            z-index: 5;
+            
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: left bottom;
+            }
+            
+            .knight-body {
+                z-index: 1;
+                top: 0;
+            }
+            
+            .knight-head {
+                z-index: 3;
+                top: -17%;
+                left: 1%;
+                transform-origin: 33% 70%;
+            }
+            
+            .knight-sword {
+                z-index: 2;
+                left: 8.5%;
+                top: -14%;
+                transform-origin: 17% 45%;
+            }
+        }
+    }
+}
+
+// Coming Soon Text
+.herald-message {
+    position: absolute;
+    top: 40%; // Raised more
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+    will-change: transform;
+    
+    .coming-soon {
+        font-family: 'UnifrakturMaguntia', cursive;
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 300;
+        color: $vermillion;
+        text-transform: none;
+        letter-spacing: -0.02em;
+        transition: all 0.3s;
+        pointer-events: auto;
+        position: relative;
+        
+        // Illuminated manuscript drop shadow
+        text-shadow: 
+            2px 2px 0px $illuminated-gold,
+            1px 1px 3px rgba($ink-black, 0.3);
+        
+        
+        // Medieval manuscript first letter styling
+        &::first-letter {
+            font-size: 1.3em;
+            color: $royal-blue;
+            text-shadow: 1px 1px 0px $illuminated-gold;
+        }
+    }
+    
+    .subtitle {
+        margin-top: 0.5rem;
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
+        color: $royal-blue;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-shadow: 1px 1px 0px $illuminated-gold;
+        
+        // Medieval manuscript styling
+        font-family: 'Cinzel', serif;
+        font-style: italic;
+    }
+}
+
+// Social Scrolls (now empty, keeping for parallax reference)
+.social-scrolls {
+    display: none;
+}
+
+// Copyright Footer
+.realm-footer {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    
+    .footer-socials {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+        
+        .scroll-link {
+            @include social-icon-light;  // WHITE ICONS FOR LANDING PAGE
+        }
+    }
+    
+    .middleton-crest {
+        width: 60px; // Bigger crest
+        height: 60px;
+        opacity: 0.6;
+        margin-bottom: 0.5rem;
+    }
+    
+    .copyright {
+        font-family: Arial, Helvetica, sans-serif; // Standard font
+        font-size: 0.75rem;
+        color: rgba($parchment, 0.7); // Increased opacity
+        letter-spacing: 0.05em;
+        font-weight: 400;
+    }
+}
+
+// Mobile Adjustments
+@media (max-width: 768px) {
+    // Hide cursor initially on mobile
+    .sword-cursor {
+        display: none;
+    }
+    
+    body.touched .sword-cursor {
+        display: block;
+    }
+    
+    .herald-message {
+        top: 15%; // Top of screen
+        left: 50%; // Centered
+        transform: translateX(-50%);
+        text-align: center;
+        pointer-events: none !important;
+        
+        .coming-soon {
+            font-size: clamp(3rem, 12vw, 4rem); // Bigger
+            letter-spacing: 0;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 3vw, 1.3rem); // Bigger
+            margin-top: 0.5rem;
+        }
+    }
+    
+    .dragon-link {
+        display: none !important; // Remove dragon link on mobile
+    }
+    
+    .dragon-silhouette {
+        position: absolute;
+        width: 500px; // Original mobile size
+        left: -10%; // Original position
+        top: 8%;
+        pointer-events: none; // Not clickable
+    }
+    
+    .knight-container {
+        bottom: 15%;
+        left: -15% !important;
+        width: 350px;
+        height: 189px;
+        
+        .knight-body {
+            top: 0;
+            left: 0;
+        }
+        
+        .knight-head {
+            top: -15%;
+            left: 3%;
+        }
+        
+        .knight-sword {
+            left: 10%;
+            top: -10%;
+        }
+    }
+    
+    .realm-footer {
+        position: fixed; // Fixed to viewport
+        bottom: 20px; // Raised significantly
+        left: 50%;
+        transform: translateX(-50%);
+        
+        .middleton-crest {
+            display: none;
+        }
+        
+        .footer-socials {
+            margin-bottom: 0;
+            gap: 1.5rem;
+            
+            .scroll-link {
+                @include social-icon-standard;
+            }
+        }
+        
+        .copyright {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+// Tablet Adjustments
+@media (max-width: 1024px) {
+    .landing-realm {
+        .illustration-layer {
+            .main-illustration {
+                object-position: center center;
+            }
+        }
+    }
+}

@@ -72,10 +72,10 @@ html, body {
         }
         
         .nav-logo {
-            height: 73px !important;  // 8px smaller (81px - 8px)
+            height: 35px !important;  // Properly sized for 55px nav height
             width: auto !important;
             transition: all 0.3s ease;
-            margin: 6px 0 0 0;  // Top margin for better vertical centering
+            margin: 0 2rem 0 0;  // Added right margin for more space from nav links
             
             &:hover {
                 transform: scale(1.05);
@@ -285,7 +285,7 @@ html, body {
         margin-bottom: 1rem;
         
         .scroll-link {
-            @include social-icon-standard;
+            @include social-icon-dark;
         }
     }
     

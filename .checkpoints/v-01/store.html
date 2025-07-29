@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJM Studio Store - Creative Goods & Digital Assets</title>
+    <style>
+        body {
+            opacity: 0;
+        }
+        .loading-screen {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="medieval-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/home.html" class="nav-brand-link">
+                    <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="nav-logo">
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="/home.html" class="nav-link">← Home</a>
+                <div class="nav-links">
+                    <a href="/src/pages/portfolio.html" class="nav-link">Portfolio Overview</a>
+                    <a href="/src/pages/directing.html" class="nav-link">Directing</a>
+                    <a href="/src/pages/videography.html" class="nav-link">Videography</a>
+                    <a href="/src/pages/photography.html" class="nav-link">Photography</a>
+                    <a href="/src/pages/video-editing.html" class="nav-link">Video Editing</a>
+                    <a href="/src/pages/graphic-design.html" class="nav-link">Graphic Design</a>
+                    <a href="/store.html" class="nav-link active">Store</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="store-realm">
+        <!-- Store Header -->
+        <section class="store-header">
+            <div class="container">
+                <h1 class="page-title">PJM Studio Store</h1>
+                <p class="page-subtitle">Curated creative goods, digital assets, and unique pieces from the studio</p>
+            </div>
+        </section>
+
+        <!-- Store Categories -->
+        <section class="store-categories">
+            <div class="container">
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">All Products</button>
+                    <button class="filter-btn" data-category="stickers">Stickers</button>
+                    <button class="filter-btn" data-category="clothing">Clothing</button>
+                    <button class="filter-btn" data-category="digital">Digital Assets</button>
+                    <button class="filter-btn" data-category="furniture">Furniture</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <section class="products-section">
+            <div class="container">
+                <!-- Featured Products -->
+                <div class="featured-banner">
+                    <h2 class="section-title">Featured Items</h2>
+                    <p>Handpicked favorites from the studio collection</p>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Sticker Pack - Test Product -->
+                    <div class="product-card" data-category="stickers">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">🏰</span>
+                                <div class="test-product-badge">
+                                    <span>Demo Product</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Medieval Sticker Pack</h3>
+                            <p class="product-description">Hand-illustrated medieval-themed stickers perfect for laptops, water bottles, and creative projects.</p>
+                            <div class="product-price">$12.99</div>
+                            <button class="add-to-cart-btn test-product" data-product-id="sticker-pack-01">Add to Cart (Demo)</button>
+                        </div>
+                    </div>
+
+                    <!-- Digital Editing Pack -->
+                    <div class="product-card" data-category="digital">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">🎬</span>
+                                <div class="coming-soon-overlay">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Cinematic LUTs Pack</h3>
+                            <p class="product-description">Professional color grading LUTs used in PJM Studio productions. Compatible with Premiere Pro, Final Cut, and DaVinci Resolve.</p>
+                            <div class="product-price">$24.99</div>
+                            <button class="add-to-cart-btn" disabled>Notify Me</button>
+                        </div>
+                    </div>
+
+                    <!-- T-Shirt Design -->
+                    <div class="product-card" data-category="clothing">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">👕</span>
+                                <div class="coming-soon-overlay">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Studio Crest Tee</h3>
+                            <p class="product-description">Premium cotton t-shirt featuring the PJM Studio crest. Available in multiple colors and sizes.</p>
+                            <div class="product-price">$28.99</div>
+                            <button class="add-to-cart-btn" disabled>Notify Me</button>
+                        </div>
+                    </div>
+
+                    <!-- Digital Asset Pack -->
+                    <div class="product-card" data-category="digital">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">🎨</span>
+                                <div class="coming-soon-overlay">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Logo Design Templates</h3>
+                            <p class="product-description">Professional logo templates in medieval and brutalist styles. Includes AI, EPS, and PNG files.</p>
+                            <div class="product-price">$19.99</div>
+                            <button class="add-to-cart-btn" disabled>Notify Me</button>
+                        </div>
+                    </div>
+
+                    <!-- Custom Furniture -->
+                    <div class="product-card" data-category="furniture">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">🪑</span>
+                                <div class="coming-soon-overlay">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Custom Medieval Desk</h3>
+                            <p class="product-description">Hand-crafted wooden desk with medieval-inspired design elements. Made to order with custom sizing available.</p>
+                            <div class="product-price">Starting at $899</div>
+                            <button class="add-to-cart-btn" disabled>Contact for Quote</button>
+                        </div>
+                    </div>
+
+                    <!-- Photography Preset Pack -->
+                    <div class="product-card" data-category="digital">
+                        <div class="product-image">
+                            <div class="product-placeholder">
+                                <span class="product-icon">📸</span>
+                                <div class="coming-soon-overlay">
+                                    <span>Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Moody Portrait Presets</h3>
+                            <p class="product-description">Lightroom presets for dramatic, low-light portrait photography. Includes 15 presets and adjustment tutorials.</p>
+                            <div class="product-price">$16.99</div>
+                            <button class="add-to-cart-btn" disabled>Notify Me</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Launch Notice -->
+                <div class="store-notice">
+                    <div class="notice-content">
+                        <h3>Store Launch Coming Soon</h3>
+                        <p>The PJM Studio store is currently in development. Be the first to know when we launch by joining our mailing list.</p>
+                        <div class="newsletter-signup">
+                            <input type="email" placeholder="Enter your email" class="email-input">
+                            <button class="signup-btn">Notify Me</button>
+                        </div>
+                        <p class="notice-subtitle">Get exclusive early access to new products and studio updates</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="realm-footer">
+            <div class="footer-logo">
+                <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="footer-logo-img">
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="scroll-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/user/midzasaur" target="_blank" class="scroll-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="https://www.itsnova.com/pm" target="_blank" class="scroll-link">
+                    <img src="/src/assets/images/nova-logo.svg" alt="Nova">
+                </a>
+                <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="scroll-link">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">© 2025 PAUL MIDDLETON - PJM STUDIO</p>
+        </footer>
+    </main>
+
+    <link rel="stylesheet" href="/src/styles/store.scss">
+    <script type="module" src="/src/js/store.js"></script>
+</body>
+</html>

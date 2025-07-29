@@ -1,8 +1,8 @@
 // home.js - Main entry point for home page
 import { SwordCursor } from './modules/cursor.js';
 import { KnightAnimations } from './modules/animations.js';
-import { ParallaxManager } from './modules/parallax.js';
-import { SparkleSystem } from './modules/sparkles.js';
+import { ParallaxEffects } from './modules/parallax.js';
+import { MedievalSparkles } from './modules/sparkles.js';
 import { LoadingManager } from './modules/utils.js';
 
 class HomePage {
@@ -20,8 +20,8 @@ class HomePage {
         
         // Initialize visual effects
         this.knightAnimations = new KnightAnimations();
-        this.parallaxManager = new ParallaxManager();
-        this.sparkleSystem = new SparkleSystem();
+        this.parallaxManager = new ParallaxEffects();
+        this.sparkleSystem = new MedievalSparkles();
         
         // Initialize home-specific features
         this.initNavigation();

@@ -10,23 +10,24 @@ $forest-green: #166534;     // Rich manuscript green
 $purple-imperial: #7C2D92;  // Medieval purple
 $burnt-orange: #EA580C;     // Warm orange accent
 
-// Secondary manuscript colors
-$castle-stone: #8B8680;     // Keep existing stone
-$deep-red: #8B2500;         // Keep existing deep red for compatibility
 
-// Map old colors to new authentic medieval palette
-$sky-blue: $royal-blue;     // Map to deep manuscript blue
-$grass-gold: $illuminated-gold; // Map to Byzantine gold
-
-// Social Icon Standards (consolidating footer/contact icon styling)
+// Social Icon Standards
 $social-icon-size: 20px;
-$social-icon-opacity-default: 0.7;  // Increased from 0.6 for better visibility
-$social-icon-opacity-hover: 0.9;    // Increased from 0.8 for better contrast
-$social-icon-brightness-default: 0.3; // Darker for better consistency
-$social-icon-brightness-hover: 0.1;   // Darker on hover for all icons
 
-// STANDARDIZED SOCIAL ICON MIXIN (consolidates duplicated .scroll-link code)
-@mixin social-icon-standard {
+// Light theme (landing page) - WHITE ICONS
+$social-icon-opacity-light: 0.7;
+$social-icon-opacity-hover-light: 0.9;
+$social-icon-brightness-light: 1.8;  // High brightness for white appearance
+$social-icon-brightness-hover-light: 2.0;  // Even brighter on hover
+
+// Dark theme (all other pages) - MATCH NOVA OPACITY
+$social-icon-opacity-dark: 0.8;  // Nova's opacity level
+$social-icon-opacity-hover-dark: 1.0;
+$social-icon-brightness-dark: 0.3;
+$social-icon-brightness-hover-dark: 0.1;
+
+// LIGHT SOCIAL ICON MIXIN (for landing page)
+@mixin social-icon-light {
     display: block;
     width: $social-icon-size !important;
     height: $social-icon-size !important;
@@ -36,26 +37,24 @@ $social-icon-brightness-hover: 0.1;   // Darker on hover for all icons
     svg {
         width: $social-icon-size !important;
         height: $social-icon-size !important;
-        opacity: $social-icon-opacity-default !important;
-        filter: grayscale(100%) brightness($social-icon-brightness-default) !important;
+        opacity: $social-icon-opacity-light !important;
+        filter: grayscale(100%) brightness($social-icon-brightness-light) !important;
         object-fit: contain;
     }
     
-    // IMG icons (Nova logo - standardized to match others)
+    // IMG icons (Nova logo)
     img {
         width: $social-icon-size !important;
         height: $social-icon-size !important;
-        opacity: $social-icon-opacity-default !important;
-        // FIXED: Nova logo now uses same brightness as others (no inversion)
-        filter: grayscale(100%) brightness($social-icon-brightness-default) contrast(1.5) !important;
+        opacity: $social-icon-opacity-light !important;
+        filter: grayscale(100%) brightness($social-icon-brightness-light) contrast(1.5) !important;
         object-fit: contain;
         
-        // Nova-specific adjustments for better visual matching
         &[alt="Nova"] {
-            width: calc($social-icon-size * 1.1) !important;  // 10% larger
-            height: calc($social-icon-size * 1.1) !important; // 10% larger
-            opacity: 0.8 !important;  // Slightly more opaque for better visibility
-            filter: grayscale(100%) brightness(0.25) contrast(1.5) !important; // Darker for better match
+            width: calc($social-icon-size * 1.1) !important;
+            height: calc($social-icon-size * 1.1) !important;
+            opacity: $social-icon-opacity-light !important;
+            filter: grayscale(100%) brightness($social-icon-brightness-light) contrast(1.5) !important;
         }
     }
     
@@ -63,20 +62,71 @@ $social-icon-brightness-hover: 0.1;   // Darker on hover for all icons
         transform: translateY(-2px);
         
         svg {
-            opacity: $social-icon-opacity-hover !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-hover) !important;
+            opacity: $social-icon-opacity-hover-light !important;
+            filter: grayscale(100%) brightness($social-icon-brightness-hover-light) !important;
         }
         
         img {
-            opacity: $social-icon-opacity-hover !important;
-            // FIXED: Nova logo now darkens on hover like other icons
-            filter: grayscale(100%) brightness($social-icon-brightness-hover) contrast(1.5) !important;
+            opacity: $social-icon-opacity-hover-light !important;
+            filter: grayscale(100%) brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
             
-            // Nova hover adjustments to maintain consistency
             &[alt="Nova"] {
-                opacity: 0.95 !important;  // Slightly higher opacity on hover
-                filter: grayscale(100%) brightness(0.05) contrast(1.5) !important; // Darker on hover
+                opacity: $social-icon-opacity-hover-light !important;
+                filter: grayscale(100%) brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
             }
         }
     }
 }
+
+// DARK SOCIAL ICON MIXIN (for all other pages)
+@mixin social-icon-dark {
+    display: block;
+    width: $social-icon-size !important;
+    height: $social-icon-size !important;
+    transition: all 0.3s ease;
+    
+    // SVG icons (Instagram, YouTube, Discord) - MATCH NOVA OPACITY
+    svg {
+        width: $social-icon-size !important;
+        height: $social-icon-size !important;
+        opacity: $social-icon-opacity-dark !important;  // Same as Nova
+        filter: grayscale(100%) brightness($social-icon-brightness-dark) !important;
+        object-fit: contain;
+    }
+    
+    // IMG icons (Nova logo)
+    img {
+        width: $social-icon-size !important;
+        height: $social-icon-size !important;
+        opacity: $social-icon-opacity-dark !important;  // Consistent with SVG
+        filter: grayscale(100%) brightness($social-icon-brightness-dark) contrast(1.5) !important;
+        object-fit: contain;
+        
+        &[alt="Nova"] {
+            width: calc($social-icon-size * 1.1) !important;
+            height: calc($social-icon-size * 1.1) !important;
+            opacity: $social-icon-opacity-dark !important;  // Same opacity as others
+            filter: grayscale(100%) brightness($social-icon-brightness-dark) contrast(1.5) !important;
+        }
+    }
+    
+    &:hover {
+        transform: translateY(-2px);
+        
+        svg {
+            opacity: $social-icon-opacity-hover-dark !important;
+            filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) !important;
+        }
+        
+        img {
+            opacity: $social-icon-opacity-hover-dark !important;
+            filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) contrast(1.5) !important;
+            
+            &[alt="Nova"] {
+                opacity: $social-icon-opacity-hover-dark !important;
+                filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) contrast(1.5) !important;
+            }
+        }
+    }
+}
+

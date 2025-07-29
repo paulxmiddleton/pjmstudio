@@ -5,8 +5,12 @@
 - Professional Roles: Video Editor, Director, Photographer, Graphic Designer
 - Domain: pjm.studio
 
+### Session Startup Instructions
+- Every time we start a new session on this project, run "/prime"
+- Every time we start a new session on this project, read CLAUDE.md
+
 ### Website Goals
-- Create a comprehensive personal portfolio and online hub
+- Create a comprehensive personal portfolio and online hub that is minimal yet tasteful and uses modern web design features
 - Showcase professional skills across multiple disciplines
 - Implement an e-commerce store for selling:
   * Stickers
@@ -28,13 +32,12 @@
 - Flexible platform for showcasing and selling creative work
 
 ### Design Inspiration and Personal Interests
-- Overall website theme: Old medieval illustration style
+- Overall website theme: Old medieval manuscript illustration style
 - Personal interests:
   * Skateboarding
   * Cooking
   * Gardening
-  * Cannabis
-  * Video games (e.g., Call of Duty)
+  * Video games (e.g., Call of Duty 4, Modern Warfare 2)
 - Aesthetic preferences:
   * Brutalist design elements
   * Low-light photography/design
@@ -80,6 +83,12 @@
 - `npm run build` - Production build
 - `npm run preview` - Preview production build
 
+### Checkpoint System Commands
+- `/checkpoint [title]` - Create complete project snapshot with optional custom title
+- `/checkpoint-list` - View all saved checkpoints with metadata
+- `/checkpoint-restore <id>` - Restore project to previous checkpoint state  
+- `/checkpoint-delete <id>` - Delete old checkpoints to free storage space
+
 ### Recently Completed Tasks (July 27, 2025)
 1. **Font Optimization**: ✅ Converted Tempting.ttf to .woff2/.woff formats
    - Generated Tempting.woff2 (14.8KB, 54% smaller)
@@ -119,5 +128,3 @@
   * Proficient in After Effects and Premiere
   * Can create and modify custom video elements
 
-### AI Interaction Preferences
-- Whenever told to look at something, use the visualizer agent to analyze and report details

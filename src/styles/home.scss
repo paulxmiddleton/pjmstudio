@@ -398,7 +398,7 @@ p, span, div, a, li, td, th, label, button, input, textarea {
     }
 }
 
-// Contact section social icons - STANDARDIZED APPEARANCE
+// Contact section social icons - LIGHT THEME FOR LANDING PAGE
 .contact-realm .social-scrolls {
     display: flex;
     justify-content: center;
@@ -406,7 +406,7 @@ p, span, div, a, li, td, th, label, button, input, textarea {
     margin-bottom: 2rem;
     
     .scroll-link {
-        @include social-icon-standard;
+        @include social-icon-dark;
     }
     
     .middleton-crest {
@@ -743,12 +743,6 @@ p, span, div, a, li, td, th, label, button, input, textarea {
         padding: 4rem 0;
         
         .hero-content {
-            .hero-skills {
-                .skill-badge {
-                    font-size: 0.8rem;
-                    padding: 0.5rem 1rem;
-                }
-            }
         }
     }
     

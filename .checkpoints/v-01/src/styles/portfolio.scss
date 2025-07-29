@@ -1,0 +1,351 @@
+// Portfolio Pages - Clean & Minimal
+// Import variables for color consistency
+@import 'variables';
+
+// Prevent horizontal scrolling on portfolio pages
+html, body {
+    overflow-x: hidden;  // Prevent horizontal scrolling
+    overflow-y: auto;    // Allow vertical scrolling
+}
+
+// Clean Portfolio Layout
+.portfolio-realm {
+    min-height: 100vh;
+    background: $parchment;
+    padding-top: 80px;
+    
+    // Remove all background imagery and textures
+    // Clean white/cream background only
+}
+
+// Minimal Navigation
+.medieval-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba($royal-blue, 0.1);
+    z-index: 100;
+    height: 55px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 3rem;  // Increased padding for more spacing
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        .nav-brand-link {
+            text-decoration: none;
+            color: inherit;
+            
+            &:hover .nav-title {
+                color: $royal-blue;
+            }
+        }
+        
+        .nav-crest {
+            width: 32px;
+            height: 32px;
+            opacity: 0.8;
+        }
+        
+        .nav-title {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: $royal-blue;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-logo {
+            height: 73px !important;  // 8px smaller (81px - 8px)
+            width: auto !important;
+            transition: all 0.3s ease;
+            margin: 6px 2rem 0 0;  // Added right margin for more space from nav links
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+    
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        height: 100%;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        color: $ink-black;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-size: 0.8rem;
+        font-weight: 400;
+        padding: 0;
+        position: relative;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        
+        &:hover {
+            color: $royal-blue;
+        }
+        
+        &.active {
+            color: $royal-blue;
+            font-weight: 500;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: $royal-blue;
+            }
+        }
+    }
+}
+
+// Clean Portfolio Content
+.portfolio-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    
+    .portfolio-header {
+        text-align: center;
+        margin-bottom: 6rem;
+        
+        .page-title {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: $royal-blue;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            // Remove heavy decorations - keep it clean
+        }
+        
+        .page-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba($ink-black, 0.7);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    }
+}
+
+// Minimal Portfolio Grid
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+    
+    .portfolio-item {
+        background: white;
+        border: 1px solid rgba($royal-blue, 0.1);
+        border-radius: 8px;
+        padding: 0;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba($ink-black, 0.05);
+        
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba($ink-black, 0.1);
+            border-color: rgba($royal-blue, 0.2);
+        }
+        
+        .item-media {
+            aspect-ratio: 16/9;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            
+            .video-placeholder {
+                color: rgba($ink-black, 0.4);
+                font-family: 'Cinzel', serif;
+                font-size: 0.9rem;
+                font-weight: 300;
+                text-align: center;
+                // Clean placeholder styling
+                
+                &.instagram-placeholder {
+                    p {
+                        font-size: 1.2rem;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    small {
+                        font-size: 0.8rem;
+                        opacity: 0.6;
+                    }
+                }
+            }
+            
+            // Video embed containers
+            .video-embed {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+                
+                video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            
+            // Instagram embed styling
+            .instagram-embed {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                .instagram-media {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    background: transparent;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+        
+        .item-details {
+            padding: 1.5rem;
+            
+            h3 {
+                font-family: 'Cinzel', serif;
+                color: $ink-black;
+                margin-bottom: 0.5rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+            
+            p {
+                color: rgba($ink-black, 0.6);
+                font-size: 0.9rem;
+                line-height: 1.6;
+                font-weight: 300;
+            }
+        }
+    }
+}
+
+// Footer - Consistent with Store Design
+.realm-footer {
+    background: transparent;
+    border-top: none;
+    padding: 3rem 0;
+    text-align: center;
+    margin-top: 4rem;
+    
+    .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        
+        .scroll-link {
+            @include social-icon-standard;
+        }
+    }
+    
+    .footer-logo {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .copyright {
+        font-family: 'Cinzel', serif;
+        font-size: 0.9rem;
+        color: rgba($ink-black, 0.4);
+        font-weight: 300;
+    }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+    .medieval-nav {
+        padding: 1rem;
+        
+        .nav-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .nav-links {
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            font-size: 0.85rem;
+        }
+    }
+    
+    .portfolio-realm {
+        padding-top: 100px;
+    }
+    
+    .portfolio-content {
+        padding: 2rem 1rem;
+        
+        .portfolio-header {
+            margin-bottom: 3rem;
+        }
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
