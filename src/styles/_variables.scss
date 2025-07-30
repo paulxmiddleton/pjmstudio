@@ -33,12 +33,12 @@ $social-icon-brightness-hover-dark: 0.1;
     height: $social-icon-size !important;
     transition: all 0.3s ease;
     
-    // SVG icons (Instagram, YouTube, Discord)
+    // SVG icons (Instagram, YouTube, Discord) - BLACK TO WHITE conversion
     svg {
         width: $social-icon-size !important;
         height: $social-icon-size !important;
         opacity: $social-icon-opacity-light !important;
-        filter: grayscale(100%) brightness($social-icon-brightness-light) !important;
+        filter: invert(1) brightness($social-icon-brightness-light) !important;
         object-fit: contain;
     }
     
@@ -47,14 +47,14 @@ $social-icon-brightness-hover-dark: 0.1;
         width: $social-icon-size !important;
         height: $social-icon-size !important;
         opacity: $social-icon-opacity-light !important;
-        filter: grayscale(100%) brightness($social-icon-brightness-light) contrast(1.5) !important;
+        filter: brightness($social-icon-brightness-light) !important;
         object-fit: contain;
         
         &[alt="Nova"] {
             width: calc($social-icon-size * 1.1) !important;
             height: calc($social-icon-size * 1.1) !important;
             opacity: $social-icon-opacity-light !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-light) contrast(1.5) !important;
+            filter: brightness($social-icon-brightness-light) !important;
         }
     }
     
@@ -63,16 +63,16 @@ $social-icon-brightness-hover-dark: 0.1;
         
         svg {
             opacity: $social-icon-opacity-hover-light !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-hover-light) !important;
+            filter: invert(1) brightness($social-icon-brightness-hover-light) !important;
         }
         
         img {
             opacity: $social-icon-opacity-hover-light !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
+            filter: brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
             
             &[alt="Nova"] {
                 opacity: $social-icon-opacity-hover-light !important;
-                filter: grayscale(100%) brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
+                filter: brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
             }
         }
     }

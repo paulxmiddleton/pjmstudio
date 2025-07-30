@@ -8,6 +8,7 @@
 ### Session Startup Instructions
 - Every time we start a new session on this project, run "/prime"
 - Every time we start a new session on this project, read CLAUDE.md
+- Every time i prompt claude, you should think about which sub agents to implement for best results
 
 ### Website Goals
 - Create a comprehensive personal portfolio and online hub that is minimal yet tasteful and uses modern web design features
@@ -127,4 +128,3 @@
 - Video editing capabilities:
   * Proficient in After Effects and Premiere
   * Can create and modify custom video elements
-

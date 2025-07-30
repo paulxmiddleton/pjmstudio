@@ -1,6 +1,14 @@
 {
   "checkpoints": [
     {
+      "id": "v-02",
+      "timestamp": "2025-07-30T02:08:39.605Z",
+      "title": "v.02",
+      "description": "Custom checkpoint: v.02",
+      "fileCount": 63,
+      "size": 56220058
+    },
+    {
       "id": "v-01",
       "timestamp": "2025-07-29T04:59:07.533Z",
       "title": "v.01",

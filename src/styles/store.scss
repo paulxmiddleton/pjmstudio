@@ -74,6 +74,7 @@ html, body {
             transition: color 0.3s ease;
         }
         
+        
         .nav-logo {
             height: 73px !important;  // 8px smaller (81px - 8px)
             width: auto !important;
@@ -145,6 +146,13 @@ html, body {
     padding: 4rem 0 2rem;
     text-align: center;
     background: linear-gradient(135deg, rgba($royal-blue, 0.05) 0%, rgba($illuminated-gold, 0.03) 100%);
+    
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
     
     .page-title {
         font-family: 'UnifrakturMaguntia', 'Old English Text MT', 'Blackletter', serif;
@@ -453,17 +461,6 @@ html, body {
     text-align: center;
     margin-top: 4rem;
     
-    .footer-socials {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
-        
-        .scroll-link {
-            @include social-icon-dark;
-        }
-    }
-    
     .footer-logo {
         text-align: center;
         margin-bottom: 1.5rem;
@@ -477,6 +474,17 @@ html, body {
             &:hover {
                 opacity: 1;
             }
+        }
+    }
+    
+    .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        
+        .scroll-link {
+            @include social-icon-dark;
         }
     }
     

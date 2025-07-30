@@ -13,7 +13,10 @@ export class SwordCursor {
     }
     
     init() {
-        if (!this.cursor) return;
+        if (!this.cursor) {
+            console.warn('Sword cursor element not found. Skipping cursor initialization.');
+            return;
+        }
         
         // Hide cursor initially and position off-screen
         this.cursor.style.opacity = '0';
@@ -37,12 +40,9 @@ export class SwordCursor {
             }
         });
         
-        // Sword swipe animation on click
-        document.addEventListener('click', () => {
-            this.cursor.classList.add('swiping');
-            setTimeout(() => {
-                this.cursor.classList.remove('swiping');
-            }, 300);
+        // Enhanced sword slash animation on click
+        document.addEventListener('click', (e) => {
+            this.performSwordSlash(e);
         });
         
         // Hide cursor when leaving window (only after first movement)
@@ -60,6 +60,8 @@ export class SwordCursor {
     }
     
     animate() {
+        if (!this.cursor) return; // Guard against missing cursor element
+        
         const dx = this.mouseX - this.cursorX;
         const dy = this.mouseY - this.cursorY;
         
@@ -79,6 +81,19 @@ export class SwordCursor {
             }, { once: true });
         }
     }
+    
+    performSwordSlash(e) {
+        if (!this.cursor) return;
+        
+        // Add main slash animation
+        this.cursor.classList.add('slashing');
+        
+        // Remove animation class after completion
+        setTimeout(() => {
+            this.cursor.classList.remove('slashing');
+        }, 400);
+    }
+    
     
     show() {
         if (this.cursor) {

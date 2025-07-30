@@ -89,23 +89,46 @@ body {
     img {
         width: 32px; // Fixed size
         height: 32px;
-        transform: rotate(-10deg);
+        transform: rotate(-20deg);
         transition: transform 0.2s ease-out;
+        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
     }
     
-    &.swiping {
+    &.slashing {
         img {
-            animation: sword-swipe 0.3s ease-out;
+            animation: simple-sword-slash 0.3s ease-out;
         }
-        
     }
 }
 
-@keyframes sword-swipe {
-    0% { transform: rotate(-10deg) translateX(0); }
-    50% { transform: rotate(-50deg) translateX(-5px); }
-    100% { transform: rotate(-10deg) translateX(0); }
+// Dynamic sword slash animation
+@keyframes simple-sword-slash {
+    0% { 
+        transform: rotate(-20deg) translateX(0) scale(1);
+        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+    }
+    15% { 
+        transform: rotate(-45deg) translateX(-5px) scale(1.3);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+    }
+    30% { 
+        transform: rotate(-60deg) translateX(-8px) scale(1.5);
+        filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+    }
+    60% { 
+        transform: rotate(70deg) translateX(18px) scale(1.4);
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+    }
+    85% { 
+        transform: rotate(35deg) translateX(10px) scale(1.1);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+    }
+    100% { 
+        transform: rotate(-20deg) translateX(0) scale(1);
+        filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+    }
 }
+
 
 // Landing Realm
 .landing-realm {
@@ -400,15 +423,58 @@ body {
     }
 }
 
+// Mobile dark sword slash animation
+@keyframes mobile-dark-sword-slash {
+    0% { 
+        transform: rotate(-10deg) translateX(0) scale(1);
+        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
+    }
+    30% { 
+        transform: rotate(-90deg) translateX(-8px) scale(1.2);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+    }
+    70% { 
+        transform: rotate(20deg) translateX(10px) scale(1.1);
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
+    }
+    100% { 
+        transform: rotate(-10deg) translateX(0) scale(1);
+        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
+    }
+}
+
 // Mobile Adjustments
 @media (max-width: 768px) {
     // Hide cursor initially on mobile
     .sword-cursor {
         display: none;
+        
+        // Smaller cursor for mobile
+        &.slashing img {
+            animation: mobile-dark-sword-slash 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
     }
     
     body.touched .sword-cursor {
         display: block;
+    }
+    
+    // Simplified particle effects for mobile performance
+    .slash-trail-container .slash-particle {
+        animation-duration: 0.4s !important;
+        
+        &:nth-child(n+7) {
+            display: none; // Hide extra particles on mobile
+        }
+    }
+    
+    .slash-energy-arc {
+        width: 50px !important; // Smaller arc on mobile
+        animation-duration: 0.2s !important;
+    }
+    
+    .sword-screen-flash {
+        animation-duration: 0.1s !important; // Faster flash on mobile
     }
     
     .herald-message {

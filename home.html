@@ -7,15 +7,17 @@
     
     <!-- Clean Home Page Styles -->
     <style>
+        * {
+            cursor: none !important;
+        }
         body {
             opacity: 0;
         }
         .loading-screen {
             opacity: 1 !important;
         }
-        /* Hide any knight/cursor elements that shouldn't be on home page */
+        /* Hide any knight/sparkles elements that shouldn't be on home page */
         .knight-container,
-        .sword-cursor,
         .sparkles-container {
             display: none !important;
         }
@@ -29,6 +31,11 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content"></div>
+    </div>
+
+    <!-- Custom Sword Cursor -->
+    <div class="sword-cursor" id="customCursor">
+        <img src="/src/assets/images/cursor-sword.png" alt="">
     </div>
 
 
