@@ -226,7 +226,7 @@ body {
         .dragon-link {
             position: absolute;
             top: 7%; // Position at dragon center
-            left: 30%; // Match dragon position exactly
+            left: 27%; // Moved 3% left (approximately 25px on most screens)
             transform: translate(-50%, -50%); // Center the clickbox
             display: block;
             z-index: 6; // Above dragon image
@@ -255,7 +255,7 @@ body {
         .dragon-visual {
             position: absolute;
             top: 5%;
-            left: 30%;
+            left: 27%; // Moved 3% left to match clickable area
             transform: translateX(-50%);
             display: block;
             width: 800px; // Original large size for visibility
@@ -351,7 +351,7 @@ body {
         font-family: 'UnifrakturMaguntia', cursive;
         font-size: clamp(3rem, 8vw, 5rem);
         font-weight: 300;
-        color: $vermillion;
+        color: $royal-blue;
         text-transform: none;
         letter-spacing: -0.02em;
         transition: all 0.3s;

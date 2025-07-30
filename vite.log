@@ -159,3 +159,62 @@ More info and automated migrator: https://sass-lang.com/d/import
 7:08:39 PM [vite] page reload .checkpoints/v-02/portfolio/videography.html
 7:08:39 PM [vite] page reload .checkpoints/v-02/portfolio.html
 7:08:39 PM [vite] page reload .checkpoints/v-02/store.html
+7:15:58 PM [vite] hmr update /src/styles/main.scss
+DEPRECATION WARNING [legacy-js-api]: The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import 'variables';
+  │         ^^^^^^^^^^^
+  ╵
+    src/styles/main.scss 3:9  root stylesheet
+
+7:16:12 PM [vite] hmr update /src/styles/main.scss
+DEPRECATION WARNING [legacy-js-api]: The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import 'variables';
+  │         ^^^^^^^^^^^
+  ╵
+    src/styles/main.scss 3:9  root stylesheet
+
+7:16:20 PM [vite] hmr update /src/styles/main.scss
+DEPRECATION WARNING [legacy-js-api]: The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+3 │ @import 'variables';
+  │         ^^^^^^^^^^^
+  ╵
+    src/styles/main.scss 3:9  root stylesheet
+
+7:26:21 PM [vite] page reload src/js/modules/sparkles.js
+7:28:05 PM [vite] page reload src/js/modules/sparkles.js
+7:29:02 PM [vite] page reload src/js/modules/sparkles.js
+7:29:20 PM [vite] page reload src/js/modules/sparkles.js
+7:31:45 PM [vite] page reload src/js/modules/sparkles.js
+7:31:55 PM [vite] page reload src/js/modules/sparkles.js
+7:32:05 PM [vite] page reload src/js/modules/sparkles.js
+7:32:30 PM [vite] page reload src/js/modules/sparkles.js
+7:32:58 PM [vite] page reload src/js/modules/sparkles.js
+7:33:03 PM [vite] page reload src/js/modules/sparkles.js
+7:36:21 PM [vite] page reload src/js/modules/sparkles.js
+7:36:29 PM [vite] page reload src/js/modules/sparkles.js
+7:36:43 PM [vite] page reload src/js/modules/sparkles.js
+7:36:58 PM [vite] page reload src/js/modules/sparkles.js
