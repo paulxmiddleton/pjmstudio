@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII 3D Engine Fix Test</title>
+    <style>
+        body { margin: 0; padding: 20px; background: #000; color: #00ff00; font-family: monospace; }
+        #test-canvas { border: 1px solid #00ff00; width: 100%; height: 400px; }
+        .log { margin: 10px 0; padding: 10px; background: rgba(0,255,0,0.1); border: 1px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <h1>ASCII 3D Engine Fix Test</h1>
+    <canvas id="test-canvas"></canvas>
+    <div id="log" class="log">
+        <strong>Test Log:</strong><br>
+        <div id="log-content">Starting test...</div>
+    </div>
+
+    <script type="module">
+        import { ASCII3DEngine } from '/src/js/modules/ascii3d-engine.js';
+
+        function log(message) {
+            const logContent = document.getElementById('log-content');
+            logContent.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+            console.log(message);
+        }
+
+        async function testEngine() {
+            try {
+                log('🧪 Starting ASCII 3D Engine test...');
+                
+                const canvas = document.getElementById('test-canvas');
+                if (!canvas) {
+                    throw new Error('Canvas not found');
+                }
+                
+                log('📐 Canvas found, dimensions: ' + canvas.clientWidth + 'x' + canvas.clientHeight);
+                
+                const engine = new ASCII3DEngine();
+                log('✅ Engine constructor completed');
+                
+                log('🚀 Calling engine.init()...');
+                await engine.init(canvas);
+                
+                log('✅ Engine initialization completed!');
+                log('🔍 Checking if ASCII DOM element was created...');
+                
+                // Check if ASCII element exists
+                const asciiElements = document.querySelectorAll('div table');
+                if (asciiElements.length > 0) {
+                    log('✅ ASCII DOM element found: ' + asciiElements.length + ' element(s)');
+                } else {
+                    log('⚠️ ASCII DOM element not found in page');
+                }
+                
+                log('▶️ Starting animation...');
+                
+                engine.startAnimation();
+                log('🎉 SUCCESS: Engine is running!');
+                
+                // Test performance stats
+                setTimeout(() => {
+                    const stats = engine.getPerformanceStats();
+                    log(`📊 Performance: ${stats.fps} FPS, ${stats.renderTime}ms render time`);
+                    log(`📈 Status: ${stats.isRunning ? 'RUNNING' : 'STOPPED'}`);
+                }, 2000);
+                
+                // Test interaction
+                setTimeout(() => {
+                    log('🖱️ Testing mouse interaction...');
+                    engine.updateMousePosition(400, 300);
+                    engine.simulateInteraction(400, 300);
+                }, 3000);
+                
+            } catch (error) {
+                log(`❌ ERROR: ${error.message}`);
+                log(`❌ Error stack: ${error.stack?.substring(0, 300)}...`);
+                console.error('Full error:', error);
+            }
+        }
+
+        // WebGL support check
+        function checkWebGL() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (gl) {
+                    log('✅ WebGL supported');
+                    return true;
+                } else {
+                    log('❌ WebGL not supported');
+                    return false;
+                }
+            } catch (e) {
+                log('❌ WebGL check failed: ' + e.message);
+                return false;
+            }
+        }
+
+        // Run checks and test
+        log('🔍 Checking browser capabilities...');
+        if (checkWebGL()) {
+            testEngine();
+        } else {
+            log('🚫 Cannot run test: WebGL required');
+        }
+    </script>
+</body>
+</html>

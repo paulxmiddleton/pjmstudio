@@ -19,96 +19,177 @@
         <div class="loading-content"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="medieval-nav">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="nav-logo">
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-trigger" id="navTrigger">
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-header">
+                <span class="nav-title">NAVIGATION</span>
+                <span class="nav-close" id="navClose">×</span>
             </div>
             
-            <div class="nav-menu">
-                <a href="/home" class="nav-link">← Home</a>
-                <div class="nav-links">
-                    <a href="/portfolio" class="nav-link">Portfolio Overview</a>
-                    <a href="/portfolio/directing" class="nav-link">Directing</a>
-                    <a href="/portfolio/videography" class="nav-link">Videography</a>
-                    <a href="/portfolio/photography" class="nav-link">Photography</a>
-                    <a href="/portfolio/video-editing" class="nav-link">Video Editing</a>
-                    <a href="/portfolio/graphic-design" class="nav-link">Graphic Design</a>
-                    <a href="/store" class="nav-link active">Store</a>
+            <div class="nav-links">
+                <a href="/home.html" class="nav-link">
+                    <span class="link-number">01</span>
+                    <span class="link-text">HOME</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/directing" class="nav-link">
+                    <span class="link-number">02</span>
+                    <span class="link-text">DIRECTING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/videography" class="nav-link">
+                    <span class="link-number">03</span>
+                    <span class="link-text">VIDEOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/photography" class="nav-link">
+                    <span class="link-number">04</span>
+                    <span class="link-text">PHOTOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/video-editing" class="nav-link">
+                    <span class="link-number">05</span>
+                    <span class="link-text">VIDEO_EDITING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/graphic-design" class="nav-link">
+                    <span class="link-number">06</span>
+                    <span class="link-text">GRAPHIC_DESIGN</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/store" class="nav-link active">
+                    <span class="link-number">07</span>
+                    <span class="link-text">STORE</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="nav-footer">
+                <div class="nav-status">
+                    <span class="status-dot active"></span>
+                    <span class="status-text">SYSTEM_ACTIVE</span>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="store-realm">
-        <!-- Store Header -->
-        <section class="store-header">
+    <main class="industrial-store">
+        <!-- Store Terminal Header -->
+        <section class="store-terminal">
             <div class="container">
-                <div class="header-content">
-                    <h1 class="page-title">PJM Studio Store</h1>
-                    <p class="page-subtitle">Curated creative goods, digital assets, and unique pieces from the studio</p>
+                <div class="terminal-header">
+                    <h1 class="brutalist-heading">PJM_STUDIO_STORE.EXE</h1>
+                    <div class="terminal-status">
+                        <span class="status-line">STATUS: OPERATIONAL</span>
+                        <span class="status-line">INVENTORY: UPDATING</span>
+                        <span class="status-line">PAYMENT_SYSTEM: PENDING</span>
+                    </div>
+                    <div class="terminal-description brutalist-mono">
+                        INDUSTRIAL_COMMERCE_INTERFACE → CREATIVE_GOODS | DIGITAL_ASSETS | <span class="neo-accent">UNIQUE_PIECES</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Store Categories -->
-        <section class="store-categories">
+        <!-- Product Catalog Filter -->
+        <section class="catalog-filter">
             <div class="container">
-                <div class="category-filter">
-                    <button class="filter-btn active" data-category="all">All Products</button>
-                    <button class="filter-btn" data-category="stickers">Stickers</button>
-                    <button class="filter-btn" data-category="clothing">Clothing</button>
-                    <button class="filter-btn" data-category="digital">Digital Assets</button>
-                    <button class="filter-btn" data-category="furniture">Furniture</button>
+                <div class="filter-terminal">
+                    <h2 class="brutalist-mono">PRODUCT_CATALOG_FILTER</h2>
+                    <div class="filter-controls">
+                        <button class="control-btn active brutalist-mono" data-category="all">ALL_PRODUCTS</button>
+                        <button class="control-btn brutalist-mono" data-category="stickers">STICKERS</button>
+                        <button class="control-btn brutalist-mono" data-category="clothing">APPAREL</button>
+                        <button class="control-btn brutalist-mono" data-category="digital">DIGITAL_ASSETS</button>
+                        <button class="control-btn brutalist-mono" data-category="furniture">FURNITURE</button>
+                    </div>
+                    <div class="filter-status">
+                        <span class="status-text brutalist-mono">FILTER_STATUS: ALL_CATEGORIES_ACTIVE</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Product Grid -->
-        <section class="products-section">
+        <!-- Inventory Database -->
+        <section class="inventory-database">
             <div class="container">
-                <!-- Featured Products -->
-                <div class="featured-banner">
-                    <h2 class="section-title">Featured Items</h2>
-                    <p>Handpicked favorites from the studio collection</p>
+                <!-- Inventory Header -->
+                <div class="database-banner">
+                    <h2 class="brutalist-mono">INVENTORY_DATABASE</h2>
+                    <div class="database-stats">
+                        <span class="stat-item">TOTAL_ITEMS: 06</span>
+                        <span class="stat-item">AVAILABLE: 01</span>
+                        <span class="stat-item">DEVELOPMENT: 05</span>
+                    </div>
+                    <div class="database-description brutalist-mono">
+                        PRIORITY_ITEMS → STUDIO_CURATED_SELECTION
+                    </div>
                 </div>
 
                 <div class="products-grid">
-                    <!-- Sticker Pack - Test Product -->
-                    <div class="product-card" data-category="stickers">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">🏰</span>
-                                <div class="test-product-badge">
-                                    <span>Demo Product</span>
+                    <!-- Item 001: Sticker Pack - Available -->
+                    <div class="inventory-item available" data-category="stickers">
+                        <div class="item-display">
+                            <div class="item-visual">
+                                <div class="item-icon brutalist-mono">🏰</div>
+                                <div class="availability-badge available">
+                                    <span class="brutalist-mono">AVAILABLE</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Medieval Sticker Pack</h3>
-                            <p class="product-description">Hand-illustrated medieval-themed stickers perfect for laptops, water bottles, and creative projects.</p>
-                            <div class="product-price">$12.99</div>
-                            <button class="add-to-cart-btn test-product" data-product-id="sticker-pack-01">Add to Cart (Demo)</button>
+                        <div class="item-specs">
+                            <div class="spec-header">
+                                <span class="item-id brutalist-mono">ITEM_001</span>
+                                <span class="item-category brutalist-mono">STICKERS</span>
+                            </div>
+                            <h3 class="item-name brutalist-mono">MEDIEVAL_STICKER_PACK</h3>
+                            <div class="item-description">
+                                Hand-illustrated <span class="neo-accent">neo-brutalist themed</span> stickers. Compatible with laptops, water bottles, creative projects. Material: premium vinyl.
+                            </div>
+                            <div class="item-pricing">
+                                <span class="price-label brutalist-mono">PRICE:</span>
+                                <span class="price-value brutalist-mono">$12.99_USD</span>
+                            </div>
+                            <button class="system-btn available brutalist-mono" data-product-id="sticker-pack-01">
+                                ADD_TO_CART [DEMO_MODE]
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Digital Editing Pack -->
-                    <div class="product-card" data-category="digital">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">🎬</span>
-                                <div class="coming-soon-overlay">
-                                    <span>Coming Soon</span>
+                    <!-- Item 002: Digital Editing Pack - Development -->
+                    <div class="inventory-item development" data-category="digital">
+                        <div class="item-display">
+                            <div class="item-visual">
+                                <div class="item-icon brutalist-mono">🎬</div>
+                                <div class="availability-badge development">
+                                    <span class="brutalist-mono">DEVELOPMENT</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Cinematic LUTs Pack</h3>
-                            <p class="product-description">Professional color grading LUTs used in PJM Studio productions. Compatible with Premiere Pro, Final Cut, and DaVinci Resolve.</p>
-                            <div class="product-price">$24.99</div>
-                            <button class="add-to-cart-btn" disabled>Notify Me</button>
+                        <div class="item-specs">
+                            <div class="spec-header">
+                                <span class="item-id brutalist-mono">ITEM_002</span>
+                                <span class="item-category brutalist-mono">DIGITAL_ASSETS</span>
+                            </div>
+                            <h3 class="item-name brutalist-mono">CINEMATIC_LUTS_PACK</h3>
+                            <div class="item-description">
+                                Professional color grading LUTs from PJM Studio productions. Compatibility: Premiere Pro, Final Cut, DaVinci Resolve. Format: .cube files.
+                            </div>
+                            <div class="item-pricing">
+                                <span class="price-label brutalist-mono">PRICE:</span>
+                                <span class="price-value brutalist-mono">$24.99_USD</span>
+                            </div>
+                            <button class="system-btn development brutalist-mono" disabled>
+                                NOTIFY_WHEN_AVAILABLE
+                            </button>
                         </div>
                     </div>
 
@@ -185,16 +266,33 @@
                     </div>
                 </div>
 
-                <!-- Store Launch Notice -->
-                <div class="store-notice">
-                    <div class="notice-content">
-                        <h3>Store Launch Coming Soon</h3>
-                        <p>The PJM Studio store is currently in development. Be the first to know when we launch by joining our mailing list.</p>
-                        <div class="newsletter-signup">
-                            <input type="email" placeholder="Enter your email" class="email-input">
-                            <button class="signup-btn">Notify Me</button>
+                <!-- System Status Notice -->
+                <div class="system-notice">
+                    <div class="notice-terminal">
+                        <div class="terminal-frame">
+                            <div class="terminal-header-bar">
+                                <span class="terminal-title brutalist-mono">SYSTEM_STATUS.LOG</span>
+                            </div>
+                            <div class="terminal-content">
+                                <h3 class="brutalist-mono">COMMERCE_MODULE_STATUS: DEVELOPMENT</h3>
+                                <div class="status-description">
+                                    Industrial commerce interface currently under construction. 
+                                    Payment processing and inventory management systems in active development phase.
+                                </div>
+                                <div class="notification-interface">
+                                    <div class="interface-label brutalist-mono">NOTIFICATION_SUBSCRIPTION:</div>
+                                    <div class="input-group">
+                                        <input type="email" placeholder="EMAIL_ADDRESS" class="terminal-input brutalist-mono">
+                                        <button class="terminal-btn brutalist-mono">SUBSCRIBE_TO_UPDATES</button>
+                                    </div>
+                                </div>
+                                <div class="system-benefits">
+                                    <div class="benefit-line brutalist-mono">→ PRIORITY_ACCESS_TO_NEW_INVENTORY</div>
+                                    <div class="benefit-line brutalist-mono">→ <span class="neo-accent">EXCLUSIVE</span>_STUDIO_COMMUNICATIONS</div>
+                                    <div class="benefit-line brutalist-mono">→ EARLY_BETA_SYSTEM_ACCESS</div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="notice-subtitle">Get exclusive early access to new products and studio updates</p>
                     </div>
                 </div>
             </div>
@@ -229,7 +327,6 @@
         </footer>
     </main>
 
-    <link rel="stylesheet" href="/src/styles/store.scss">
     <script type="module" src="/src/js/store.js"></script>
 </body>
 </html>

@@ -1,0 +1,608 @@
+// Landing Page - High Fashion Brutalist Existentialism
+@import 'variables';
+
+// Global Reset with Neubauladen-inspired Foundation
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: $font-system;
+    background: $bg-primary;
+    color: $white;
+    line-height: 1.2;
+    overflow-x: hidden;
+    font-weight: 300;
+}
+
+// ASCII Animation Canvas - Neo-Brutalist Color Scheme
+#asciiCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+    
+    // Neo-brutalist background color
+    background-color: $neo-blue;
+    
+    // Responsive sizing for different screen densities
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    
+    // Ensure canvas scales properly on mobile
+    object-fit: cover;
+    object-position: center;
+    
+    // Smooth transitions for opacity changes
+    transition: opacity 0.3s ease-in-out;
+    
+    // Ensure proper layering - behind all interactive content
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        z-index: -1;
+    }
+    
+    // Mobile optimization
+    @media (max-width: $tablet) {
+        // Reduce opacity on mobile for better readability
+        opacity: 0.6;
+        
+        // Optimize for mobile performance
+        will-change: opacity;
+        transform: translateZ(0);
+    }
+    
+    @media (max-width: $mobile) {
+        opacity: 0.4;
+        
+        // Further reduce visual complexity on small screens
+        filter: blur(0.5px);
+    }
+    
+    // High DPI display optimization
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        image-rendering: auto;
+    }
+    
+    // Fallback for when canvas fails to load or initialize
+    &.ascii-error,
+    &.ascii-loading-failed {
+        background-color: $neo-blue;
+        opacity: 0.3;
+        
+        // Subtle animation to maintain visual interest
+        animation: subtlePulse 8s ease-in-out infinite;
+    }
+    
+    // Accessibility: Respect reduced motion preferences
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transition: none;
+        opacity: 0.2;
+    }
+}
+
+// Loading Screen - Minimalist with Strategic Background
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $bg-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000; // Highest priority - above ASCII canvas (z-index: 1)
+    opacity: 1;
+    transition: opacity 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    
+    &.loaded {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .loading-text {
+        @include text-thin();
+        color: $white;
+        font-size: 14px;
+        @include systematic-spacing();
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+// Main Composition - Avant-garde Layout
+.composition {
+    min-height: 100vh;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+// Header Name - Very small text at top (5% from top)
+.header-name {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    
+    h1 {
+        font-family: Arial, sans-serif;
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        font-weight: bold;
+        color: #FFFFFF;
+        letter-spacing: 0.8em;
+        text-transform: uppercase;
+        margin: 0;
+        opacity: 1;
+    }
+}
+
+// Main Title Block - Large title at 20-25% from top
+.main-title-block {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    
+    .portfolio-title {
+        font-family: Arial, sans-serif;
+        font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+        font-weight: bold;
+        color: #FFFFFF;
+        letter-spacing: 0.6em;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1.1;
+        transform: scaleY(1.4) translateX(-25%) translateY(-5%);
+    }
+}
+
+// Development Status - Positioned at 40% from top, shifted from center
+.development-status {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 10;
+    
+    p {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: clamp(0.9rem, 2vw, 1.2rem);
+        font-weight: bold;
+        color: #FFFFFF;
+        letter-spacing: 0.2em;
+        text-transform: lowercase;
+        margin: 0;
+        opacity: 1;
+        transform: translateX(40%);
+    }
+}
+
+// ASCII Centerpiece Area - Space for the animation
+.ascii-centerpiece {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 30%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+// Asymmetrical Content Fragment
+.content-fragment {
+    position: absolute;
+    top: 60%;
+    right: 10%;
+    max-width: 350px;
+    z-index: 10; // Above ASCII canvas (z-index: 1) and background elements
+    
+    .fragment-text {
+        .fragment-label {
+            @include text-thick();
+            font-size: 10px;
+            color: $off-grey;
+            @include systematic-spacing(0.25);
+            opacity: 0.7;
+        }
+        
+        .fragment-content {
+            p {
+                @include text-thin();
+                font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+                font-weight: 300;
+                line-height: 1.4;
+                color: $off-grey;
+                text-transform: lowercase;
+                letter-spacing: $tracking-wide;
+                
+                &:hover {
+                    color: $white;
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+    }
+}
+
+// Services Matrix - Editorial Grid
+.services-matrix {
+    position: absolute;
+    bottom: 20%;
+    left: 8%;
+    z-index: 10; // Above ASCII canvas (z-index: 1) and background elements
+    
+    .matrix-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $space-8;
+        padding-bottom: $space-3;
+        border-bottom: 1px solid $off-grey;
+        width: 400px;
+        
+        .matrix-label {
+            @include text-thick();
+            font-size: 12px;
+            color: $white;
+        }
+        
+        .matrix-status {
+            font-size: 10px;
+            font-weight: 400;
+            color: $neo-blue;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+    
+    .service-blocks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-6;
+        width: 400px;
+        
+        .service-block {
+            padding: $space-4;
+            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            
+            .service-number {
+                @include text-thick();
+                font-size: 10px;
+                color: $off-grey;
+                @include systematic-spacing(0.15);
+            }
+            
+            .service-name {
+                @include text-thick();
+                font-size: 14px;
+                color: $white;
+                transition: all 0.3s ease;
+            }
+            
+            .service-hover-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: $black;
+                color: $white;
+                padding: $space-4;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                
+                p {
+                    @include text-thin();
+                    font-size: 11px;
+                    @include systematic-spacing(0.15);
+                    color: $off-grey;
+                }
+                
+                .service-access {
+                    @include text-thick();
+                    font-size: 12px;
+                    color: $neo-blue;
+                    @include systematic-spacing(0.2);
+                }
+            }
+            
+            &:hover {
+                border-color: $black;
+                transform: translateY(-2px);
+                
+                .service-hover-content {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .service-name {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}
+
+// Contact Fragment - Minimal Integration
+.contact-fragment {
+    position: absolute;
+    top: 40%;
+    right: 8%;
+    z-index: 10; // Above ASCII canvas (z-index: 1) and background elements
+    
+    .contact-content {
+        .contact-label {
+            @include text-thick();
+            font-size: 10px;
+            color: $off-grey;
+            @include systematic-spacing(0.5);
+        }
+        
+        .contact-methods {
+            .contact-method {
+                display: block;
+                text-decoration: none;
+                color: $black;
+                margin-bottom: $space-4;
+                transition: all 0.3s ease;
+                
+                &.primary {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: $space-8;
+                    
+                    .method-label {
+                        @include text-thick();
+                        font-size: 10px;
+                        color: $off-grey;
+                        @include systematic-spacing(0.08);
+                    }
+                    
+                    .method-value {
+                        @include text-thick();
+                        font-size: 16px;
+                        color: $white;
+                    }
+                    
+                    &:hover {
+                        .method-value {
+                            color: $neo-blue;
+                        }
+                    }
+                }
+                
+                &.secondary {
+                    @include text-thin();
+                    font-size: 11px;
+                    color: $off-grey;
+                    line-height: 2;
+                    
+                    &:hover {
+                        color: $neo-blue;
+                        transform: translateX(5px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// NO NAVIGATION ON LANDING PAGE PER USER REQUIREMENTS
+// Navigation has been removed from landing page - only ASCII animation and minimal social links
+
+// Site Footer - PXM logo and social links
+.site-footer {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    
+    .footer-logo {
+        margin-bottom: 20px;
+        
+        .pxm-logo {
+            width: 90px;
+            height: 90px;
+            filter: invert(1) brightness(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        
+        .social-link {
+            font-family: Arial, sans-serif;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            font-weight: normal;
+            color: $white;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-transform: lowercase;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                opacity: 1;
+                transform: translateY(-2px);
+            }
+        }
+    }
+}
+
+
+// Animations
+@keyframes expand {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        opacity: 0.3;
+        background-size: 100% 100%;
+    }
+    25% {
+        opacity: 0.4;
+        background-size: 105% 105%;
+    }
+    50% {
+        opacity: 0.35;
+        background-size: 110% 110%;
+    }
+    75% {
+        opacity: 0.4;
+        background-size: 105% 105%;
+    }
+}
+
+// Mobile Responsive - Maintain clean title layout
+@media (max-width: $tablet) {
+    .header-name {
+        h1 {
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            letter-spacing: 0.5em;
+        }
+    }
+    
+    .main-title-block {
+        top: 20%;
+        
+        .portfolio-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+            letter-spacing: 0.4em;
+        }
+    }
+    
+    .development-status {
+        top: 38%;
+        right: 10%;
+        
+        p {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+        }
+    }
+    
+    .ascii-centerpiece {
+        width: 80%;
+        height: 25%;
+    }
+    
+    .site-footer {
+        bottom: 5%;
+        
+        .social-links {
+            gap: 25px;
+            
+            .social-link {
+                font-size: clamp(0.6rem, 2vw, 0.8rem);
+            }
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .header-name {
+        h1 {
+            font-size: clamp(0.5rem, 3vw, 0.7rem);
+            letter-spacing: 0.3em;
+        }
+    }
+    
+    .main-title-block {
+        top: 18%;
+        
+        .portfolio-title {
+            font-size: clamp(1.5rem, 10vw, 2.5rem);
+            letter-spacing: 0.3em;
+        }
+    }
+    
+    .development-status {
+        top: 35%;
+        right: 8%;
+        
+        p {
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
+        }
+    }
+    
+    .ascii-centerpiece {
+        width: 90%;
+        height: 20%;
+    }
+    
+    .site-footer {
+        bottom: 3%;
+        
+        .footer-logo {
+            margin-bottom: 15px;
+            
+            .pxm-logo {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        .social-links {
+            gap: 20px;
+            flex-wrap: wrap;
+            
+            .social-link {
+                font-size: clamp(0.5rem, 2.5vw, 0.7rem);
+            }
+        }
+    }
+}

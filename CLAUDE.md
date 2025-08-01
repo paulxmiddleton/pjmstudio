@@ -9,6 +9,7 @@
 - Every time we start a new session on this project, run "/prime"
 - Every time we start a new session on this project, read CLAUDE.md
 - Every time i prompt claude, you should think about which sub agents to implement for best results
+- Before you tell me a task is done, make sure you double or triple checked that the task and actual solution were found, dont tell me its done when it isnt or when its still a bug and you didnt look
 
 ### Website Goals
 - Create a comprehensive personal portfolio and online hub that is minimal yet tasteful and uses modern web design features
@@ -45,6 +46,7 @@
   * Color palette emphasizing blue tones
 - Design Philosophy:
   * Medieval manuscript style inspiration
+  * brutalist inspiration
   * Moody aesthetics and tones
   * Clean, minimalistic design
   * Dragon-themed accents
@@ -60,7 +62,6 @@
 ### Recent Optimizations Completed
 1. **Code Structure**:
    - Split main.js (287 lines) into focused modules:
-     * `cursor.js` - Custom sword cursor functionality
      * `animations.js` - GSAP knight & text animations  
      * `parallax.js` - Mouse-based parallax effects
      * `sparkles.js` - Medieval sparkle effects
@@ -109,7 +110,6 @@
 3. **Content Addition**: Add actual portfolio content to replace placeholders
 
 ### Technical Notes
-- Custom cursor with sword theme working
 - Knight head/sword mouse tracking implemented
 - Medieval sparkles system active
 - Parallax effects on desktop only

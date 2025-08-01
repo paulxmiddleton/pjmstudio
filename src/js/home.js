@@ -1,5 +1,5 @@
 // home.js - Main entry point for home page
-import { SwordCursor } from './modules/cursor.js';
+import '../styles/home.scss';
 import { KnightAnimations } from './modules/animations.js';
 import { ParallaxEffects } from './modules/parallax.js';
 import { MedievalSparkles } from './modules/sparkles.js';
@@ -13,7 +13,6 @@ class HomePage {
     async init() {
         // Initialize core systems
         this.loadingManager = new LoadingManager();
-        this.cursorManager = new SwordCursor();
         
         // Wait for DOM to be ready
         await this.waitForDOMReady();

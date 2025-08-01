@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none !important;
         }
         
         body {
@@ -40,20 +39,6 @@
             pointer-events: none;
         }
         
-        .sword-cursor {
-            position: fixed;
-            width: 32px;
-            height: 32px;
-            pointer-events: none;
-            z-index: 9999;
-            transition: opacity 0.3s;
-        }
-        
-        .sword-cursor img {
-            width: 32px;
-            height: 32px;
-            transform: rotate(-10deg);
-        }
         
         .container {
             max-width: 1200px;
@@ -193,10 +178,6 @@
         <div class="loading-content"></div>
     </div>
 
-    <!-- Custom Sword Cursor -->
-    <div class="sword-cursor" id="customCursor">
-        <img src="/src/assets/images/cursor-sword.png" alt="">
-    </div>
 
     <!-- Navigation -->
     <nav class="medieval-nav">
@@ -249,8 +230,6 @@
         // Simple loading screen management
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
-            const cursor = document.getElementById('customCursor');
-            if (cursor) cursor.style.opacity = '1';
             
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loadingScreen');
@@ -263,14 +242,6 @@
             }, 300);
         });
         
-        // Simple cursor tracking
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.getElementById('customCursor');
-            if (cursor) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            }
-        });
     </script>
 </body>
 </html>

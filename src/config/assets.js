@@ -34,7 +34,6 @@ export const assetConfig = {
         // Critical images (load immediately)
         critical: [
             '/src/assets/images/landing-illustration.jpg',
-            '/src/assets/images/cursor-sword.png',
             '/src/assets/images/knight-body-centered.png',
             '/src/assets/images/knight-head-centered.png',
             '/src/assets/images/knight-sword-centered.png'

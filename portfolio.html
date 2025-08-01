@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Overview - PJM Studio</title>
     <style>
-        * {
-            cursor: none !important;
-        }
         body {
             opacity: 0;
         }
@@ -22,184 +19,371 @@
         <div class="loading-content"></div>
     </div>
 
-    <!-- Custom Sword Cursor -->
-    <div class="sword-cursor" id="customCursor">
-        <img src="/src/assets/images/cursor-sword.png" alt="">
-    </div>
 
-    <!-- Navigation -->
-    <nav class="medieval-nav">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="/home.html" class="nav-brand-link">
-                    <img src="/src/assets/images/pjm-logo.svg" alt="PJM Studio" class="nav-logo">
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-trigger" id="navTrigger">
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-header">
+                <span class="nav-title">NAVIGATION</span>
+                <span class="nav-close" id="navClose">×</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/home.html" class="nav-link">
+                    <span class="link-number">01</span>
+                    <span class="link-text">HOME</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/directing" class="nav-link">
+                    <span class="link-number">02</span>
+                    <span class="link-text">DIRECTING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/videography" class="nav-link">
+                    <span class="link-number">03</span>
+                    <span class="link-text">VIDEOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/photography" class="nav-link">
+                    <span class="link-number">04</span>
+                    <span class="link-text">PHOTOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/video-editing" class="nav-link">
+                    <span class="link-number">05</span>
+                    <span class="link-text">VIDEO_EDITING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/graphic-design" class="nav-link">
+                    <span class="link-number">06</span>
+                    <span class="link-text">GRAPHIC_DESIGN</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/store" class="nav-link">
+                    <span class="link-number">07</span>
+                    <span class="link-text">STORE</span>
+                    <span class="link-arrow">→</span>
                 </a>
             </div>
             
-            <div class="nav-menu">
-                <a href="/home.html" class="nav-link">← Home</a>
-                <div class="nav-links">
-                    <a href="/portfolio" class="nav-link active">Portfolio Overview</a>
-                    <a href="/portfolio/directing" class="nav-link">Directing</a>
-                    <a href="/portfolio/videography" class="nav-link">Videography</a>
-                    <a href="/portfolio/photography" class="nav-link">Photography</a>
-                    <a href="/portfolio/video-editing" class="nav-link">Video Editing</a>
-                    <a href="/portfolio/graphic-design" class="nav-link">Graphic Design</a>
+            <div class="nav-footer">
+                <div class="nav-status">
+                    <span class="status-dot active"></span>
+                    <span class="status-text">SYSTEM_ACTIVE</span>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="portfolio-realm portfolio-overview-realm">
-        <!-- Content -->
-        <section class="portfolio-content">
-            <div class="portfolio-header">
-                <h1 class="page-title">Portfolio Overview</h1>
-                <p class="page-subtitle">A curated selection of my best work across multiple creative disciplines</p>
-            </div>
+    <!-- Main Content -->
+    <main class="portfolio-realm brutalist-portfolio">
+        <section class="brutalist-content">
+            <!-- Brutalist Header with Tech Specs -->
+            <header class="portfolio-header brutalist-header">
+                <h1 class="brutalist-heading">PORTFOLIO_OVERVIEW.EXE</h1>
+                <div class="system-metadata">
+                    <span class="metadata-item">USER: PAUL_MIDDLETON</span>
+                    <span class="metadata-item">TYPE: CREATIVE_PROFESSIONAL</span>
+                    <span class="metadata-item">STATUS: ACTIVE</span>
+                    <span class="metadata-item">UPTIME: 2019-PRESENT</span>
+                </div>
+            </header>
 
-            <!-- Resume Summary -->
-            <section class="resume-summary">
-                <div class="summary-card">
-                    <h2>Paul Middleton</h2>
-                    <h3>Creative Professional & Visual Storyteller</h3>
-                    <div class="experience-stats">
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Years Experience</span>
+            <!-- Technical Profile Block -->
+            <section class="tech-profile">
+                <div class="profile-block">
+                    <h2 class="brutalist-mono">SYSTEM_SPECIFICATIONS</h2>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">EXPERIENCE_YEARS:</span>
+                            <span class="spec-value">05</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">100+</span>
-                            <span class="stat-label">Projects Completed</span>
+                        <div class="spec-item">
+                            <span class="spec-label">PROJECTS_COMPLETED:</span>
+                            <span class="spec-value">100+</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">4</span>
-                            <span class="stat-label">Core Disciplines</span>
+                        <div class="spec-item">
+                            <span class="spec-label">CORE_DISCIPLINES:</span>
+                            <span class="spec-value">04</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">PRIMARY_SOFTWARE:</span>
+                            <span class="spec-value">ADOBE_SUITE</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">SPECIALIZATION:</span>
+                            <span class="spec-value">VISUAL_STORYTELLING</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">OUTPUT_FORMAT:</span>
+                            <span class="spec-value">MULTI_MEDIA</span>
                         </div>
                     </div>
-                    <p class="summary-text">
-                        Specializing in cinematic storytelling through directing, videography, photography, 
-                        and graphic design. Experienced in After Effects, Premiere Pro, Photoshop, and 
-                        various industry-standard tools for creating compelling visual narratives.
-                    </p>
                 </div>
             </section>
 
-            <!-- Featured Work Grid -->
-            <section class="featured-work">
-                <h2 class="section-title">Featured Work</h2>
+            <!-- Project Database Display -->
+            <section class="project-database">
+                <h2 class="brutalist-mono">PROJECT_DATABASE</h2>
+                <div class="database-header">
+                    <span class="db-info">TOTAL_ENTRIES: 06</span>
+                    <span class="db-info">STATUS: ACTIVE</span>
+                    <span class="db-info">LAST_UPDATE: 2025-01-30</span>
+                </div>
                 
-                <div class="work-grid">
-                    <!-- Directing Showcase -->
-                    <div class="work-item large">
-                        <div class="work-media">
-                            <div class="video-placeholder">
-                                <span class="work-category">Directing</span>
-                                <h3>"Short Film Title"</h3>
-                                <p>Award-winning short film showcasing narrative direction and visual storytelling</p>
+                <div class="project-grid brutalist-grid">
+                    <!-- Project 001: Directing -->
+                    <div class="project-entry primary">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_001</span>
+                            <span class="project-type">DIRECTING</span>
+                        </div>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">TITLE:</span>
+                                <span class="spec-value">SHORT_FILM_SERIES</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">FORMAT:</span>
+                                <span class="spec-value">4K_DIGITAL</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">RUNTIME:</span>
+                                <span class="spec-value">15:30_MIN</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">STATUS:</span>
+                                <span class="spec-value">AWARD_WINNING</span>
                             </div>
                         </div>
-                        <div class="work-details">
-                            <div class="work-tags">
-                                <span class="tag">Narrative Direction</span>
-                                <span class="tag">Cinematography</span>
-                                <span class="tag">Post-Production</span>
+                        <div class="project-tags">
+                            <span class="tech-tag">NARRATIVE_DIRECTION</span>
+                            <span class="tech-tag">VISUAL_STORYTELLING</span>
+                            <span class="tech-tag">POST_PRODUCTION</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 002: Video Editing -->
+                    <div class="project-entry">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_002</span>
+                            <span class="project-type">VIDEO_EDITING</span>
+                        </div>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">TITLE:</span>
+                                <span class="spec-value">COMMERCIAL_REEL</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">SOFTWARE:</span>
+                                <span class="spec-value">PREMIERE_PRO</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">DURATION:</span>
+                                <span class="spec-value">02:45_MIN</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Video Editing Showcase -->
-                    <div class="work-item">
-                        <div class="work-media">
-                            <div class="video-placeholder">
-                                <span class="work-category">Video Editing</span>
-                                <h3>Commercial Reel</h3>
+                    <!-- Project 003: Photography -->
+                    <div class="project-entry">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_003</span>
+                            <span class="project-type">PHOTOGRAPHY</span>
+                        </div>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">SERIES:</span>
+                                <span class="spec-value">PORTRAIT_COLLECTION</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">STYLE:</span>
+                                <span class="spec-value">LOW_LIGHT_DRAMATIC</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">COUNT:</span>
+                                <span class="spec-value">24_IMAGES</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Photography Showcase -->
-                    <div class="work-item">
-                        <div class="work-media">
-                            <div class="image-placeholder">
-                                <span class="work-category">Photography</span>
-                                <h3>Portrait Series</h3>
+                    <!-- Project 004: Graphic Design -->
+                    <div class="project-entry">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_004</span>
+                            <span class="project-type">GRAPHIC_DESIGN</span>
+                        </div>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">PROJECT:</span>
+                                <span class="spec-value">BRAND_IDENTITY_SYSTEM</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">STYLE:</span>
+                                <span class="spec-value">BRUTALIST_MEDIEVAL</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">DELIVERABLES:</span>
+                                <span class="spec-value">LOGO_GUIDELINES_ASSETS</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Graphic Design Showcase -->
-                    <div class="work-item">
-                        <div class="work-media">
-                            <div class="image-placeholder">
-                                <span class="work-category">Graphic Design</span>
-                                <h3>Brand Identity</h3>
+                    <!-- Project 005: Videography -->
+                    <div class="project-entry">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_005</span>
+                            <span class="project-type">VIDEOGRAPHY</span>
+                        </div>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">TYPE:</span>
+                                <span class="spec-value">DOCUMENTARY_SERIES</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">EQUIPMENT:</span>
+                                <span class="spec-value">CINEMA_CAMERA</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">TOTAL_RUNTIME:</span>
+                                <span class="spec-value">45:00_MIN</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Videography Showcase -->
-                    <div class="work-item">
-                        <div class="work-media">
-                            <div class="video-placeholder">
-                                <span class="work-category">Videography</span>
-                                <h3>Documentary</h3>
-                            </div>
+                    <!-- Project 006: Mixed Media -->
+                    <div class="project-entry">
+                        <div class="project-header">
+                            <span class="project-id">PROJECT_006</span>
+                            <span class="project-type">EXPERIMENTAL</span>
                         </div>
-                    </div>
-
-                    <!-- Additional Work -->
-                    <div class="work-item">
-                        <div class="work-media">
-                            <div class="video-placeholder">
-                                <span class="work-category">Mixed Media</span>
-                                <h3>Experimental</h3>
+                        <div class="project-specs">
+                            <div class="spec-line">
+                                <span class="spec-key">CATEGORY:</span>
+                                <span class="spec-value">MIXED_MEDIA_ART</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">MEDIUM:</span>
+                                <span class="spec-value">DIGITAL_PHYSICAL</span>
+                            </div>
+                            <div class="spec-line">
+                                <span class="spec-key">STATUS:</span>
+                                <span class="spec-value">ONGOING_RESEARCH</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Skills & Tools -->
-            <section class="skills-section">
-                <h2 class="section-title">Skills & Tools</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Video Production</h3>
-                        <ul>
-                            <li>Adobe Premiere Pro</li>
-                            <li>Adobe After Effects</li>
-                            <li>DaVinci Resolve</li>
-                            <li>Cinema 4D</li>
-                        </ul>
+            <!-- System Capabilities -->
+            <section class="system-capabilities">
+                <h2 class="brutalist-mono">SYSTEM_CAPABILITIES</h2>
+                <div class="capabilities-grid">
+                    <div class="capability-module">
+                        <div class="module-header">
+                            <span class="module-id">MODULE_001</span>
+                            <span class="module-name">VIDEO_PRODUCTION</span>
+                        </div>
+                        <div class="capability-list">
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_PREMIERE_PRO</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_AFTER_EFFECTS</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">DAVINCI_RESOLVE</span>
+                                <span class="cap-level">INTERMEDIATE</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">CINEMA_4D</span>
+                                <span class="cap-level">INTERMEDIATE</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-category">
-                        <h3>Photography</h3>
-                        <ul>
-                            <li>Adobe Photoshop</li>
-                            <li>Adobe Lightroom</li>
-                            <li>Capture One</li>
-                            <li>Studio Lighting</li>
-                        </ul>
+
+                    <div class="capability-module">
+                        <div class="module-header">
+                            <span class="module-id">MODULE_002</span>
+                            <span class="module-name">PHOTOGRAPHY</span>
+                        </div>
+                        <div class="capability-list">
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_PHOTOSHOP</span>
+                                <span class="cap-level">EXPERT</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_LIGHTROOM</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">CAPTURE_ONE</span>
+                                <span class="cap-level">INTERMEDIATE</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">STUDIO_LIGHTING</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-category">
-                        <h3>Design</h3>
-                        <ul>
-                            <li>Adobe Illustrator</li>
-                            <li>Adobe InDesign</li>
-                            <li>Figma</li>
-                            <li>Brand Development</li>
-                        </ul>
+
+                    <div class="capability-module">
+                        <div class="module-header">
+                            <span class="module-id">MODULE_003</span>
+                            <span class="module-name">GRAPHIC_DESIGN</span>
+                        </div>
+                        <div class="capability-list">
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_ILLUSTRATOR</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">ADOBE_INDESIGN</span>
+                                <span class="cap-level">INTERMEDIATE</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">FIGMA</span>
+                                <span class="cap-level">INTERMEDIATE</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">BRAND_DEVELOPMENT</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-category">
-                        <h3>Direction</h3>
-                        <ul>
-                            <li>Script Development</li>
-                            <li>Shot Planning</li>
-                            <li>Team Leadership</li>
-                            <li>Creative Vision</li>
-                        </ul>
+
+                    <div class="capability-module">
+                        <div class="module-header">
+                            <span class="module-id">MODULE_004</span>
+                            <span class="module-name">CREATIVE_DIRECTION</span>
+                        </div>
+                        <div class="capability-list">
+                            <div class="capability-item">
+                                <span class="cap-name">SCRIPT_DEVELOPMENT</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">SHOT_PLANNING</span>
+                                <span class="cap-level">EXPERT</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">TEAM_LEADERSHIP</span>
+                                <span class="cap-level">ADVANCED</span>
+                            </div>
+                            <div class="capability-item">
+                                <span class="cap-name">CREATIVE_VISION</span>
+                                <span class="cap-level">EXPERT</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -234,7 +418,6 @@
         </footer>
     </main>
 
-    <link rel="stylesheet" href="/src/styles/portfolio.scss">
-    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/portfolio.js"></script>
 </body>
 </html>

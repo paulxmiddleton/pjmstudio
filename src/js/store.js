@@ -31,6 +31,8 @@ class StoreManager {
         this.loadingManager = new LoadingManager();
         this.initStore();
         this.initEventListeners();
+        this.initBrutalistEffects();
+        this.initTerminalEffects();
     }
 
     initStore() {
@@ -42,7 +44,13 @@ class StoreManager {
         this.currentCategory = 'all';
         this.products = this.getAllProducts();
         
+        // Brutalist store enhancement
+        this.terminalLines = [];
+        this.glitchInterval = null;
+        this.scanlineElement = null;
+        
         console.log('Store initialized with', this.products.length, 'products');
+        this.updateTerminalStatus();
     }
 
     initEventListeners() {
@@ -99,6 +107,8 @@ class StoreManager {
         });
 
         console.log(`Filtered to category: ${category}`);
+        this.updateFilterStatus(category);
+        this.triggerTerminalGlitch();
     }
 
     handleNewsletterSignup() {
@@ -129,7 +139,7 @@ class StoreManager {
         // Simulate API call
         setTimeout(() => {
             signupBtn.textContent = '✓ Subscribed!';
-            signupBtn.style.background = '#10B981'; // Green success color
+            signupBtn.style.background = '#3300ff'; // Neo-blue success color
             
             this.showNotification('Successfully subscribed! You\'ll be notified when the store launches.', 'success');
             
@@ -173,7 +183,7 @@ class StoreManager {
         
         setTimeout(() => {
             button.textContent = '✓ Added to Cart!';
-            button.style.background = '#10B981'; // Green
+            button.style.background = '#3300ff'; // Neo-blue
             
             this.showNotification(`${productTitle} added to cart! (This is a demo - no actual purchase will be made)`, 'success');
             
@@ -216,7 +226,7 @@ class StoreManager {
             position: 'fixed',
             top: '100px',
             right: '20px',
-            background: type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#3B82F6',
+            background: type === 'success' ? '#3300ff' : type === 'error' ? '#ff0000' : '#ff00f6',
             color: 'white',
             padding: '1rem 1.5rem',
             borderRadius: '8px',
@@ -262,6 +272,316 @@ class StoreManager {
             }, 300);
         }
     }
+    
+    // Enhanced brutalist store effects
+    initBrutalistEffects() {
+        // Add industrial loading indicators
+        this.createScanlines();
+        this.initGlitchEffects();
+        this.addSystemIndicators();
+        this.initDataStreams();
+    }
+    
+    initTerminalEffects() {
+        // Create terminal typing effect for status updates
+        this.initTerminalTyping();
+        this.addRandomSystemMessages();
+        this.createDataFlowAnimation();
+    }
+    
+    createScanlines() {
+        // Add subtle scanlines for CRT monitor effect
+        const scanlines = document.createElement('div');
+        scanlines.className = 'scanlines';
+        scanlines.innerHTML = '<div class="scanline"></div>'.repeat(5);
+        
+        const styles = document.createElement('style');
+        styles.textContent = `
+            .scanlines {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+                opacity: 0.1;
+            }
+            
+            .scanline {
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #3300ff, transparent);
+                animation: scanline-move 8s linear infinite;
+            }
+            
+            .scanline:nth-child(1) { animation-delay: 0s; }
+            .scanline:nth-child(2) { animation-delay: 1.6s; }
+            .scanline:nth-child(3) { animation-delay: 3.2s; }
+            .scanline:nth-child(4) { animation-delay: 4.8s; }
+            .scanline:nth-child(5) { animation-delay: 6.4s; }
+            
+            @keyframes scanline-move {
+                0% { top: -10px; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 100vh; opacity: 0; }
+            }
+        `;
+        
+        document.head.appendChild(styles);
+        document.body.appendChild(scanlines);
+        this.scanlineElement = scanlines;
+    }
+    
+    initGlitchEffects() {
+        // Random glitch effects on interactive elements
+        const glitchTargets = document.querySelectorAll('.control-btn, .brutalist-heading, .neo-accent');
+        
+        this.glitchInterval = setInterval(() => {
+            if (Math.random() < 0.1) { // 10% chance every interval
+                const target = glitchTargets[Math.floor(Math.random() * glitchTargets.length)];
+                this.applyGlitchEffect(target);
+            }
+        }, 2000);
+    }
+    
+    applyGlitchEffect(element) {
+        if (!element) return;
+        
+        const originalText = element.textContent;
+        const glitchChars = ['█', '▓', '▒', '░', '╬', '╫', '╪', '┼'];
+        
+        // Create glitch text
+        let glitchText = '';
+        for (let char of originalText) {
+            if (char !== ' ' && Math.random() < 0.3) {
+                glitchText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            } else {
+                glitchText += char;
+            }
+        }
+        
+        // Apply glitch
+        element.style.color = '#ff00f6'; // Magenta glitch
+        element.textContent = glitchText;
+        
+        // Restore after brief moment
+        setTimeout(() => {
+            element.style.color = '';
+            element.textContent = originalText;
+        }, 100 + Math.random() * 200);
+    }
+    
+    addSystemIndicators() {
+        // Add random system indicators in corners
+        const indicators = [
+            'SYS_LOAD: 67%',
+            'MEM_USAGE: 42%', 
+            'NET_STATUS: STABLE',
+            'PROC_COUNT: 12',
+            'TEMP: 23°C',
+            'UPTIME: 4:23:17'
+        ];
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'system-indicator';
+        indicator.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: #3300ff;
+            opacity: 0.6;
+            z-index: 10;
+            background: rgba(0,0,0,0.8);
+            padding: 5px 8px;
+            border: 1px solid #3300ff;
+        `;
+        
+        document.body.appendChild(indicator);
+        
+        // Cycle through indicators
+        let currentIndex = 0;
+        setInterval(() => {
+            indicator.textContent = indicators[currentIndex];
+            currentIndex = (currentIndex + 1) % indicators.length;
+        }, 3000);
+    }
+    
+    initDataStreams() {
+        // Add data stream animation to empty areas
+        const dataStream = document.createElement('div');
+        dataStream.className = 'data-stream';
+        dataStream.style.cssText = `
+            position: fixed;
+            top: 0;
+            right: 20px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #3300ff, transparent);
+            opacity: 0.3;
+            animation: data-flow 6s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        
+        const streamStyles = document.createElement('style');
+        streamStyles.textContent = `
+            @keyframes data-flow {
+                0% { transform: translateY(-100%); }
+                100% { transform: translateY(100vh); }
+            }
+        `;
+        
+        document.head.appendChild(streamStyles);
+        document.body.appendChild(dataStream);
+    }
+    
+    initTerminalTyping() {
+        // Create typing effect for terminal messages
+        const terminalOutput = document.createElement('div');
+        terminalOutput.className = 'terminal-output';
+        terminalOutput.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #3300ff;
+            opacity: 0.7;
+            z-index: 10;
+            background: rgba(0,0,0,0.9);
+            padding: 10px;
+            border: 1px solid #3300ff;
+            max-width: 300px;
+            min-height: 60px;
+        `;
+        
+        document.body.appendChild(terminalOutput);
+        this.terminalOutput = terminalOutput;
+        
+        // Start with initial message
+        this.typeMessage('STORE_SYSTEM_INITIALIZED...\nLOADING_INVENTORY...');
+    }
+    
+    typeMessage(message, callback) {
+        if (!this.terminalOutput) return;
+        
+        this.terminalOutput.textContent = '';
+        let index = 0;
+        
+        const typeInterval = setInterval(() => {
+            if (index < message.length) {
+                if (message[index] === '\\' && message[index + 1] === 'n') {
+                    this.terminalOutput.innerHTML += '<br>';
+                    index += 2;
+                } else {
+                    this.terminalOutput.textContent += message[index];
+                    index++;
+                }
+            } else {
+                clearInterval(typeInterval);
+                if (callback) callback();
+            }
+        }, 50 + Math.random() * 50); // Variable typing speed
+    }
+    
+    addRandomSystemMessages() {
+        const messages = [
+            'SCANNING_PRODUCT_DATABASE...',
+            'UPDATING_INVENTORY_CACHE...',
+            'OPTIMIZING_PAYMENT_GATEWAY...',
+            'SYNCHRONIZING_SHOPIFY_API...',
+            'PROCESSING_CUSTOMER_QUEUE...',
+            'VALIDATING_PRODUCT_METADATA...'
+        ];
+        
+        setInterval(() => {
+            if (Math.random() < 0.3) { // 30% chance
+                const message = messages[Math.floor(Math.random() * messages.length)];
+                this.typeMessage(message);
+            }
+        }, 8000);
+    }
+    
+    createDataFlowAnimation() {
+        // Create moving data blocks in the background
+        setInterval(() => {
+            if (Math.random() < 0.2) { // 20% chance
+                this.createDataBlock();
+            }
+        }, 1500);
+    }
+    
+    createDataBlock() {
+        const dataBlock = document.createElement('div');
+        dataBlock.textContent = Math.random().toString(16).substr(2, 8).toUpperCase();
+        dataBlock.style.cssText = `
+            position: fixed;
+            right: -100px;
+            top: ${Math.random() * window.innerHeight}px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #3300ff;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+            transition: all 8s linear;
+        `;
+        
+        document.body.appendChild(dataBlock);
+        
+        // Animate across screen
+        setTimeout(() => {
+            dataBlock.style.right = '100vw';
+            dataBlock.style.opacity = '0';
+        }, 100);
+        
+        // Remove after animation
+        setTimeout(() => {
+            if (dataBlock.parentNode) {
+                dataBlock.parentNode.removeChild(dataBlock);
+            }
+        }, 8500);
+    }
+    
+    updateTerminalStatus() {
+        const statusElements = document.querySelectorAll('.status-line');
+        const statuses = [
+            'STATUS: OPERATIONAL',
+            'INVENTORY: UPDATING',
+            'PAYMENT_SYSTEM: INITIALIZING'
+        ];
+        
+        statusElements.forEach((element, index) => {
+            if (statuses[index]) {
+                element.textContent = statuses[index];
+            }
+        });
+    }
+    
+    updateFilterStatus(category) {
+        const statusElement = document.querySelector('.filter-status .status-text');
+        if (statusElement) {
+            const categoryName = category.toUpperCase();
+            statusElement.textContent = `FILTER_STATUS: ${categoryName === 'ALL' ? 'ALL_CATEGORIES_ACTIVE' : categoryName + '_SELECTED'}`;
+        }
+    }
+    
+    triggerTerminalGlitch() {
+        // Brief glitch effect when filtering
+        const terminalElements = document.querySelectorAll('.brutalist-mono, .neo-accent');
+        
+        terminalElements.forEach(element => {
+            if (Math.random() < 0.1) { // 10% chance per element
+                this.applyGlitchEffect(element);
+            }
+        });
+    }
 
     // Future methods for Shopify integration
     async initShopify() {
@@ -293,4 +613,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Make it globally available for debugging
     window.storeManager = storeManager;
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        if (storeManager.glitchInterval) {
+            clearInterval(storeManager.glitchInterval);
+        }
+        if (storeManager.scanlineElement) {
+            storeManager.scanlineElement.remove();
+        }
+    });
 });

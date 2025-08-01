@@ -1,132 +1,316 @@
-// _variables.scss - Authentic Medieval Manuscript Color Palette
-// Based on 13th-15th century illuminated manuscripts
+// _variables.scss - Neo-Brutalist Design System
+// Approved 7-Color Palette with High-Fashion Typography
 
-$parchment: #F9F1E6;        // Warm cream parchment
-$ink-black: #1A1A1A;        // Rich black ink
-$illuminated-gold: #D4AF37;  // Byzantine gold
-$royal-blue: #1E3A8A;       // Deep manuscript blue
-$vermillion: #DC2626;       // Bright red pigment
-$forest-green: #166534;     // Rich manuscript green
-$purple-imperial: #7C2D92;  // Medieval purple
-$burnt-orange: #EA580C;     // Warm orange accent
+// === APPROVED 7-COLOR PALETTE ONLY ===
+$white: #FFFFFF;              // Pure white - primary background
+$black: #000000;              // Pure black - primary text/borders
+$neo-blue: #3300ff;           // Neo-brutalist blue - primary accent
+$neo-pink: #ff00f6;           // Neo-brutalist pink - secondary accent
+$neo-red: #ff0000;            // Neo-brutalist red - alert/error
+$off-grey: #bec2c1;           // Off-grey - neutral medium
+$light-gray: #bec2c1;         // Alias for off-grey
+$off-white: #e9edec;          // Off-white - subtle backgrounds
 
+// === BACKGROUND STRATEGY VARIABLES ===
+// Strategic background usage with approved palette
+$bg-primary: $neo-blue;       // Landing/hero areas - neo blue
+$bg-content: $white;          // Portfolio grids - clean white
+$bg-content-alt: $off-white;  // Subtle content variations
+$bg-content-accent: $off-grey; // Section breaks
 
-// Social Icon Standards
-$social-icon-size: 20px;
+// === SYSTEM COLORS (MAPPED TO APPROVED PALETTE) ===
+$error: $neo-red;             // Use neo-red for errors
+$info: $neo-blue;             // Use neo-blue for info
 
-// Light theme (landing page) - WHITE ICONS
-$social-icon-opacity-light: 0.7;
-$social-icon-opacity-hover-light: 0.9;
-$social-icon-brightness-light: 1.8;  // High brightness for white appearance
-$social-icon-brightness-hover-light: 2.0;  // Even brighter on hover
+// === TYPOGRAPHY SYSTEM ===
+// High-Fashion Brutalist Typography
+$font-system: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+$font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+$font-serif: 'Times New Roman', 'Georgia', serif;
 
-// Dark theme (all other pages) - MATCH NOVA OPACITY
-$social-icon-opacity-dark: 0.8;  // Nova's opacity level
-$social-icon-opacity-hover-dark: 1.0;
-$social-icon-brightness-dark: 0.3;
-$social-icon-brightness-hover-dark: 0.1;
+// Font weights
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
 
-// LIGHT SOCIAL ICON MIXIN (for landing page)
-@mixin social-icon-light {
-    display: block;
-    width: $social-icon-size !important;
-    height: $social-icon-size !important;
-    transition: all 0.3s ease;
+// Exaggerated Letter Spacing for High-Fashion Brutalist Typography
+$tracking-wide: .25em;        // Wide letter spacing for thin text
+$tracking-xwide: .35em;       // Extra-wide letter spacing for thick text
+
+// Font sizes - stark, functional scale
+$text-xs: 0.75rem;      // 12px
+$text-sm: 0.875rem;     // 14px
+$text-base: 1rem;       // 16px
+$text-lg: 1.125rem;     // 18px
+$text-xl: 1.25rem;      // 20px
+$text-2xl: 1.5rem;      // 24px
+$text-3xl: 1.875rem;    // 30px
+$text-4xl: 2.25rem;     // 36px
+$text-5xl: 3rem;        // 48px
+$text-6xl: 3.75rem;     // 60px
+$text-7xl: 4.5rem;      // 72px
+
+// === SPACING SYSTEM ===
+// Minimal, functional spacing
+$space-1: 0.25rem;      // 4px
+$space-2: 0.5rem;       // 8px
+$space-3: 0.75rem;      // 12px
+$space-4: 1rem;         // 16px
+$space-5: 1.25rem;      // 20px
+$space-6: 1.5rem;       // 24px
+$space-8: 2rem;         // 32px
+$space-10: 2.5rem;      // 40px
+$space-12: 3rem;        // 48px
+$space-16: 4rem;        // 64px
+$space-20: 5rem;        // 80px
+$space-24: 6rem;        // 96px
+
+// === SYSTEMATIC SPACING (Neubauladen-inspired) ===
+$systematic-base: 1.5rem; // 24px - base unit for systematic spacing
+$systematic-tight: 0.5rem; // 8px - tight spacing
+$systematic-loose: 3rem;    // 48px - generous spacing
+
+// === LAYOUT VARIABLES ===
+$container-max: 1200px;
+$container-padding: $space-4;
+$nav-height: 60px;
+$border-radius: 0;        // No rounded corners - raw edges
+$border-width: 1px;
+$border-width-thick: 2px;
+$border-width-heavy: 4px;
+
+// === SHADOW SYSTEM ===
+// Harsh, geometric shadows with approved colors
+$shadow-sm: 0 1px 2px rgba($black, 0.05);
+$shadow-md: 0 4px 6px rgba($black, 0.1);
+$shadow-lg: 0 10px 15px rgba($black, 0.1);
+$shadow-harsh: 4px 4px 0px $black;           // Brutalist geometric shadow
+$shadow-neon: 0 0 20px rgba($neo-blue, 0.3); // Neo-blue glow effect
+
+// === TRANSITION SYSTEM ===
+$transition-fast: 0.15s ease;
+$transition-normal: 0.2s ease;
+$transition-slow: 0.3s ease;
+
+// === BREAKPOINTS ===
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1280px;
+
+// === SOCIAL ICON SYSTEM ===
+$social-icon-size: 24px;
+
+// Social icon styling - updated for approved palette
+@mixin social-icon {
+    display: inline-block;
+    width: $social-icon-size;
+    height: $social-icon-size;
+    transition: $transition-normal;
     
-    // SVG icons (Instagram, YouTube, Discord) - BLACK TO WHITE conversion
-    svg {
-        width: $social-icon-size !important;
-        height: $social-icon-size !important;
-        opacity: $social-icon-opacity-light !important;
-        filter: invert(1) brightness($social-icon-brightness-light) !important;
-        object-fit: contain;
-    }
-    
-    // IMG icons (Nova logo)
-    img {
-        width: $social-icon-size !important;
-        height: $social-icon-size !important;
-        opacity: $social-icon-opacity-light !important;
-        filter: brightness($social-icon-brightness-light) !important;
-        object-fit: contain;
-        
-        &[alt="Nova"] {
-            width: calc($social-icon-size * 1.1) !important;
-            height: calc($social-icon-size * 1.1) !important;
-            opacity: $social-icon-opacity-light !important;
-            filter: brightness($social-icon-brightness-light) !important;
-        }
+    svg, img {
+        width: 100%;
+        height: 100%;
+        fill: $off-grey;
+        color: $off-grey;
+        transition: $transition-normal;
     }
     
     &:hover {
         transform: translateY(-2px);
         
-        svg {
-            opacity: $social-icon-opacity-hover-light !important;
-            filter: invert(1) brightness($social-icon-brightness-hover-light) !important;
-        }
-        
-        img {
-            opacity: $social-icon-opacity-hover-light !important;
-            filter: brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
-            
-            &[alt="Nova"] {
-                opacity: $social-icon-opacity-hover-light !important;
-                filter: brightness($social-icon-brightness-hover-light) contrast(1.5) !important;
-            }
+        svg, img {
+            fill: $neo-blue;
+            color: $neo-blue;
+            filter: drop-shadow(0 0 20px rgba($neo-blue, 0.3));
         }
     }
 }
 
-// DARK SOCIAL ICON MIXIN (for all other pages)
-@mixin social-icon-dark {
-    display: block;
-    width: $social-icon-size !important;
-    height: $social-icon-size !important;
-    transition: all 0.3s ease;
-    
-    // SVG icons (Instagram, YouTube, Discord) - MATCH NOVA OPACITY
-    svg {
-        width: $social-icon-size !important;
-        height: $social-icon-size !important;
-        opacity: $social-icon-opacity-dark !important;  // Same as Nova
-        filter: grayscale(100%) brightness($social-icon-brightness-dark) !important;
-        object-fit: contain;
-    }
-    
-    // IMG icons (Nova logo)
-    img {
-        width: $social-icon-size !important;
-        height: $social-icon-size !important;
-        opacity: $social-icon-opacity-dark !important;  // Consistent with SVG
-        filter: grayscale(100%) brightness($social-icon-brightness-dark) contrast(1.5) !important;
-        object-fit: contain;
-        
-        &[alt="Nova"] {
-            width: calc($social-icon-size * 1.1) !important;
-            height: calc($social-icon-size * 1.1) !important;
-            opacity: $social-icon-opacity-dark !important;  // Same opacity as others
-            filter: grayscale(100%) brightness($social-icon-brightness-dark) contrast(1.5) !important;
-        }
-    }
+// === BRUTALIST COMPONENT MIXINS ===
+
+// Raw button style - updated for approved palette
+@mixin btn-brutalist {
+    background: $white;
+    color: $black;
+    border: $border-width-thick solid $black;
+    padding: $space-3 $space-6;
+    font-family: $font-mono;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-wide;
+    transition: $transition-fast;
+    cursor: pointer;
     
     &:hover {
-        transform: translateY(-2px);
-        
-        svg {
-            opacity: $social-icon-opacity-hover-dark !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) !important;
-        }
-        
-        img {
-            opacity: $social-icon-opacity-hover-dark !important;
-            filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) contrast(1.5) !important;
-            
-            &[alt="Nova"] {
-                opacity: $social-icon-opacity-hover-dark !important;
-                filter: grayscale(100%) brightness($social-icon-brightness-hover-dark) contrast(1.5) !important;
-            }
-        }
+        background: $black;
+        color: $white;
+        box-shadow: $shadow-harsh;
+        transform: translate(-2px, -2px);
+    }
+    
+    &:active {
+        transform: translate(0, 0);
+        box-shadow: none;
     }
 }
 
+// Neo-brutalist accent button
+@mixin btn-neon {
+    background: $neo-blue;
+    color: $white;
+    border: none;
+    padding: $space-3 $space-6;
+    font-family: $font-mono;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-wide;
+    transition: $transition-fast;
+    cursor: pointer;
+    box-shadow: $shadow-neon;
+    
+    &:hover {
+        background: $neo-pink;
+        color: $white;
+        box-shadow: 0 0 30px rgba($neo-pink, 0.5);
+        transform: translateY(-2px);
+    }
+}
+
+// Terminal/system text style - updated for approved palette
+@mixin text-terminal {
+    font-family: $font-mono;
+    color: $neo-blue;
+    background: $black;
+    padding: $space-2 $space-4;
+    border-left: 4px solid $neo-blue;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+// Raw container style - updated for approved palette
+@mixin container-brutalist {
+    max-width: $container-max;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+    border: $border-width solid $off-grey;
+    background: $white;
+}
+
+// Grid system - updated for approved palette
+@mixin grid-brutalist($cols: 1, $gap: $space-8, $accent-color: null, $background-color: null) {
+    display: grid;
+    grid-template-columns: repeat($cols, 1fr);
+    gap: $gap;
+    border: $border-width solid $off-grey;
+    padding: $space-8;
+    
+    @if $background-color {
+        background: $background-color;
+    }
+    
+    @if $accent-color {
+        border-color: $accent-color;
+    }
+}
+
+// === HIGH-FASHION BRUTALIST TYPOGRAPHY MIXINS ===
+
+// Thin typography - lowercase, exaggerated spacing
+@mixin text-thin() {
+    font-weight: 100;
+    text-transform: lowercase;
+    letter-spacing: $tracking-wide;
+    line-height: 1.6;
+    
+    @media (min-width: $tablet) {
+        font-weight: 200;
+        letter-spacing: $tracking-wide;
+    }
+    
+    @media (min-width: $desktop) {
+        font-weight: 300;
+        letter-spacing: $tracking-wide;
+    }
+}
+
+// Thick typography - uppercase, exaggerated spacing, condensed fonts
+@mixin text-thick() {
+    font-family: 'Bebas Neue', $font-system;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: $tracking-xwide;
+    line-height: 1.2;
+    
+    @media (min-width: $tablet) {
+        font-weight: 700;
+        letter-spacing: $tracking-xwide;
+    }
+    
+    @media (min-width: $desktop) {
+        font-weight: 800;
+        letter-spacing: $tracking-xwide;
+    }
+}
+
+// Systematic spacing mixin
+@mixin systematic-spacing($multiplier: 1) {
+    margin-bottom: calc(#{$systematic-base} * #{$multiplier});
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Confident restraint mixin - minimalist text styling
+@mixin confident-restraint() {
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    text-decoration: none;
+    
+    &:not(:last-child) {
+        margin-bottom: $systematic-tight;
+    }
+}
+
+// Highlight effect mixin - neo-blue on white text highlights
+@mixin highlight-effect() {
+    background: $neo-blue;
+    color: $white;
+    padding: 0.125em 0.375em;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba($neo-blue, 0.2);
+    
+    &:hover {
+        background: $neo-pink;
+        box-shadow: 0 4px 8px rgba($neo-pink, 0.3);
+    }
+}
+
+// === STRATEGIC BACKGROUND MIXINS ===
+
+// Section split mixin for smooth transitions
+@mixin section-split($from, $to) {
+    background: linear-gradient(to bottom, $from 0%, $from 50%, $to 50%, $to 100%);
+    background-size: 100% 20px;
+    background-repeat: no-repeat;
+}
+
+// Brutal divider mixin
+@mixin brutal-divider() {
+    border-top: 2px solid $black;
+    border-bottom: 2px solid $off-grey;
+    position: relative;
+}
+
+// === UTILITY CLASSES ===
+
+.tracking--wide {
+    letter-spacing: $tracking-wide !important;
+}
+
+.tracking--xwide {
+    letter-spacing: $tracking-xwide !important;
+}

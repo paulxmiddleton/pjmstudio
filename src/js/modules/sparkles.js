@@ -20,7 +20,7 @@ export class MedievalSparkles {
             fadeOutTime: 1200, // Longer fade out
             mouseRadius: 120, // Much wider spread around mouse
             minDistance: 15, // Minimum distance from mouse center
-            colors: ['#8B2500', '#7A1F00', '#6B1A00', '#5C1500'], // Only dark maroon tones
+            colors: ['#ff0000', '#ff00f6', '#3300ff', '#000000'], // Neo-brutalist palette colors
             crossSize: 18, // Slightly larger base size
             crossVariations: [
                 { vRatio: 1.0, hRatio: 0.85 }, // Slightly tall cross

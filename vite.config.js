@@ -19,6 +19,7 @@ export default defineConfig({
         photography: resolve(__dirname, 'portfolio/photography.html'),
         videoEditing: resolve(__dirname, 'portfolio/video-editing.html'),
         graphicDesign: resolve(__dirname, 'portfolio/graphic-design.html'),
+        'ascii-test': resolve(__dirname, 'ascii-test.html'),
       },
       output: {
         // Organize assets by type
@@ -31,6 +32,8 @@ export default defineConfig({
             extType = 'fonts';
           } else if (/mp4|webm|mov|avi/i.test(extType)) {
             extType = 'videos';
+          } else if (/glb|gltf|obj|stl/i.test(extType)) {
+            extType = 'models';
           }
           return `${extType}/[name]-[hash][extname]`;
         },
@@ -53,7 +56,7 @@ export default defineConfig({
     },
   },
   // Asset processing
-  assetsInclude: ['**/*.mov', '**/*.webm'],
+  assetsInclude: ['**/*.mov', '**/*.webm', '**/*.glb', '**/*.gltf', '**/*.obj', '**/*.stl'],
   // Resolve aliases for cleaner imports
   resolve: {
     alias: {
@@ -61,6 +64,7 @@ export default defineConfig({
       '@assets': resolve(__dirname, 'src/assets'),
       '@styles': resolve(__dirname, 'src/styles'),
       '@js': resolve(__dirname, 'src/js'),
+      '@models': resolve(__dirname, 'src/assets/models'),
     },
   },
 });

@@ -3,96 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PJM Studio - Coming Soon</title>
+    <title>PAUL MIDDLETON | VISUAL EXISTENTIALIST</title>
     
-    <!-- Custom Cursor -->
+    <!-- Systematic typography with Arial priority -->
+    
     <style>
+        /* Critical inline styles for immediate render */
         * {
-            cursor: none !important;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* Hide everything until loaded */
+        
         body {
-            opacity: 0;
+            font-family: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+            background: #3300ff;
+            color: #FFFFFF;
+            overflow-x: hidden;
         }
+        
         .loading-screen {
-            opacity: 1 !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #3300ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: #FFFFFF;
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: .25em;
+            text-transform: lowercase;
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content"></div>
+        <div class="loading-text"></div>
     </div>
+    
+    <!-- JavaScript fallback - hide loading screen after 5 seconds -->
+    <script>
+        // Emergency fallback if main.js fails
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen && loadingScreen.style.opacity !== '0') {
+                console.warn('⚠️ Loading screen fallback triggered - main.js may have failed');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    if (loadingScreen.parentNode) {
+                        loadingScreen.remove();
+                    }
+                }, 500);
+            }
+        }, 5000);
+    </script>
 
-    <!-- Custom Sword Cursor -->
-    <div class="sword-cursor" id="customCursor">
-        <img src="/src/assets/images/cursor-sword.png" alt="">
-    </div>
+    <!-- ASCII Animation Canvas -->
+    <canvas id="asciiCanvas"></canvas>
 
-    <!-- Main Landing -->
-    <section class="landing-realm">
-        <!-- Full Illustration Background -->
-        <div class="illustration-layer">
-            <img class="main-illustration" src="/src/assets/images/landing-illustration.jpg" alt="">
-            
-            <!-- Sparkles Layer -->
-            <div class="sparkles-container" id="sparklesContainer"></div>
-            
-            <!-- Castle Click Area (invisible) -->
-            <div class="castle-portal" id="castlePortal" title="Enter the castle..."></div>
-            
-            <!-- Tiny invisible dragon click area -->
-            <a href="https://www.instagram.com/lumpythedragon" target="_blank" class="dragon-link" title="Lumpy the Dragon"></a>
-            
-            <!-- Visual Dragon (not clickable) -->
-            <img class="dragon-silhouette dragon-visual" id="dragon" src="/src/assets/images/dragon-silhouette.png" alt="">
-            
-            <!-- Complete Knight as Separate Entity -->
-            <div class="knight-container" id="knightContainer">
-                <img class="knight-body" src="/src/assets/images/knight-body-centered.png" alt="">
-                <img class="knight-head" id="knightHead" src="/src/assets/images/knight-head-centered.png" alt="">
-                <img class="knight-sword" id="knightSword" src="/src/assets/images/knight-sword-centered.png" alt="">
+    <!-- Main Composition -->
+    <main class="composition">
+        <!-- Small Header Name -->
+        <header class="header-name">
+            <h1>PAUL MIDDLETON</h1>
+        </header>
+
+        <!-- Main Title Block -->
+        <section class="main-title-block">
+            <h2 class="portfolio-title">PORTFOLIO & WEBSITE</h2>
+        </section>
+
+        <!-- Development Note -->
+        <div class="development-status">
+            <p>in development</p>
+        </div>
+
+        <!-- ASCII Canvas Centerpiece Area -->
+        <div class="ascii-centerpiece">
+            <!-- Canvas will be positioned here -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-logo">
+                <img src="/src/assets/images/pjm-logo.svg" alt="PXM Logo" class="pxm-logo" width="40" height="40">
             </div>
-        </div>
-
-        <!-- Coming Soon Text -->
-        <div class="herald-message">
-            <h1 class="coming-soon" id="comingSoon">Coming Soon</h1>
-            <p class="subtitle">website + portfolio in development</p>
-        </div>
-
-        <!-- Social Scrolls -->
-        <div class="social-scrolls">
-            <!-- Social links removed from here -->
-        </div>
-        
-        <!-- Copyright Footer -->
-        <footer class="realm-footer">
-            <div class="footer-socials">
-                <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
-                    </svg>
-                </a>
-                <a href="https://www.youtube.com/user/midzasaur" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                </a>
-                <a href="https://www.itsnova.com/pm" target="_blank" class="scroll-link">
-                    <img src="/src/assets/images/nova-logo.svg" alt="Nova">
-                </a>
-                <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-                    </svg>
-                </a>
-            </div>
-            <img class="middleton-crest" src="/src/assets/images/middleton-crest.png" alt="Middleton Crest">
-            <p class="copyright">© 2025 Paul Middleton</p>
+            <nav class="social-links">
+                <a href="https://www.youtube.com/user/midzasaur" target="_blank" class="social-link">youtube</a>
+                <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="social-link">instagram</a>
+                <a href="https://www.itsnova.com/pm" target="_blank" class="social-link">nova</a>
+                <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="social-link">discord</a>
+            </nav>
         </footer>
-    </section>
+
+    </main>
 
     <script type="module" src="/src/js/main.js"></script>
 </body>
