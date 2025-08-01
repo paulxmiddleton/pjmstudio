@@ -48,11 +48,12 @@ export class ASCII3DEngine {
         // 3D configuration
         this.cameraDistance = 5;
         this.autoRotate = false;
-        this.rotationSpeed = 0.005;
+        this.rotationSpeed = 0.008;
         
-        // ASCII configuration - Higher detail settings
-        this.asciiResolution = { width: 160, height: 80 };
-        this.characterSet = ' .\'`^",:;Il!i~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
+        // ASCII configuration - Enhanced detail settings for 3D models
+        this.asciiResolution = { width: 200, height: 100 };
+        // Enhanced character set with better shading gradients (from darkest to lightest)
+        this.characterSet = ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
         this.backgroundColor = 'transparent';
         this.textColor = '#FFFFFF';
         
@@ -143,7 +144,8 @@ export class ASCII3DEngine {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
             antialias: true,
-            alpha: true
+            alpha: true,
+            willReadFrequently: true
         });
         
         // Configure renderer
@@ -195,7 +197,7 @@ export class ASCII3DEngine {
                 color: false,       // Color ASCII (slower)
                 alpha: false,       // Transparency
                 block: false,       // Blocked characters
-                resolution: 0.2     // Slightly more detail
+                resolution: 0.25    // Lower resolution number = higher detail/smaller characters
             });
             
             // Set size to match canvas
@@ -208,6 +210,13 @@ export class ASCII3DEngine {
             
             console.log('✅ ASCII effect initialized successfully');
             console.log('ASCII DOM element created and positioned');
+            
+            // Immediate debug check
+            console.log('🔍 Immediate ASCII check - DOM element exists:', !!this.asciiEffect.domElement);
+            if (this.asciiEffect.domElement) {
+                console.log('🔍 DOM element parent:', this.asciiEffect.domElement.parentNode?.tagName);
+                console.log('🔍 DOM element position:', this.asciiEffect.domElement.style.position);
+            }
             
         } catch (error) {
             console.error('❌ ASCII effect initialization failed:', error);
@@ -234,15 +243,44 @@ export class ASCII3DEngine {
         console.log('📦 Loading default model...');
         
         try {
-            // Create a simple default geometry (cube) if no models available
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const material = new THREE.MeshLambertMaterial({ color: 0xffffff });
-            const defaultModel = new THREE.Mesh(geometry, material);
+            // TODO: Future enhancement - random model selection or morphing between models
+            // const models = ['sword', 'castle-archers', 'dragon'];
+            // const randomModel = models[Math.floor(Math.random() * models.length)];
+            
+            // Temporarily reverting to sword for debugging
+            let defaultModel;
+            try {
+                defaultModel = await this.modelLoader.loadModel('sword');
+                console.log('✅ Sword model loaded as default');
+            } catch (castleError) {
+                console.warn('⚠️ Failed to load castle-archers model, trying sword:', castleError);
+                // Fallback to sword model
+                try {
+                    defaultModel = await this.modelLoader.loadModel('sword');
+                    console.log('✅ Sword model loaded as fallback');
+                } catch (swordError) {
+                    console.warn('⚠️ Failed to load sword model, falling back to cube:', swordError);
+                    // Final fallback to cube
+                    const geometry = new THREE.BoxGeometry(2, 2, 2);
+                    const material = new THREE.MeshLambertMaterial({ color: 0xffffff });
+                    defaultModel = new THREE.Mesh(geometry, material);
+                    console.log('✅ Cube fallback model loaded');
+                }
+            }
             
             this.currentModel = defaultModel;
             this.scene.add(defaultModel);
             
-            console.log('✅ Default model loaded');
+            // Apply model-specific ASCII settings if available
+            this.applyModelSpecificSettings(defaultModel);
+            
+            // Debug: Check if ASCII element is visible after a short delay
+            setTimeout(() => {
+                console.log('🔍 Running ASCII debug check...');
+                this.debugASCIIElement();
+            }, 2000);
+            
+            console.log('✅ Default model loaded successfully');
             
         } catch (error) {
             console.error('❌ Failed to load default model:', error);
@@ -518,8 +556,9 @@ export class ASCII3DEngine {
             const mouseInfluenceX = (this.mouseX - rect.width / 2) / rect.width;
             const mouseInfluenceY = (this.mouseY - rect.height / 2) / rect.height;
             
-            this.currentModel.rotation.y += mouseInfluenceX * 0.01;
-            this.currentModel.rotation.x += mouseInfluenceY * 0.01;
+            // Enhanced sensitivity with faster overall rotation
+            this.currentModel.rotation.y += -mouseInfluenceX * 0.035; // Faster X-axis rotation
+            this.currentModel.rotation.x += mouseInfluenceY * 0.025;  // Faster Y-axis rotation
         }
         
         // Update model morphing if in progress
@@ -653,20 +692,20 @@ export class ASCII3DEngine {
             this.performanceManager.setMode(mode);
         }
         
-        // Adjust rendering quality based on mode - all with higher detail
+        // Adjust rendering quality based on mode - enhanced for 3D models
         switch (mode) {
             case 'low':
-                this.setResolution(100, 50);
-                this.rotationSpeed = 0.002;
+                this.setResolution(140, 70);
+                this.rotationSpeed = 0.006;
                 break;
             case 'medium':
-                this.setResolution(130, 65);
-                this.rotationSpeed = 0.003;
+                this.setResolution(170, 85);
+                this.rotationSpeed = 0.007;
                 break;
             case 'high':
             default:
-                this.setResolution(160, 80);
-                this.rotationSpeed = 0.005;
+                this.setResolution(200, 100);
+                this.rotationSpeed = 0.008;
                 break;
         }
         
@@ -699,6 +738,157 @@ export class ASCII3DEngine {
             return this.interactionSystem.getInteractionData();
         }
         return { count: 0, crossings: 0, morphProgress: 0 };
+    }
+    
+    // Switch to specific model - Enhanced API for testing different models
+    async switchToModel(modelName) {
+        console.log(`🔄 Switching to model: ${modelName}`);
+        
+        try {
+            await this.loadModel(modelName);
+            return true;
+        } catch (error) {
+            console.error(`❌ Failed to switch to model ${modelName}:`, error);
+            return false;
+        }
+    }
+    
+    // Get available models
+    getAvailableModels() {
+        if (this.modelLoader) {
+            return this.modelLoader.getAvailableModels();
+        }
+        return ['cube', 'sphere', 'torus', 'sword', 'castle-archers', 'dragon', 'castle'];
+    }
+    
+    // Apply model-specific ASCII settings
+    applyModelSpecificSettings(model) {
+        if (!model || !model.userData || !model.userData.asciiConfig) {
+            console.log('⚙️ No model-specific ASCII config found, using defaults');
+            return;
+        }
+        
+        const config = model.userData.asciiConfig;
+        console.log('⚙️ Applying model-specific ASCII settings:', config);
+        
+        try {
+            // Update camera distance
+            if (config.cameraDistance && this.camera) {
+                this.cameraDistance = config.cameraDistance;
+                this.camera.position.set(0, 0, config.cameraDistance);
+                this.camera.lookAt(0, 0, 0);
+            }
+            
+            // Recreate ASCII effect with new settings if needed
+            if (config.resolution !== undefined || config.characterSet) {
+                this.updateASCIIEffect(config);
+            }
+            
+        } catch (error) {
+            console.warn('⚠️ Failed to apply model-specific settings:', error);
+        }
+    }
+    
+    // Update ASCII effect with new configuration
+    updateASCIIEffect(config) {
+        if (!this.renderer || !this.asciiEffect) return;
+        
+        try {
+            // Use model-specific character set or fallback to current
+            const characterSet = config.characterSet || this.characterSet;
+            const resolution = config.resolution !== undefined ? config.resolution : 0.25;
+            
+            console.log('🔄 Updating ASCII effect - Resolution:', resolution, 'Characters:', characterSet.length);
+            
+            // Create new ASCII effect with updated settings
+            this.asciiEffect = new AsciiEffect(this.renderer, characterSet, {
+                invert: false,
+                color: false,
+                alpha: false,
+                block: false,
+                resolution: resolution
+            });
+            
+            // Update size
+            const width = this.canvas.clientWidth || 800;
+            const height = this.canvas.clientHeight || 600;
+            this.asciiEffect.setSize(width, height);
+            
+            // Update DOM element styling if needed
+            if (this.asciiEffect.domElement) {
+                this.updateASCIIElementStyling(this.asciiEffect.domElement);
+                
+                // Ensure element is added to DOM if not already
+                if (!this.asciiEffect.domElement.parentNode) {
+                    console.log('🔧 Re-adding ASCII element to DOM');
+                    const container = this.canvas.parentNode;
+                    if (container) {
+                        container.appendChild(this.asciiEffect.domElement);
+                    }
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Failed to update ASCII effect:', error);
+        }
+    }
+    
+    // Update ASCII element styling for better rendering
+    updateASCIIElementStyling(element) {
+        if (!element) return;
+        
+        // Get canvas position for precise positioning
+        const rect = this.canvas.getBoundingClientRect();
+        
+        element.style.cssText = `
+            position: absolute;
+            top: ${rect.top + window.scrollY}px;
+            left: ${rect.left + window.scrollX}px;
+            width: ${rect.width}px;
+            height: ${rect.height}px;
+            background-color: transparent;
+            color: ${this.textColor};
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-size: 8px;
+            line-height: 0.9;
+            letter-spacing: -1px;
+            white-space: pre;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        `;
+    }
+    
+    // Debug ASCII element visibility
+    debugASCIIElement() {
+        console.log('🔍 ASCII Element Debug Info:');
+        console.log('- ASCII Effect exists:', !!this.asciiEffect);
+        console.log('- ASCII DOM element exists:', !!this.asciiEffect?.domElement);
+        
+        if (this.asciiEffect?.domElement) {
+            const element = this.asciiEffect.domElement;
+            const styles = window.getComputedStyle(element);
+            console.log('- Element dimensions:', element.offsetWidth, 'x', element.offsetHeight);
+            console.log('- Element position:', styles.position, styles.top, styles.left);
+            console.log('- Element z-index:', styles.zIndex);
+            console.log('- Element visibility:', styles.visibility);
+            console.log('- Element display:', styles.display);
+            console.log('- Element opacity:', styles.opacity);
+            console.log('- Element content length:', element.textContent?.length || 0);
+            console.log('- Element parent:', element.parentNode?.tagName);
+            
+            // Force a test render
+            if (element.textContent?.length === 0) {
+                console.warn('⚠️ ASCII element has no content - forcing test render');
+                element.textContent = 'TEST ASCII CONTENT';
+                element.style.color = 'red';
+                element.style.fontSize = '20px';
+            }
+        }
+        
+        console.log('- Scene has model:', !!this.currentModel);
+        console.log('- Animation running:', this.isRunning);
+        console.log('- Canvas dimensions:', this.canvas?.clientWidth, 'x', this.canvas?.clientHeight);
     }
     
     // Get performance stats - API method matching ASCIIEngine

@@ -3,133 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography - PJM Studio</title>
+    <title>PHOTOGRAPHY | PAUL MIDDLETON</title>
     <style>
-        * {
-            cursor: none !important;
-        }
         body {
             opacity: 0;
         }
         .loading-screen {
-            opacity: 1 !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: #3300ff;
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: .25em;
+            text-transform: lowercase;
         }
     </style>
   <script type="module" crossorigin src="/js/modulepreload-polyfill-B5Qt9EMX.js"></script>
-  <script type="module" crossorigin src="/js/main-C00Tr9QG.js"></script>
-  <link rel="stylesheet" crossorigin href="/css/main-JZLUoPmR.css">
-  <link rel="stylesheet" crossorigin href="/css/portfolio-C4-FvWwk.css">
+  <script type="module" crossorigin src="/js/navigation-CaLtn89W.js"></script>
+  <script type="module" crossorigin src="/js/portfolio-BaEy_thy.js"></script>
+  <link rel="stylesheet" crossorigin href="/css/portfolio-BMK-vPtm.css">
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content"></div>
+        <div class="loading-text"></div>
     </div>
 
-    <!-- Custom Sword Cursor -->
-    <div class="sword-cursor" id="customCursor">
-        <img src="/images/cursor-sword-BjyZtuTY.png" alt="">
-    </div>
 
-    <!-- Navigation -->
-    <nav class="medieval-nav">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="/home" class="nav-brand-link">
-                    <img src="/images/pjm-logo-CYakVmQC.svg" alt="PJM Studio" class="nav-logo">
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-trigger" id="navTrigger">
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-header">
+                <span class="nav-title">NAVIGATION</span>
+                <span class="nav-close" id="navClose">×</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/index.html" class="nav-link">
+                    <span class="link-number">00</span>
+                    <span class="link-text">LANDING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/home.html" class="nav-link">
+                    <span class="link-number">01</span>
+                    <span class="link-text">PORTFOLIO</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/directing.html" class="nav-link">
+                    <span class="link-number">02</span>
+                    <span class="link-text">DIRECTING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/videography.html" class="nav-link">
+                    <span class="link-number">03</span>
+                    <span class="link-text">VIDEOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/photography.html" class="nav-link">
+                    <span class="link-number">04</span>
+                    <span class="link-text">PHOTOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/video-editing.html" class="nav-link">
+                    <span class="link-number">05</span>
+                    <span class="link-text">VIDEO_EDITING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/graphic-design.html" class="nav-link">
+                    <span class="link-number">06</span>
+                    <span class="link-text">GRAPHIC_DESIGN</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/store.html" class="nav-link">
+                    <span class="link-number">07</span>
+                    <span class="link-text">STORE</span>
+                    <span class="link-arrow">→</span>
                 </a>
             </div>
             
-            <div class="nav-menu">
-                <a href="/home" class="nav-link">← Home</a>
-                <div class="nav-links">
-                    <a href="/portfolio/directing" class="nav-link">Directing</a>
-                    <a href="/portfolio/videography" class="nav-link">Videography</a>
-                    <a href="/portfolio/photography" class="nav-link active">Photography</a>
-                    <a href="/portfolio/video-editing" class="nav-link">Video Editing</a>
-                    <a href="/portfolio/graphic-design" class="nav-link">Graphic Design</a>
+            <div class="nav-footer">
+                <div class="nav-status">
+                    <span class="status-dot active"></span>
+                    <span class="status-text">PHOTOGRAPHY_ARCHIVE</span>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="portfolio-realm photography-realm">
-        <!-- Content -->
-        <section class="portfolio-content">
-            <div class="portfolio-header">
-                <h1 class="page-title">Photography</h1>
-                <p class="page-subtitle">Freezing time with light, shadow, and emotion</p>
+    <main class="directing-composition">
+        <!-- Archive Header -->
+        <section class="archive-header">
+            <div class="header-content">
+                <div class="discipline-label">03</div>
+                <h1 class="discipline-title">PHOTOGRAPHY</h1>
+                <div class="discipline-separator"></div>
+                <p class="discipline-statement">crystallizing moments through light manipulation and temporal aesthetics</p>
             </div>
-
-            <!-- Portfolio Grid -->
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Demo Reel Coming Soon</p>
-                        </div>
+            
+            <div class="archive-meta">
+                <div class="meta-label">STATUS</div>
+                <div class="meta-data">
+                    <div class="meta-line">
+                        <span class="meta-key">projects</span>
+                        <span class="meta-value active">09</span>
                     </div>
-                    <div class="item-details">
-                        <h3>Demo Reel</h3>
-                        <p>A showcase of directing work across various projects</p>
+                    <div class="meta-line">
+                        <span class="meta-key">discipline</span>
+                        <span class="meta-value">photography</span>
                     </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Project 1 Coming Soon</p>
-                        </div>
+                    <div class="meta-line">
+                        <span class="meta-key">status</span>
+                        <span class="meta-value active">active</span>
                     </div>
-                    <div class="item-details">
-                        <h3>Featured Project</h3>
-                        <p>Description of photography project will go here</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="item-media">
-                        <div class="video-placeholder">
-                            <p>Project 2 Coming Soon</p>
-                        </div>
-                    </div>
-                    <div class="item-details">
-                        <h3>Featured Project</h3>
-                        <p>Description of photography project will go here</p>
+                    <div class="meta-line">
+                        <span class="meta-key">last_update</span>
+                        <span class="meta-value">jan_2025</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="realm-footer">
-            <div class="footer-logo">
-                <img src="/images/pjm-logo-CYakVmQC.svg" alt="PJM Studio" class="footer-logo-img">
+        <!-- Directing Manifesto -->
+        <section class="directing-manifesto">
+            <div class="manifesto-content">
+                <div class="manifesto-label">philosophy_03</div>
+                <div class="manifesto-text">
+                    <p>every photograph captures more than light—it freezes intention, emotion, and the photographer's interpretation of reality.</p>
+                    <p>through composition and timing, we transform fleeting moments into permanent statements about human experience.</p>
+                </div>
             </div>
-            <div class="footer-socials">
-                <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
-                    </svg>
-                </a>
-                <a href="https://www.youtube.com/user/midzasaur" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                </a>
-                <a href="https://www.itsnova.com/pm" target="_blank" class="scroll-link">
-                    <img src="/images/nova-logo-CPVc2tWn.svg" alt="Nova">
-                </a>
-                <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="scroll-link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-                    </svg>
-                </a>
+        </section>
+
+        <!-- Portfolio Archive -->
+        <section class="portfolio-archive">
+            <div class="archive-grid">
+                <div class="project-block feature">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-diagonal"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_001</div>
+                            <div class="project-title">URBAN SHADOWS</div>
+                            <div class="project-meta">
+                                <span class="project-format">SERIES</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">street photography exploring the interplay between natural light and urban architecture</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-solid"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_002</div>
+                            <div class="project-title">PORTRAITS</div>
+                            <div class="project-meta">
+                                <span class="project-format">STUDIO</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">intimate character studies using controlled lighting</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-gradient"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_003</div>
+                            <div class="project-title">LANDSCAPES</div>
+                            <div class="project-meta">
+                                <span class="project-format">NATURE</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <div class="project-description">documenting natural environments with emphasis on texture and atmosphere</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-lines"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_004</div>
+                            <div class="project-title">ABSTRACT</div>
+                            <div class="project-meta">
+                                <span class="project-format">CONCEPT</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">experimental compositions focusing on form, color, and movement</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-blocks"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_005</div>
+                            <div class="project-title">EVENTS</div>
+                            <div class="project-meta">
+                                <span class="project-format">LIVE</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">capturing authentic moments at concerts, festivals, and cultural gatherings</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern alternating"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">PHOTO_006</div>
+                            <div class="project-title">COMMERCIAL</div>
+                            <div class="project-meta">
+                                <span class="project-format">CLIENT</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <div class="project-description">product and lifestyle photography for brand campaigns</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">© 2025 Paul Middleton</p>
-        </footer>
+        </section>
+
+        <!-- Process Fragment -->
+        <section class="process-fragment">
+            <div class="fragment-content">
+                <div class="fragment-label">METHODOLOGY</div>
+                <div class="process-stages">
+                    <div class="stage-item">
+                        <div class="stage-number">01</div>
+                        <div class="stage-name">CONCEPT</div>
+                        <div class="stage-description">developing visual concept and narrative approach</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">02</div>
+                        <div class="stage-name">SETUP</div>
+                        <div class="stage-description">location scouting, lighting design, equipment preparation</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">03</div>
+                        <div class="stage-name">CAPTURE</div>
+                        <div class="stage-description">execution of planned shots with attention to composition</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">04</div>
+                        <div class="stage-name">POST</div>
+                        <div class="stage-description">color grading, retouching, and final image optimization</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Composition -->
+        <div class="background-composition">
+            <div class="composition-element element-1"></div>
+            <div class="composition-element element-2"></div>
+            <div class="composition-element element-3"></div>
+        </div>
+        
+        <!-- Copyright Mark -->
+        <div class="copyright-mark">
+            <span>© 2025 PAUL MIDDLETON</span>
+        </div>
     </main>
 
+    
 </body>
 </html>

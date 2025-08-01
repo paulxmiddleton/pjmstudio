@@ -154,25 +154,26 @@ html, body {
     }
 }
 
-// Main Title Block - Large title at 20-25% from top
+// Main Title Block - Off-centered asymmetrical composition
 .main-title-block {
     position: absolute;
-    top: 22%;
-    left: 50%;
+    top: 19%;
+    left: calc(45% - 25px);
     transform: translateX(-50%);
     z-index: 10;
-    text-align: center;
+    text-align: left;
     
     .portfolio-title {
         font-family: Arial, sans-serif;
-        font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+        font-size: clamp(1.1rem, 2.75vw, 1.8rem);
         font-weight: bold;
         color: #FFFFFF;
-        letter-spacing: 0.6em;
+        letter-spacing: 0.8em;
         text-transform: uppercase;
         margin: 0;
         line-height: 1.1;
-        transform: scaleY(1.4) translateX(-25%) translateY(-5%);
+        transform: scaleY(1.8) translateX(-25%) translateY(-5%);
+        white-space: pre;
     }
 }
 
@@ -185,7 +186,7 @@ html, body {
     
     p {
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: clamp(0.9rem, 2vw, 1.2rem);
+        font-size: clamp(1.1rem, 2.4vw, 1.5rem);
         font-weight: bold;
         color: #FFFFFF;
         letter-spacing: 0.2em;
@@ -426,9 +427,11 @@ html, body {
     transform: translateX(-50%);
     z-index: 10;
     text-align: center;
+    width: auto;
     
     .footer-logo {
         margin-bottom: 20px;
+        text-align: center;
         
         .pxm-logo {
             width: 90px;
@@ -436,6 +439,8 @@ html, body {
             filter: invert(1) brightness(1);
             opacity: 0.8;
             transition: opacity 0.3s ease;
+            display: block;
+            margin: 0 auto;
             
             &:hover {
                 opacity: 1;
@@ -446,7 +451,9 @@ html, body {
     .social-links {
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 40px;
+        margin: 0 auto;
         
         .social-link {
             font-family: Arial, sans-serif;

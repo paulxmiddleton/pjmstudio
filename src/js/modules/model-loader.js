@@ -17,46 +17,88 @@ export class ModelLoader {
         this.modelCache = new Map();
         this.loadingPromises = new Map();
         
-        // Model configurations
+        // Model configurations with ASCII optimization profiles
         this.modelConfigs = {
             cube: {
                 type: 'procedural',
                 generator: () => this.createCube(),
                 scale: 2,
-                position: [0, 0, 0]
+                position: [0, 0, 0],
+                ascii: {
+                    resolution: 0.25,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
             },
             sphere: {
                 type: 'procedural',
                 generator: () => this.createSphere(),
                 scale: 2,
-                position: [0, 0, 0]
+                position: [0, 0, 0],
+                ascii: {
+                    resolution: 0.25,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
             },
             torus: {
                 type: 'procedural',
                 generator: () => this.createTorus(),
                 scale: 2,
-                position: [0, 0, 0]
+                position: [0, 0, 0],
+                ascii: {
+                    resolution: 0.25,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
             },
             dragon: {
                 type: 'gltf',
                 path: '/src/assets/models/dragon-head.glb',
                 fallback: () => this.createDragonFallback(),
                 scale: 1,
-                position: [0, 0, 0]
+                position: [0, 0, 0],
+                ascii: {
+                    resolution: 0.2,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 4
+                }
             },
             castle: {
                 type: 'gltf',
                 path: '/src/assets/models/castle.glb',
                 fallback: () => this.createCastleFallback(),
                 scale: 1,
-                position: [0, -1, 0]
+                position: [0, -1, 0],
+                ascii: {
+                    resolution: 0.18,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 6
+                }
             },
             sword: {
-                type: 'obj',
-                path: '/src/assets/models/sword.obj',
+                type: 'gltf',
+                path: '/src/assets/models/sword-model.glb',
                 fallback: () => this.createSwordFallback(),
-                scale: 1,
-                position: [0, 0, 0]
+                scale: 1.8,
+                position: [0.2, 0, 0],
+                ascii: {
+                    resolution: 0.22,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
+            },
+            'castle-archers': {
+                type: 'gltf',
+                path: '/src/assets/models/castle-archers.glb',
+                fallback: () => this.createCastleFallback(),
+                scale: 2,
+                position: [0, -0.5, 0],
+                ascii: {
+                    resolution: 0.2,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 6
+                }
             }
         };
         
@@ -176,6 +218,9 @@ export class ModelLoader {
         // Optimize for ASCII rendering
         this.optimizeForASCII(model);
         
+        // Store ASCII configuration for this model
+        model.userData.asciiConfig = config.ascii;
+        
         return model;
     }
     
@@ -253,6 +298,7 @@ export class ModelLoader {
                 material = this.materials.metal;
                 break;
             case 'castle':
+            case 'castle-archers':
                 material = this.materials.stone;
                 break;
             case 'dragon':
@@ -280,13 +326,38 @@ export class ModelLoader {
                     child.material.transparent = false;
                     child.material.alphaTest = 0;
                     
+                    // Enhanced shading for better ASCII depth perception
+                    child.material.flatShading = false;
+                    
+                    // Increase ambient occlusion if available
+                    if (child.material.aoMapIntensity !== undefined) {
+                        child.material.aoMapIntensity = 1.5;
+                    }
+                    
                     // Enhance contrast for better ASCII conversion
                     if (child.material.color) {
                         const color = child.material.color;
-                        // Increase contrast by pushing colors towards extremes
-                        color.r = color.r > 0.5 ? Math.min(1, color.r * 1.2) : Math.max(0, color.r * 0.8);
-                        color.g = color.g > 0.5 ? Math.min(1, color.g * 1.2) : Math.max(0, color.g * 0.8);
-                        color.b = color.b > 0.5 ? Math.min(1, color.b * 1.2) : Math.max(0, color.b * 0.8);
+                        // More aggressive contrast enhancement for ASCII
+                        const contrast = 1.5;
+                        color.r = Math.pow(color.r, 1/contrast);
+                        color.g = Math.pow(color.g, 1/contrast);
+                        color.b = Math.pow(color.b, 1/contrast);
+                        
+                        // Ensure high contrast for better ASCII representation
+                        const luminance = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b;
+                        if (luminance > 0.5) {
+                            color.multiplyScalar(1.3); // Brighten bright colors
+                        } else {
+                            color.multiplyScalar(0.7); // Darken dark colors
+                        }
+                    }
+                    
+                    // Enhance metalness and roughness for better shading
+                    if (child.material.metalness !== undefined) {
+                        child.material.metalness = Math.min(1, child.material.metalness * 1.2);
+                    }
+                    if (child.material.roughness !== undefined) {
+                        child.material.roughness = Math.max(0.1, child.material.roughness * 0.8);
                     }
                 }
             }
