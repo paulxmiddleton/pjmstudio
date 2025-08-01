@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII 3D Engine Test</title>
+    <title>ASCII 3D Video Lab</title>
     
     <style>
         * {
@@ -15,7 +15,7 @@
         body {
             font-family: monospace;
             background: #000;
-            color: #00ff00;
+            color: #3300ff;
             overflow: hidden;
         }
         
@@ -35,7 +35,7 @@
             z-index: 100;
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
-            border: 1px solid #00ff00;
+            border: 1px solid #3300ff;
             font-size: 12px;
             max-width: 300px;
         }
@@ -46,8 +46,8 @@
         
         .test-controls button {
             background: transparent;
-            border: 1px solid #00ff00;
-            color: #00ff00;
+            border: 1px solid #3300ff;
+            color: #3300ff;
             padding: 5px 10px;
             margin: 2px;
             cursor: pointer;
@@ -56,12 +56,47 @@
         }
         
         .test-controls button:hover {
-            background: #00ff00;
+            background: #3300ff;
             color: #000;
         }
         
+        .upload-custom {
+            color: #3300ff;
+            font-family: 'Helvetica', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: lowercase;
+            cursor: pointer;
+            text-decoration: underline;
+            position: relative;
+            display: inline-block;
+            margin: 2px 5px;
+        }
+        
+        .upload-custom:hover {
+            color: #5522ff;
+        }
+        
+        .upload-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: #3300ff;
+            padding: 5px 8px;
+            border: 1px solid #3300ff;
+            font-size: 9px;
+            white-space: nowrap;
+            display: none;
+            z-index: 200;
+        }
+        
+        .upload-custom:hover .upload-tooltip {
+            display: block;
+        }
+        
         .performance-stats {
-            border-top: 1px solid #00ff00;
+            border-top: 1px solid #3300ff;
             padding-top: 10px;
             font-size: 10px;
         }
@@ -101,15 +136,19 @@
             z-index: 100;
             background: rgba(0, 0, 0, 0.8);
             padding: 10px;
-            border: 1px solid #00ff00;
+            border: 1px solid #3300ff;
             font-size: 10px;
         }
         
         .keyboard-help div {
             margin: 2px 0;
         }
+        
+        #file-input {
+            display: none;
+        }
     </style>
-  <script type="module" crossorigin src="/js/ascii-test-DplehIki.js"></script>
+  <script type="module" crossorigin src="/js/ascii-video-CIEOgbfv.js"></script>
   <link rel="modulepreload" crossorigin href="/js/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-DDB8Hsov.js">
 </head>
@@ -130,6 +169,9 @@
     <!-- ASCII 3D Canvas -->
     <canvas id="ascii3dCanvas"></canvas>
     
+    <!-- Hidden File Input -->
+    <input type="file" id="file-input" accept=".glb,.gltf,.obj" />
+    
     <!-- Test UI Controls -->
     <div class="test-ui">
         <div class="test-controls">
@@ -137,6 +179,10 @@
             <button onclick="testEngine.loadModel('cube')">CUBE</button>
             <button onclick="testEngine.loadModel('sphere')">SPHERE</button>
             <button onclick="testEngine.loadModel('torus')">TORUS</button>
+            <span class="upload-custom" onclick="testEngine.triggerFileUpload()">
+                upload custom shape
+                <div class="upload-tooltip">Accepts: .glb, .gltf, .obj files</div>
+            </span>
             <br><br>
             <div>ASCII SETTINGS:</div>
             <button onclick="testEngine.changeResolution('high')">HIGH RES</button>
