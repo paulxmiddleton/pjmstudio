@@ -46,6 +46,11 @@
   to = "/portfolio/graphic-design.html"
   status = 200
 
+[[redirects]]
+  from = "/ascii-video"
+  to = "/ascii-video.html"
+  status = 200
+
 # Fallback for SPA routing
 [[redirects]]
   from = "/*"

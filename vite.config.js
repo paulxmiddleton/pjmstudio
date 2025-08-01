@@ -20,6 +20,7 @@ export default defineConfig({
         videoEditing: resolve(__dirname, 'portfolio/video-editing.html'),
         graphicDesign: resolve(__dirname, 'portfolio/graphic-design.html'),
         'ascii-test': resolve(__dirname, 'ascii-test.html'),
+        'ascii-video': resolve(__dirname, 'ascii-video.html'),
       },
       output: {
         // Organize assets by type

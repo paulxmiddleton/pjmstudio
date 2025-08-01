@@ -636,7 +636,7 @@ export class ASCII3DEngine {
     }
     
     // Load 3D model - Enhanced API method
-    async loadModel(modelType) {
+    async loadModel(modelType, extension = null) {
         if (!this.modelLoader) {
             console.warn('Model loader not initialized');
             return;
@@ -645,7 +645,17 @@ export class ASCII3DEngine {
         try {
             console.log(`📦 Loading 3D model: ${modelType}`);
             
-            const newModel = await this.modelLoader.loadModel(modelType);
+            let newModel;
+            
+            // Check if modelType is a file URL (starts with blob:)
+            if (typeof modelType === 'string' && modelType.startsWith('blob:')) {
+                // Use provided extension or default to 'glb'
+                const fileExtension = extension || 'glb';
+                newModel = await this.loadCustomModel(modelType, fileExtension);
+            } else {
+                // Use regular model loader for predefined models
+                newModel = await this.modelLoader.loadModel(modelType);
+            }
             
             if (newModel) {
                 // Remove current model from scene before adding new one
@@ -673,6 +683,99 @@ export class ASCII3DEngine {
             console.error(`❌ Failed to load model ${modelType}:`, error);
             throw error;
         }
+    }
+    
+    // Load custom model from file URL - New method for file uploads
+    async loadCustomModel(fileURL, extension) {
+        try {
+            console.log(`📁 Loading custom model from file: ${extension}`);
+            
+            let model;
+            
+            switch (extension.toLowerCase()) {
+                case 'glb':
+                case 'gltf':
+                    const gltfLoader = new GLTFLoader();
+                    const gltfResult = await new Promise((resolve, reject) => {
+                        gltfLoader.load(
+                            fileURL,
+                            (gltf) => resolve(gltf),
+                            (progress) => {
+                                console.log(`📊 Loading progress: ${Math.round((progress.loaded / progress.total) * 100)}%`);
+                            },
+                            (error) => reject(error)
+                        );
+                    });
+                    model = gltfResult.scene;
+                    break;
+                    
+                case 'obj':
+                    const objLoader = new OBJLoader();
+                    model = await new Promise((resolve, reject) => {
+                        objLoader.load(
+                            fileURL,
+                            (obj) => resolve(obj),
+                            (progress) => {
+                                console.log(`📊 Loading progress: ${Math.round((progress.loaded / progress.total) * 100)}%`);
+                            },
+                            (error) => reject(error)
+                        );
+                    });
+                    break;
+                    
+                default:
+                    throw new Error(`Unsupported file format: ${extension}`);
+            }
+            
+            if (!model) {
+                throw new Error('Failed to load model from file');
+            }
+            
+            // Apply the same preprocessing as other models
+            this.preprocessCustomModel(model);
+            
+            console.log(`✅ Custom ${extension.toUpperCase()} model loaded successfully`);
+            return model;
+            
+        } catch (error) {
+            console.error(`❌ Failed to load custom model:`, error);
+            throw new Error(`Custom model loading failed: ${error.message}`);
+        }
+    }
+    
+    // Preprocess custom model to match engine standards
+    preprocessCustomModel(model) {
+        // Center the model
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+        
+        // Scale the model to fit within reasonable bounds
+        const size = box.getSize(new THREE.Vector3());
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        if (maxDimension > 4) {
+            const scale = 4 / maxDimension;
+            model.scale.setScalar(scale);
+        }
+        
+        // Apply consistent material properties
+        model.traverse((child) => {
+            if (child.isMesh) {
+                // Ensure proper material setup for ASCII rendering
+                if (child.material) {
+                    child.material.color = new THREE.Color(0xffffff);
+                    child.material.transparent = true;
+                    child.material.opacity = 1.0;
+                }
+                
+                // Add geometry if missing
+                if (!child.geometry) {
+                    child.geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+                }
+            }
+        });
+        
+        console.log('🔧 Custom model preprocessed for ASCII rendering');
     }
     
     // Set ASCII resolution
