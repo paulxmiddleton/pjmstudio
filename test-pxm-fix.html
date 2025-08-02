@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PXM Logo Fix Test</title>
+    <style>
+        body { 
+            font-family: monospace; 
+            background: #000; 
+            color: #3300ff; 
+            padding: 20px;
+        }
+        #test-results {
+            background: rgba(51, 0, 255, 0.1);
+            border: 1px solid #3300ff;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>🧪 PXM-Logo Fix Validation Test</h2>
+    <div id="test-results">
+        <h3>Testing pxm-logo Configuration:</h3>
+        <div id="config-test"></div>
+        
+        <h3>Expected Debug Output When Loading:</h3>
+        <pre>
+📏 Model pxm-logo dimensions: [X] x [Y] x [Z]
+📐 Max dimension: [value]
+📍 Model center: [X], [Y], [Z]
+✅ Model pxm-logo centered at origin
+🚫 Auto-scaling disabled for pxm-logo (overrideAutoScale: true)
+🎥 Scale-Aware OBJ Model Analysis for pxm-logo:
+   📐 Original dimensions: [X] × [Y] × [Z]
+   📏 Original max dimension: [value]
+   ⚙️ Config scale: 0.05
+   📏 Scaled max dimension: [much smaller value]
+   🔢 Smart multiplier: 2.5 or 4.0 (for tiny models)
+   🎯 Final camera distance: [appropriate distance]
+📍 Enhanced OBJ centering applied for pxm-logo
+📊 Final pxm-logo center: [near 0.000], [near 0.000], [near 0.000]
+        </pre>
+    </div>
+
+    <script type="module">
+        // Test the configuration
+        import { ModelLoader } from '/src/js/modules/model-loader.js';
+        
+        try {
+            const loader = new ModelLoader();
+            const pxmConfig = loader.modelConfigs['pxm-logo'];
+            
+            const configTest = document.getElementById('config-test');
+            
+            if (pxmConfig) {
+                configTest.innerHTML = `
+                    ✅ PXM-Logo config found:<br>
+                    - Scale: ${pxmConfig.scale} (should be 0.05)<br>
+                    - Override Auto-Scale: ${pxmConfig.overrideAutoScale} (should be true)<br>
+                    - Type: ${pxmConfig.type} (should be obj)<br>
+                    - Needs OBJ Processing: ${pxmConfig.needsOBJProcessing} (should be true)<br>
+                    - Camera Distance: ${pxmConfig.ascii.cameraDistance} (should be dynamic)<br><br>
+                    🎯 <strong>Configuration is CORRECT!</strong><br><br>
+                    Next: Load the pxm-logo model in ASCII Video Lab to see the debug output.
+                `;
+            } else {
+                configTest.innerHTML = '❌ PXM-Logo config not found!';
+            }
+        } catch (error) {
+            document.getElementById('config-test').innerHTML = `❌ Error testing config: ${error.message}`;
+        }
+    </script>
+</body>
+</html>

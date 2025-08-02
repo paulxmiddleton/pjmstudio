@@ -3,6 +3,7 @@ import '../styles/landing.scss';
 import { FloatingNavigation } from './modules/navigation.js';
 import { ASCIIEngine } from './modules/ascii-engine.js';
 import { ASCII3DEngine } from './modules/ascii3d-engine.js';
+import { MODEL_WEIGHTS } from './modules/model-loader.js';
 
 class HighFashionBrutalist {
     constructor() {
@@ -271,6 +272,12 @@ class HighFashionBrutalist {
         try {
             this.asciiEngine = new ASCII3DEngine();
             await this.asciiEngine.init(canvasElement);
+            
+            // Load a random weighted model
+            const randomModel = this.selectWeightedRandomModel();
+            console.log(`🎲 Loading random weighted model: ${randomModel}`);
+            await this.asciiEngine.loadModel(randomModel);
+            
             this.asciiEngine.startAnimation();
             
             this.engineInitialized = true;
@@ -356,6 +363,31 @@ class HighFashionBrutalist {
         ];
         
         return transientPatterns.some(pattern => pattern.test(error.message));
+    }
+    
+    // Select a random model based on weights
+    selectWeightedRandomModel() {
+        const models = Object.keys(MODEL_WEIGHTS);
+        const weights = Object.values(MODEL_WEIGHTS);
+        
+        // Create cumulative weight array
+        const cumulativeWeights = [];
+        let sum = 0;
+        for (const weight of weights) {
+            sum += weight;
+            cumulativeWeights.push(sum);
+        }
+        
+        // Generate random number and find corresponding model
+        const random = Math.random() * sum;
+        for (let i = 0; i < cumulativeWeights.length; i++) {
+            if (random <= cumulativeWeights[i]) {
+                return models[i];
+            }
+        }
+        
+        // Fallback
+        return models[0];
     }
     
     // Loading Screen Management - Enhanced debugging

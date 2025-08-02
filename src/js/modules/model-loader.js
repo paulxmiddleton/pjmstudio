@@ -5,6 +5,17 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
+// Export model weights for use in main.js
+export const MODEL_WEIGHTS = {
+    'sword': 0.40,                   // 40% - primary model
+    'pxm-logo': 0.20,               // 20% - secondary model
+    'stone-tower': 0.125,           // 12.5% - increased custom model
+    'castle-archers': 0.075,        // 7.5% - custom model
+    'lumpy': 0.125,                 // 12.5% - new custom model
+    'cube': 0.05,                   // 5% - fallback model
+    'torus': 0.025                  // 2.5% - rare model
+};
+
 export class ModelLoader {
     constructor(scene) {
         this.scene = scene;
@@ -22,7 +33,7 @@ export class ModelLoader {
             cube: {
                 type: 'procedural',
                 generator: () => this.createCube(),
-                scale: 2,
+                scale: 1.0,  // Back to original size
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.25,
@@ -50,6 +61,68 @@ export class ModelLoader {
                     resolution: 0.25,
                     characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
                     cameraDistance: 5
+                }
+            },
+            lumpy: {
+                type: 'gltf',
+                path: '/src/assets/models/custom/lumpy-1.glb',
+                fallback: () => this.createCube(),
+                scale: 2.0,
+                position: [0, 0, 0],
+                ascii: {
+                    resolution: 0.2,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5.0
+                }
+            },
+            sword: {
+                type: 'gltf',
+                path: '/src/assets/models/custom/sword-model.glb',
+                fallback: () => this.createSwordFallback(),
+                scale: 0.6,  // Reduced from 1.8 - perfect size for landing page
+                position: [0.2, 0, 0],
+                category: 'custom',
+                ascii: {
+                    resolution: 0.22,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
+            },
+            'pxm-logo': {
+                type: 'gltf',
+                path: '/src/assets/models/custom/pxm-logo2.glb',
+                fallback: () => this.createCube(),
+                scale: 4.5,  // Increased 3x from 1.5 - maximum visibility and detail
+                position: [0, 0, 0],
+                category: 'custom',
+                ascii: {
+                    resolution: 0.22,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 5
+                }
+            },
+            'stone-tower': {
+                type: 'gltf',
+                path: '/src/assets/models/custom/stone-tower.glb',
+                fallback: () => this.createTowerFallback(),
+                scale: 2.2,
+                position: [0, -0.8, 0],
+                ascii: {
+                    resolution: 0.2,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 7
+                }
+            },
+            'castle-archers': {
+                type: 'gltf',
+                path: '/src/assets/models/custom/castle-archers.glb',
+                fallback: () => this.createCastleFallback(),
+                scale: 1.5,  // Increased back up - impressive and visible
+                position: [0, -0.5, 0],
+                ascii: {
+                    resolution: 0.2,
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    cameraDistance: 6
                 }
             },
             dragon: {
@@ -192,20 +265,24 @@ export class ModelLoader {
                 break;
                 
             case 'gltf':
-                model = await this.loadGLTFModel(config.path);
+                model = await this.loadGLTFModel(config.path, config);
                 break;
                 
             case 'obj':
-                model = await this.loadOBJModel(config.path);
+                model = await this.loadOBJModel(config.path, config);
                 break;
                 
             default:
                 throw new Error(`Unknown model type: ${config.type}`);
         }
         
-        // Apply transformations
-        if (config.scale !== undefined) {
+        // Apply transformations (scale should already be handled in preprocessing)
+        if (config.scale !== undefined && !model.userData.hasCustomScale) {
             model.scale.setScalar(config.scale);
+            model.userData.hasCustomScale = true;
+            // Store original scale for morphing transitions
+            model.userData.originalScale = config.scale;
+            console.log(`🎯 Applied custom scale ${config.scale} to ${modelName} and stored for morph preservation`);
         }
         
         if (config.position) {
@@ -272,12 +349,14 @@ export class ModelLoader {
         const center = box.getCenter(new THREE.Vector3());
         model.position.sub(center);
         
-        // Ensure reasonable scale
-        const size = box.getSize(new THREE.Vector3());
-        const maxDimension = Math.max(size.x, size.y, size.z);
-        if (maxDimension > 4) {
-            const scale = 4 / maxDimension;
-            model.scale.setScalar(scale);
+        // Ensure reasonable scale only if no custom scale is set
+        if (!model.userData.hasCustomScale) {
+            const size = box.getSize(new THREE.Vector3());
+            const maxDimension = Math.max(size.x, size.y, size.z);
+            if (maxDimension > 4) {
+                const scale = 4 / maxDimension;
+                model.scale.setScalar(scale);
+            }
         }
         
         // Enable shadows
@@ -484,6 +563,34 @@ export class ModelLoader {
         group.add(gate);
         
         group.name = 'castle_fallback';
+        return group;
+    }
+    
+    // Create tower fallback
+    createTowerFallback() {
+        const group = new THREE.Group();
+        const stoneMaterial = this.materials.default.clone();
+        stoneMaterial.color.setHex(0x888888);
+        
+        // Tower base (wide cylinder)
+        const baseGeometry = new THREE.CylinderGeometry(1.2, 1.5, 0.8, 8);
+        const base = new THREE.Mesh(baseGeometry, stoneMaterial);
+        base.position.set(0, -1, 0);
+        group.add(base);
+        
+        // Tower main body (cylinder)
+        const bodyGeometry = new THREE.CylinderGeometry(1, 1, 3, 8);
+        const body = new THREE.Mesh(bodyGeometry, stoneMaterial);
+        body.position.set(0, 0.5, 0);
+        group.add(body);
+        
+        // Tower top (cone)
+        const topGeometry = new THREE.ConeGeometry(1.2, 1.5, 8);
+        const top = new THREE.Mesh(topGeometry, stoneMaterial);
+        top.position.set(0, 2.5, 0);
+        group.add(top);
+        
+        group.name = 'tower_fallback';
         return group;
     }
     

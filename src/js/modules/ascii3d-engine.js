@@ -592,8 +592,9 @@ export class ASCII3DEngine {
                 }
             });
             
-            // Add scale transition effect
-            const scaleTransition = 0.8 + (0.2 * fadeIn);
+            // Add scale transition effect - respect custom model scale
+            const baseScale = this.targetModel.userData?.originalScale || 1.0;
+            const scaleTransition = baseScale * (0.8 + (0.2 * fadeIn));
             this.targetModel.scale.setScalar(scaleTransition);
         }
         
@@ -611,7 +612,11 @@ export class ASCII3DEngine {
                         child.material.transparent = false;
                     }
                 });
-                this.targetModel.scale.setScalar(1.0);
+                
+                // Preserve custom scale if model has one, otherwise reset to 1.0
+                const customScale = this.targetModel.userData?.originalScale || 1.0;
+                this.targetModel.scale.setScalar(customScale);
+                console.log(`🔄 Morph complete: restored scale to ${customScale} for ${this.targetModel.userData?.modelName || 'unknown'}`);
             }
             
             this.currentModel = this.targetModel;
@@ -655,6 +660,16 @@ export class ASCII3DEngine {
             } else {
                 // Use regular model loader for predefined models
                 newModel = await this.modelLoader.loadModel(modelType);
+                
+                // Apply model-specific scale from configuration if it exists
+                if (newModel && this.modelLoader.modelConfigs[modelType]) {
+                    const config = this.modelLoader.modelConfigs[modelType];
+                    if (config.scale !== undefined && !newModel.userData.hasCustomScale) {
+                        console.log(`📏 Applying configured scale ${config.scale} to ${modelType}`);
+                        newModel.scale.setScalar(config.scale);
+                        newModel.userData.hasCustomScale = true;
+                    }
+                }
             }
             
             if (newModel) {
@@ -668,11 +683,14 @@ export class ASCII3DEngine {
                 if (this.currentModel) {
                     // Start morphing transition
                     this.targetModel = newModel;
+                    // Ensure model starts with correct scale immediately
+                    const baseScale = newModel.userData?.originalScale || 1.0;
+                    newModel.scale.setScalar(baseScale * 0.8); // Start at 80% for smooth transition
                     this.scene.add(newModel);
                     this.morphProgress = 0;
-                    console.log(`🔄 Starting morph transition to ${modelType}`);
+                    console.log(`🔄 Starting morph transition to ${modelType} with base scale ${baseScale}`);
                 } else {
-                    // Direct replacement for first model
+                    // Direct replacement for first model - should appear at full scale immediately
                     this.currentModel = newModel;
                     this.scene.add(newModel);
                     console.log(`✅ Model ${modelType} loaded as initial model`);
@@ -1190,5 +1208,40 @@ export class ASCII3DEngine {
         } catch (error) {
             console.error('❌ Error during disposal:', error);
         }
+    }
+    
+    // Set 3D model scale
+    setModelScale(scaleFactor) {
+        if (!scaleFactor || scaleFactor <= 0) {
+            console.warn('⚠️ Invalid scale factor:', scaleFactor);
+            return;
+        }
+        
+        if (this.currentModel) {
+            this.currentModel.scale.setScalar(scaleFactor);
+        }
+        if (this.targetModel) {
+            this.targetModel.scale.setScalar(scaleFactor);
+        }
+    }
+    
+    // Auto-rotate controls
+    setAutoRotate(enabled, speed = 0.008) {
+        this.autoRotate = enabled;
+        if (speed) {
+            this.rotationSpeed = speed;
+        }
+    }
+    
+    getAutoRotate() {
+        return this.autoRotate || false;
+    }
+    
+    // Set ASCII resolution - convert normalized value to settings
+    setResolution(value) {
+        const resolution = Math.max(0.1, Math.min(1.0, value));
+        const width = Math.round(80 + (resolution * 120));
+        const height = Math.round(40 + (resolution * 60));
+        this.asciiResolution = { width, height };
     }
 }

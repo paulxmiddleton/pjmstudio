@@ -12,7 +12,7 @@ class ASCII3DTestSuite {
             interactionCount: 0,
             morphProgress: 0
         };
-        this.testModels = ['cube', 'sphere', 'torus'];
+        this.testModels = ['sword', 'pxm-logo', 'cube', 'stone-tower', 'lumpy', 'castle-archers', 'torus'];
         this.currentModelIndex = 0;
         this.performanceInterval = null;
         this.customFileUrls = new Set(); // Track custom file URLs for cleanup
@@ -49,6 +49,10 @@ class ASCII3DTestSuite {
             
             // Setup file upload handling
             this.setupFileUpload();
+            
+            // Setup UI controls
+            this.setupResolutionSlider();
+            this.setupScaleSlider();
             
             // Start engine animation
             this.engine.startAnimation();
@@ -143,7 +147,6 @@ class ASCII3DTestSuite {
             'renderTimeDisplay': `${Math.round(this.stats.renderTime)}ms`,
             'memoryDisplay': `${Math.round(this.stats.memory)}MB`,
             'interactionCount': this.stats.interactionCount,
-            'morphProgress': `${Math.round(this.stats.morphProgress)}%`
         };
         
         Object.entries(displays).forEach(([id, value]) => {
@@ -190,6 +193,44 @@ class ASCII3DTestSuite {
         const fileInput = document.getElementById('file-input');
         if (fileInput) {
             fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+        }
+    }
+    
+    // Setup resolution slider
+    setupResolutionSlider() {
+        const slider = document.getElementById('resolution-slider');
+        const display = document.getElementById('resolution-value');
+        
+        if (slider && display) {
+            slider.addEventListener('input', (e) => {
+                const value = parseFloat(e.target.value);
+                display.textContent = value.toFixed(1);
+                
+                if (this.engine && this.engine.setResolution) {
+                    this.engine.setResolution(value);
+                }
+            });
+            
+            console.log('✅ Resolution slider setup complete');
+        }
+    }
+    
+    // Setup scale slider
+    setupScaleSlider() {
+        const slider = document.getElementById('scale-slider');
+        const display = document.getElementById('scale-value');
+        
+        if (slider && display) {
+            slider.addEventListener('input', (e) => {
+                const value = parseFloat(e.target.value);
+                display.textContent = `${value.toFixed(1)}x`;
+                
+                if (this.engine && this.engine.setModelScale) {
+                    this.engine.setModelScale(value);
+                }
+            });
+            
+            console.log('✅ Scale slider setup complete');
         }
     }
     
@@ -479,6 +520,22 @@ class ASCII3DTestSuite {
         }
         
         console.log('🧹 Video lab cleaned up');
+    }
+    
+    // Toggle auto-rotation
+    toggleAutoRotate() {
+        if (!this.engine) {
+            console.warn('⚠️ Engine not initialized');
+            return;
+        }
+        
+        const currentState = this.engine.getAutoRotate ? this.engine.getAutoRotate() : false;
+        const newState = !currentState;
+        
+        if (this.engine.setAutoRotate) {
+            this.engine.setAutoRotate(newState);
+            console.log(`🔄 Auto-rotate ${newState ? 'enabled' : 'disabled'}`);
+        }
     }
 }
 
