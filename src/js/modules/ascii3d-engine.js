@@ -879,7 +879,7 @@ export class ASCII3DEngine {
         if (this.modelLoader) {
             return this.modelLoader.getAvailableModels();
         }
-        return ['cube', 'sphere', 'torus', 'sword', 'castle-archers', 'dragon', 'castle'];
+        return ['cube', 'sphere', 'torus', 'sword', 'pxm-logo', 'stone-tower', 'castle-archers', 'lumpy'];
     }
     
     // Apply model-specific ASCII settings

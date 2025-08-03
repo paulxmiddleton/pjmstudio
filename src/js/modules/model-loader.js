@@ -4,16 +4,16 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MODEL_URLS, getModelUrl } from './model-assets.js';
 
 // Export model weights for use in main.js
 export const MODEL_WEIGHTS = {
     'sword': 0.40,                   // 40% - primary model
     'pxm-logo': 0.20,               // 20% - secondary model
-    'stone-tower': 0.125,           // 12.5% - increased custom model
-    'castle-archers': 0.075,        // 7.5% - custom model
-    'lumpy': 0.125,                 // 12.5% - new custom model
+    'stone-tower': 0.15,            // 15% - increased custom model
+    'castle-archers': 0.10,         // 10% - custom model
+    'lumpy': 0.10,                  // 10% - new custom model
     'cube': 0.05,                   // 5% - fallback model
-    'torus': 0.025                  // 2.5% - rare model
 };
 
 export class ModelLoader {
@@ -79,7 +79,7 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/sword-model.glb',
                 fallback: () => this.createSwordFallback(),
-                scale: 0.6,  // Reduced from 1.8 - perfect size for landing page
+                scale: 1.8,
                 position: [0.2, 0, 0],
                 category: 'custom',
                 ascii: {
@@ -92,7 +92,7 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/pxm-logo2.glb',
                 fallback: () => this.createCube(),
-                scale: 4.5,  // Increased 3x from 1.5 - maximum visibility and detail
+                scale: 4.5,
                 position: [0, 0, 0],
                 category: 'custom',
                 ascii: {
@@ -117,7 +117,7 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/castle-archers.glb',
                 fallback: () => this.createCastleFallback(),
-                scale: 1.5,  // Increased back up - impressive and visible
+                scale: 3.0,
                 position: [0, -0.5, 0],
                 ascii: {
                     resolution: 0.2,
@@ -125,52 +125,16 @@ export class ModelLoader {
                     cameraDistance: 6
                 }
             },
-            dragon: {
+            'girl-with-pearl': {
                 type: 'gltf',
-                path: '/src/assets/models/dragon-head.glb',
-                fallback: () => this.createDragonFallback(),
-                scale: 1,
+                path: '/src/assets/models/girlwithpearlearring-3d.glb',
+                fallback: () => this.createCube(),
+                scale: 1.5,
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.2,
                     characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
-                    cameraDistance: 4
-                }
-            },
-            castle: {
-                type: 'gltf',
-                path: '/src/assets/models/castle.glb',
-                fallback: () => this.createCastleFallback(),
-                scale: 1,
-                position: [0, -1, 0],
-                ascii: {
-                    resolution: 0.18,
-                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
-                    cameraDistance: 6
-                }
-            },
-            sword: {
-                type: 'gltf',
-                path: '/src/assets/models/sword-model.glb',
-                fallback: () => this.createSwordFallback(),
-                scale: 1.8,
-                position: [0.2, 0, 0],
-                ascii: {
-                    resolution: 0.22,
-                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
                     cameraDistance: 5
-                }
-            },
-            'castle-archers': {
-                type: 'gltf',
-                path: '/src/assets/models/castle-archers.glb',
-                fallback: () => this.createCastleFallback(),
-                scale: 2,
-                position: [0, -0.5, 0],
-                ascii: {
-                    resolution: 0.2,
-                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
-                    cameraDistance: 6
                 }
             }
         };
@@ -301,11 +265,26 @@ export class ModelLoader {
         return model;
     }
     
-    // Load GLTF model
-    async loadGLTFModel(path) {
+    // Load GLTF model with production-safe URL resolution
+    async loadGLTFModel(path, config) {
         return new Promise((resolve, reject) => {
+            // In production, use the imported URL from model-assets.js
+            // In development, use the original path
+            let resolvedPath = path;
+            
+            // Check if this is a known model with a production URL
+            const modelName = Object.keys(this.modelConfigs).find(name => {
+                const modelConfig = this.modelConfigs[name];
+                return modelConfig.path === path;
+            });
+            
+            if (modelName && MODEL_URLS[modelName]) {
+                resolvedPath = MODEL_URLS[modelName];
+                console.log(`🔗 Using production URL for ${modelName}: ${resolvedPath}`);
+            }
+            
             this.gltfLoader.load(
-                path,
+                resolvedPath,
                 (gltf) => {
                     const model = gltf.scene;
                     this.preprocessModel(model);
@@ -316,6 +295,7 @@ export class ModelLoader {
                 },
                 (error) => {
                     console.error('GLTF loading error:', error);
+                    console.error('Failed path:', resolvedPath);
                     reject(error);
                 }
             );

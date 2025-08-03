@@ -1,5 +1,7 @@
 // ascii-video.js - ASCII 3D Video Lab with file upload capability
 import { ASCII3DEngine } from './modules/ascii3d-engine.js';
+// Import model assets to ensure they're included in production build
+import './modules/model-assets.js';
 
 class ASCII3DTestSuite {
     constructor() {
@@ -12,7 +14,7 @@ class ASCII3DTestSuite {
             interactionCount: 0,
             morphProgress: 0
         };
-        this.testModels = ['sword', 'pxm-logo', 'cube', 'stone-tower', 'lumpy', 'castle-archers', 'torus'];
+        this.testModels = ['sword', 'pxm-logo', 'cube', 'stone-tower', 'lumpy', 'castle-archers', 'sphere', 'torus'];
         this.currentModelIndex = 0;
         this.performanceInterval = null;
         this.customFileUrls = new Set(); // Track custom file URLs for cleanup

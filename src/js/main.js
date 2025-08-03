@@ -4,6 +4,8 @@ import { FloatingNavigation } from './modules/navigation.js';
 import { ASCIIEngine } from './modules/ascii-engine.js';
 import { ASCII3DEngine } from './modules/ascii3d-engine.js';
 import { MODEL_WEIGHTS } from './modules/model-loader.js';
+// Import model assets to ensure they're included in production build
+import './modules/model-assets.js';
 
 class HighFashionBrutalist {
     constructor() {
