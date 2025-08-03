@@ -592,18 +592,18 @@ html, body {
     
     .development-status {
         top: 32%;
-        right: 5%;
+        right: 8%; // Move further from edge to prevent text cutoff
         
         p {
             font-size: clamp(1rem, 4vw, 1.3rem); // Much bigger "in development" text for mobile
-            transform: translateX(30%); // Adjust to work with new text positioning
+            transform: translateX(15%); // Reduce transform to move text left and prevent cutoff
         }
     }
     
     .ascii-centerpiece {
         width: 90%;
         height: 20%;
-        transform: translate(-47%, -50%); // Nudge slightly back to the right
+        transform: translate(-48%, -50%); // Move 1% more to the left to align with footer logo
     }
     
     .site-footer {
