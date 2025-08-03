@@ -603,27 +603,27 @@ html, body {
     .ascii-centerpiece {
         width: 90%;
         height: 20%;
-        transform: translate(-48%, -50%); // Shift slightly left to center better
+        transform: translate(-45%, -50%); // Shift more to the left for better centering
     }
     
     .site-footer {
-        bottom: 8%; // Move footer higher so it's visible
+        bottom: 12%; // Move footer even higher to show social links
         
         .footer-logo {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             
             .pxm-logo {
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
             }
         }
         
         .social-links {
-            gap: 12px;
+            gap: 10px;
             flex-wrap: nowrap; // Keep all 4 links on same line
             
             .social-link {
-                font-size: clamp(0.4rem, 2vw, 0.6rem);
+                font-size: clamp(0.35rem, 1.8vw, 0.55rem);
                 white-space: nowrap; // Prevent text wrapping
             }
         }
