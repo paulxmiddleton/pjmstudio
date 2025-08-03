@@ -529,9 +529,9 @@ class HighFashionBrutalist {
             const mouseX = clientX / window.innerWidth;
             const mouseY = clientY / window.innerHeight;
             
-            // Detect mobile for increased sensitivity
+            // Detect mobile for dramatically increased sensitivity
             const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            const sensitivityMultiplier = isMobile ? 2.5 : 1.0; // Increase mobile sensitivity
+            const sensitivityMultiplier = isMobile ? 5.0 : 1.0; // Much higher mobile sensitivity for faster effects
             
             // Update ASCII animation with enhanced sensitivity
             if (this.asciiEngine) {

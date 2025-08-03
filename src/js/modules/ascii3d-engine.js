@@ -477,16 +477,16 @@ export class ASCII3DEngine {
         let normalizedX = (x / rect.width) * 2 - 1;
         let normalizedY = -(y / rect.height) * 2 + 1;
         
-        // Enhanced mobile sensitivity for more responsive touch interactions
+        // Enhanced mobile sensitivity for much more responsive touch interactions
         const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (isMobile) {
-            // Amplify mouse movement for more dramatic effects on mobile
-            const amplification = 1.8;
+            // Amplify mouse movement for much more dramatic effects on mobile
+            const amplification = 4.0; // Increased from 1.8 to 4.0 for faster touch response
             normalizedX *= amplification;
             normalizedY *= amplification;
             // Clamp to keep within reasonable bounds
-            normalizedX = Math.max(-2, Math.min(2, normalizedX));
-            normalizedY = Math.max(-2, Math.min(2, normalizedY));
+            normalizedX = Math.max(-3, Math.min(3, normalizedX));
+            normalizedY = Math.max(-3, Math.min(3, normalizedY));
         }
         
         this.mouse.x = normalizedX;

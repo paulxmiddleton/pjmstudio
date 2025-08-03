@@ -595,7 +595,7 @@ html, body {
         right: 5%;
         
         p {
-            font-size: clamp(0.7rem, 3vw, 0.9rem); // Make "in development" text bigger
+            font-size: clamp(1rem, 4vw, 1.3rem); // Much bigger "in development" text for mobile
             transform: translateX(30%); // Adjust to work with new text positioning
         }
     }
