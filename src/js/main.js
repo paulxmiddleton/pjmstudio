@@ -520,23 +520,39 @@ class HighFashionBrutalist {
         // Subtle parallax for background elements and ASCII animation integration
         const backgroundElements = document.querySelectorAll('.composition-element');
         
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+        // Enhanced mouse and touch interaction for better mobile responsiveness
+        const handlePointerMove = (e) => {
+            // Get coordinates from either mouse or touch event
+            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
             
-            // Update ASCII animation with mouse position
+            const mouseX = clientX / window.innerWidth;
+            const mouseY = clientY / window.innerHeight;
+            
+            // Detect mobile for increased sensitivity
+            const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const sensitivityMultiplier = isMobile ? 2.5 : 1.0; // Increase mobile sensitivity
+            
+            // Update ASCII animation with enhanced sensitivity
             if (this.asciiEngine) {
-                this.asciiEngine.updateMousePosition(e.clientX, e.clientY);
+                this.asciiEngine.updateMousePosition(clientX, clientY);
             }
             
             backgroundElements.forEach((element, index) => {
-                const speed = (index + 1) * 0.5;
+                const speed = (index + 1) * 0.5 * sensitivityMultiplier;
                 const x = (mouseX - 0.5) * speed;
                 const y = (mouseY - 0.5) * speed;
                 
                 element.style.transform = `translate(${x}px, ${y}px) ${element.style.transform}`;
             });
-        });
+        };
+
+        // Add both mouse and touch event listeners
+        document.addEventListener('mousemove', handlePointerMove);
+        document.addEventListener('touchmove', handlePointerMove, { passive: false });
+        
+        // Add touch start for immediate response
+        document.addEventListener('touchstart', handlePointerMove, { passive: false });
         
         // Typography hover effects
         const primaryStatement = document.querySelector('.primary-statement');

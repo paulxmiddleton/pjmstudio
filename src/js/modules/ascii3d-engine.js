@@ -474,8 +474,23 @@ export class ASCII3DEngine {
         
         // Convert to normalized coordinates
         const rect = this.canvas.getBoundingClientRect();
-        this.mouse.x = (x / rect.width) * 2 - 1;
-        this.mouse.y = -(y / rect.height) * 2 + 1;
+        let normalizedX = (x / rect.width) * 2 - 1;
+        let normalizedY = -(y / rect.height) * 2 + 1;
+        
+        // Enhanced mobile sensitivity for more responsive touch interactions
+        const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (isMobile) {
+            // Amplify mouse movement for more dramatic effects on mobile
+            const amplification = 1.8;
+            normalizedX *= amplification;
+            normalizedY *= amplification;
+            // Clamp to keep within reasonable bounds
+            normalizedX = Math.max(-2, Math.min(2, normalizedX));
+            normalizedY = Math.max(-2, Math.min(2, normalizedY));
+        }
+        
+        this.mouse.x = normalizedX;
+        this.mouse.y = normalizedY;
         
         // Update interaction system
         if (this.interactionSystem) {
