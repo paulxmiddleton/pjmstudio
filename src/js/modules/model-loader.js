@@ -19,12 +19,12 @@ import logger from './logger.js';
 
 // Export model weights for use in main.js
 export const MODEL_WEIGHTS = {
-    'sword': 0.40,                   // 40% - primary model
-    'pxm-logo': 0.20,               // 20% - secondary model
+    'sword': 0.25,                   // 25% - secondary model
+    'pxm-logo': 0.30,               // 30% - primary model
     'stone-tower': 0.15,            // 15% - increased custom model
     'castle-archers': 0.10,         // 10% - custom model
-    'lumpy': 0.10,                  // 10% - new custom model
-    'cube': 0.05,                   // 5% - fallback model
+    'lumpy': 0.15,                  // 15% - new custom model (increased for better mobile/desktop visibility)
+    'cube': 0.10,                   // 10% - fallback model
 };
 
 export class ModelLoader {
@@ -104,9 +104,12 @@ export class ModelLoader {
                 fallback: () => this.createSwordFallback(),
                 scale: {
                     desktop: 1.8,    // Desktop scale - ORIGINAL VALUE PRESERVED
-                    mobile: 1.8      // Mobile scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.16     // Mobile scale - 20% larger (1.8 * 1.2 = 2.16)
                 },
-                position: [0.2, 0, 0],
+                position: {
+                    desktop: [0.2, 0, 0],     // Desktop position - ORIGINAL VALUE PRESERVED
+                    mobile: [-0.1, 0, 0]      // Mobile position - shifted left from 0.2 to -0.1
+                },
                 category: 'custom',
                 ascii: {
                     resolution: 0.22,
@@ -122,7 +125,10 @@ export class ModelLoader {
                     desktop: 4.5,    // Desktop scale - ORIGINAL VALUE PRESERVED
                     mobile: 4.5      // Mobile scale - ORIGINAL VALUE PRESERVED
                 },
-                position: [0, 0, 0],
+                position: {
+                    desktop: [0, 0, 0],       // Desktop position - ORIGINAL VALUE PRESERVED
+                    mobile: [0.3, 0, 0]       // Mobile position - shifted right slightly
+                },
                 category: 'custom',
                 ascii: {
                     resolution: 0.22,
@@ -151,7 +157,7 @@ export class ModelLoader {
                 fallback: () => this.createCastleFallback(),
                 scale: {
                     desktop: 3.0,    // Desktop scale - ORIGINAL VALUE PRESERVED
-                    mobile: 3.0      // Mobile scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.25     // Mobile scale - 25% smaller (3.0 * 0.75 = 2.25)
                 },
                 position: [0, -0.5, 0],
                 ascii: {
@@ -315,7 +321,22 @@ export class ModelLoader {
         }
         
         if (config.position) {
-            model.position.set(...config.position);
+            // Determine device type
+            const isMobile = this.detectMobileDevice();
+            
+            // Get appropriate position based on device
+            let positionValue;
+            if (typeof config.position === 'object' && config.position.desktop) {
+                // Device-specific positioning
+                positionValue = isMobile ? config.position.mobile : config.position.desktop;
+                console.log(`📱 Using ${isMobile ? 'mobile' : 'desktop'} position: [${positionValue.join(', ')}] for ${modelName}`);
+            } else {
+                // Legacy single position array
+                positionValue = config.position;
+                console.log(`📏 Using legacy position: [${positionValue.join(', ')}] for ${modelName}`);
+            }
+            
+            model.position.set(...positionValue);
         }
         
         // Apply model-specific materials
