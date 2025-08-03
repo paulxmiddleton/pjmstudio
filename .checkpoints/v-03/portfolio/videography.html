@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIDEOGRAPHY | PAUL MIDDLETON</title>
+    <style>
+        body {
+            opacity: 0;
+        }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: #3300ff;
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: .25em;
+            text-transform: lowercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text"></div>
+    </div>
+
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-trigger" id="navTrigger">
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-header">
+                <span class="nav-title">NAVIGATION</span>
+                <span class="nav-close" id="navClose">×</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/index.html" class="nav-link">
+                    <span class="link-number">00</span>
+                    <span class="link-text">LANDING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/home.html" class="nav-link">
+                    <span class="link-number">01</span>
+                    <span class="link-text">PORTFOLIO</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/directing.html" class="nav-link">
+                    <span class="link-number">02</span>
+                    <span class="link-text">DIRECTING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/videography.html" class="nav-link">
+                    <span class="link-number">03</span>
+                    <span class="link-text">VIDEOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/photography.html" class="nav-link">
+                    <span class="link-number">04</span>
+                    <span class="link-text">PHOTOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/video-editing.html" class="nav-link">
+                    <span class="link-number">05</span>
+                    <span class="link-text">VIDEO_EDITING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/graphic-design.html" class="nav-link">
+                    <span class="link-number">06</span>
+                    <span class="link-text">GRAPHIC_DESIGN</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/store.html" class="nav-link">
+                    <span class="link-number">07</span>
+                    <span class="link-text">STORE</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="nav-footer">
+                <div class="nav-status">
+                    <span class="status-dot active"></span>
+                    <span class="status-text">VIDEOGRAPHY_ARCHIVE</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="directing-composition">
+        <!-- Archive Header -->
+        <section class="archive-header">
+            <div class="header-content">
+                <div class="discipline-label">02</div>
+                <h1 class="discipline-title">VIDEOGRAPHY</h1>
+                <div class="discipline-separator"></div>
+                <p class="discipline-statement">kinetic storytelling and temporal aesthetics</p>
+            </div>
+            
+            <div class="archive-meta">
+                <div class="meta-label">STATUS</div>
+                <div class="meta-data">
+                    <div class="meta-line">
+                        <span class="meta-key">projects</span>
+                        <span class="meta-value active">12</span>
+                    </div>
+                    <div class="meta-line">
+                        <span class="meta-key">discipline</span>
+                        <span class="meta-value">videography</span>
+                    </div>
+                    <div class="meta-line">
+                        <span class="meta-key">status</span>
+                        <span class="meta-value active">active</span>
+                    </div>
+                    <div class="meta-line">
+                        <span class="meta-key">last_update</span>
+                        <span class="meta-value">jan_2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directing Manifesto -->
+        <section class="directing-manifesto">
+            <div class="manifesto-content">
+                <div class="manifesto-label">philosophy_02</div>
+                <div class="manifesto-text">
+                    <p>videography captures life in motion—documenting reality while crafting visual narratives through camera movement and composition.</p>
+                    <p>each frame serves the story, building momentum and emotion through intentional cinematography and temporal pacing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Archive -->
+        <section class="portfolio-archive">
+            <div class="archive-grid">
+                <div class="project-block feature">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-solid"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_001</div>
+                            <div class="project-title">DOCUMENTARY SERIES</div>
+                            <div class="project-meta">
+                                <span class="project-format">LONG-FORM</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">multi-part documentary exploring urban culture and community stories</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-gradient"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_002</div>
+                            <div class="project-title">MUSIC VIDEOS</div>
+                            <div class="project-meta">
+                                <span class="project-format">CREATIVE</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">visual storytelling synchronized with musical rhythm and emotion</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-lines"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_003</div>
+                            <div class="project-title">EVENT COVERAGE</div>
+                            <div class="project-meta">
+                                <span class="project-format">LIVE</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <div class="project-description">capturing live events with dynamic camera work and crowd energy</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-blocks"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_004</div>
+                            <div class="project-title">COMMERCIAL WORK</div>
+                            <div class="project-meta">
+                                <span class="project-format">CLIENT</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">brand storytelling through cinematic product and lifestyle videography</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern alternating"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_005</div>
+                            <div class="project-title">EXPERIMENTAL</div>
+                            <div class="project-meta">
+                                <span class="project-format">ART</span>
+                                <span class="project-year">2023</span>
+                            </div>
+                            <div class="project-description">abstract visual experiments exploring movement, time, and perception</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-block">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-diagonal"></div>
+                        <div class="project-overlay">
+                            <div class="project-number">VIDEO_006</div>
+                            <div class="project-title">INTERVIEWS</div>
+                            <div class="project-meta">
+                                <span class="project-format">PORTRAIT</span>
+                                <span class="project-year">2024</span>
+                            </div>
+                            <div class="project-description">intimate conversation capture with thoughtful framing and lighting</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Fragment -->
+        <section class="process-fragment">
+            <div class="fragment-content">
+                <div class="fragment-label">METHODOLOGY</div>
+                <div class="process-stages">
+                    <div class="stage-item">
+                        <div class="stage-number">01</div>
+                        <div class="stage-name">PLANNING</div>
+                        <div class="stage-description">story development, shot lists, and location scouting</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">02</div>
+                        <div class="stage-name">SETUP</div>
+                        <div class="stage-description">equipment preparation, lighting design, and camera positioning</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">03</div>
+                        <div class="stage-description">capturing footage with attention to movement and composition</div>
+                        <div class="stage-name">CAPTURE</div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">04</div>
+                        <div class="stage-name">REVIEW</div>
+                        <div class="stage-description">footage evaluation and selection for post-production workflow</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Composition -->
+        <div class="background-composition">
+            <div class="composition-element element-1"></div>
+            <div class="composition-element element-2"></div>
+            <div class="composition-element element-3"></div>
+        </div>
+        
+        <!-- Copyright Mark -->
+        <div class="copyright-mark">
+            <span>© 2025 PAUL MIDDLETON</span>
+        </div>
+    </main>
+
+    <script type="module" src="/src/js/portfolio.js"></script>
+</body>
+</html>

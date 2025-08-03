@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII 3D Video Lab</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #3300ff;
+            overflow: hidden;
+        }
+        
+        #ascii3dCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        
+        .test-ui {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 1px solid #3300ff;
+            font-size: 12px;
+            max-width: 300px;
+        }
+        
+        .test-controls {
+            margin-bottom: 15px;
+        }
+        
+        .test-controls button {
+            background: transparent;
+            border: 1px solid #3300ff;
+            color: #3300ff;
+            padding: 5px 10px;
+            margin: 2px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 10px;
+        }
+        
+        .test-controls button:hover {
+            background: #3300ff;
+            color: #000;
+        }
+        
+        .upload-custom {
+            color: #3300ff;
+            font-family: 'Helvetica', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: lowercase;
+            cursor: pointer;
+            text-decoration: underline;
+            position: relative;
+            display: inline-block;
+            margin: 2px 5px;
+        }
+        
+        .upload-custom:hover {
+            color: white;
+        }
+        
+        .upload-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: #3300ff;
+            padding: 5px 8px;
+            border: 1px solid #3300ff;
+            font-size: 9px;
+            white-space: nowrap;
+            display: none;
+            z-index: 200;
+        }
+        
+        .upload-custom:hover .upload-tooltip {
+            display: block;
+        }
+        
+        .performance-stats {
+            border-top: 1px solid #3300ff;
+            padding-top: 10px;
+            font-size: 10px;
+        }
+        
+        .performance-stats div {
+            margin: 2px 0;
+        }
+        
+        .loading-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            text-align: center;
+        }
+        
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border: 2px solid #ff0000;
+            max-width: 80vw;
+            text-align: center;
+            display: none;
+        }
+        
+        .keyboard-help {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border: 1px solid #3300ff;
+            font-size: 10px;
+        }
+        
+        .keyboard-help div {
+            margin: 2px 0;
+        }
+        
+        #file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loadingIndicator">
+        <div>INITIALIZING 3D ASCII ENGINE...</div>
+        <div>████████████████████████</div>
+    </div>
+    
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage">
+        <h2>3D ASCII ENGINE ERROR</h2>
+        <p id="errorText"></p>
+        <button onclick="location.reload()">RELOAD</button>
+    </div>
+    
+    <!-- ASCII 3D Canvas -->
+    <canvas id="ascii3dCanvas"></canvas>
+    
+    <!-- Hidden File Input -->
+    <input type="file" id="file-input" accept=".glb,.gltf,.obj" />
+    
+    <!-- Test UI Controls -->
+    <div class="test-ui">
+        <div class="test-controls">
+            <div>MODELS:</div>
+            <button onclick="testEngine.loadModel('sword')">SWORD</button>
+            <button onclick="testEngine.loadModel('pxm-logo')">PXM-LOGO</button>
+            <button onclick="testEngine.loadModel('cube')">CUBE</button>
+            <button onclick="testEngine.loadModel('stone-tower')">TOWER</button>
+            <button onclick="testEngine.loadModel('lumpy')">LUMPY</button>
+            <button onclick="testEngine.loadModel('castle-archers')">ARCHERS</button>
+            <button onclick="testEngine.loadModel('torus')">TORUS</button>
+            <span class="upload-custom" onclick="testEngine.triggerFileUpload()">
+                upload custom shape
+                <div class="upload-tooltip">Accepts: .glb, .gltf, .obj files</div>
+            </span>
+            <br><br>
+            <div>ASCII SETTINGS:</div>
+            <button onclick="testEngine.changeResolution('high')">HIGH RES</button>
+            <button onclick="testEngine.changeResolution('medium')">MED RES</button>
+            <button onclick="testEngine.changeResolution('low')">LOW RES</button>
+            <br>
+            <label for="resolution-slider">Resolution: <span id="resolution-value">1.0</span></label>
+            <input type="range" id="resolution-slider" min="0.1" max="1.0" value="1.0" step="0.05" data-tooltip="Controls ASCII character density">
+            <br>
+            <label for="scale-slider">Model Scale: <span id="scale-value">1x</span></label>
+            <input type="range" id="scale-slider" min="0.5" max="2.0" value="1.25" step="0.1" data-tooltip="Controls model size (auto-bounded)">
+            <br><br>
+            <div>INTERACTION TESTS:</div>
+            <button onclick="testEngine.resetInteractions()">RESET</button>
+            <br><br>
+            <div>PERFORMANCE:</div>
+            <button onclick="testEngine.changePerformance('high')">HIGH</button>
+            <button onclick="testEngine.changePerformance('medium')">MEDIUM</button>
+            <button onclick="testEngine.changePerformance('low')">LOW</button>
+            <br><br>
+            <div>ROTATION:</div>
+            <button onclick="testEngine.toggleSlowRotation()">TOGGLE SLOW</button>
+            <button onclick="testEngine.toggleAutoRotate()">AUTO-ROTATE</button>
+        </div>
+        
+        <div class="performance-stats">
+            <div>FPS: <span id="fpsDisplay">--</span></div>
+            <div>Render Time: <span id="renderTimeDisplay">--ms</span></div>
+            <div>Memory: <span id="memoryDisplay">--MB</span></div>
+            <div>Engine: <span id="engineStatus">INITIALIZING</span></div>
+            <div>Interactions: <span id="interactionCount">0</span></div>
+            <div id="rotation-status">Rotation: NORMAL</div>
+        </div>
+    </div>
+    
+    <!-- Keyboard Help -->
+    <div class="keyboard-help">
+        <div><strong>KEYBOARD SHORTCUTS:</strong></div>
+        <div>R - Reset Engine</div>
+        <div>M - Toggle Models</div>
+        <div>P - Performance Mode</div>
+        <div>S - Slow Rotation</div>
+        <div>I - Interaction Info</div>
+        <div>ESC - Stop Animation</div>
+    </div>
+
+    <script type="module" src="/src/js/ascii-video.js"></script>
+</body>
+</html>

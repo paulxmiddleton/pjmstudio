@@ -1,0 +1,829 @@
+// Portfolio Pages - High Fashion Brutalist Archive
+@import 'variables';
+
+// Strategic Background - Portfolio Content Areas
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: $font-system;
+    background: $bg-content;
+    color: $black;
+    line-height: 1.2;
+    overflow-x: hidden;
+    font-weight: 300;
+}
+
+// Header area uses deep blue, content area uses light backgrounds
+
+// Loading Screen - Minimalist
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    
+    &.loaded {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .loading-text {
+        @include text-thick();
+        color: $neo-blue;
+        font-size: 14px;
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+// Floating Navigation - Same as Other Pages
+.floating-nav {
+    position: fixed;
+    top: $space-8;
+    right: $space-8;
+    z-index: 1000;
+    
+    .nav-trigger {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        .trigger-line {
+            width: 20px;
+            height: 1px;
+            background: $black;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-origin: center;
+            
+            &:nth-child(1) {
+                width: 25px;
+            }
+            
+            &:nth-child(3) {
+                width: 15px;
+            }
+        }
+        
+        &:hover .trigger-line {
+            background: $neo-blue;
+            
+            &:nth-child(1) {
+                transform: translateX(3px);
+            }
+            
+            &:nth-child(3) {
+                transform: translateX(-3px);
+            }
+        }
+        
+        &.active .trigger-line {
+            background: $white;
+            
+            &:nth-child(1) {
+                transform: rotate(45deg) translateY(7px);
+                width: 20px;
+            }
+            
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            
+            &:nth-child(3) {
+                transform: rotate(-45deg) translateY(-7px);
+                width: 20px;
+            }
+        }
+    }
+    
+    .nav-content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 350px;
+        height: 100vh;
+        background: $bg-primary;
+        color: $white;
+        padding: $space-12 $space-8;
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        
+        &.active {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: $space-16;
+            padding-bottom: $space-4;
+            border-bottom: 1px solid $off-grey;
+            
+            .nav-title {
+                @include text-thick();
+                font-size: 12px;
+                color: $white;
+            }
+            
+            .nav-close {
+                font-size: 24px;
+                color: $white;
+                cursor: pointer;
+                transition: color 0.3s ease;
+                
+                &:hover {
+                    color: $neo-blue;
+                }
+            }
+        }
+        
+        .nav-links {
+            .nav-link {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: $space-4 0;
+                text-decoration: none;
+                color: $white;
+                border-bottom: 1px solid rgba($off-grey, 0.3);
+                transition: all 0.3s ease;
+                
+                &.active {
+                    color: $neo-blue;
+                    border-bottom-color: $neo-blue;
+                }
+                
+                .link-number {
+                    @include text-thick();
+                    font-size: 10px;
+                    color: $off-grey;
+                    min-width: 30px;
+                }
+                
+                .link-text {
+                    @include text-thick();
+                    font-size: 14px;
+                    flex: 1;
+                    margin-left: $space-4;
+                }
+                
+                .link-arrow {
+                    font-size: 14px;
+                    color: $off-grey;
+                    transition: all 0.3s ease;
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+                
+                &:hover {
+                    padding-left: $space-2;
+                    
+                    .link-text {
+                        color: $neo-blue;
+                    }
+                    
+                    .link-arrow {
+                        opacity: 1;
+                        transform: translateX(0);
+                        color: $neo-blue;
+                    }
+                }
+            }
+        }
+        
+        .nav-footer {
+            position: absolute;
+            bottom: $space-8;
+            left: $space-8;
+            right: $space-8;
+            
+            .nav-status {
+                display: flex;
+                align-items: center;
+                gap: $space-3;
+                
+                .status-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: $off-grey;
+                    
+                    &.active {
+                        background: $neo-blue;
+                        box-shadow: 0 0 10px rgba($neo-blue, 0.3);
+                        animation: pulse 2s ease-in-out infinite;
+                    }
+                }
+                
+                .status-text {
+                    @include text-thick();
+                    font-size: 10px;
+                    color: $off-grey;
+                }
+            }
+        }
+    }
+}
+
+// Main Portfolio Composition
+.directing-composition {
+    min-height: 100vh;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+// Archive Header - Strategic Deep Blue Background
+.archive-header {
+    background: $bg-primary;
+    color: $white;
+    position: relative;
+    padding: $space-24 $space-8;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    @media (max-width: $tablet) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $space-12;
+        padding: $space-16 $space-4;
+        min-height: 50vh;
+    }
+    
+    .header-content {
+        max-width: 700px;
+        
+        .discipline-label {
+            @include text-thick();
+            font-size: 10px;
+            color: $off-grey;
+            @include systematic-spacing(0.25);
+            opacity: 0.7;
+        }
+        
+        .discipline-title {
+            @include text-thick();
+            font-size: clamp(5rem, 12vw, 10rem);
+            line-height: 0.8;
+            color: $white;
+            letter-spacing: $tracking-xwide;
+            margin-bottom: $space-6;
+            
+            &:hover {
+                color: $neo-blue;
+                transition: color 0.3s ease;
+            }
+        }
+        
+        .discipline-separator {
+            width: 120px;
+            height: 3px;
+            background: $neo-blue;
+            margin-bottom: $space-6;
+            transform-origin: left;
+            animation: expand 2s ease-out 0.5s both;
+        }
+        
+        .discipline-statement {
+            @include text-thin();
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 200;
+            line-height: 1.3;
+            color: $off-grey;
+            text-transform: lowercase;
+            letter-spacing: $tracking-wide;
+            
+            &:hover {
+                color: $white;
+                transition: color 0.3s ease;
+            }
+        }
+    }
+    
+    .archive-meta {
+        position: relative;
+        z-index: 10;
+        
+        @media (max-width: $tablet) {
+            width: 100%;
+        }
+        
+        .meta-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: $off-grey;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: $space-6;
+        }
+        
+        .meta-data {
+            .meta-line {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: $space-3;
+                padding: $space-2 0;
+                border-bottom: 1px solid rgba($off-grey, 0.5);
+                min-width: 350px;
+                
+                .meta-key {
+                    @include text-thick();
+                    font-size: 10px;
+                    color: $off-grey;
+                }
+                
+                .meta-value {
+                    @include text-thick();
+                    font-size: 10px;
+                    color: $white;
+                    text-align: right;
+                    
+                    &.active {
+                        color: $neo-blue;
+                        text-shadow: 0 0 5px rgba($neo-blue, 0.3);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Directing Manifesto Block
+.directing-manifesto {
+    @include section-split($neo-blue, $off-white);
+    padding: $space-24 $space-8;
+    background: $off-white;
+    
+    @media (max-width: $tablet) {
+        padding: $space-16 $space-4;
+    }
+    
+    .manifesto-content {
+        max-width: 800px;
+        margin: 0 auto;
+        
+        .manifesto-label {
+            @include text-thick();
+            font-size: 10px;
+            color: $off-grey;
+            @include systematic-spacing(0.6);
+            text-align: center;
+        }
+        
+        .manifesto-text {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: $space-12;
+            
+            @media (max-width: $tablet) {
+                grid-template-columns: 1fr;
+                gap: $space-8;
+            }
+            
+            p {
+                @include text-thin();
+                font-size: clamp(1.1rem, 2vw, 1.4rem);
+                font-weight: 300;
+                line-height: 1.3;
+                color: $black;
+                text-transform: lowercase;
+                letter-spacing: $tracking-wide;
+                text-align: center;
+                
+                &:hover {
+                    color: $neo-blue;
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+    }
+}
+
+// Portfolio Archive Grid
+.portfolio-archive {
+    padding: $space-24 $space-8;
+    background: $white;
+    
+    @media (max-width: $tablet) {
+        padding: $space-16 $space-4;
+    }
+    
+    .archive-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 300px);
+        gap: $space-6;
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        @media (max-width: $desktop) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 280px);
+        }
+        
+        @media (max-width: $tablet) {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(6, 260px);
+            gap: $space-4;
+        }
+        
+        .project-block {
+            @include grid-brutalist(1, $space-4, $neo-blue, $bg-content);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            
+            // Logo accent pattern overlay
+            &::before {
+                content: "PXM";
+                position: absolute;
+                top: $space-2;
+                right: $space-2;
+                font-size: 8px;
+                @include text-thick();
+                color: rgba($neo-blue, 0.1);
+                z-index: 1;
+                pointer-events: none;
+            }
+            
+            &.feature {
+                grid-column: span 2;
+                grid-row: span 2;
+                
+                @media (max-width: $desktop) {
+                    grid-column: span 2;
+                    grid-row: span 1;
+                }
+                
+                @media (max-width: $tablet) {
+                    grid-column: span 1;
+                }
+            }
+            
+            .placeholder-content {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                
+                .placeholder-pattern {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    
+                    &.blue-diagonal {
+                        background: linear-gradient(45deg, $neo-blue 25%, $black 25%, $black 50%, $neo-blue 50%, $neo-blue 75%, $black 75%);
+                        background-size: 40px 40px;
+                    }
+                    
+                    &.black-solid {
+                        background: $black;
+                    }
+                    
+                    &.blue-gradient {
+                        background: linear-gradient(135deg, $neo-blue 0%, $black 100%);
+                    }
+                    
+                    &.black-lines {
+                        background: repeating-linear-gradient(
+                            0deg,
+                            $black,
+                            $black 2px,
+                            transparent 2px,
+                            transparent 8px
+                        );
+                    }
+                    
+                    &.blue-blocks {
+                        background: $neo-blue;
+                        background-image: 
+                            linear-gradient(45deg, $black 25%, transparent 25%), 
+                            linear-gradient(-45deg, $black 25%, transparent 25%), 
+                            linear-gradient(45deg, transparent 75%, $black 75%), 
+                            linear-gradient(-45deg, transparent 75%, $black 75%);
+                        background-size: 20px 20px;
+                        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+                    }
+                    
+                    &.alternating {
+                        background: repeating-linear-gradient(
+                            90deg,
+                            $neo-blue 0,
+                            $neo-blue 50px,
+                            $black 50px,
+                            $black 100px
+                        );
+                    }
+                }
+                
+                .project-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(135deg, rgba($black, 0.85) 0%, rgba($black, 0.7) 100%);
+                    color: $white;
+                    padding: $space-6;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                    
+                    .project-number {
+                        @include text-thick();
+                        font-size: 10px;
+                        color: $neo-blue;
+                        @include systematic-spacing(0.15);
+                    }
+                    
+                    .project-title {
+                        @include text-thick();
+                        font-size: clamp(16px, 2.5vw, 24px);
+                        font-weight: 700;
+                        color: $white;
+                        text-transform: uppercase;
+                        letter-spacing: $tracking-xwide;
+                        margin-bottom: $space-4;
+                    }
+                    
+                    .project-meta {
+                        display: flex;
+                        gap: $space-3;
+                        margin-bottom: $space-4;
+                        
+                        .project-format,
+                        .project-year {
+                            @include text-thick();
+                            font-size: 9px;
+                            color: $off-grey;
+                            padding: $space-1 $space-2;
+                            border: 1px solid rgba($off-grey, 0.3);
+                        }
+                    }
+                    
+                    .project-description {
+                        @include text-thin();
+                        font-size: 10px;
+                        font-weight: 300;
+                        color: $off-white;
+                        text-transform: lowercase;
+                        letter-spacing: $tracking-wide;
+                        line-height: 1.6;
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+            
+            &:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 25px 50px rgba($black, 0.4);
+                
+                .project-overlay {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+}
+
+// Process Fragment
+.process-fragment {
+    @include brutal-divider();
+    padding: $space-24 $space-8;
+    background: $black;
+    color: $white;
+    
+    @media (max-width: $tablet) {
+        padding: $space-16 $space-4;
+    }
+    
+    .fragment-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        
+        .fragment-label {
+            @include text-thick();
+            font-size: 12px;
+            font-weight: 600;
+            color: $neo-blue;
+            text-transform: uppercase;
+            letter-spacing: $tracking-xwide;
+            margin-bottom: $space-12;
+            text-align: center;
+        }
+        
+        .process-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: $space-8;
+            
+            .stage-item {
+                text-align: center;
+                padding: $space-6;
+                border: 1px solid $off-grey;
+                background: rgba($black, 0.3);
+                transition: all 0.3s ease;
+                
+                &:hover {
+                    border-color: $neo-blue;
+                    background: rgba($black, 0.6);
+                    transform: translateY(-4px);
+                }
+                
+                .stage-number {
+                    @include text-thick();
+                    font-size: 14px;
+                    color: $neo-blue;
+                    @include systematic-spacing(0.2);
+                }
+                
+                .stage-name {
+                    @include text-thick();
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: $white;
+                    text-transform: uppercase;
+                    letter-spacing: $tracking-wide;
+                    margin-bottom: $space-4;
+                }
+                
+                .stage-description {
+                    @include text-thin();
+                    font-size: 11px;
+                    font-weight: 300;
+                    color: $off-white;
+                    text-transform: lowercase;
+                    letter-spacing: $tracking-wide;
+                    line-height: 1.5;
+                }
+            }
+        }
+    }
+}
+
+// Copyright Mark
+.copyright-mark {
+    position: absolute;
+    bottom: $space-8;
+    left: $space-8;
+    z-index: 10;
+    
+    span {
+        @include text-thick();
+        font-size: 9px;
+        color: $off-grey;
+        opacity: 0.6;
+        
+        &:hover {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+    }
+}
+
+// Avant-garde Background Composition
+.background-composition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    
+    .composition-element {
+        position: absolute;
+        background: $off-white;
+        opacity: 0.2;
+        
+        &.element-1 {
+            top: 25%;
+            right: 30%;
+            width: 180px;
+            height: 1px;
+            transform: rotate(35deg);
+        }
+        
+        &.element-2 {
+            bottom: 35%;
+            left: 20%;
+            width: 1px;
+            height: 140px;
+            background: $neo-blue;
+            opacity: 0.15;
+        }
+        
+        &.element-3 {
+            top: 65%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+            border: 1px solid $off-grey;
+            background: transparent;
+            transform: rotate(45deg);
+            opacity: 0.1;
+        }
+    }
+}
+
+// Animations
+@keyframes expand {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+// Scroll-based animations
+.project-block,
+.manifesto-text,
+.process-stages,
+.archive-meta {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+// Mobile Responsive - Maintain Brutalist Integrity
+@media (max-width: $tablet) {
+    .archive-header {
+        .discipline-title {
+            font-size: clamp(3.5rem, 15vw, 7rem);
+        }
+    }
+    
+    .floating-nav {
+        top: $space-4;
+        right: $space-4;
+        
+        .nav-content {
+            width: 100vw;
+            padding: $space-8 $space-4;
+        }
+    }
+    
+    .archive-meta {
+        .meta-data .meta-line {
+            min-width: auto;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .archive-header {
+        .discipline-title {
+            font-size: clamp(2.8rem, 18vw, 5.5rem);
+            line-height: 0.9;
+        }
+    }
+    
+    .portfolio-archive .archive-grid {
+        gap: $space-3;
+    }
+    
+    .process-fragment .process-stages {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
+}

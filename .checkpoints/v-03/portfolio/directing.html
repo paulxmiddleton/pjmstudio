@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIRECTING | PAUL MIDDLETON</title>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Critical inline styles for immediate render */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: #000000;
+            overflow-x: hidden;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: #3300ff;
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text"></div>
+    </div>
+
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="nav-trigger" id="navTrigger">
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+            <span class="trigger-line"></span>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-header">
+                <span class="nav-title">NAVIGATION</span>
+                <span class="nav-close" id="navClose">×</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/index.html" class="nav-link">
+                    <span class="link-number">00</span>
+                    <span class="link-text">LANDING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/home.html" class="nav-link">
+                    <span class="link-number">01</span>
+                    <span class="link-text">PORTFOLIO</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/directing.html" class="nav-link">
+                    <span class="link-number">02</span>
+                    <span class="link-text">DIRECTING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/videography.html" class="nav-link">
+                    <span class="link-number">03</span>
+                    <span class="link-text">VIDEOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/photography.html" class="nav-link">
+                    <span class="link-number">04</span>
+                    <span class="link-text">PHOTOGRAPHY</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/video-editing.html" class="nav-link">
+                    <span class="link-number">05</span>
+                    <span class="link-text">VIDEO_EDITING</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/portfolio/graphic-design.html" class="nav-link">
+                    <span class="link-number">06</span>
+                    <span class="link-text">GRAPHIC_DESIGN</span>
+                    <span class="link-arrow">→</span>
+                </a>
+                <a href="/store.html" class="nav-link">
+                    <span class="link-number">07</span>
+                    <span class="link-text">STORE</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="nav-footer">
+                <div class="nav-status">
+                    <span class="status-dot active"></span>
+                    <span class="status-text">DIRECTING_ARCHIVE</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Portfolio Composition -->
+    <main class="directing-composition">
+        <!-- Editorial Header -->
+        <section class="archive-header">
+            <div class="header-content">
+                <div class="discipline-label text-thick">DISCIPLINE_01</div>
+                <h1 class="discipline-title text-thick">DIRECTING</h1>
+                <div class="discipline-separator"></div>
+                <p class="discipline-statement text-thin">
+                    NARRATIVE CONSTRUCTION<br>
+                    CINEMATIC VISION<br>
+                    STORY ARCHITECTURE
+                </p>
+            </div>
+            
+            <!-- Archive Meta -->
+            <div class="archive-meta">
+                <div class="meta-label text-thick">ARCHIVE_STATUS</div>
+                <div class="meta-data">
+                    <div class="meta-line">
+                        <span class="meta-key text-thick">PROJECTS:</span>
+                        <span class="meta-value text-thin">PLACEHOLDER_DATA</span>
+                    </div>
+                    <div class="meta-line">
+                        <span class="meta-key text-thick">FORMATS:</span>
+                        <span class="meta-value text-thin">SHORT_FILM | COMMERCIAL | NARRATIVE</span>
+                    </div>
+                    <div class="meta-line">
+                        <span class="meta-key text-thick">STATUS:</span>
+                        <span class="meta-value active text-thick">ACTIVE_ARCHIVE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manifesto Block -->
+        <section class="directing-manifesto">
+            <div class="manifesto-content">
+                <div class="manifesto-label text-thick">DIRECTING_PHILOSOPHY</div>
+                <div class="manifesto-text">
+                    <p class="text-thin">
+                        EVERY FRAME SERVES<br>
+                        THE NARRATIVE PURPOSE.
+                    </p>
+                    <p class="text-thin">
+                        DIRECTION IS THE ART OF<br>
+                        ORCHESTRATING EMOTION<br>
+                        THROUGH VISUAL LANGUAGE.
+                    </p>
+                    <p class="text-thin">
+                        AUTHENTIC MOMENTS EMERGE<br>
+                        WHEN TECHNIQUE BECOMES<br>
+                        INVISIBLE.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Grid -->
+        <section class="portfolio-archive">
+            <div class="archive-grid">
+                <!-- Large Feature Project -->
+                <div class="project-block feature" data-project="01">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-diagonal"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">01</div>
+                            <div class="project-title text-thick">FEATURE_PROJECT</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">SHORT_FILM</span>
+                                <span class="project-year text-thin">2024</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                NARRATIVE EXPLORATION<br>
+                                CHARACTER DEVELOPMENT<br>
+                                VISUAL STORYTELLING
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commercial Work -->
+                <div class="project-block commercial" data-project="02">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-solid"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">02</div>
+                            <div class="project-title text-thick">COMMERCIAL_WORK</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">COMMERCIAL</span>
+                                <span class="project-year text-thin">2024</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                BRAND_STORYTELLING<br>
+                                PRODUCT_NARRATIVE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experimental Piece -->
+                <div class="project-block experimental" data-project="03">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-gradient"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">03</div>
+                            <div class="project-title text-thick">EXPERIMENTAL</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">CONCEPT</span>
+                                <span class="project-year text-thin">2024</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                ABSTRACT_NARRATIVE<br>
+                                VISUAL_POETRY
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentary Style -->
+                <div class="project-block documentary" data-project="04">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern black-lines"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">04</div>
+                            <div class="project-title text-thick">DOCUMENTARY</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">DOCUMENTARY</span>
+                                <span class="project-year text-thin">2023</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                REALITY_CAPTURE<br>
+                                TRUTH_SEEKING
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Video -->
+                <div class="project-block music-video" data-project="05">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern blue-blocks"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">05</div>
+                            <div class="project-title text-thick">MUSIC_VIDEO</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">MUSIC_VIDEO</span>
+                                <span class="project-year text-thin">2023</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                RHYTHM_VISUALIZATION<br>
+                                SONIC_NARRATIVE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collaborative Work -->
+                <div class="project-block collaborative" data-project="06">
+                    <div class="placeholder-content">
+                        <div class="placeholder-pattern alternating"></div>
+                        <div class="project-overlay">
+                            <div class="project-number text-thick">06</div>
+                            <div class="project-title text-thick">COLLABORATIVE</div>
+                            <div class="project-meta">
+                                <span class="project-format text-thick">COLLABORATION</span>
+                                <span class="project-year text-thin">2023</span>
+                            </div>
+                            <div class="project-description text-thin">
+                                SHARED_VISION<br>
+                                COLLECTIVE_CREATION
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Fragment -->
+        <section class="process-fragment">
+            <div class="fragment-content">
+                <div class="fragment-label text-thick">DIRECTING_PROCESS</div>
+                <div class="process-stages">
+                    <div class="stage-item">
+                        <div class="stage-number text-thick">01</div>
+                        <div class="stage-name text-thick">CONCEPT_DEVELOPMENT</div>
+                        <div class="stage-description text-thin">
+                            Story architecture and visual language conception
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number text-thick">02</div>
+                        <div class="stage-name text-thick">PRE_PRODUCTION</div>
+                        <div class="stage-description text-thin">
+                            Planning, casting, location scouting, and preparation
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number text-thick">03</div>
+                        <div class="stage-name text-thick">PRODUCTION</div>
+                        <div class="stage-description text-thin">
+                            On-set direction, performance guidance, visual execution
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number text-thick">04</div>
+                        <div class="stage-name text-thick">POST_DIRECTION</div>
+                        <div class="stage-description text-thin">
+                            Editorial guidance, color consultation, final vision
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Copyright Mark -->
+    <div class="copyright-mark">
+        <span>© 2025 PAUL MIDDLETON | DIRECTING ARCHIVE</span>
+    </div>
+    
+    <!-- Avant-garde Background Elements -->
+    <div class="background-composition">
+        <div class="composition-element element-1"></div>
+        <div class="composition-element element-2"></div>
+        <div class="composition-element element-3"></div>
+    </div>
+
+    <script type="module" src="/src/js/portfolio.js"></script>
+</body>
+</html>

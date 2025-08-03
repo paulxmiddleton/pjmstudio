@@ -1,0 +1,444 @@
+// Store Page - Neo-Brutalist E-commerce
+@import 'variables';
+
+// Allow body to scroll for store page - prevent horizontal scroll
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    background: $off-white;
+}
+
+// Container for consistent spacing
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+    }
+}
+
+// Industrial Store Components
+
+// Industrial Store Layout
+.industrial-store {
+    min-height: 100vh;
+    background: $off-white;
+    padding-top: 80px;
+}
+
+// Store Terminal Header
+.store-terminal {
+    background: $neo-blue;
+    color: $white;
+    padding: 3rem 2rem;
+    
+    .terminal-header {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        
+        .brutalist-heading {
+            @include text-thick();
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.1;
+            color: $white;
+            @include systematic-spacing(1.5);
+        }
+        
+        .terminal-status {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            
+            .status-line {
+                @include text-thick();
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                color: $white;
+                background: rgba($white, 0.1);
+                padding: 0.5rem 1rem;
+                border: 1px solid rgba($white, 0.3);
+            }
+        }
+        
+        .terminal-description {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            
+            .neo-accent {
+                color: $neo-pink;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// Catalog Filter
+.catalog-filter {
+    background: $white;
+    padding: 2rem;
+    border-bottom: 2px solid $black;
+    
+    .filter-terminal {
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        h2 {
+            @include text-thick();
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            @include systematic-spacing(1.5);
+            text-align: center;
+        }
+        
+        .filter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            
+            .control-btn {
+                @include text-thick();
+                background: $white;
+                border: 2px solid $black;
+                color: $black;
+                padding: 0.75rem 1.5rem;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                
+                &:hover {
+                    background: $off-white;
+                }
+                
+                &.active {
+                    background: $neo-blue;
+                    color: $white;
+                }
+            }
+        }
+        
+        .filter-status {
+            text-align: center;
+            
+            .status-text {
+                @include text-thin();
+                font-size: 0.8rem;
+                color: $black;
+            }
+        }
+    }
+}
+
+// Inventory Database
+.inventory-database {
+    background: $off-white;
+    padding: 4rem 2rem;
+    
+    .database-banner {
+        max-width: 1200px;
+        margin: 0 auto 3rem auto;
+        text-align: center;
+        
+        h2 {
+            @include text-thick();
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            @include systematic-spacing(1.2);
+        }
+        
+        .database-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            
+            .stat-item {
+                @include text-thick();
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.8rem;
+                color: $white;
+                background: $black;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        .database-description {
+            font-size: 1rem;
+            color: $black;
+            letter-spacing: 1px;
+        }
+    }
+    
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        .inventory-item {
+            background: $white;
+            border: 2px solid $black;
+            padding: 2rem;
+            transition: all 0.2s ease;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 4px 4px 0 $black;
+            }
+            
+            &.available {
+                border-color: $neo-blue;
+                border-width: 3px;
+            }
+            
+            &.development {
+                background: $off-white;
+                opacity: 0.8;
+            }
+            
+            .item-display {
+                margin-bottom: 2rem;
+                
+                .item-visual {
+                    text-align: center;
+                    position: relative;
+                    
+                    .item-icon {
+                        font-size: 3rem;
+                        margin-bottom: 1rem;
+                        display: block;
+                    }
+                    
+                    .availability-badge {
+                        position: absolute;
+                        top: -10px;
+                        right: -10px;
+                        padding: 0.3rem 0.8rem;
+                        font-size: 0.7rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        
+                        &.available {
+                            background: $neo-blue;
+                            color: $black;
+                        }
+                        
+                        &.development {
+                            background: $neo-pink;
+                            color: $black;
+                        }
+                    }
+                }
+            }
+            
+            .item-specs {
+                .spec-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 1rem;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid $black;
+                    
+                    .item-id, .item-category {
+                        @include text-thick();
+                        font-family: 'JetBrains Mono', monospace;
+                        font-size: 0.8rem;
+                    }
+                    
+                    .item-id {
+                        color: $black;
+                    }
+                    
+                    .item-category {
+                        color: $black;
+                    }
+                }
+                
+                .item-name {
+                    @include text-thick();
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 1.2rem;
+                    @include systematic-spacing(0.8);
+                    color: $black;
+                }
+                
+                .item-description {
+                    @include text-thin();
+                    font-family: 'JetBrains Mono', monospace;
+                    line-height: 1.5;
+                    color: $black;
+                    @include systematic-spacing(1.2);
+                    font-size: 0.9rem;
+                    
+                    .neo-accent {
+                        color: $neo-pink;
+                        font-weight: bold;
+                    }
+                }
+                
+                .item-pricing {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                    
+                    .price-label {
+                        @include text-thick();
+                        font-size: 0.8rem;
+                        color: $black;
+                    }
+                    
+                    .price-value {
+                        @include text-thick();
+                        font-size: 1.2rem;
+                        color: $black;
+                    }
+                }
+                
+                .system-btn {
+                    @include text-thick();
+                    width: 100%;
+                    padding: 1rem;
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    border: 2px solid $black;
+                    
+                    &.available {
+                        background: $neo-blue;
+                        color: $black;
+                        
+                        &:hover {
+                            background: darken($neo-blue, 10%);
+                        }
+                    }
+                    
+                    &.development {
+                        background: $light-gray;
+                        color: $black;
+                        cursor: not-allowed;
+                        
+                        &:disabled {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// System Notice
+.system-notice {
+    background: $black;
+    padding: 4rem 2rem;
+    
+    .notice-terminal {
+        max-width: 800px;
+        margin: 0 auto;
+        
+        .terminal-frame {
+            background: $black;
+            border: 2px solid $white;
+            
+            .terminal-header-bar {
+                background: $white;
+                color: $black;
+                padding: 0.5rem 1rem;
+                border-bottom: 2px solid $white;
+                
+                .terminal-title {
+                    font-size: 0.8rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+            }
+            
+            .terminal-content {
+                padding: 2rem;
+                color: $white;
+                
+                h3 {
+                    font-family: 'JetBrains Mono', monospace;
+                    font-size: 1.2rem;
+                    margin-bottom: 1.5rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+                
+                .status-description {
+                    font-family: 'JetBrains Mono', monospace;
+                    line-height: 1.6;
+                    margin-bottom: 2rem;
+                    color: $light-gray;
+                }
+                
+                .notification-interface {
+                    margin-bottom: 2rem;
+                    
+                    .interface-label {
+                        font-size: 1rem;
+                        margin-bottom: 1rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                    }
+                    
+                    .input-group {
+                        display: flex;
+                        gap: 0;
+                        
+                        .terminal-input {
+                            flex: 1;
+                            padding: 1rem;
+                            font-family: 'JetBrains Mono', monospace;
+                            background: $white;
+                            color: $black;
+                            border: 2px solid $white;
+                            border-right: none;
+                            text-transform: uppercase;
+                            
+                            &::placeholder {
+                                color: $black;
+                            }
+                        }
+                        
+                        .terminal-btn {
+                            padding: 1rem 1.5rem;
+                            background: $neo-blue;
+                            color: $black;
+                            border: 2px solid $neo-blue;
+                            cursor: pointer;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                            font-size: 0.8rem;
+                            
+                            &:hover {
+                                background: darken($neo-blue, 10%);
+                            }
+                        }
+                    }
+                }
+                
+                .system-benefits {
+                    .benefit-line {
+                        font-size: 0.9rem;
+                        margin-bottom: 0.5rem;
+                        color: $light-gray;
+                    }
+                }
+            }
+        }
+    }
+}

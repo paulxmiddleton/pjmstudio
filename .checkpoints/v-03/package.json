@@ -1,0 +1,23 @@
+{
+  "name": "pjm-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "checkpoint": "node checkpoint-system.js create",
+    "checkpoint-list": "node checkpoint-system.js list",
+    "checkpoint-restore": "node checkpoint-system.js restore",
+    "checkpoint-delete": "node checkpoint-system.js delete"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "gsap": "^3.12.4",
+    "three": "^0.160.0"
+  }
+}

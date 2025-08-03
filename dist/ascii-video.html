@@ -147,10 +147,75 @@
         #file-input {
             display: none;
         }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .test-ui {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                padding: 10px;
+                font-size: 10px;
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+            
+            .test-controls button {
+                padding: 3px 6px;
+                margin: 1px;
+                font-size: 8px;
+            }
+            
+            .keyboard-help {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 8px;
+                font-size: 8px;
+                max-height: 15vh;
+                overflow-y: auto;
+            }
+            
+            .performance-stats {
+                font-size: 8px;
+            }
+            
+            .performance-stats div {
+                margin: 1px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .test-ui {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+                padding: 8px;
+                font-size: 9px;
+                max-height: 25vh;
+            }
+            
+            .test-controls button {
+                padding: 2px 4px;
+                margin: 1px;
+                font-size: 7px;
+            }
+            
+            .keyboard-help {
+                bottom: 5px;
+                left: 5px;
+                right: 5px;
+                padding: 6px;
+                font-size: 7px;
+                max-height: 12vh;
+            }
+        }
     </style>
-  <script type="module" crossorigin src="/js/ascii-video-D2b8lYlJ.js"></script>
+  <script type="module" crossorigin src="/js/ascii-video-j_oV8mgF.js"></script>
   <link rel="modulepreload" crossorigin href="/js/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-CuBe-AWt.js">
+  <link rel="modulepreload" crossorigin href="/js/dom-utils-UozHuNU6.js">
+  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-BXQAj8pL.js">
 </head>
 <body>
     <!-- Loading Indicator -->

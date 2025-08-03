@@ -1,0 +1,78 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Clean URL redirects - specific routes first, then catch-all
+[[redirects]]
+  from = "/home"
+  to = "/home.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/store"
+  to = "/store.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/directing"
+  to = "/portfolio/directing.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/videography"
+  to = "/portfolio/videography.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/photography"
+  to = "/portfolio/photography.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/video-editing"
+  to = "/portfolio/video-editing.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/graphic-design"
+  to = "/portfolio/graphic-design.html"
+  status = 200
+
+[[redirects]]
+  from = "/ascii-video"
+  to = "/ascii-video.html"
+  status = 200
+
+# Fallback for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

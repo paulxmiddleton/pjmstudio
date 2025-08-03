@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAUL MIDDLETON | VISUAL EXISTENTIALIST</title>
+    
+    <!-- Systematic typography with Arial priority -->
+    
+    <style>
+        /* Critical inline styles for immediate render */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+            background: #3300ff;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #3300ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            color: #FFFFFF;
+            font-weight: 100;
+            font-size: 14px;
+            letter-spacing: .25em;
+            text-transform: lowercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text"></div>
+    </div>
+    
+    <!-- JavaScript fallback - hide loading screen after 5 seconds -->
+    <script>
+        // Emergency fallback if main.js fails
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen && loadingScreen.style.opacity !== '0') {
+                console.warn('⚠️ Loading screen fallback triggered - main.js may have failed');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    if (loadingScreen.parentNode) {
+                        loadingScreen.remove();
+                    }
+                }, 500);
+            }
+        }, 5000);
+    </script>
+
+    <!-- ASCII Animation Canvas -->
+    <canvas id="asciiCanvas"></canvas>
+
+    <!-- Main Composition -->
+    <main class="composition">
+        <!-- Small Header Name -->
+        <header class="header-name">
+            <h1>PAUL MIDDLETON</h1>
+        </header>
+
+        <!-- Main Title Block -->
+        <section class="main-title-block">
+            <h2 class="portfolio-title">PORTFOLIO   <a href="/ascii-video.html" class="ampersand-link">&</a><br>     WEBSITE</h2>
+        </section>
+
+        <!-- Development Note -->
+        <div class="development-status">
+            <p>in development</p>
+        </div>
+
+        <!-- ASCII Canvas Centerpiece Area -->
+        <div class="ascii-centerpiece">
+            <!-- Canvas will be positioned here -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-logo">
+                <img src="/src/assets/images/pjm-logo.svg" alt="PXM Logo" class="pxm-logo" width="40" height="40">
+            </div>
+            <nav class="social-links">
+                <a href="https://www.youtube.com/user/midzasaur" target="_blank" class="social-link">youtube</a>
+                <a href="https://www.instagram.com/paulxmiddleton" target="_blank" class="social-link">instagram</a>
+                <a href="https://www.itsnova.com/pm" target="_blank" class="social-link">nova</a>
+                <a href="https://discord.gg/Qtzm8kyuXJ" target="_blank" class="social-link">discord</a>
+            </nav>
+        </footer>
+
+    </main>
+
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

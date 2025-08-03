@@ -14,7 +14,7 @@ html, body {
     background: $bg-primary;
     color: $white;
     line-height: 1.2;
-    overflow-x: hidden;
+    overflow: hidden; // Prevent all scrolling on landing page
     font-weight: 300;
 }
 
@@ -581,6 +581,7 @@ html, body {
     
     .main-title-block {
         top: 18%;
+        left: calc(55% - 25px); // Move text more to the right on mobile
         
         .portfolio-title {
             font-size: clamp(1.5rem, 10vw, 2.5rem);
@@ -615,11 +616,12 @@ html, body {
         }
         
         .social-links {
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 15px;
+            flex-wrap: nowrap; // Keep all 4 links on same line
             
             .social-link {
-                font-size: clamp(0.5rem, 2.5vw, 0.7rem);
+                font-size: clamp(0.45rem, 2.2vw, 0.65rem);
+                white-space: nowrap; // Prevent text wrapping
             }
         }
     }
