@@ -222,14 +222,20 @@ export class ASCII3DEngine {
             // Setup ASCII DOM element with robust error handling
             this.setupASCIIDOM(width, height);
             
+            // Validate ASCII effect is ready for rendering
+            if (!this.asciiEffect.domElement) {
+                throw new Error('ASCII DOM element was not created properly');
+            }
+            
             console.log('✅ ASCII effect initialized successfully');
             console.log('ASCII DOM element created and positioned');
             
-            // Immediate debug check
-            console.log('🔍 Immediate ASCII check - DOM element exists:', !!this.asciiEffect.domElement);
+            // Immediate validation check
+            console.log('🔍 Immediate ASCII validation - DOM element exists:', !!this.asciiEffect.domElement);
             if (this.asciiEffect.domElement) {
                 console.log('🔍 DOM element parent:', this.asciiEffect.domElement.parentNode?.tagName);
                 console.log('🔍 DOM element position:', this.asciiEffect.domElement.style.position);
+                console.log('🔍 DOM element ready for rendering');
             }
             
         } catch (error) {
@@ -288,11 +294,16 @@ export class ASCII3DEngine {
             // Apply model-specific ASCII settings if available
             this.applyModelSpecificSettings(defaultModel);
             
-            // Debug: Check if ASCII element is visible after a short delay
+            // Debug: Check if ASCII element is visible after model loads and a few render cycles
             setTimeout(() => {
                 console.log('🔍 Running ASCII debug check...');
-                this.debugASCIIElement();
-            }, 2000);
+                // Only run debug check if the engine is properly initialized and running
+                if (this.isInitialized && this.isRunning) {
+                    this.debugASCIIElement();
+                } else {
+                    console.warn('⚠️ Skipping debug check - engine not fully initialized');
+                }
+            }, 3000); // Increased delay to 3 seconds to ensure proper initialization
             
             console.log('✅ Default model loaded successfully');
             
@@ -1027,12 +1038,11 @@ export class ASCII3DEngine {
             console.log('- Element content length:', element.textContent?.length || 0);
             console.log('- Element parent:', element.parentNode?.tagName);
             
-            // Force a test render
+            // Check for content but don't force debug content
             if (element.textContent?.length === 0) {
-                console.warn('⚠️ ASCII element has no content - forcing test render');
-                element.textContent = 'TEST ASCII CONTENT';
-                element.style.color = 'red';
-                element.style.fontSize = '20px';
+                console.warn('⚠️ ASCII element has no content - this may indicate a rendering issue');
+                // Don't inject test content - let the normal render cycle handle it
+                console.warn('⚠️ Skipping debug content injection to prevent red text flash');
             }
         }
         

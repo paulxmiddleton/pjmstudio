@@ -1,5 +1,15 @@
 // Model Loader - 3D model loading utility for ASCII 3D engine
 // Handles GLTF, OBJ, and procedural model generation with caching and optimization
+//
+// DEVICE-SPECIFIC SCALING SYSTEM:
+// Each model can have different scales for desktop vs mobile:
+// scale: { desktop: 2.0, mobile: 1.5 }
+// 
+// To adjust model sizes per device:
+// 1. Find the model in modelConfigs below
+// 2. Modify the desktop or mobile scale value
+// 3. Changes apply only to that specific model on that device type
+// 4. Other models and other device types remain unaffected
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -29,12 +39,15 @@ export class ModelLoader {
         this.modelCache = new Map();
         this.loadingPromises = new Map();
         
-        // Model configurations with ASCII optimization profiles
+        // Model configurations with device-specific scaling and ASCII optimization profiles
         this.modelConfigs = {
             cube: {
                 type: 'procedural',
                 generator: () => this.createCube(),
-                scale: 1.0,  // Back to original size
+                scale: {
+                    desktop: 1.0,  // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 1.0    // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.25,
@@ -45,7 +58,10 @@ export class ModelLoader {
             sphere: {
                 type: 'procedural',
                 generator: () => this.createSphere(),
-                scale: 2,
+                scale: {
+                    desktop: 2.0,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.0      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.25,
@@ -56,7 +72,10 @@ export class ModelLoader {
             torus: {
                 type: 'procedural',
                 generator: () => this.createTorus(),
-                scale: 2,
+                scale: {
+                    desktop: 2.0,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.0      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.25,
@@ -68,7 +87,10 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/lumpy-1.glb',
                 fallback: () => this.createCube(),
-                scale: 2.0,
+                scale: {
+                    desktop: 2.0,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.0      // Mobile scale - ORIGINAL VALUE PRESERVED  
+                },
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.2,
@@ -80,7 +102,10 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/sword-model.glb',
                 fallback: () => this.createSwordFallback(),
-                scale: 1.8,
+                scale: {
+                    desktop: 1.8,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 1.8      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0.2, 0, 0],
                 category: 'custom',
                 ascii: {
@@ -93,7 +118,10 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/pxm-logo2.glb',
                 fallback: () => this.createCube(),
-                scale: 4.5,
+                scale: {
+                    desktop: 4.5,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 4.5      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, 0, 0],
                 category: 'custom',
                 ascii: {
@@ -106,7 +134,10 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/stone-tower.glb',
                 fallback: () => this.createTowerFallback(),
-                scale: 2.2,
+                scale: {
+                    desktop: 2.2,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 2.2      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, -0.8, 0],
                 ascii: {
                     resolution: 0.2,
@@ -118,7 +149,10 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/custom/castle-archers.glb',
                 fallback: () => this.createCastleFallback(),
-                scale: 3.0,
+                scale: {
+                    desktop: 3.0,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 3.0      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, -0.5, 0],
                 ascii: {
                     resolution: 0.2,
@@ -130,11 +164,14 @@ export class ModelLoader {
                 type: 'gltf',
                 path: '/src/assets/models/girlwithpearlearring-3d.glb',
                 fallback: () => this.createCube(),
-                scale: 1.5,
+                scale: {
+                    desktop: 1.5,    // Desktop scale - ORIGINAL VALUE PRESERVED
+                    mobile: 1.5      // Mobile scale - ORIGINAL VALUE PRESERVED
+                },
                 position: [0, 0, 0],
                 ascii: {
                     resolution: 0.2,
-                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$',
+                    characterSet: ' .\'`^",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZMwqpdbkhao*#MW&8%B@$',
                     cameraDistance: 5
                 }
             }
@@ -168,6 +205,17 @@ export class ModelLoader {
         };
         
         logger.model('ModelLoader: Initialized with ' + Object.keys(this.modelConfigs).length + ' model types');
+    }
+    
+    // Device detection for responsive scaling
+    detectMobileDevice() {
+        // Check for touch support and screen width
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const isSmallScreen = window.innerWidth <= 768; // Mobile breakpoint
+        const isMobile = isTouchDevice && isSmallScreen;
+        
+        console.log(`🔍 Device detection: Touch=${isTouchDevice}, SmallScreen=${isSmallScreen}, Mobile=${isMobile}`);
+        return isMobile;
     }
     
     // Load model by name
@@ -241,13 +289,29 @@ export class ModelLoader {
                 throw new Error(`Unknown model type: ${config.type}`);
         }
         
-        // Apply transformations (scale should already be handled in preprocessing)
+        // Apply device-specific transformations
         if (config.scale !== undefined && !model.userData.hasCustomScale) {
-            model.scale.setScalar(config.scale);
+            // Determine device type
+            const isMobile = this.detectMobileDevice();
+            
+            // Get appropriate scale based on device
+            let scaleValue;
+            if (typeof config.scale === 'object') {
+                // Device-specific scaling
+                scaleValue = isMobile ? config.scale.mobile : config.scale.desktop;
+                console.log(`📱 Using ${isMobile ? 'mobile' : 'desktop'} scale: ${scaleValue} for ${modelName}`);
+            } else {
+                // Legacy single scale value
+                scaleValue = config.scale;
+                console.log(`📏 Using legacy scale: ${scaleValue} for ${modelName}`);
+            }
+            
+            model.scale.setScalar(scaleValue);
             model.userData.hasCustomScale = true;
             // Store original scale for morphing transitions
-            model.userData.originalScale = config.scale;
-            console.log(`🎯 Applied custom scale ${config.scale} to ${modelName} and stored for morph preservation`);
+            model.userData.originalScale = scaleValue;
+            model.userData.deviceScale = { mobile: config.scale.mobile || scaleValue, desktop: config.scale.desktop || scaleValue };
+            console.log(`🎯 Applied device-specific scale ${scaleValue} to ${modelName} and stored for morph preservation`);
         }
         
         if (config.position) {
