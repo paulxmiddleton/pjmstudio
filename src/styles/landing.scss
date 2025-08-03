@@ -595,7 +595,7 @@ html, body {
         right: 5%;
         
         p {
-            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+            font-size: clamp(0.7rem, 3vw, 0.9rem); // Make "in development" text bigger
             transform: translateX(30%); // Adjust to work with new text positioning
         }
     }
@@ -603,7 +603,7 @@ html, body {
     .ascii-centerpiece {
         width: 90%;
         height: 20%;
-        transform: translate(-45%, -50%); // Shift more to the left for better centering
+        transform: translate(-47%, -50%); // Nudge slightly back to the right
     }
     
     .site-footer {
