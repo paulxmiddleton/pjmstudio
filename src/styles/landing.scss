@@ -580,47 +580,50 @@ html, body {
     }
     
     .main-title-block {
-        top: 18%;
-        left: calc(55% - 25px); // Move text more to the right on mobile
+        top: 16%;
+        left: calc(58% - 15px); // Move further right and adjust for better mobile fit
         
         .portfolio-title {
-            font-size: clamp(1.5rem, 10vw, 2.5rem);
-            letter-spacing: 0.3em;
+            font-size: clamp(1.2rem, 8vw, 2rem); // Smaller text size to fit better
+            letter-spacing: 0.2em; // Reduced letter spacing
+            transform: scaleY(1.6) translateX(-15%) translateY(-5%); // Less aggressive scaling
         }
     }
     
     .development-status {
-        top: 35%;
-        right: 8%;
+        top: 32%;
+        right: 5%;
         
         p {
-            font-size: clamp(0.7rem, 3vw, 0.9rem);
+            font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+            transform: translateX(30%); // Adjust to work with new text positioning
         }
     }
     
     .ascii-centerpiece {
         width: 90%;
         height: 20%;
+        transform: translate(-48%, -50%); // Shift slightly left to center better
     }
     
     .site-footer {
-        bottom: 3%;
+        bottom: 8%; // Move footer higher so it's visible
         
         .footer-logo {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             
             .pxm-logo {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
             }
         }
         
         .social-links {
-            gap: 15px;
+            gap: 12px;
             flex-wrap: nowrap; // Keep all 4 links on same line
             
             .social-link {
-                font-size: clamp(0.45rem, 2.2vw, 0.65rem);
+                font-size: clamp(0.4rem, 2vw, 0.6rem);
                 white-space: nowrap; // Prevent text wrapping
             }
         }
