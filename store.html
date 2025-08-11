@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PJM Studio Store - Creative Goods & Digital Assets</title>
     <style>
-        body {
-            opacity: 0;
-        }
         .loading-screen {
             opacity: 1 !important;
         }
@@ -81,218 +78,167 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="industrial-store">
-        <!-- Store Terminal Header -->
-        <section class="store-terminal">
-            <div class="container">
-                <div class="terminal-header">
-                    <h1 class="brutalist-heading">PJM_STUDIO_STORE.EXE</h1>
-                    <div class="terminal-status">
-                        <span class="status-line">STATUS: OPERATIONAL</span>
-                        <span class="status-line">INVENTORY: UPDATING</span>
-                        <span class="status-line">PAYMENT_SYSTEM: PENDING</span>
-                    </div>
-                    <div class="terminal-description brutalist-mono">
-                        INDUSTRIAL_COMMERCE_INTERFACE → CREATIVE_GOODS | DIGITAL_ASSETS | <span class="neo-accent">UNIQUE_PIECES</span>
-                    </div>
-                </div>
+    <main class="store-main">
+        <!-- Clean Header -->
+        <header class="store-header">
+            <h1 class="store-title">store</h1>
+            <p class="store-subtitle">creative goods and digital assets by paul middleton</p>
+        </header>
+
+        <!-- Product Categories Filter -->
+        <section class="store-filter">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-category="all">all products</button>
+                <button class="filter-btn" data-category="stickers">stickers</button>
+                <button class="filter-btn" data-category="clothing">apparel</button>
+                <button class="filter-btn" data-category="digital">digital assets</button>
+                <button class="filter-btn" data-category="furniture">furniture</button>
             </div>
         </section>
 
-        <!-- Product Catalog Filter -->
-        <section class="catalog-filter">
-            <div class="container">
-                <div class="filter-terminal">
-                    <h2 class="brutalist-mono">PRODUCT_CATALOG_FILTER</h2>
-                    <div class="filter-controls">
-                        <button class="control-btn active brutalist-mono" data-category="all">ALL_PRODUCTS</button>
-                        <button class="control-btn brutalist-mono" data-category="stickers">STICKERS</button>
-                        <button class="control-btn brutalist-mono" data-category="clothing">APPAREL</button>
-                        <button class="control-btn brutalist-mono" data-category="digital">DIGITAL_ASSETS</button>
-                        <button class="control-btn brutalist-mono" data-category="furniture">FURNITURE</button>
+        <!-- Products Overview -->
+        <section class="store-overview">
+            <div class="products-grid">
+                <!-- Sticker Pack - Available -->
+                <div class="product-card available" data-category="stickers">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">medieval sticker pack</h3>
+                            <span class="product-status available">available</span>
+                        </div>
+                        <p class="product-description">Hand-illustrated neo-brutalist themed stickers. Compatible with laptops, water bottles, creative projects.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">$12.99</span>
+                        </div>
+                        <button class="product-btn available" data-product-id="sticker-pack-01">
+                            add to cart
+                        </button>
                     </div>
-                    <div class="filter-status">
-                        <span class="status-text brutalist-mono">FILTER_STATUS: ALL_CATEGORIES_ACTIVE</span>
+                    <div class="product-icon">
+                        <span class="icon-symbol">🏰</span>
                     </div>
                 </div>
-            </div>
+
+                <!-- Cinematic LUTs Pack - Development -->
+                <div class="product-card development" data-category="digital">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">cinematic luts pack</h3>
+                            <span class="product-status development">coming soon</span>
+                        </div>
+                        <p class="product-description">Professional color grading LUTs from PJM Studio productions. Compatible with Premiere Pro, Final Cut, DaVinci Resolve.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">$24.99</span>
+                        </div>
+                        <button class="product-btn development" disabled>
+                            notify me
+                        </button>
+                    </div>
+                    <div class="product-icon">
+                        <span class="icon-symbol">🎬</span>
+                    </div>
+                </div>
+
+                <!-- Studio Crest Tee -->
+                <div class="product-card development" data-category="clothing">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">studio crest tee</h3>
+                            <span class="product-status development">coming soon</span>
+                        </div>
+                        <p class="product-description">Premium cotton t-shirt featuring the PJM Studio crest. Available in multiple colors and sizes.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">$28.99</span>
+                        </div>
+                        <button class="product-btn development" disabled>
+                            notify me
+                        </button>
+                    </div>
+                    <div class="product-icon">
+                        <span class="icon-symbol">👕</span>
+                    </div>
+                </div>
+
+                <!-- Logo Design Templates -->
+                <div class="product-card development" data-category="digital">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">logo design templates</h3>
+                            <span class="product-status development">coming soon</span>
+                        </div>
+                        <p class="product-description">Professional logo templates in medieval and brutalist styles. Includes AI, EPS, and PNG files.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">$19.99</span>
+                        </div>
+                        <button class="product-btn development" disabled>
+                            notify me
+                        </button>
+                    </div>
+                    <div class="product-icon">
+                        <span class="icon-symbol">🎨</span>
+                    </div>
+                </div>
+
+                <!-- Custom Medieval Desk -->
+                <div class="product-card development" data-category="furniture">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">custom medieval desk</h3>
+                            <span class="product-status development">coming soon</span>
+                        </div>
+                        <p class="product-description">Hand-crafted wooden desk with medieval-inspired design elements. Made to order with custom sizing available.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">starting at $899</span>
+                        </div>
+                        <button class="product-btn development" disabled>
+                            contact for quote
+                        </button>
+                    </div>
+                    <div class="product-icon">
+                        <span class="icon-symbol">🪑</span>
+                    </div>
+                </div>
+
+                <!-- Moody Portrait Presets -->
+                <div class="product-card development" data-category="digital">
+                    <div class="product-content">
+                        <div class="product-header">
+                            <h3 class="product-title">moody portrait presets</h3>
+                            <span class="product-status development">coming soon</span>
+                        </div>
+                        <p class="product-description">Lightroom presets for dramatic, low-light portrait photography. Includes 15 presets and adjustment tutorials.</p>
+                        <div class="product-pricing">
+                            <span class="product-price">$16.99</span>
+                        </div>
+                        <button class="product-btn development" disabled>
+                            notify me
+                        </button>
+                    </div>
+                    <div class="product-icon">
+                        <span class="icon-symbol">📸</span>
+                    </div>
+                </div>
+                </div>
+
         </section>
 
-        <!-- Inventory Database -->
-        <section class="inventory-database">
-            <div class="container">
-                <!-- Inventory Header -->
-                <div class="database-banner">
-                    <h2 class="brutalist-mono">INVENTORY_DATABASE</h2>
-                    <div class="database-stats">
-                        <span class="stat-item">TOTAL_ITEMS: 06</span>
-                        <span class="stat-item">AVAILABLE: 01</span>
-                        <span class="stat-item">DEVELOPMENT: 05</span>
+        <!-- Store Status Notice -->
+        <section class="store-notice">
+            <div class="notice-content">
+                <h3 class="notice-title">store development status</h3>
+                <p class="notice-description">
+                    The PJM Studio store is currently under development. Payment processing and inventory management systems are being built to ensure a seamless shopping experience.
+                </p>
+                <div class="newsletter-signup">
+                    <h4 class="signup-label">get notified when new products launch</h4>
+                    <div class="signup-form">
+                        <input type="email" placeholder="your email address" class="email-input">
+                        <button class="signup-btn">subscribe</button>
                     </div>
-                    <div class="database-description brutalist-mono">
-                        PRIORITY_ITEMS → STUDIO_CURATED_SELECTION
-                    </div>
-                </div>
-
-                <div class="products-grid">
-                    <!-- Item 001: Sticker Pack - Available -->
-                    <div class="inventory-item available" data-category="stickers">
-                        <div class="item-display">
-                            <div class="item-visual">
-                                <div class="item-icon brutalist-mono">🏰</div>
-                                <div class="availability-badge available">
-                                    <span class="brutalist-mono">AVAILABLE</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-specs">
-                            <div class="spec-header">
-                                <span class="item-id brutalist-mono">ITEM_001</span>
-                                <span class="item-category brutalist-mono">STICKERS</span>
-                            </div>
-                            <h3 class="item-name brutalist-mono">MEDIEVAL_STICKER_PACK</h3>
-                            <div class="item-description">
-                                Hand-illustrated <span class="neo-accent">neo-brutalist themed</span> stickers. Compatible with laptops, water bottles, creative projects. Material: premium vinyl.
-                            </div>
-                            <div class="item-pricing">
-                                <span class="price-label brutalist-mono">PRICE:</span>
-                                <span class="price-value brutalist-mono">$12.99_USD</span>
-                            </div>
-                            <button class="system-btn available brutalist-mono" data-product-id="sticker-pack-01">
-                                ADD_TO_CART [DEMO_MODE]
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Item 002: Digital Editing Pack - Development -->
-                    <div class="inventory-item development" data-category="digital">
-                        <div class="item-display">
-                            <div class="item-visual">
-                                <div class="item-icon brutalist-mono">🎬</div>
-                                <div class="availability-badge development">
-                                    <span class="brutalist-mono">DEVELOPMENT</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-specs">
-                            <div class="spec-header">
-                                <span class="item-id brutalist-mono">ITEM_002</span>
-                                <span class="item-category brutalist-mono">DIGITAL_ASSETS</span>
-                            </div>
-                            <h3 class="item-name brutalist-mono">CINEMATIC_LUTS_PACK</h3>
-                            <div class="item-description">
-                                Professional color grading LUTs from PJM Studio productions. Compatibility: Premiere Pro, Final Cut, DaVinci Resolve. Format: .cube files.
-                            </div>
-                            <div class="item-pricing">
-                                <span class="price-label brutalist-mono">PRICE:</span>
-                                <span class="price-value brutalist-mono">$24.99_USD</span>
-                            </div>
-                            <button class="system-btn development brutalist-mono" disabled>
-                                NOTIFY_WHEN_AVAILABLE
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- T-Shirt Design -->
-                    <div class="product-card" data-category="clothing">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">👕</span>
-                                <div class="coming-soon-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Studio Crest Tee</h3>
-                            <p class="product-description">Premium cotton t-shirt featuring the PJM Studio crest. Available in multiple colors and sizes.</p>
-                            <div class="product-price">$28.99</div>
-                            <button class="add-to-cart-btn" disabled>Notify Me</button>
-                        </div>
-                    </div>
-
-                    <!-- Digital Asset Pack -->
-                    <div class="product-card" data-category="digital">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">🎨</span>
-                                <div class="coming-soon-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Logo Design Templates</h3>
-                            <p class="product-description">Professional logo templates in medieval and brutalist styles. Includes AI, EPS, and PNG files.</p>
-                            <div class="product-price">$19.99</div>
-                            <button class="add-to-cart-btn" disabled>Notify Me</button>
-                        </div>
-                    </div>
-
-                    <!-- Custom Furniture -->
-                    <div class="product-card" data-category="furniture">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">🪑</span>
-                                <div class="coming-soon-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Custom Medieval Desk</h3>
-                            <p class="product-description">Hand-crafted wooden desk with medieval-inspired design elements. Made to order with custom sizing available.</p>
-                            <div class="product-price">Starting at $899</div>
-                            <button class="add-to-cart-btn" disabled>Contact for Quote</button>
-                        </div>
-                    </div>
-
-                    <!-- Photography Preset Pack -->
-                    <div class="product-card" data-category="digital">
-                        <div class="product-image">
-                            <div class="product-placeholder">
-                                <span class="product-icon">📸</span>
-                                <div class="coming-soon-overlay">
-                                    <span>Coming Soon</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-title">Moody Portrait Presets</h3>
-                            <p class="product-description">Lightroom presets for dramatic, low-light portrait photography. Includes 15 presets and adjustment tutorials.</p>
-                            <div class="product-price">$16.99</div>
-                            <button class="add-to-cart-btn" disabled>Notify Me</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- System Status Notice -->
-                <div class="system-notice">
-                    <div class="notice-terminal">
-                        <div class="terminal-frame">
-                            <div class="terminal-header-bar">
-                                <span class="terminal-title brutalist-mono">SYSTEM_STATUS.LOG</span>
-                            </div>
-                            <div class="terminal-content">
-                                <h3 class="brutalist-mono">COMMERCE_MODULE_STATUS: DEVELOPMENT</h3>
-                                <div class="status-description">
-                                    Industrial commerce interface currently under construction. 
-                                    Payment processing and inventory management systems in active development phase.
-                                </div>
-                                <div class="notification-interface">
-                                    <div class="interface-label brutalist-mono">NOTIFICATION_SUBSCRIPTION:</div>
-                                    <div class="input-group">
-                                        <input type="email" placeholder="EMAIL_ADDRESS" class="terminal-input brutalist-mono">
-                                        <button class="terminal-btn brutalist-mono">SUBSCRIBE_TO_UPDATES</button>
-                                    </div>
-                                </div>
-                                <div class="system-benefits">
-                                    <div class="benefit-line brutalist-mono">→ PRIORITY_ACCESS_TO_NEW_INVENTORY</div>
-                                    <div class="benefit-line brutalist-mono">→ <span class="neo-accent">EXCLUSIVE</span>_STUDIO_COMMUNICATIONS</div>
-                                    <div class="benefit-line brutalist-mono">→ EARLY_BETA_SYSTEM_ACCESS</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="signup-benefits">
+                        <p>• priority access to new products</p>
+                        <p>• exclusive studio updates</p>
+                        <p>• early access to beta releases</p>
                     </div>
                 </div>
             </div>

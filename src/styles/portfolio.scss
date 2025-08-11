@@ -1,7 +1,19 @@
-// Portfolio Pages - High Fashion Brutalist Archive
+// Portfolio Pages - Nova Design System Recreation
 @import 'variables';
 
-// Strategic Background - Portfolio Content Areas
+// Import technical mono font
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+// Custom Color Palette - Clean Technical
+$accent-pink: #ff00f6;
+$nova-bg: #fafafa;
+$nova-card-bg: #ffffff;
+$nova-text: #1a1a1a;
+$nova-text-muted: #6b7280;
+$nova-border: #e5e7eb;
+$nova-hover: #f3f4f6;
+
+// Clean Foundation - Nova's Technical Aesthetic
 * {
     margin: 0;
     padding: 0;
@@ -10,30 +22,30 @@
 
 html, body {
     height: 100%;
-    font-family: $font-system;
-    background: $bg-content;
-    color: $black;
-    line-height: 1.2;
+    font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: $nova-bg;
+    color: $nova-text;
+    line-height: 1.6;
     overflow-x: hidden;
     font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-// Header area uses deep blue, content area uses light backgrounds
-
-// Loading Screen - Minimalist
+// Nova-style Loading Screen
 .loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: $black;
+    background: $nova-bg;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
     opacity: 1;
-    transition: opacity 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.8s ease-out;
     
     &.loaded {
         opacity: 0;
@@ -41,65 +53,55 @@ html, body {
     }
     
     .loading-text {
-        @include text-thick();
-        color: $neo-blue;
-        font-size: 14px;
-        animation: pulse 2s ease-in-out infinite;
+        font-family: 'IBM Plex Mono', monospace;
+        color: $accent-pink;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        animation: fadeInOut 1.5s ease-in-out infinite;
     }
 }
 
-// Floating Navigation - Same as Other Pages
+// Nova-style Navigation - Clean Technical Style
 .floating-nav {
     position: fixed;
-    top: $space-8;
-    right: $space-8;
+    top: 24px;
+    right: 24px;
     z-index: 1000;
     
     .nav-trigger {
-        width: 40px;
-        height: 40px;
-        display: flex;
+        width: 44px;
+        height: 44px;
+        display: none; /* Hidden for custom nav implementation */
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 6px;
+        gap: 4px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
+        background: $nova-card-bg;
+                border: 1px solid $nova-border;
         
-        .trigger-line {
-            width: 20px;
-            height: 1px;
-            background: $black;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-origin: center;
-            
-            &:nth-child(1) {
-                width: 25px;
-            }
-            
-            &:nth-child(3) {
-                width: 15px;
-            }
+        &:hover {
+            background: $nova-hover;
+            border-color: $accent-pink;
         }
         
-        &:hover .trigger-line {
-            background: $neo-blue;
+        .trigger-line {
+            width: 16px;
+            height: 1px;
+            background: $nova-text;
+            transition: all 0.2s ease;
+            transform-origin: center;
             
-            &:nth-child(1) {
-                transform: translateX(3px);
-            }
-            
-            &:nth-child(3) {
-                transform: translateX(-3px);
+            &:nth-child(2) {
+                width: 12px;
             }
         }
         
         &.active .trigger-line {
-            background: $white;
-            
             &:nth-child(1) {
-                transform: rotate(45deg) translateY(7px);
-                width: 20px;
+                transform: rotate(45deg) translate(3px, 3px);
             }
             
             &:nth-child(2) {
@@ -107,8 +109,7 @@ html, body {
             }
             
             &:nth-child(3) {
-                transform: rotate(-45deg) translateY(-7px);
-                width: 20px;
+                transform: rotate(-45deg) translate(3px, -3px);
             }
         }
     }
@@ -117,13 +118,14 @@ html, body {
         position: fixed;
         top: 0;
         right: 0;
-        width: 350px;
+        width: 320px;
         height: 100vh;
-        background: $bg-primary;
-        color: $white;
-        padding: $space-12 $space-8;
+        background: $nova-card-bg;
+        color: $nova-text;
+        padding: 32px 24px;
         transform: translateX(100%);
-        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        transition: transform 0.3s ease;
+        border-left: 1px solid $nova-border;
         
         &.active {
             transform: translateX(0);
@@ -133,24 +135,27 @@ html, body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: $space-16;
-            padding-bottom: $space-4;
-            border-bottom: 1px solid $off-grey;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $nova-border;
             
             .nav-title {
-                @include text-thick();
-                font-size: 12px;
-                color: $white;
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 11px;
+                color: $nova-text-muted;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: lowercase;
             }
             
             .nav-close {
-                font-size: 24px;
-                color: $white;
+                font-size: 20px;
+                color: $nova-text-muted;
                 cursor: pointer;
-                transition: color 0.3s ease;
+                transition: color 0.2s ease;
                 
                 &:hover {
-                    color: $neo-blue;
+                    color: $accent-pink;
                 }
             }
         }
@@ -159,208 +164,175 @@ html, body {
             .nav-link {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                padding: $space-4 0;
+                padding: 12px 0;
                 text-decoration: none;
-                color: $white;
-                border-bottom: 1px solid rgba($off-grey, 0.3);
-                transition: all 0.3s ease;
+                color: $nova-text;
+                border-bottom: 1px solid $nova-border;
+                transition: all 0.2s ease;
+                font-family: Arial, sans-serif;
                 
-                &.active {
-                    color: $neo-blue;
-                    border-bottom-color: $neo-blue;
+                &:hover {
+                    color: $accent-pink;
                 }
                 
                 .link-number {
-                    @include text-thick();
+                    font-family: Arial, sans-serif;
                     font-size: 10px;
-                    color: $off-grey;
-                    min-width: 30px;
+                    color: $nova-text-muted;
+                    min-width: 28px;
+                    font-weight: 500;
                 }
                 
                 .link-text {
-                    @include text-thick();
                     font-size: 14px;
                     flex: 1;
-                    margin-left: $space-4;
+                    margin-left: 12px;
+                    font-weight: 500;
                 }
                 
                 .link-arrow {
                     font-size: 14px;
-                    color: $off-grey;
-                    transition: all 0.3s ease;
+                    color: $nova-text-muted;
                     opacity: 0;
-                    transform: translateX(-10px);
+                    transform: translateX(-8px);
+                    transition: all 0.2s ease;
                 }
                 
-                &:hover {
-                    padding-left: $space-2;
-                    
-                    .link-text {
-                        color: $neo-blue;
-                    }
-                    
-                    .link-arrow {
-                        opacity: 1;
-                        transform: translateX(0);
-                        color: $neo-blue;
-                    }
+                &:hover .link-arrow {
+                    opacity: 1;
+                    transform: translateX(0);
+                    color: $accent-pink;
                 }
             }
         }
         
         .nav-footer {
             position: absolute;
-            bottom: $space-8;
-            left: $space-8;
-            right: $space-8;
+            bottom: 32px;
+            left: 24px;
+            right: 24px;
             
             .nav-status {
                 display: flex;
                 align-items: center;
-                gap: $space-3;
+                gap: 8px;
                 
                 .status-dot {
                     width: 6px;
                     height: 6px;
                     border-radius: 50%;
-                    background: $off-grey;
+                    background: $nova-text-muted;
                     
                     &.active {
-                        background: $neo-blue;
-                        box-shadow: 0 0 10px rgba($neo-blue, 0.3);
-                        animation: pulse 2s ease-in-out infinite;
+                        background: $accent-pink;
                     }
                 }
                 
                 .status-text {
-                    @include text-thick();
-                    font-size: 10px;
-                    color: $off-grey;
+                    font-family: 'IBM Plex Mono', monospace;
+                    font-size: 9px;
+                    color: $nova-text-muted;
+                    text-transform: lowercase;
+                    letter-spacing: 0.1em;
                 }
             }
         }
     }
 }
 
-// Main Portfolio Composition
+// Main Portfolio Composition - Nova Style
 .directing-composition {
     min-height: 100vh;
     position: relative;
-    padding: 0;
-    overflow: hidden;
+    background: $nova-bg;
 }
 
-// Archive Header - Strategic Deep Blue Background
+// Nova-style Archive Header - Clean Technical Layout
 .archive-header {
-    background: $bg-primary;
-    color: $white;
-    position: relative;
-    padding: $space-24 $space-8;
-    min-height: 60vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     
-    @media (max-width: $tablet) {
+    @media (max-width: 768px) {
         flex-direction: column;
-        align-items: flex-start;
-        gap: $space-12;
-        padding: $space-16 $space-4;
-        min-height: 50vh;
+        padding: 32px 20px 24px;
+        gap: 24px;
     }
     
     .header-content {
-        max-width: 700px;
+        flex: 1;
         
-        .discipline-label {
-            @include text-thick();
-            font-size: 10px;
-            color: $off-grey;
-            @include systematic-spacing(0.25);
-            opacity: 0.7;
+        .breadcrumb-placeholder {
+            margin-bottom: 12px;
+            min-height: 16px;
+            // Future breadcrumb navigation will go here
         }
         
         .discipline-title {
-            @include text-thick();
-            font-size: clamp(5rem, 12vw, 10rem);
-            line-height: 0.8;
-            color: $white;
-            letter-spacing: $tracking-xwide;
-            margin-bottom: $space-6;
-            
-            &:hover {
-                color: $neo-blue;
-                transition: color 0.3s ease;
-            }
-        }
-        
-        .discipline-separator {
-            width: 120px;
-            height: 3px;
-            background: $neo-blue;
-            margin-bottom: $space-6;
-            transform-origin: left;
-            animation: expand 2s ease-out 0.5s both;
+            font-family: Arial, sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: $nova-text;
+            margin-bottom: 16px;
+            letter-spacing: 0.15em;
         }
         
         .discipline-statement {
-            @include text-thin();
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-weight: 200;
-            line-height: 1.3;
-            color: $off-grey;
-            text-transform: lowercase;
-            letter-spacing: $tracking-wide;
-            
-            &:hover {
-                color: $white;
-                transition: color 0.3s ease;
-            }
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: $nova-text-muted;
+            line-height: 1.5;
+            max-width: 400px;
+            font-weight: 300;
         }
     }
     
     .archive-meta {
-        position: relative;
-        z-index: 10;
+        min-width: 280px;
         
-        @media (max-width: $tablet) {
+        @media (max-width: 768px) {
+            min-width: auto;
             width: 100%;
         }
         
         .meta-label {
+            font-family: Arial, sans-serif;
             font-size: 10px;
             font-weight: 500;
-            color: $off-grey;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: $space-6;
+            color: $nova-text-muted;
+            text-transform: lowercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
         }
         
         .meta-data {
             .meta-line {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: $space-3;
-                padding: $space-2 0;
-                border-bottom: 1px solid rgba($off-grey, 0.5);
-                min-width: 350px;
+                margin-bottom: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid $nova-border;
                 
                 .meta-key {
-                    @include text-thick();
-                    font-size: 10px;
-                    color: $off-grey;
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    color: $nova-text-muted;
+                    font-weight: 400;
                 }
                 
                 .meta-value {
-                    @include text-thick();
-                    font-size: 10px;
-                    color: $white;
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    color: $nova-text;
                     text-align: right;
+                    font-weight: 500;
                     
                     &.active {
-                        color: $neo-blue;
-                        text-shadow: 0 0 5px rgba($neo-blue, 0.3);
+                        color: $accent-pink;
                     }
                 }
             }
@@ -368,116 +340,269 @@ html, body {
     }
 }
 
-// Directing Manifesto Block
-.directing-manifesto {
-    @include section-split($neo-blue, $off-white);
-    padding: $space-24 $space-8;
-    background: $off-white;
+
+// Nova-style Portfolio Header
+.portfolio-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
     
-    @media (max-width: $tablet) {
-        padding: $space-16 $space-4;
+    @media (max-width: 768px) {
+        padding: 32px 20px 24px;
     }
     
-    .manifesto-content {
-        max-width: 800px;
-        margin: 0 auto;
+    .portfolio-title {
+        font-family: Arial, sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600;
+        line-height: 1.2;
+        color: $nova-text;
+        margin-bottom: 8px;
+        letter-spacing: 0.15em;
+    }
+    
+    .portfolio-subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: $nova-text-muted;
+        margin-bottom: 0;
+        font-weight: 300;
+    }
+}
+
+// Nova-style Portfolio Overview Section
+.portfolio-overview {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    
+    @media (max-width: 768px) {
+        padding: 0 20px 32px;
+    }
+}
+
+// Nova-style Portfolio Grid
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+// Nova-style Portfolio Cards - Full Clickable Cards
+.portfolio-card {
+    background: $nova-card-bg;
+    border: 1px solid $nova-border;
+    padding: 24px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    
+    &:hover {
+        transform: translateY(-2px);
+        border-color: $accent-pink;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    &:focus {
+        outline: 2px solid $accent-pink;
+        outline-offset: 2px;
+    }
+    
+    &:hover .explore-link::after {
+        transform: translateX(2px);
+    }
+    
+    .card-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
         
-        .manifesto-label {
-            @include text-thick();
-            font-size: 10px;
-            color: $off-grey;
-            @include systematic-spacing(0.6);
-            text-align: center;
+        .card-title {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: $nova-text;
+            margin-bottom: 8px;
+            letter-spacing: 0.08em;
+            line-height: 1.3;
         }
         
-        .manifesto-text {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: $space-12;
+        .card-description {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: $nova-text-muted;
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+    }
+    
+    .card-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        
+        .category-icon {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+            filter: brightness(0) saturate(100%) invert(43%) sepia(7%) saturate(347%) hue-rotate(202deg) brightness(95%) contrast(85%);
+            display: block;
+        }
+    }
+    
+    &:hover .category-icon {
+        opacity: 1;
+        transform: scale(1.05);
+        filter: brightness(0) saturate(100%) invert(6%) sepia(100%) saturate(7498%) hue-rotate(293deg) brightness(200%) contrast(90%);
+    }
+}
+
+// Special styling for directing card with full background image
+.portfolio-card.directing-card {
+    position: relative;
+    overflow: hidden;
+    
+    .card-background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/src/assets/images/icons/directing-for-pcard.png');
+        background-size: cover;
+        background-position: center 12%;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        z-index: 0;
+        transition: all 0.3s ease;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0);
+            mix-blend-mode: multiply;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+    }
+    
+    .card-content {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-radius: 0;
+        padding: 16px;
+        margin: 8px;
+        transition: all 0.3s ease;
+        height: calc(100% - 16px);
+        
+        .card-title {
+            color: $nova-text;
+            text-shadow: none;
+            font-weight: 600;
+            margin-bottom: 0;
+            position: relative;
+        }
+        
+        .card-description {
+            color: $nova-text;
+            text-shadow: none;
+            font-weight: 600;
+            margin: 0;
+            position: absolute;
+            bottom: -16px;
+            left: 16px;
+            right: 16px;
+        }
+    }
+    
+    &:hover {
+        border-color: #ff0000;
+        
+        .card-background-image {
+            transform: scale(1.05);
+            opacity: 0.9;
             
-            @media (max-width: $tablet) {
-                grid-template-columns: 1fr;
-                gap: $space-8;
+            &::after {
+                background: rgba(255, 0, 0, 0.4);
             }
+        }
+        
+        .card-content {
+            background: transparent;
+            transform: translateY(-2px);
             
-            p {
-                @include text-thin();
-                font-size: clamp(1.1rem, 2vw, 1.4rem);
-                font-weight: 300;
-                line-height: 1.3;
-                color: $black;
-                text-transform: lowercase;
-                letter-spacing: $tracking-wide;
-                text-align: center;
-                
-                &:hover {
-                    color: $neo-blue;
-                    transition: color 0.3s ease;
-                }
+            .card-title,
+            .card-description {
+                color: #ffffff;
             }
         }
     }
 }
 
-// Portfolio Archive Grid
+// Nova-style Portfolio Archive Grid
 .portfolio-archive {
-    padding: $space-24 $space-8;
-    background: $white;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
     
-    @media (max-width: $tablet) {
-        padding: $space-16 $space-4;
+    @media (max-width: 768px) {
+        padding: 24px 20px 32px;
     }
     
     .archive-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 300px);
-        gap: $space-6;
-        max-width: 1200px;
-        margin: 0 auto;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
         
-        @media (max-width: $desktop) {
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(4, 280px);
-        }
-        
-        @media (max-width: $tablet) {
+        @media (max-width: 768px) {
             grid-template-columns: 1fr;
-            grid-template-rows: repeat(6, 260px);
-            gap: $space-4;
+            gap: 16px;
         }
         
         .project-block {
-            @include grid-brutalist(1, $space-4, $neo-blue, $bg-content);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: $nova-card-bg;
+            border: 1px solid $nova-border;
+                        overflow: hidden;
+            transition: all 0.2s ease;
             cursor: pointer;
+            min-height: 320px;
+            position: relative;
             
-            // Logo accent pattern overlay
-            &::before {
-                content: "PXM";
-                position: absolute;
-                top: $space-2;
-                right: $space-2;
-                font-size: 8px;
-                @include text-thick();
-                color: rgba($neo-blue, 0.1);
-                z-index: 1;
-                pointer-events: none;
+            &:hover {
+                transform: translateY(-2px);
+                border-color: $accent-pink;
             }
             
             &.feature {
                 grid-column: span 2;
-                grid-row: span 2;
+                min-height: 400px;
                 
-                @media (max-width: $desktop) {
-                    grid-column: span 2;
-                    grid-row: span 1;
-                }
-                
-                @media (max-width: $tablet) {
+                @media (max-width: 768px) {
                     grid-column: span 1;
+                    min-height: 320px;
                 }
             }
             
@@ -491,203 +616,97 @@ html, body {
                     top: 0;
                     left: 0;
                     width: 100%;
-                    height: 100%;
+                    height: 60%;
+                    background: $nova-hover;
                     
                     &.blue-diagonal {
-                        background: linear-gradient(45deg, $neo-blue 25%, $black 25%, $black 50%, $neo-blue 50%, $neo-blue 75%, $black 75%);
-                        background-size: 40px 40px;
-                    }
-                    
-                    &.black-solid {
-                        background: $black;
+                        background: linear-gradient(45deg, $nova-hover 0%, lighten($accent-pink, 30%) 100%);
                     }
                     
                     &.blue-gradient {
-                        background: linear-gradient(135deg, $neo-blue 0%, $black 100%);
-                    }
-                    
-                    &.black-lines {
-                        background: repeating-linear-gradient(
-                            0deg,
-                            $black,
-                            $black 2px,
-                            transparent 2px,
-                            transparent 8px
-                        );
+                        background: linear-gradient(135deg, $accent-pink 0%, lighten($accent-pink, 20%) 100%);
                     }
                     
                     &.blue-blocks {
-                        background: $neo-blue;
-                        background-image: 
-                            linear-gradient(45deg, $black 25%, transparent 25%), 
-                            linear-gradient(-45deg, $black 25%, transparent 25%), 
-                            linear-gradient(45deg, transparent 75%, $black 75%), 
-                            linear-gradient(-45deg, transparent 75%, $black 75%);
-                        background-size: 20px 20px;
-                        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+                        background: $accent-pink;
+                        opacity: 0.1;
+                    }
+                    
+                    &.black-lines,
+                    &.black-solid {
+                        background: $nova-text;
+                        opacity: 0.05;
                     }
                     
                     &.alternating {
                         background: repeating-linear-gradient(
-                            90deg,
-                            $neo-blue 0,
-                            $neo-blue 50px,
-                            $black 50px,
-                            $black 100px
+                            45deg,
+                            $nova-hover,
+                            $nova-hover 10px,
+                            transparent 10px,
+                            transparent 20px
                         );
                     }
                 }
                 
                 .project-overlay {
                     position: absolute;
-                    top: 0;
+                    bottom: 0;
                     left: 0;
                     right: 0;
-                    bottom: 0;
-                    background: linear-gradient(135deg, rgba($black, 0.85) 0%, rgba($black, 0.7) 100%);
-                    color: $white;
-                    padding: $space-6;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                    background: $nova-card-bg;
+                    padding: 24px;
+                    border-top: 1px solid $nova-border;
                     
                     .project-number {
-                        @include text-thick();
+                        font-family: Arial, sans-serif;
                         font-size: 10px;
-                        color: $neo-blue;
-                        @include systematic-spacing(0.15);
+                        color: $nova-text-muted;
+                        text-transform: lowercase;
+                        letter-spacing: 0.1em;
+                        margin-bottom: 8px;
                     }
                     
                     .project-title {
-                        @include text-thick();
-                        font-size: clamp(16px, 2.5vw, 24px);
-                        font-weight: 700;
-                        color: $white;
-                        text-transform: uppercase;
-                        letter-spacing: $tracking-xwide;
-                        margin-bottom: $space-4;
+                        font-family: Arial, sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: $nova-text;
+                        margin-bottom: 12px;
+                        letter-spacing: 0.08em;
+                        line-height: 1.3;
                     }
                     
                     .project-meta {
                         display: flex;
-                        gap: $space-3;
-                        margin-bottom: $space-4;
+                        gap: 8px;
+                        margin-bottom: 12px;
                         
                         .project-format,
                         .project-year {
-                            @include text-thick();
+                            font-family: Arial, sans-serif;
                             font-size: 9px;
-                            color: $off-grey;
-                            padding: $space-1 $space-2;
-                            border: 1px solid rgba($off-grey, 0.3);
+                            color: $nova-text-muted;
+                            padding: 4px 8px;
+                            background: $nova-hover;
+                                                        text-transform: lowercase;
+                            letter-spacing: 0.05em;
                         }
                     }
                     
                     .project-description {
-                        @include text-thin();
-                        font-size: 10px;
+                        font-family: Arial, sans-serif;
+                        font-size: 12px;
+                        color: $nova-text-muted;
+                        line-height: 1.4;
                         font-weight: 300;
-                        color: $off-white;
-                        text-transform: lowercase;
-                        letter-spacing: $tracking-wide;
-                        line-height: 1.6;
-                        flex: 1;
-                        display: flex;
-                        align-items: center;
                     }
-                }
-            }
-            
-            &:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 25px 50px rgba($black, 0.4);
-                
-                .project-overlay {
-                    opacity: 1;
-                    transform: translateY(0);
                 }
             }
         }
     }
 }
 
-// Process Fragment
-.process-fragment {
-    @include brutal-divider();
-    padding: $space-24 $space-8;
-    background: $black;
-    color: $white;
-    
-    @media (max-width: $tablet) {
-        padding: $space-16 $space-4;
-    }
-    
-    .fragment-content {
-        max-width: 1000px;
-        margin: 0 auto;
-        
-        .fragment-label {
-            @include text-thick();
-            font-size: 12px;
-            font-weight: 600;
-            color: $neo-blue;
-            text-transform: uppercase;
-            letter-spacing: $tracking-xwide;
-            margin-bottom: $space-12;
-            text-align: center;
-        }
-        
-        .process-stages {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: $space-8;
-            
-            .stage-item {
-                text-align: center;
-                padding: $space-6;
-                border: 1px solid $off-grey;
-                background: rgba($black, 0.3);
-                transition: all 0.3s ease;
-                
-                &:hover {
-                    border-color: $neo-blue;
-                    background: rgba($black, 0.6);
-                    transform: translateY(-4px);
-                }
-                
-                .stage-number {
-                    @include text-thick();
-                    font-size: 14px;
-                    color: $neo-blue;
-                    @include systematic-spacing(0.2);
-                }
-                
-                .stage-name {
-                    @include text-thick();
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: $white;
-                    text-transform: uppercase;
-                    letter-spacing: $tracking-wide;
-                    margin-bottom: $space-4;
-                }
-                
-                .stage-description {
-                    @include text-thin();
-                    font-size: 11px;
-                    font-weight: 300;
-                    color: $off-white;
-                    text-transform: lowercase;
-                    letter-spacing: $tracking-wide;
-                    line-height: 1.5;
-                }
-            }
-        }
-    }
-}
 
 // Copyright Mark
 .copyright-mark {
@@ -754,24 +773,24 @@ html, body {
     }
 }
 
-// Animations
-@keyframes expand {
-    from {
-        transform: scaleX(0);
-    }
-    to {
-        transform: scaleX(1);
-    }
-}
-
-@keyframes pulse {
+// Nova-style Animations
+@keyframes fadeInOut {
     0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
+        opacity: 0.4;
     }
     50% {
         opacity: 1;
-        transform: scale(1.1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -825,5 +844,107 @@ html, body {
     .process-fragment .process-stages {
         grid-template-columns: 1fr;
         gap: $space-6;
+    }
+}
+
+// Nova-style Footer
+.realm-footer {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid $nova-border;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+        padding: 24px 20px;
+    }
+    
+    .footer-logo {
+        justify-self: start;
+        
+        .footer-logo-img {
+            height: 60px;
+            width: auto;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .footer-socials {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-self: center;
+        
+        @media (max-width: 768px) {
+            gap: 12px;
+        }
+        
+        .scroll-link {
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: $nova-text-muted;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            
+            &:hover {
+                color: $accent-pink;
+                transform: translateY(-1px);
+                
+                img {
+                    filter: brightness(0) saturate(100%) invert(13%) sepia(100%) saturate(7498%) hue-rotate(293deg) brightness(200%) contrast(90%); /* Maximum bright #ff00f6 magenta-pink */
+                }
+            }
+            
+            svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
+            }
+            
+            img {
+                width: 120%; /* 20% larger than other icons */
+                height: 120%; /* 20% larger than other icons */
+                object-fit: contain;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 1; /* Remove transparency - color will be controlled by filter */
+                transition: opacity 0.2s ease; /* Only transition opacity, not filter */
+                filter: brightness(0) saturate(100%) invert(43%) sepia(7%) saturate(347%) hue-rotate(202deg) brightness(95%) contrast(85%); /* Match exact grey of SVG icons */
+                
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    
+    .copyright {
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        color: $nova-text-muted;
+        text-transform: lowercase;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        justify-self: end;
+        
+        @media (max-width: 768px) {
+            order: -1;
+            justify-self: center;
+        }
     }
 }

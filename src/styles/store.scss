@@ -1,444 +1,766 @@
-// Store Page - Neo-Brutalist E-commerce
+// Store Pages - Nova Design System Recreation
 @import 'variables';
 
-// Allow body to scroll for store page - prevent horizontal scroll
+// Import technical mono font
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+// Custom Color Palette - Clean Technical
+$accent-pink: #ff00f6;
+$nova-bg: #fafafa;
+$nova-card-bg: #ffffff;
+$nova-text: #1a1a1a;
+$nova-text-muted: #6b7280;
+$nova-border: #e5e7eb;
+$nova-hover: #f3f4f6;
+
+// Clean Foundation - Nova's Technical Aesthetic
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html, body {
+    height: 100%;
+    font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: $nova-bg;
+    color: $nova-text;
+    line-height: 1.6;
     overflow-x: hidden;
-    overflow-y: auto;
-    height: auto;
-    background: $off-white;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-// Container for consistent spacing
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+// Nova-style Loading Screen
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $nova-bg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
     
-    @media (max-width: 768px) {
-        padding: 0 1rem;
+    &.loaded {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .loading-text {
+        font-family: 'IBM Plex Mono', monospace;
+        color: $accent-pink;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        animation: fadeInOut 1.5s ease-in-out infinite;
     }
 }
 
-// Industrial Store Components
-
-// Industrial Store Layout
-.industrial-store {
-    min-height: 100vh;
-    background: $off-white;
-    padding-top: 80px;
-}
-
-// Store Terminal Header
-.store-terminal {
-    background: $neo-blue;
-    color: $white;
-    padding: 3rem 2rem;
+// Nova-style Navigation - Clean Technical Style
+.floating-nav {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
     
-    .terminal-header {
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
+    .nav-trigger {
+        width: 44px;
+        height: 44px;
+        display: none; /* Hidden for custom nav implementation */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: $nova-card-bg;
+        border: 1px solid $nova-border;
         
-        .brutalist-heading {
-            @include text-thick();
-            font-family: 'Space Mono', monospace;
-            font-size: clamp(2rem, 5vw, 4rem);
-            line-height: 1.1;
-            color: $white;
-            @include systematic-spacing(1.5);
+        &:hover {
+            background: $nova-hover;
+            border-color: $accent-pink;
         }
         
-        .terminal-status {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        .trigger-line {
+            width: 16px;
+            height: 1px;
+            background: $nova-text;
+            transition: all 0.2s ease;
+            transform-origin: center;
             
-            .status-line {
-                @include text-thick();
-                font-family: 'JetBrains Mono', monospace;
-                font-size: 0.8rem;
-                color: $white;
-                background: rgba($white, 0.1);
-                padding: 0.5rem 1rem;
-                border: 1px solid rgba($white, 0.3);
+            &:nth-child(2) {
+                width: 12px;
             }
         }
         
-        .terminal-description {
-            font-size: 1rem;
-            letter-spacing: 1px;
+        &.active .trigger-line {
+            &:nth-child(1) {
+                transform: rotate(45deg) translate(3px, 3px);
+            }
             
-            .neo-accent {
-                color: $neo-pink;
-                font-weight: bold;
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            
+            &:nth-child(3) {
+                transform: rotate(-45deg) translate(3px, -3px);
             }
         }
     }
-}
-
-// Catalog Filter
-.catalog-filter {
-    background: $white;
-    padding: 2rem;
-    border-bottom: 2px solid $black;
     
-    .filter-terminal {
-        max-width: 1200px;
-        margin: 0 auto;
+    .nav-content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 320px;
+        height: 100vh;
+        background: $nova-card-bg;
+        color: $nova-text;
+        padding: 32px 24px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border-left: 1px solid $nova-border;
         
-        h2 {
-            @include text-thick();
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            @include systematic-spacing(1.5);
-            text-align: center;
+        &.active {
+            transform: translateX(0);
         }
         
-        .filter-controls {
+        .nav-header {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $nova-border;
             
-            .control-btn {
-                @include text-thick();
-                background: $white;
-                border: 2px solid $black;
-                color: $black;
-                padding: 0.75rem 1.5rem;
-                font-family: 'JetBrains Mono', monospace;
-                font-size: 0.8rem;
+            .nav-title {
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 11px;
+                color: $nova-text-muted;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: lowercase;
+            }
+            
+            .nav-close {
+                font-size: 20px;
+                color: $nova-text-muted;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: color 0.2s ease;
                 
                 &:hover {
-                    background: $off-white;
-                }
-                
-                &.active {
-                    background: $neo-blue;
-                    color: $white;
+                    color: $accent-pink;
                 }
             }
         }
         
-        .filter-status {
-            text-align: center;
+        .nav-links {
+            .nav-link {
+                display: flex;
+                align-items: center;
+                padding: 12px 0;
+                text-decoration: none;
+                color: $nova-text;
+                border-bottom: 1px solid $nova-border;
+                transition: all 0.2s ease;
+                font-family: Arial, sans-serif;
+                
+                &:hover {
+                    color: $accent-pink;
+                }
+                
+                .link-number {
+                    font-family: Arial, sans-serif;
+                    font-size: 10px;
+                    color: $nova-text-muted;
+                    min-width: 28px;
+                    font-weight: 500;
+                }
+                
+                .link-text {
+                    font-size: 14px;
+                    flex: 1;
+                    margin-left: 12px;
+                    font-weight: 500;
+                }
+                
+                .link-arrow {
+                    font-size: 14px;
+                    color: $nova-text-muted;
+                    opacity: 0;
+                    transform: translateX(-8px);
+                    transition: all 0.2s ease;
+                }
+                
+                &:hover .link-arrow {
+                    opacity: 1;
+                    transform: translateX(0);
+                    color: $accent-pink;
+                }
+            }
+        }
+        
+        .nav-footer {
+            position: absolute;
+            bottom: 32px;
+            left: 24px;
+            right: 24px;
             
-            .status-text {
-                @include text-thin();
-                font-size: 0.8rem;
-                color: $black;
+            .nav-status {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                
+                .status-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: $nova-text-muted;
+                    
+                    &.active {
+                        background: $accent-pink;
+                    }
+                }
+                
+                .status-text {
+                    font-family: 'IBM Plex Mono', monospace;
+                    font-size: 9px;
+                    color: $nova-text-muted;
+                    text-transform: lowercase;
+                    letter-spacing: 0.1em;
+                }
             }
         }
     }
 }
 
-// Inventory Database
-.inventory-database {
-    background: $off-white;
-    padding: 4rem 2rem;
+// Main Store Composition - Nova Style
+.store-main {
+    min-height: 100vh;
+    position: relative;
+    background: $nova-bg;
+}
+
+// Nova-style Store Header - Clean Technical Layout
+.store-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
     
-    .database-banner {
-        max-width: 1200px;
-        margin: 0 auto 3rem auto;
-        text-align: center;
+    @media (max-width: 768px) {
+        padding: 32px 20px 24px;
+    }
+    
+    .store-title {
+        font-family: Arial, sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600;
+        line-height: 1.2;
+        color: $nova-text;
+        margin-bottom: 8px;
+        letter-spacing: 0.15em;
+    }
+    
+    .store-subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: $nova-text-muted;
+        margin-bottom: 0;
+        font-weight: 300;
+    }
+}
+
+// Nova-style Filter Section
+.store-filter {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 32px;
+    
+    @media (max-width: 768px) {
+        padding: 0 20px 24px;
+    }
+    
+    .filter-controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
         
-        h2 {
-            @include text-thick();
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            @include systematic-spacing(1.2);
+        @media (max-width: 768px) {
+            gap: 8px;
         }
         
-        .database-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+        .filter-btn {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: $nova-text-muted;
+            background: transparent;
+            border: 1px solid $nova-border;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
             
-            .stat-item {
-                @include text-thick();
-                font-family: 'JetBrains Mono', monospace;
-                font-size: 0.8rem;
-                color: $white;
-                background: $black;
-                padding: 0.5rem 1rem;
+            &:hover {
+                color: $nova-text;
+                border-color: $nova-text;
+            }
+            
+            &.active {
+                color: $accent-pink;
+                border-color: $accent-pink;
+                background: rgba($accent-pink, 0.05);
             }
         }
+    }
+}
+
+// Nova-style Store Overview Section
+.store-overview {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    
+    @media (max-width: 768px) {
+        padding: 0 20px 32px;
+    }
+}
+
+// Nova-style Product Grid
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+// Nova-style Product Cards
+.product-card {
+    background: $nova-card-bg;
+    border: 1px solid $nova-border;
+    padding: 24px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 240px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    
+    &:hover {
+        transform: translateY(-2px);
+        border-color: $accent-pink;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    &:focus {
+        outline: 2px solid $accent-pink;
+        outline-offset: 2px;
+    }
+    
+    &.development {
+        opacity: 0.8;
         
-        .database-description {
-            font-size: 1rem;
-            color: $black;
-            letter-spacing: 1px;
+        &:hover {
+            border-color: $nova-text-muted;
         }
     }
     
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+    .product-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
         
-        .inventory-item {
-            background: $white;
-            border: 2px solid $black;
-            padding: 2rem;
-            transition: all 0.2s ease;
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
             
-            &:hover {
-                transform: translateY(-2px);
-                box-shadow: 4px 4px 0 $black;
+            .product-title {
+                font-family: Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: $nova-text;
+                margin: 0;
+                letter-spacing: 0.08em;
+                line-height: 1.3;
+                flex: 1;
+                text-transform: lowercase;
             }
             
+            .product-status {
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 9px;
+                font-weight: 500;
+                padding: 4px 8px;
+                border-radius: 2px;
+                text-transform: lowercase;
+                letter-spacing: 0.05em;
+                margin-left: 12px;
+                
+                &.available {
+                    color: $accent-pink;
+                    background: rgba($accent-pink, 0.1);
+                    border: 1px solid rgba($accent-pink, 0.2);
+                }
+                
+                &.development {
+                    color: $nova-text-muted;
+                    background: $nova-hover;
+                    border: 1px solid $nova-border;
+                }
+            }
+        }
+        
+        .product-description {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: $nova-text-muted;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+        
+        .product-pricing {
+            margin-bottom: 16px;
+            
+            .product-price {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                color: $nova-text;
+                text-transform: lowercase;
+            }
+        }
+        
+        .product-btn {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid $nova-border;
+            background: $nova-card-bg;
+            color: $nova-text;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
+            
             &.available {
-                border-color: $neo-blue;
-                border-width: 3px;
+                background: $accent-pink;
+                color: white;
+                border-color: $accent-pink;
+                
+                &:hover {
+                    background: darken($accent-pink, 10%);
+                    border-color: darken($accent-pink, 10%);
+                }
             }
             
             &.development {
-                background: $off-white;
-                opacity: 0.8;
-            }
-            
-            .item-display {
-                margin-bottom: 2rem;
+                opacity: 0.6;
+                cursor: not-allowed;
                 
-                .item-visual {
-                    text-align: center;
-                    position: relative;
-                    
-                    .item-icon {
-                        font-size: 3rem;
-                        margin-bottom: 1rem;
-                        display: block;
-                    }
-                    
-                    .availability-badge {
-                        position: absolute;
-                        top: -10px;
-                        right: -10px;
-                        padding: 0.3rem 0.8rem;
-                        font-size: 0.7rem;
-                        text-transform: uppercase;
-                        letter-spacing: 1px;
-                        
-                        &.available {
-                            background: $neo-blue;
-                            color: $black;
-                        }
-                        
-                        &.development {
-                            background: $neo-pink;
-                            color: $black;
-                        }
-                    }
+                &:disabled {
+                    opacity: 0.4;
                 }
             }
+        }
+    }
+    
+    .product-icon {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1;
+        
+        .icon-symbol {
+            font-size: 48px;
+            opacity: 0.1;
+            transition: all 0.2s ease;
+            display: block;
+        }
+    }
+    
+    &:hover .icon-symbol {
+        opacity: 0.2;
+        transform: scale(1.05);
+    }
+}
+
+// Nova-style Store Notice Section
+.store-notice {
+    max-width: 800px;
+    margin: 48px auto 0;
+    padding: 32px 24px;
+    
+    @media (max-width: 768px) {
+        padding: 24px 20px;
+    }
+    
+    .notice-content {
+        background: $nova-card-bg;
+        border: 1px solid $nova-border;
+        padding: 32px;
+        
+        @media (max-width: 768px) {
+            padding: 24px;
+        }
+        
+        .notice-title {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: $nova-text;
+            margin-bottom: 16px;
+            text-transform: lowercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .notice-description {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: $nova-text-muted;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+        
+        .newsletter-signup {
+            .signup-label {
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                color: $nova-text;
+                margin-bottom: 16px;
+                text-transform: lowercase;
+            }
             
-            .item-specs {
-                .spec-header {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 1rem;
-                    padding-bottom: 0.5rem;
-                    border-bottom: 1px solid $black;
+            .signup-form {
+                display: flex;
+                gap: 0;
+                margin-bottom: 20px;
+                
+                @media (max-width: 768px) {
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                
+                .email-input {
+                    flex: 1;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    padding: 12px 16px;
+                    border: 1px solid $nova-border;
+                    border-right: none;
+                    background: $nova-card-bg;
+                    color: $nova-text;
                     
-                    .item-id, .item-category {
-                        @include text-thick();
-                        font-family: 'JetBrains Mono', monospace;
-                        font-size: 0.8rem;
+                    @media (max-width: 768px) {
+                        border-right: 1px solid $nova-border;
                     }
                     
-                    .item-id {
-                        color: $black;
+                    &::placeholder {
+                        color: $nova-text-muted;
+                        text-transform: lowercase;
                     }
                     
-                    .item-category {
-                        color: $black;
+                    &:focus {
+                        outline: none;
+                        border-color: $accent-pink;
+                        
+                        @media (max-width: 768px) {
+                            border-right-color: $accent-pink;
+                        }
                     }
                 }
                 
-                .item-name {
-                    @include text-thick();
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 1.2rem;
-                    @include systematic-spacing(0.8);
-                    color: $black;
-                }
-                
-                .item-description {
-                    @include text-thin();
-                    font-family: 'JetBrains Mono', monospace;
-                    line-height: 1.5;
-                    color: $black;
-                    @include systematic-spacing(1.2);
-                    font-size: 0.9rem;
-                    
-                    .neo-accent {
-                        color: $neo-pink;
-                        font-weight: bold;
-                    }
-                }
-                
-                .item-pricing {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1.5rem;
-                    
-                    .price-label {
-                        @include text-thick();
-                        font-size: 0.8rem;
-                        color: $black;
-                    }
-                    
-                    .price-value {
-                        @include text-thick();
-                        font-size: 1.2rem;
-                        color: $black;
-                    }
-                }
-                
-                .system-btn {
-                    @include text-thick();
-                    width: 100%;
-                    padding: 1rem;
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 0.9rem;
+                .signup-btn {
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    padding: 12px 24px;
+                    background: $accent-pink;
+                    color: white;
+                    border: 1px solid $accent-pink;
                     cursor: pointer;
                     transition: all 0.2s ease;
-                    border: 2px solid $black;
+                    text-transform: lowercase;
                     
-                    &.available {
-                        background: $neo-blue;
-                        color: $black;
-                        
-                        &:hover {
-                            background: darken($neo-blue, 10%);
-                        }
+                    &:hover {
+                        background: darken($accent-pink, 10%);
+                        border-color: darken($accent-pink, 10%);
                     }
-                    
-                    &.development {
-                        background: $light-gray;
-                        color: $black;
-                        cursor: not-allowed;
-                        
-                        &:disabled {
-                            opacity: 0.6;
-                        }
-                    }
+                }
+            }
+            
+            .signup-benefits {
+                p {
+                    font-family: Arial, sans-serif;
+                    font-size: 12px;
+                    color: $nova-text-muted;
+                    margin-bottom: 4px;
+                    font-weight: 300;
                 }
             }
         }
     }
 }
 
-// System Notice
-.system-notice {
-    background: $black;
-    padding: 4rem 2rem;
+// Nova-style Footer
+.realm-footer {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid $nova-border;
     
-    .notice-terminal {
-        max-width: 800px;
-        margin: 0 auto;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+        padding: 24px 20px;
+    }
+    
+    .footer-logo {
+        justify-self: start;
         
-        .terminal-frame {
-            background: $black;
-            border: 2px solid $white;
+        .footer-logo-img {
+            height: 60px;
+            width: auto;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
             
-            .terminal-header-bar {
-                background: $white;
-                color: $black;
-                padding: 0.5rem 1rem;
-                border-bottom: 2px solid $white;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .footer-socials {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-self: center;
+        
+        @media (max-width: 768px) {
+            gap: 12px;
+        }
+        
+        .scroll-link {
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: $nova-text-muted;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            
+            &:hover {
+                color: $accent-pink;
+                transform: translateY(-1px);
                 
-                .terminal-title {
-                    font-size: 0.8rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
+                img {
+                    filter: brightness(0) saturate(100%) invert(13%) sepia(100%) saturate(7498%) hue-rotate(293deg) brightness(200%) contrast(90%); /* Maximum bright #ff00f6 magenta-pink */
                 }
             }
             
-            .terminal-content {
-                padding: 2rem;
-                color: $white;
+            svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
+            }
+            
+            img {
+                width: 120%; /* 20% larger than other icons */
+                height: 120%; /* 20% larger than other icons */
+                object-fit: contain;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 1; /* Remove transparency - color will be controlled by filter */
+                transition: opacity 0.2s ease; /* Only transition opacity, not filter */
+                filter: brightness(0) saturate(100%) invert(43%) sepia(7%) saturate(347%) hue-rotate(202deg) brightness(95%) contrast(85%); /* Match exact grey of SVG icons */
                 
-                h3 {
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 1.2rem;
-                    margin-bottom: 1.5rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
-                
-                .status-description {
-                    font-family: 'JetBrains Mono', monospace;
-                    line-height: 1.6;
-                    margin-bottom: 2rem;
-                    color: $light-gray;
-                }
-                
-                .notification-interface {
-                    margin-bottom: 2rem;
-                    
-                    .interface-label {
-                        font-size: 1rem;
-                        margin-bottom: 1rem;
-                        text-transform: uppercase;
-                        letter-spacing: 1px;
-                    }
-                    
-                    .input-group {
-                        display: flex;
-                        gap: 0;
-                        
-                        .terminal-input {
-                            flex: 1;
-                            padding: 1rem;
-                            font-family: 'JetBrains Mono', monospace;
-                            background: $white;
-                            color: $black;
-                            border: 2px solid $white;
-                            border-right: none;
-                            text-transform: uppercase;
-                            
-                            &::placeholder {
-                                color: $black;
-                            }
-                        }
-                        
-                        .terminal-btn {
-                            padding: 1rem 1.5rem;
-                            background: $neo-blue;
-                            color: $black;
-                            border: 2px solid $neo-blue;
-                            cursor: pointer;
-                            text-transform: uppercase;
-                            letter-spacing: 1px;
-                            font-size: 0.8rem;
-                            
-                            &:hover {
-                                background: darken($neo-blue, 10%);
-                            }
-                        }
-                    }
-                }
-                
-                .system-benefits {
-                    .benefit-line {
-                        font-size: 0.9rem;
-                        margin-bottom: 0.5rem;
-                        color: $light-gray;
-                    }
+                &:hover {
+                    opacity: 1;
                 }
             }
+        }
+    }
+    
+    .copyright {
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        color: $nova-text-muted;
+        text-transform: lowercase;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        justify-self: end;
+        
+        @media (max-width: 768px) {
+            order: -1;
+            justify-self: center;
+        }
+    }
+}
+
+// Nova-style Animations
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Scroll-based animations
+.product-card,
+.notice-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+// Mobile Responsive - Maintain Nova Integrity
+@media (max-width: 768px) {
+    .floating-nav {
+        top: 16px;
+        right: 16px;
+        
+        .nav-content {
+            width: 100vw;
+            padding: 24px 20px;
         }
     }
 }
