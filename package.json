@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "build-css": "sass src/styles:dist/css --watch",
     "checkpoint": "node checkpoint-system.js create",
     "checkpoint-list": "node checkpoint-system.js list",
     "checkpoint-restore": "node checkpoint-system.js restore",

@@ -1,10 +1,15 @@
 // portfolio.js - Main entry point for portfolio pages
 import '../styles/portfolio.scss';
-import { FloatingNavigation } from './modules/navigation.js';
+import { CustomNavigation } from './modules/custom-navigation.js';
+import { portfolioData, getProjectBySlug, getProjectsByCategory, getAdjacentProjects, getAllCategories, getCategoryBySlug } from '../config/portfolio-data.js';
+import { assetLoader } from '../config/assets.js';
 
 class PortfolioPage {
     constructor() {
-        this.floatingNav = null;
+        this.customNavigation = null;
+        this.projectData = null;
+        this.currentCategory = null;
+        this.currentProject = null;
         this.init();
     }
     
@@ -13,6 +18,9 @@ class PortfolioPage {
         
         // Wait for DOM to be ready
         await this.waitForDOMReady();
+        
+        // Initialize data structure
+        this.initializeDataStructure();
         
         // Initialize navigation
         this.initializeNavigation();
@@ -52,53 +60,118 @@ class PortfolioPage {
         }, 1000); // Shorter delay for portfolio pages
     }
     
-    // Floating Navigation System
+    // Custom Navigation System
     initializeNavigation() {
-        const navTrigger = document.getElementById('navTrigger');
-        const navContent = document.getElementById('navContent');
-        const navClose = document.getElementById('navClose');
-        
-        if (!navTrigger || !navContent) return;
-        
-        let isNavigationOpen = false;
-        
-        const openNav = () => {
-            isNavigationOpen = true;
-            navTrigger.classList.add('active');
-            navContent.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        
-        const closeNav = () => {
-            isNavigationOpen = false;
-            navTrigger.classList.remove('active');
-            navContent.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        
-        navTrigger.addEventListener('click', () => {
-            if (isNavigationOpen) {
-                closeNav();
-            } else {
-                openNav();
-            }
+        // Initialize the custom navigation system
+        this.customNavigation = new CustomNavigation({
+            hideDelay: 1500, // 1.5 second delay
+            enableLogging: false // Disable logging for production
         });
+    }
+    
+    // Data Structure Management for Future Navigation
+    initializeDataStructure() {
+        this.loadProjectData();
+        this.detectCurrentContext();
+        console.log('📊 Portfolio data structure initialized');
+    }
+    
+    loadProjectData() {
+        this.projectData = portfolioData;
+        console.log('📄 Project data loaded:', Object.keys(this.projectData.categories).length, 'categories');
+    }
+    
+    detectCurrentContext() {
+        // Detect current page context from URL or page title
+        const pathname = window.location.pathname;
+        const pageTitle = document.title;
         
-        if (navClose) {
-            navClose.addEventListener('click', closeNav);
+        // Extract category from URL or title
+        if (pathname.includes('/portfolio/')) {
+            const pathParts = pathname.split('/');
+            const categorySlug = pathParts[pathParts.length - 1].replace('.html', '');
+            this.currentCategory = getCategoryBySlug(categorySlug);
+        } else if (pageTitle.includes('|')) {
+            const titleParts = pageTitle.split('|')[0].trim();
+            this.currentCategory = this.findCategoryByTitle(titleParts);
         }
         
-        // Close nav on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isNavigationOpen) {
-                closeNav();
+        if (this.currentCategory) {
+            console.log('🎯 Detected category:', this.currentCategory.title);
+        }
+    }
+    
+    findCategoryByTitle(title) {
+        const categories = getAllCategories();
+        return categories.find(cat => 
+            cat.title.toLowerCase() === title.toLowerCase() ||
+            cat.title.replace(/\s+/g, '_').toLowerCase() === title.toLowerCase()
+        ) || null;
+    }
+    
+    // Data Management Helper Methods for Future Navigation
+    getProjectData(categorySlug = null, projectSlug = null) {
+        if (projectSlug && categorySlug) {
+            return getProjectBySlug(categorySlug, projectSlug);
+        }
+        if (categorySlug) {
+            return getProjectsByCategory(categorySlug);
+        }
+        return this.projectData;
+    }
+    
+    getCategoryData(slug = null) {
+        return slug ? getCategoryBySlug(slug) : getAllCategories();
+    }
+    
+    findProjectBySlug(slug) {
+        for (const category of getAllCategories()) {
+            const project = category.projects.find(p => p.slug === slug);
+            if (project) {
+                return { project, category };
             }
-        });
+        }
+        return null;
+    }
+    
+    // Future Navigation Integration Methods
+    prepareNavigationData() {
+        return {
+            categories: getAllCategories(),
+            currentCategory: this.currentCategory,
+            currentProject: this.currentProject
+        };
+    }
+    
+    async preloadProjectAssets(categorySlug) {
+        const projects = getProjectsByCategory(categorySlug);
+        const imagePromises = projects
+            .filter(project => project.coverImage)
+            .map(project => assetLoader.loadImage(project.coverImage));
+        
+        try {
+            await Promise.all(imagePromises);
+            console.log('✅ Project assets preloaded for category:', categorySlug);
+        } catch (error) {
+            console.warn('⚠️ Some project assets failed to preload:', error);
+        }
     }
     
     // Portfolio-specific interactions
     initializePortfolioInteractions() {
-        // Project block hover effects
+        // Portfolio card hover effects
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        portfolioCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Project block hover effects (for individual project pages)
         const projectBlocks = document.querySelectorAll('.project-block');
         projectBlocks.forEach(block => {
             block.addEventListener('mouseenter', () => {
@@ -117,6 +190,11 @@ class PortfolioPage {
                 console.log('Service block clicked:', block.querySelector('.service-name')?.textContent);
             });
         });
+        
+        // Preload assets for current category if detected
+        if (this.currentCategory) {
+            this.preloadProjectAssets(this.currentCategory.slug);
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import { KnightAnimations } from './modules/animations.js';
 import { ParallaxEffects } from './modules/parallax.js';
 import { MedievalSparkles } from './modules/sparkles.js';
 import { LoadingManager } from './modules/utils.js';
+import { CustomNavigation } from './modules/custom-navigation.js';
 
 class HomePage {
     constructor() {
@@ -24,6 +25,7 @@ class HomePage {
         
         // Initialize home-specific features
         this.initNavigation();
+        this.initCustomNavigation();
         this.initSmoothScroll();
         
         console.log('🏠 Home page initialized successfully');
@@ -40,39 +42,47 @@ class HomePage {
     }
     
     initNavigation() {
-        // Portfolio dropdown functionality
+        // Portfolio dropdown functionality (legacy code - may not be used)
         const dropdown = document.querySelector('.nav-dropdown');
         const dropdownToggle = dropdown?.querySelector('.dropdown-toggle');
         const dropdownMenu = dropdown?.querySelector('.dropdown-menu');
         
-        if (!dropdown || !dropdownToggle || !dropdownMenu) return;
-        
-        let isOpen = false;
-        
-        // Toggle dropdown on click
-        dropdownToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            isOpen = !isOpen;
-            dropdownMenu.classList.toggle('active', isOpen);
-            dropdownToggle.classList.toggle('active', isOpen);
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!dropdown.contains(e.target) && isOpen) {
-                isOpen = false;
-                dropdownMenu.classList.remove('active');
-                dropdownToggle.classList.remove('active');
-            }
-        });
-        
-        // Close dropdown on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isOpen) {
-                isOpen = false;
-                dropdownMenu.classList.remove('active');
-                dropdownToggle.classList.remove('active');
-            }
+        if (dropdown && dropdownToggle && dropdownMenu) {
+            let isOpen = false;
+            
+            // Toggle dropdown on click
+            dropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                isOpen = !isOpen;
+                dropdownMenu.classList.toggle('active', isOpen);
+                dropdownToggle.classList.toggle('active', isOpen);
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target) && isOpen) {
+                    isOpen = false;
+                    dropdownMenu.classList.remove('active');
+                    dropdownToggle.classList.remove('active');
+                }
+            });
+            
+            // Close dropdown on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isOpen) {
+                    isOpen = false;
+                    dropdownMenu.classList.remove('active');
+                    dropdownToggle.classList.remove('active');
+                }
+            });
+        }
+    }
+    
+    initCustomNavigation() {
+        // Initialize the modular custom navigation system
+        this.customNavigation = new CustomNavigation({
+            hideDelay: 1500, // 1.5 second delay
+            enableLogging: true // Enable console logging for debugging
         });
     }
     
