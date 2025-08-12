@@ -1,5 +1,6 @@
 // Store functionality - Nova Design System
 import '../styles/store.scss';
+import { CustomNavigation } from './modules/custom-navigation.js';
 import { createNotification } from './modules/dom-utils.js';
 
 // Simple loading manager for store page
@@ -31,6 +32,7 @@ class LoadingManager {
 class StoreManager {
     constructor() {
         this.loadingManager = new LoadingManager();
+        this.customNavigation = null;
         this.initStore();
         this.initEventListeners();
         this.initNavigation();
@@ -71,45 +73,10 @@ class StoreManager {
     }
 
     initNavigation() {
-        const navTrigger = document.getElementById('navTrigger');
-        const navContent = document.getElementById('navContent');
-        const navClose = document.getElementById('navClose');
-        
-        if (!navTrigger || !navContent) return;
-        
-        let isNavigationOpen = false;
-        
-        const openNav = () => {
-            isNavigationOpen = true;
-            navTrigger.classList.add('active');
-            navContent.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        
-        const closeNav = () => {
-            isNavigationOpen = false;
-            navTrigger.classList.remove('active');
-            navContent.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        
-        navTrigger.addEventListener('click', () => {
-            if (isNavigationOpen) {
-                closeNav();
-            } else {
-                openNav();
-            }
-        });
-        
-        if (navClose) {
-            navClose.addEventListener('click', closeNav);
-        }
-        
-        // Close nav on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isNavigationOpen) {
-                closeNav();
-            }
+        // Initialize the custom navigation system
+        this.customNavigation = new CustomNavigation({
+            hideDelay: 1500, // 1.5 second delay
+            enableLogging: false // Disable logging for production
         });
     }
 
