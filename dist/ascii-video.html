@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: blob:;
+      connect-src 'self';
+      worker-src 'self' blob:;
+    ">
     <title>ASCII 3D Video Lab</title>
     
     <style>
@@ -211,11 +219,32 @@
                 max-height: 12vh;
             }
         }
+        
+        /* Random Back Link Styles */
+        .random-back-link {
+            position: fixed;
+            z-index: 150;
+            color: #3300ff;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            text-decoration: none;
+            text-transform: lowercase;
+            background: transparent;
+            padding: 4px 8px;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .random-back-link:hover {
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
-  <script type="module" crossorigin src="/js/ascii-video-BtI8f4D_.js"></script>
+  <script type="module" crossorigin src="/js/ascii-video-DL_4x_Gz.js"></script>
   <link rel="modulepreload" crossorigin href="/js/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/js/dom-utils-DWenbHzC.js">
-  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-D20tJSJI.js">
+  <link rel="modulepreload" crossorigin href="/js/url-cleaner-Bn7ZNmfv.js">
+  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-CtqSC7ar.js">
 </head>
 <body>
     <!-- Loading Indicator -->
@@ -297,6 +326,9 @@
         <div>I - Interaction Info</div>
         <div>ESC - Stop Animation</div>
     </div>
+    
+    <!-- Random Back Link -->
+    <a href="/" class="random-back-link" id="randomBackLink">back</a>
 
 </body>
 </html>

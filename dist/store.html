@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: blob: https:;
+      connect-src 'self' https:;
+      worker-src 'self' blob:;
+    ">
     <title>PJM Studio Store - Creative Goods & Digital Assets</title>
     <style>
         .loading-screen {
             opacity: 1 !important;
         }
     </style>
-  <script type="module" crossorigin src="/js/store-DPKkzh2O.js"></script>
+  <script type="module" crossorigin src="/js/store-BZ8USj1J.js"></script>
   <link rel="modulepreload" crossorigin href="/js/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/js/access-control-ggAVTNYc.js">
+  <link rel="modulepreload" crossorigin href="/js/url-cleaner-Bn7ZNmfv.js">
   <link rel="modulepreload" crossorigin href="/js/custom-navigation-jeY08-eb.js">
-  <link rel="modulepreload" crossorigin href="/js/dom-utils-DWenbHzC.js">
-  <link rel="stylesheet" crossorigin href="/css/store-DwEGUwwy.css">
+  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-CtqSC7ar.js">
+  <link rel="stylesheet" crossorigin href="/css/store-CVbGLEJX.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -38,29 +49,35 @@
         
         <!-- Navigation Text Links -->
         <div class="nav-links">
-            <a href="/home.html" class="nav-link nav-link-1">home</a>
-            <a href="/portfolio.html" class="nav-link nav-link-2">portfolio+</a>
-            <a href="/store.html" class="nav-link nav-link-3">store</a>
-            <a href="/about.html" class="nav-link nav-link-4">about</a>
-            <a href="/contact.html" class="nav-link nav-link-5">contact</a>
+            <a href="/home" class="nav-link nav-link-1">home</a>
+            <a href="/portfolio" class="nav-link nav-link-2">portfolio+</a>
+            <a href="/store" class="nav-link nav-link-3">store</a>
+            <a href="/about" class="nav-link nav-link-4">about</a>
+            <a href="/contact" class="nav-link nav-link-5">contact</a>
         </div>
         
         <!-- Portfolio Pages Links -->
         <div class="portfolio-pages">
-            <a href="/portfolio/directing.html" class="portfolio-link portfolio-link-1">directing</a>
-            <a href="/portfolio/videography.html" class="portfolio-link portfolio-link-2">videography</a>
-            <a href="/portfolio/photography.html" class="portfolio-link portfolio-link-3">photography</a>
-            <a href="/portfolio/video-editing.html" class="portfolio-link portfolio-link-4">video editing</a>
-            <a href="/portfolio/graphic-design.html" class="portfolio-link portfolio-link-5">graphic design</a>
+            <a href="/portfolio/directing" class="portfolio-link portfolio-link-1">directing</a>
+            <a href="/portfolio/videography" class="portfolio-link portfolio-link-2">videography</a>
+            <a href="/portfolio/photography" class="portfolio-link portfolio-link-3">photography</a>
+            <a href="/portfolio/video-editing" class="portfolio-link portfolio-link-4">video editing</a>
+            <a href="/portfolio/graphic-design" class="portfolio-link portfolio-link-5">graphic design</a>
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="store-main">
+        <!-- ASCII Engine Background -->
+        <div class="ascii-background-container">
+            <canvas id="storeAsciiCanvas1" class="store-ascii-canvas"></canvas>
+            <canvas id="storeAsciiCanvas2" class="store-ascii-canvas"></canvas>
+            <canvas id="storeAsciiCanvas3" class="store-ascii-canvas"></canvas>
+        </div>
         <!-- Clean Header -->
         <header class="store-header">
             <h1 class="store-title">SHOP</h1>
-            <p class="store-subtitle">creative goods and digital assets by paul middleton</p>
+            <p class="store-subtitle">buy some stuff plz lol</p>
         </header>
 
         <!-- Product Categories Filter -->

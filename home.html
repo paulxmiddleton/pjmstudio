@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https:;
+      connect-src 'self' https:;
+      worker-src 'self' blob:;
+    ">
     <title>PAUL MIDDLETON - Visual Existentialist | PJM Studio</title>
     <style>
         .loading-screen {
@@ -32,20 +41,20 @@
             
             <!-- Navigation Text Links -->
             <div class="nav-links">
-                <a href="/home.html" class="nav-link nav-link-1">home</a>
-                <a href="/portfolio.html" class="nav-link nav-link-2">portfolio+</a>
-                <a href="/store.html" class="nav-link nav-link-3">store</a>
-                <a href="/about.html" class="nav-link nav-link-4">about</a>
-                <a href="/contact.html" class="nav-link nav-link-5">contact</a>
+                <a href="/home" class="nav-link nav-link-1">home</a>
+                <a href="/portfolio" class="nav-link nav-link-2">portfolio+</a>
+                <a href="/store" class="nav-link nav-link-3">store</a>
+                <a href="/about" class="nav-link nav-link-4">about</a>
+                <a href="/contact" class="nav-link nav-link-5">contact</a>
             </div>
             
             <!-- Portfolio Pages Links -->
             <div class="portfolio-pages">
-                <a href="/portfolio/directing.html" class="portfolio-link portfolio-link-1">directing</a>
-                <a href="/portfolio/videography.html" class="portfolio-link portfolio-link-2">videography</a>
-                <a href="/portfolio/photography.html" class="portfolio-link portfolio-link-3">photography</a>
-                <a href="/portfolio/video-editing.html" class="portfolio-link portfolio-link-4">video editing</a>
-                <a href="/portfolio/graphic-design.html" class="portfolio-link portfolio-link-5">graphic design</a>
+                <a href="/portfolio/directing" class="portfolio-link portfolio-link-1">directing</a>
+                <a href="/portfolio/videography" class="portfolio-link portfolio-link-2">videography</a>
+                <a href="/portfolio/photography" class="portfolio-link portfolio-link-3">photography</a>
+                <a href="/portfolio/video-editing" class="portfolio-link portfolio-link-4">video editing</a>
+                <a href="/portfolio/graphic-design" class="portfolio-link portfolio-link-5">graphic design</a>
             </div>
         </div>
         
@@ -98,6 +107,8 @@
         </div>
     </main>
 
+    <script type="module" src="/src/js/access-control.js"></script>
+    <script type="module" src="/src/js/url-cleaner.js"></script>
     <script type="module" src="/src/js/home.js"></script>
 </body>
 </html>

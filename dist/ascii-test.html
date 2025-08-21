@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: blob:;
+      connect-src 'self';
+      worker-src 'self' blob:;
+    ">
     <title>ASCII 3D Engine Test</title>
     
     <style>
@@ -109,10 +117,9 @@
             margin: 2px 0;
         }
     </style>
-  <script type="module" crossorigin src="/js/ascii-test-CZYCxq0V.js"></script>
+  <script type="module" crossorigin src="/js/ascii-test-Ddg2f0EY.js"></script>
   <link rel="modulepreload" crossorigin href="/js/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="modulepreload" crossorigin href="/js/dom-utils-DWenbHzC.js">
-  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-D20tJSJI.js">
+  <link rel="modulepreload" crossorigin href="/js/ascii3d-engine-CtqSC7ar.js">
 </head>
 <body>
     <!-- Loading Indicator -->
