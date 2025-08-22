@@ -2,6 +2,7 @@
 import '../styles/store.scss';
 import { CustomNavigation } from './modules/custom-navigation.js';
 import { createNotification } from './modules/dom-utils.js';
+import { StoreAsciiController } from './modules/store-ascii-controller.js';
 
 // Simple loading manager for store page
 class LoadingManager {
@@ -33,9 +34,11 @@ class StoreManager {
     constructor() {
         this.loadingManager = new LoadingManager();
         this.customNavigation = null;
+        this.asciiController = null;
         this.initStore();
         this.initEventListeners();
         this.initNavigation();
+        this.initAsciiBackgrounds();
     }
 
     initStore() {
@@ -78,6 +81,49 @@ class StoreManager {
             hideDelay: 1500, // 1.5 second delay
             enableLogging: false // Disable logging for production
         });
+    }
+
+    async initAsciiBackgrounds() {
+        // Initialize ASCII background engines
+        // === EASY CONTROLS: Modify these in store-ascii-controller.js ===
+        
+        // Check if access control might be interfering
+        const isAccessControlled = document.querySelector('.access-lockout-overlay');
+        
+        if (isAccessControlled) {
+            console.log('🔥 Waiting for access control to complete...');
+            // Wait for access to be granted
+            window.addEventListener('accessGranted', () => {
+                console.log('🔥 Access granted, initializing ASCII backgrounds...');
+                this.doInitAsciiBackgrounds();
+            });
+        } else {
+            // No access control, initialize immediately
+            console.log('🔥 No access control detected, initializing ASCII backgrounds...');
+            this.doInitAsciiBackgrounds();
+        }
+    }
+    
+    async doInitAsciiBackgrounds() {
+        try {
+            console.log('🔥 Creating StoreAsciiController...');
+            this.asciiController = new StoreAsciiController({
+                enableLogging: true, // Enable debug logging
+                performanceMode: 'medium' // low, medium, high
+            });
+            console.log('🔥 StoreAsciiController created:', this.asciiController);
+            
+            // Initialize with a small delay to ensure page is ready
+            setTimeout(async () => {
+                console.log('🔥 Starting ASCII controller initialization...');
+                await this.asciiController.init();
+                console.log('🔥 Store ASCII backgrounds initialized');
+                console.log('🔥 Engines:', this.asciiController.engines);
+            }, 1000);
+            
+        } catch (error) {
+            console.error('🔥 ASCII backgrounds failed to initialize:', error);
+        }
     }
 
     getAllProducts() {
@@ -296,6 +342,15 @@ class StoreManager {
         });
         */
     }
+    
+    // Cleanup method for ASCII engines
+    destroy() {
+        if (this.asciiController) {
+            this.asciiController.destroy();
+            this.asciiController = null;
+        }
+        console.log('🧹 Store cleaned up');
+    }
 }
 
 // Initialize store when DOM is loaded
@@ -305,5 +360,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make it globally available for debugging
     window.storeManager = storeManager;
     
+    // Make ASCII controller easily accessible for debugging
+    // You can use: window.storeAscii.updateEnginePosition(0, '20%', '30%')
+    setTimeout(() => {
+        if (storeManager.asciiController) {
+            window.storeAscii = storeManager.asciiController;
+            console.log('🎨 ASCII controller available as window.storeAscii');
+            
+            // Debug: Add simple test function
+            window.testAscii = () => {
+                console.log('🎨 ASCII Test Results:');
+                console.log('- Controller exists:', !!window.storeAscii);
+                console.log('- Controller initialized:', window.storeAscii?.initialized);
+                console.log('- Number of engines:', window.storeAscii?.engines?.length);
+                
+                const canvases = document.querySelectorAll('.store-ascii-canvas');
+                console.log('- Canvas elements found:', canvases.length);
+                canvases.forEach((canvas, i) => {
+                    console.log(`  Canvas ${i}: ${canvas.id}, visible: ${canvas.offsetParent !== null}`);
+                });
+                
+                return {
+                    controller: !!window.storeAscii,
+                    initialized: window.storeAscii?.initialized,
+                    engines: window.storeAscii?.engines?.length,
+                    canvases: canvases.length
+                };
+            };
+            console.log('🎨 Run window.testAscii() to debug ASCII elements');
+        }
+    }, 2000);
+    
     console.log('🎯 PJM Studio Store initialized with Nova design system');
+});
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    if (window.storeManager) {
+        window.storeManager.destroy();
+    }
 });

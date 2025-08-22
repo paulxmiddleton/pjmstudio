@@ -155,11 +155,18 @@ class AccessControl {
                 // Show success message
                 errorDiv.innerHTML = '<span style="color: #00ff00;">✓ Access granted</span>';
                 
-                // Remove overlay and reload page
+                // Remove overlay and restore page
                 setTimeout(() => {
                     overlay.remove();
                     document.body.style.overflow = '';
-                    window.location.reload();
+                    
+                    // Fire custom event for other scripts to know access is granted
+                    window.dispatchEvent(new CustomEvent('accessGranted', {
+                        detail: { timestamp: new Date().getTime() }
+                    }));
+                    
+                    // Don't reload page - just restore functionality
+                    console.log('🔓 Access restored - page ready');
                 }, 800);
                 
             } else {
