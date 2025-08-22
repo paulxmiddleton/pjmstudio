@@ -97,12 +97,11 @@ class AccessControl {
             <div class="lockout-container">
                 <div class="lockout-header">
                     <h1 class="lockout-title">PJM.STUDIO</h1>
-                    <div class="lockout-brand">VISUAL EXISTENTIALIST</div>
                 </div>
                 
                 <div class="lockout-content">
                     <div class="lockout-message">
-                        <h2>DEVELOPMENT ACCESS</h2>
+                        <h2>Development Access</h2>
                         <p>This section is currently under development.<br>
                         Enter password to access work-in-progress content.</p>
                     </div>
@@ -204,11 +203,11 @@ class AccessControl {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-family: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-container {
-                max-width: 500px;
+                max-width: 400px;
                 width: 90%;
                 text-align: center;
                 color: white;
@@ -216,41 +215,36 @@ class AccessControl {
             }
 
             .lockout-header {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
             }
 
             .lockout-title {
-                font-size: 4rem;
-                font-weight: 300;
-                letter-spacing: 8px;
+                font-size: 2rem;
+                font-weight: normal;
+                letter-spacing: 2px;
                 margin: 0;
-                line-height: 1;
-            }
-
-            .lockout-brand {
-                font-size: 0.875rem;
-                letter-spacing: 3px;
-                margin-top: 0.5rem;
-                opacity: 0.8;
+                line-height: 1.2;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-content {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
             }
 
             .lockout-message h2 {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
                 margin: 0 0 1rem 0;
-                font-weight: 400;
+                font-weight: normal;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-message p {
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
                 font-size: 0.9rem;
                 line-height: 1.4;
                 opacity: 0.9;
-                margin: 0 0 2rem 0;
+                margin: 0 0 1.5rem 0;
             }
 
             .lockout-form {
@@ -262,21 +256,19 @@ class AccessControl {
 
             .password-input {
                 width: 100%;
-                max-width: 300px;
+                max-width: 250px;
                 padding: 0.75rem 1rem;
                 font-size: 1rem;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.3);
                 color: white;
                 text-align: center;
-                letter-spacing: 1px;
-                font-family: 'SF Mono', 'Monaco', monospace;
+                font-family: Arial, sans-serif;
             }
 
             .password-input::placeholder {
                 color: rgba(255, 255, 255, 0.6);
-                font-family: 'Inter', Arial, sans-serif;
-                letter-spacing: 0;
+                font-family: Arial, sans-serif;
             }
 
             .password-input:focus {
@@ -286,15 +278,14 @@ class AccessControl {
             }
 
             .access-button {
-                padding: 0.75rem 2rem;
+                padding: 0.75rem 1.5rem;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.3);
                 color: white;
-                font-size: 0.875rem;
-                letter-spacing: 2px;
+                font-size: 0.9rem;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                font-family: 'Bebas Neue', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .access-button:hover {
@@ -304,7 +295,7 @@ class AccessControl {
 
             .access-error {
                 min-height: 1.5rem;
-                font-family: 'SF Mono', monospace;
+                font-family: Arial, sans-serif;
                 font-size: 0.8rem;
                 display: flex;
                 align-items: center;
@@ -328,9 +319,8 @@ class AccessControl {
                 color: rgba(255, 255, 255, 0.8);
                 text-decoration: none;
                 font-size: 0.875rem;
-                letter-spacing: 1px;
                 transition: opacity 0.2s ease;
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .public-link:hover {
@@ -341,8 +331,7 @@ class AccessControl {
             .lockout-info {
                 font-size: 0.75rem;
                 opacity: 0.6;
-                letter-spacing: 1px;
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             /* Mobile optimizations */
@@ -352,8 +341,8 @@ class AccessControl {
                 }
 
                 .lockout-title {
-                    font-size: 3rem;
-                    letter-spacing: 4px;
+                    font-size: 1.5rem;
+                    letter-spacing: 1px;
                 }
 
                 .public-links {

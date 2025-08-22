@@ -1,13 +1,12 @@
-class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studio_access",this.publicPages=["/","/index.html","/ascii-video","/ascii-video.html"],this.init()}init(){this.needsProtection()&&(this.hasAccess()?console.log("🔓 Access granted - Welcome back"):this.showLockoutScreen())}needsProtection(){const e=window.location.pathname;return!this.publicPages.some(t=>t==="/"?e==="/"||e==="/index.html":e===t||e.startsWith(t))}hasAccess(){const e=sessionStorage.getItem(this.accessKey);if(!e)return!1;try{const t=JSON.parse(e),o=new Date().getTime();return t.expires>o}catch{return!1}}grantAccess(){const t={granted:!0,expires:new Date().getTime()+864e5,timestamp:new Date().getTime()};sessionStorage.setItem(this.accessKey,JSON.stringify(t))}showLockoutScreen(){document.body.style.overflow="hidden";const e=this.createLockoutOverlay();document.body.appendChild(e),setTimeout(()=>{const t=e.querySelector("#accessPassword");t&&t.focus()},300)}createLockoutOverlay(){const e=document.createElement("div");return e.className="access-lockout-overlay",e.innerHTML=`
+class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studio_access",this.publicPages=["/","/index.html","/ascii-video","/ascii-video.html"],this.init()}init(){this.needsProtection()&&(this.hasAccess()?console.log("🔓 Access granted - Welcome back"):this.showLockoutScreen())}needsProtection(){const e=window.location.pathname;return!this.publicPages.some(t=>t==="/"?e==="/"||e==="/index.html":e===t||e.startsWith(t))}hasAccess(){const e=sessionStorage.getItem(this.accessKey);if(!e)return!1;try{const t=JSON.parse(e),s=new Date().getTime();return t.expires>s}catch{return!1}}grantAccess(){const t={granted:!0,expires:new Date().getTime()+864e5,timestamp:new Date().getTime()};sessionStorage.setItem(this.accessKey,JSON.stringify(t))}showLockoutScreen(){document.body.style.overflow="hidden";const e=this.createLockoutOverlay();document.body.appendChild(e),setTimeout(()=>{const t=e.querySelector("#accessPassword");t&&t.focus()},300)}createLockoutOverlay(){const e=document.createElement("div");return e.className="access-lockout-overlay",e.innerHTML=`
             <div class="lockout-container">
                 <div class="lockout-header">
                     <h1 class="lockout-title">PJM.STUDIO</h1>
-                    <div class="lockout-brand">VISUAL EXISTENTIALIST</div>
                 </div>
                 
                 <div class="lockout-content">
                     <div class="lockout-message">
-                        <h2>DEVELOPMENT ACCESS</h2>
+                        <h2>Development Access</h2>
                         <p>This section is currently under development.<br>
                         Enter password to access work-in-progress content.</p>
                     </div>
@@ -35,7 +34,7 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
                     </div>
                 </div>
             </div>
-        `,this.addLockoutStyles(),this.setupLockoutEvents(e),e}setupLockoutEvents(e){const t=e.querySelector("#accessPassword"),o=e.querySelector("#accessSubmit"),s=e.querySelector("#accessError"),n=()=>{t.value.trim()===this.accessPassword?(this.grantAccess(),s.innerHTML='<span style="color: #00ff00;">✓ Access granted</span>',setTimeout(()=>{e.remove(),document.body.style.overflow="",window.location.reload()},800)):(s.innerHTML='<span style="color: #ff0000;">× Incorrect password</span>',t.value="",t.focus(),setTimeout(()=>{s.innerHTML=""},3e3))};o.addEventListener("click",n),t.addEventListener("keypress",c=>{c.key==="Enter"&&n()})}addLockoutStyles(){if(document.getElementById("access-lockout-styles"))return;const e=document.createElement("style");e.id="access-lockout-styles",e.textContent=`
+        `,this.addLockoutStyles(),this.setupLockoutEvents(e),e}setupLockoutEvents(e){const t=e.querySelector("#accessPassword"),s=e.querySelector("#accessSubmit"),o=e.querySelector("#accessError"),n=()=>{t.value.trim()===this.accessPassword?(this.grantAccess(),o.innerHTML='<span style="color: #00ff00;">✓ Access granted</span>',setTimeout(()=>{e.remove(),document.body.style.overflow="",window.location.reload()},800)):(o.innerHTML='<span style="color: #ff0000;">× Incorrect password</span>',t.value="",t.focus(),setTimeout(()=>{o.innerHTML=""},3e3))};s.addEventListener("click",n),t.addEventListener("keypress",r=>{r.key==="Enter"&&n()})}addLockoutStyles(){if(document.getElementById("access-lockout-styles"))return;const e=document.createElement("style");e.id="access-lockout-styles",e.textContent=`
             .access-lockout-overlay {
                 position: fixed;
                 top: 0;
@@ -47,11 +46,11 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-family: 'Bebas Neue', 'Space Grotesk', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-container {
-                max-width: 500px;
+                max-width: 400px;
                 width: 90%;
                 text-align: center;
                 color: white;
@@ -59,41 +58,36 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
             }
 
             .lockout-header {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
             }
 
             .lockout-title {
-                font-size: 4rem;
-                font-weight: 300;
-                letter-spacing: 8px;
+                font-size: 2rem;
+                font-weight: normal;
+                letter-spacing: 2px;
                 margin: 0;
-                line-height: 1;
-            }
-
-            .lockout-brand {
-                font-size: 0.875rem;
-                letter-spacing: 3px;
-                margin-top: 0.5rem;
-                opacity: 0.8;
+                line-height: 1.2;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-content {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
             }
 
             .lockout-message h2 {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
                 margin: 0 0 1rem 0;
-                font-weight: 400;
+                font-weight: normal;
+                font-family: Arial, sans-serif;
             }
 
             .lockout-message p {
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
                 font-size: 0.9rem;
                 line-height: 1.4;
                 opacity: 0.9;
-                margin: 0 0 2rem 0;
+                margin: 0 0 1.5rem 0;
             }
 
             .lockout-form {
@@ -105,21 +99,19 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
 
             .password-input {
                 width: 100%;
-                max-width: 300px;
+                max-width: 250px;
                 padding: 0.75rem 1rem;
                 font-size: 1rem;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.3);
                 color: white;
                 text-align: center;
-                letter-spacing: 1px;
-                font-family: 'SF Mono', 'Monaco', monospace;
+                font-family: Arial, sans-serif;
             }
 
             .password-input::placeholder {
                 color: rgba(255, 255, 255, 0.6);
-                font-family: 'Inter', Arial, sans-serif;
-                letter-spacing: 0;
+                font-family: Arial, sans-serif;
             }
 
             .password-input:focus {
@@ -129,15 +121,14 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
             }
 
             .access-button {
-                padding: 0.75rem 2rem;
+                padding: 0.75rem 1.5rem;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.3);
                 color: white;
-                font-size: 0.875rem;
-                letter-spacing: 2px;
+                font-size: 0.9rem;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                font-family: 'Bebas Neue', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .access-button:hover {
@@ -147,7 +138,7 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
 
             .access-error {
                 min-height: 1.5rem;
-                font-family: 'SF Mono', monospace;
+                font-family: Arial, sans-serif;
                 font-size: 0.8rem;
                 display: flex;
                 align-items: center;
@@ -171,9 +162,8 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
                 color: rgba(255, 255, 255, 0.8);
                 text-decoration: none;
                 font-size: 0.875rem;
-                letter-spacing: 1px;
                 transition: opacity 0.2s ease;
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             .public-link:hover {
@@ -184,8 +174,7 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
             .lockout-info {
                 font-size: 0.75rem;
                 opacity: 0.6;
-                letter-spacing: 1px;
-                font-family: 'Inter', Arial, sans-serif;
+                font-family: Arial, sans-serif;
             }
 
             /* Mobile optimizations */
@@ -195,8 +184,8 @@ class i{constructor(){this.accessPassword="pjm2025dev",this.accessKey="pjm_studi
                 }
 
                 .lockout-title {
-                    font-size: 3rem;
-                    letter-spacing: 4px;
+                    font-size: 1.5rem;
+                    letter-spacing: 1px;
                 }
 
                 .public-links {

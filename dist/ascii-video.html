@@ -223,21 +223,25 @@
         /* Random Back Link Styles */
         .random-back-link {
             position: fixed;
-            z-index: 150;
+            z-index: 9999;
+            top: 20px;
+            left: 20px;
             color: #3300ff;
             font-family: Arial, sans-serif;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px;
             text-decoration: none;
             text-transform: lowercase;
-            background: transparent;
-            padding: 4px 8px;
-            border: none;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            border: 1px solid #3300ff;
             transition: all 0.2s ease;
         }
         
         .random-back-link:hover {
             color: #fff;
+            background: rgba(51, 0, 255, 0.3);
+            border-color: #fff;
             text-decoration: none;
         }
     </style>
