@@ -179,18 +179,18 @@ class FloatingNavigation {
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             
-            // Handle different URL patterns
+            // Handle different URL patterns (clean URLs without .html)
             if (
-                (currentPath === '/' && href === '/index.html') ||
-                (currentPath === '/index.html' && href === '/index.html') ||
-                (currentPath === '/home.html' && href === '/home.html') ||
-                (currentPath === '/home' && href === '/home.html') ||
-                (currentPath.includes('/portfolio/directing') && href === '/portfolio/directing.html') ||
-                (currentPath.includes('/portfolio/videography') && href === '/portfolio/videography.html') ||
-                (currentPath.includes('/portfolio/photography') && href === '/portfolio/photography.html') ||
-                (currentPath.includes('/portfolio/video-editing') && href === '/portfolio/video-editing.html') ||
-                (currentPath.includes('/portfolio/graphic-design') && href === '/portfolio/graphic-design.html') ||
-                (currentPath.includes('/store') && href === '/store.html')
+                (currentPath === '/' && href === '/') ||
+                (currentPath === '/index.html' && href === '/') ||
+                (currentPath === '/home' && href === '/home') ||
+                (currentPath === '/home.html' && href === '/home') ||
+                (currentPath.includes('/portfolio/directing') && href === '/portfolio/directing') ||
+                (currentPath.includes('/portfolio/videography') && href === '/portfolio/videography') ||
+                (currentPath.includes('/portfolio/photography') && href === '/portfolio/photography') ||
+                (currentPath.includes('/portfolio/video-editing') && href === '/portfolio/video-editing') ||
+                (currentPath.includes('/portfolio/graphic-design') && href === '/portfolio/graphic-design') ||
+                (currentPath.includes('/store') && href === '/store')
             ) {
                 link.classList.add('active');
             }

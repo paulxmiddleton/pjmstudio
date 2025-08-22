@@ -1,14 +1,14 @@
 ---
 command: "/prime"
-category: "Project Context"
-purpose: "Load complete project context and establish session understanding"
+category: "Session Management"
+purpose: "Load complete project context (alias for /startsession)"
 wave-enabled: false
 performance-profile: "standard"
 ---
 
 # /prime - Project Context Loader
 
-Load and display the complete project context from prime.md to establish session understanding for the PJM Studio medieval-themed portfolio website.
+Load complete project context from CLAUDE.md. This is an alias for `/startsession` to maintain compatibility with existing workflow.
 
 ## Command Syntax
 
@@ -19,35 +19,40 @@ Load and display the complete project context from prime.md to establish session
 
 ## Implementation
 
-Execute prime command with Node.js:
+Execute session memory system:
 
-```javascript
-// Load project context
-await exec('node prime-command.js');
-
-// Alternative direct load
-await exec('node prime-command.js load');
+```bash
+npm run prime
 ```
 
 ## What This Provides
 
-**Project Overview:**
-- ✅ Identity, goals, and design philosophy
-- ✅ Current technical architecture status
-- ✅ Completed features and next priorities
-- ✅ File structure and development commands
-- ✅ Asset optimization details
-- ✅ Known issues and user preferences
+**Complete Project Context:**
+- ✅ Current project state from CLAUDE.md
+- ✅ Neo-brutalist design system details
+- ✅ Technical stack and architecture
+- ✅ Recent session updates and changes
+- ✅ Current priorities and next tasks
+- ✅ Development workflow and commands
 
 ## Purpose
 
-Establishes comprehensive session context for effective assistance with:
-- Medieval-themed portfolio development
-- E-commerce integration planning  
-- Performance optimization
-- Content management
-- Technical architecture decisions
+Establishes session context for:
+- PJM Studio neo-brutalist portfolio development
+- Session continuity and memory
+- Current project state awareness
+- Effective assistance with latest context
+
+## Relationship to Other Commands
+
+- **Equivalent to**: `/startsession`
+- **Counterpart**: `/endsession` (end session and update memory)
+- **Workflow**: Use `/prime` at start, `/endsession` at end
 
 ## Auto-Persona Activation
 
-None - context loading utility command
+None - session management utility command
+
+## Legacy Compatibility
+
+This command maintains compatibility with existing CLAUDE.md instructions that reference "/prime" for session startup.

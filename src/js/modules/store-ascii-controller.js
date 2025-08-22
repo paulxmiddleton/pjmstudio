@@ -23,7 +23,7 @@ export class StoreAsciiController {
                 {
                     id: 'storeAsciiCanvas1',
                     model: 'cube',            // Simple cube model
-                    position: { x: '25%', y: '50%' },   // Left position
+                    position: { x: '25%', y: '35%' },   // Left position
                     size: { width: 520, height: 390 }, // 30% larger size
                     scale: 3.0,               // Moderate scale
                     color: '#ffffff',         // White for contrast
@@ -34,7 +34,7 @@ export class StoreAsciiController {
                 {
                     id: 'storeAsciiCanvas2',
                     model: 'cube',            // Simple cube model
-                    position: { x: '50%', y: '50%' },   // Center position
+                    position: { x: '50%', y: '35%' },   // Center position
                     size: { width: 520, height: 390 }, // 30% larger size
                     scale: 3.0,               // Moderate scale
                     color: '#ffffff',         // White for contrast
@@ -45,7 +45,7 @@ export class StoreAsciiController {
                 {
                     id: 'storeAsciiCanvas3',
                     model: 'cube',            // Simple cube model
-                    position: { x: '75%', y: '50%' },   // Right position
+                    position: { x: '75%', y: '35%' },   // Right position
                     size: { width: 520, height: 390 }, // 30% larger size
                     scale: 3.0,               // Moderate scale
                     color: '#ffffff',         // White for contrast

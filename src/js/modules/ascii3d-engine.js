@@ -105,6 +105,18 @@ export class ASCII3DEngine {
             // Load default model
             await this.loadDefaultModel();
             
+            // TESTING: Add a simple test cube if model loading fails
+            if (!this.currentModel || this.scene.children.length === 0) {
+                console.log('🧪 No model loaded, adding simple test cube for ASCII rendering test');
+                const testGeometry = new THREE.BoxGeometry(2, 2, 2);
+                const testMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+                const testCube = new THREE.Mesh(testGeometry, testMaterial);
+                testCube.name = 'test-cube';
+                this.scene.add(testCube);
+                this.currentModel = testCube;
+                console.log('🧪 Test cube added to scene for ASCII rendering');
+            }
+            
             // Setup event listeners
             this.setupEventListeners();
             
@@ -206,12 +218,105 @@ export class ASCII3DEngine {
             
             // Create ASCII effect instance using Three.js built-in AsciiEffect
             // AsciiEffect constructor: (renderer, charSet, options)
+            console.log('🔤 Creating AsciiEffect with:', {
+                renderer: !!this.renderer,
+                characterSet: this.characterSet.substring(0, 20) + '...', // Show first 20 chars
+                characterCount: this.characterSet.length
+            });
+            
+            // TRY DIFFERENT CONFIGURATION - the issue might be with the options
             this.asciiEffect = new AsciiEffect(this.renderer, this.characterSet, {
                 invert: false,      // Invert colors
                 color: false,       // Color ASCII (slower)
                 alpha: false,       // Transparency
                 block: false,       // Blocked characters
-                resolution: 0.25    // Lower resolution number = higher detail/smaller characters
+                resolution: 0.2     // Try different resolution
+            });
+            
+            // IMMEDIATE TEST: Try rendering a simple scene right after creation
+            console.log('🧪 IMMEDIATE ASCII TEST: Creating test scene for rendering validation');
+            const testScene = new THREE.Scene();
+            const testCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            testCamera.position.z = 5;
+            
+            // Add a simple white cube
+            const testGeo = new THREE.BoxGeometry(1, 1, 1);
+            const testMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const testMesh = new THREE.Mesh(testGeo, testMat);
+            testScene.add(testMesh);
+            
+            // Add basic lighting
+            const testLight = new THREE.AmbientLight(0xffffff, 1);
+            testScene.add(testLight);
+            
+            // Try immediate render test
+            console.log('🧪 Attempting immediate ASCII render test...');
+            try {
+                this.asciiEffect.render(testScene, testCamera);
+                console.log('🧪 Immediate render test completed');
+                
+                // Check result immediately and more aggressively
+                setTimeout(() => {
+                    const immediateContent = this.asciiEffect.domElement?.textContent;
+                    console.log('🧪🧪🧪 IMMEDIATE TEST RESULT 🧪🧪🧪');
+                    console.log('Content length:', immediateContent?.length || 0);
+                    console.log('Has content:', !!(immediateContent && immediateContent.length > 0));
+                    console.log('First 50 chars:', immediateContent?.substring(0, 50) || 'EMPTY');
+                    console.log('ASCII DOM element:', this.asciiEffect.domElement);
+                    console.log('DOM element innerHTML length:', this.asciiEffect.domElement?.innerHTML?.length || 0);
+                    
+                    if (!immediateContent || immediateContent.length === 0) {
+                        console.error('🚨🚨🚨 CRITICAL FAILURE 🚨🚨🚨');
+                        console.error('AsciiEffect is not generating content even with simple test scene');
+                        console.error('This indicates AsciiEffect is fundamentally broken');
+                        
+                        // Try to examine the AsciiEffect object itself
+                        console.log('AsciiEffect object:', this.asciiEffect);
+                        console.log('AsciiEffect methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.asciiEffect)));
+                    } else {
+                        console.log('✅✅✅ SUCCESS: AsciiEffect IS working - main scene issue ✅✅✅');
+                    }
+                }, 200); // Longer delay
+                
+            } catch (immediateError) {
+                console.error('🧪 IMMEDIATE TEST FAILED:', immediateError);
+            }
+            
+            // POSITION THE ASCII ENGINE'S OWN DOM ELEMENT
+            if (this.asciiEffect.domElement) {
+                const asciiElement = this.asciiEffect.domElement;
+                
+                // Apply our centering styles directly to the ASCII engine's element
+                asciiElement.style.cssText = `
+                    position: fixed !important;
+                    top: 50% !important;
+                    left: 50% !important;
+                    transform: translate(-50%, -50%) !important;
+                    width: 400px !important;
+                    height: 300px !important;
+                    background-color: transparent !important;
+                    color: #ffffff !important;
+                    font-family: 'Courier New', 'Monaco', 'Menlo', monospace !important;
+                    font-size: 8px !important;
+                    line-height: 0.9 !important;
+                    letter-spacing: -1px !important;
+                    white-space: pre !important;
+                    overflow: hidden !important;
+                    pointer-events: none !important;
+                    z-index: 9999 !important;
+                    border: none !important;
+                    box-sizing: border-box !important;
+                `;
+                
+                // Append to body to ensure it's visible
+                document.body.appendChild(asciiElement);
+                
+                console.log('✅ ASCII engine DOM element positioned in center');
+            }
+            
+            console.log('🔤 AsciiEffect created:', {
+                effectExists: !!this.asciiEffect,
+                domElementExists: !!this.asciiEffect.domElement
             });
             
             // Set size to match canvas
@@ -322,18 +427,18 @@ export class ASCII3DEngine {
                 throw new Error('ASCII effect DOM element not created');
             }
             
-            // Get canvas position for precise positioning
-            const rect = this.canvas.getBoundingClientRect();
+            // FIXED: Use relative positioning to follow canvas positioning
             const computedStyle = window.getComputedStyle(this.canvas);
             
-            // Apply comprehensive styling
+            // SIMPLE CENTERED POSITIONING
             asciiElement.className = 'ascii-renderer-output';
             asciiElement.style.cssText = `
-                position: absolute;
-                top: ${rect.top + window.scrollY}px;
-                left: ${rect.left + window.scrollX}px;
-                width: ${width}px;
-                height: ${height}px;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                height: 300px;
                 background-color: transparent;
                 color: ${this.textColor};
                 font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
@@ -343,34 +448,21 @@ export class ASCII3DEngine {
                 white-space: pre;
                 overflow: hidden;
                 pointer-events: none;
-                z-index: ${parseInt(computedStyle.zIndex || '0') + 1};
-                border: ${computedStyle.border || 'none'};
-                border-radius: ${computedStyle.borderRadius || '0'};
+                z-index: 9999;
+                border: none;
                 box-sizing: border-box;
             `;
             
-            // Handle parent container
-            const container = this.canvas.parentNode;
-            if (!container) {
-                throw new Error('Canvas parent node not found');
-            }
+            console.log(`🎯 ASCII element positioned at center:`, {
+                canvasId: this.canvas.id,
+                position: 'fixed center with transform'
+            });
             
-            // Ensure container has relative positioning for absolute child
-            if (window.getComputedStyle(container).position === 'static') {
-                container.style.position = 'relative';
-            }
+            console.log('🎯 ASCII element positioned relative to canvas');
             
-            // Insert ASCII element
-            try {
-                container.appendChild(asciiElement);
-            } catch (insertError) {
-                // Fallback: try inserting after canvas
-                if (this.canvas.nextSibling) {
-                    container.insertBefore(asciiElement, this.canvas.nextSibling);
-                } else {
-                    container.appendChild(asciiElement);
-                }
-            }
+            // SIMPLE APPROACH: Just position the ASCII engine's own DOM element
+            // Don't create our own element, just style the engine's element directly
+            console.log('🎯 Using ASCII engine DOM element directly');
             
             // Hide original canvas but keep it for measurements
             this.canvas.style.opacity = '0';
@@ -381,7 +473,7 @@ export class ASCII3DEngine {
             console.log('✅ ASCII DOM setup complete:', {
                 width,
                 height,
-                position: `${rect.left}, ${rect.top}`,
+                position: 'relative to canvas',
                 zIndex: asciiElement.style.zIndex
             });
             
@@ -391,9 +483,10 @@ export class ASCII3DEngine {
             const asciiElement = this.asciiEffect.domElement;
             if (asciiElement && this.canvas.parentNode) {
                 asciiElement.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                     width: ${width}px;
                     height: ${height}px;
                     background: transparent;
@@ -511,13 +604,33 @@ export class ASCII3DEngine {
     
     // Start animation - API method matching ASCIIEngine
     startAnimation() {
-        if (this.isRunning || !this.isInitialized) return this;
+        if (this.isRunning || !this.isInitialized) {
+            console.log('🚫 Animation start blocked:', {
+                isRunning: this.isRunning,
+                isInitialized: this.isInitialized,
+                reason: this.isRunning ? 'already running' : 'not initialized'
+            });
+            return this;
+        }
         
         console.log('▶️ Starting ASCII 3D animation...');
+        console.log('▶️ Animation prerequisites:', {
+            scene: !!this.scene,
+            camera: !!this.camera,
+            renderer: !!this.renderer,
+            asciiEffect: !!this.asciiEffect,
+            domElement: !!this.asciiEffect?.domElement,
+            currentModel: !!this.currentModel
+        });
+        
         this.isRunning = true;
         this.lastFrameTime = performance.now();
+        this.frameCount = 0; // Reset frame count for debugging
+        
+        // Start the animation loop
         this.animate();
         
+        console.log('✅ Animation loop initiated');
         return this;
     }
     
@@ -669,13 +782,84 @@ export class ASCII3DEngine {
     
     // Render frame
     render() {
-        if (!this.asciiEffect || !this.scene || !this.camera) return;
+        if (!this.asciiEffect || !this.scene || !this.camera) {
+            console.warn('🔍 RENDER SKIP: Missing components', {
+                asciiEffect: !!this.asciiEffect,
+                scene: !!this.scene,
+                camera: !!this.camera
+            });
+            return;
+        }
         
         try {
+            // DEEP DEBUG: Log every 60th frame (1 second intervals) to track rendering
+            if (this.frameCount % 60 === 0) {
+                console.log('🎬 RENDER DEBUG frame', this.frameCount, {
+                    asciiEffectExists: !!this.asciiEffect,
+                    domElementExists: !!this.asciiEffect.domElement,
+                    domElementParent: this.asciiEffect.domElement?.parentNode?.tagName,
+                    sceneChildren: this.scene.children.length,
+                    currentModel: !!this.currentModel
+                });
+                
+                // Check if DOM element content is being updated
+                if (this.asciiEffect.domElement) {
+                    const contentLength = this.asciiEffect.domElement.textContent?.length || 0;
+                    console.log('🎬 DOM content length:', contentLength);
+                    if (contentLength === 0) {
+                        console.warn('⚠️ ASCII DOM element is empty after render attempt');
+                    }
+                }
+            }
+            
             // Render with ASCII effect
             this.asciiEffect.render(this.scene, this.camera);
             
+            // ASCII engine will render directly to its own positioned DOM element
+            
+            // IMMEDIATE DEBUG: Check if content was actually rendered (only for first few frames)
+            if (this.frameCount < 5) {
+                setTimeout(() => {
+                    if (this.asciiEffect?.domElement) {
+                        const content = this.asciiEffect.domElement.textContent;
+                        console.log(`🎬 POST-RENDER check frame ${this.frameCount}: Content length = ${content?.length || 0}`);
+                        if (!content || content.length === 0) {
+                            console.warn(`⚠️ Frame ${this.frameCount}: No ASCII content generated by render call`);
+                            
+                            // DEEP DEBUG: Check scene state when rendering fails
+                            console.log('🔍 RENDER FAILURE DEBUG:', {
+                                sceneChildren: this.scene.children.length,
+                                modelExists: !!this.currentModel,
+                                modelInScene: this.currentModel ? this.scene.children.includes(this.currentModel) : false,
+                                modelVisible: this.currentModel ? this.currentModel.visible : false,
+                                modelScale: this.currentModel ? this.currentModel.scale.x : 'no model',
+                                cameraPosition: this.camera ? `${this.camera.position.x.toFixed(2)}, ${this.camera.position.y.toFixed(2)}, ${this.camera.position.z.toFixed(2)}` : 'no camera',
+                                cameraLookingAt: this.camera ? 'should be 0,0,0' : 'no camera',
+                                asciiEffectType: this.asciiEffect.constructor.name
+                            });
+                            
+                            // Try manual test render
+                            console.log('🧪 Attempting manual test render to isolate issue...');
+                            try {
+                                // Force a direct render call to see if it works
+                                this.asciiEffect.render(this.scene, this.camera);
+                                console.log('🧪 Manual render completed - checking for content...');
+                                setTimeout(() => {
+                                    const testContent = this.asciiEffect.domElement.textContent;
+                                    console.log('🧪 Manual render result:', testContent?.length || 0, 'characters');
+                                }, 50);
+                            } catch (manualRenderError) {
+                                console.error('🧪 Manual render failed:', manualRenderError);
+                            }
+                        } else {
+                            console.log(`✅ Frame ${this.frameCount}: ASCII content generated successfully!`);
+                        }
+                    }
+                }, 100); // Check 100ms after render
+            }
+            
         } catch (error) {
+            console.error('❌ RENDER ERROR:', error);
             this.handleError('Render error', error);
         }
     }

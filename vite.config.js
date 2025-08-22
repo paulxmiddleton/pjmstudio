@@ -55,6 +55,10 @@ export default defineConfig({
     watch: {
       include: ['src/**/*', 'index.html', 'home.html'],
     },
+    // Disable CSP entirely for development to allow Three.js
+    headers: {
+      'Content-Security-Policy': "default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data: blob:; connect-src *; worker-src * blob:;"
+    },
   },
   // Asset processing
   assetsInclude: ['**/*.mov', '**/*.webm', '**/*.glb', '**/*.gltf', '**/*.obj', '**/*.stl'],

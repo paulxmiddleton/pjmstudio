@@ -11,7 +11,11 @@
     "checkpoint": "node checkpoint-system.js create",
     "checkpoint-list": "node checkpoint-system.js list",
     "checkpoint-restore": "node checkpoint-system.js restore",
-    "checkpoint-delete": "node checkpoint-system.js delete"
+    "checkpoint-delete": "node checkpoint-system.js delete",
+    "session-start": "node session-memory.js start",
+    "session-end": "node session-memory.js end",
+    "prime": "node session-memory.js start",
+    "endsession": "node session-memory.js end"
   },
   "devDependencies": {
     "sass": "^1.69.5",

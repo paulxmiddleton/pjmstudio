@@ -49,6 +49,9 @@ class ASCII3DTestSuite {
             // Setup keyboard shortcuts
             this.setupKeyboardShortcuts();
             
+            // Position random back link
+            this.positionRandomBackLink();
+            
             // Setup file upload handling
             this.setupFileUpload();
             
@@ -497,6 +500,84 @@ class ASCII3DTestSuite {
             this.engine.stopAnimation();
             this.updateEngineStatus('STOPPED');
         }
+    }
+    
+    // Position the random back link
+    positionRandomBackLink() {
+        const backLink = document.getElementById('randomBackLink');
+        if (!backLink) return;
+        
+        // Get viewport dimensions
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Get element dimensions (approximate)
+        const linkWidth = 60; // approximate width of "back" text with padding
+        const linkHeight = 30; // approximate height with padding
+        
+        // Avoid UI areas
+        const testUI = document.querySelector('.test-ui');
+        const keyboardHelp = document.querySelector('.keyboard-help');
+        
+        // Define safe zones (avoiding UI elements)
+        const safeZones = [
+            // Top left area (avoiding test UI on right)
+            { 
+                minX: 20, 
+                maxX: Math.min(200, viewportWidth * 0.3), 
+                minY: 20, 
+                maxY: Math.min(150, viewportHeight * 0.3) 
+            },
+            // Bottom right area (avoiding keyboard help on left)
+            { 
+                minX: Math.max(viewportWidth * 0.6, viewportWidth - 200), 
+                maxX: viewportWidth - linkWidth - 20, 
+                minY: Math.max(viewportHeight * 0.6, viewportHeight - 150), 
+                maxY: viewportHeight - linkHeight - 20 
+            },
+            // Center areas
+            { 
+                minX: viewportWidth * 0.3, 
+                maxX: viewportWidth * 0.7, 
+                minY: viewportHeight * 0.2, 
+                maxY: viewportHeight * 0.4 
+            },
+            { 
+                minX: viewportWidth * 0.1, 
+                maxX: viewportWidth * 0.4, 
+                minY: viewportHeight * 0.6, 
+                maxY: viewportHeight * 0.8 
+            }
+        ];
+        
+        // Filter safe zones that are actually usable
+        const usableSafeZones = safeZones.filter(zone => 
+            zone.maxX > zone.minX + linkWidth && 
+            zone.maxY > zone.minY + linkHeight &&
+            zone.maxX > 0 && zone.maxY > 0
+        );
+        
+        if (usableSafeZones.length === 0) {
+            // Fallback to simple random positioning
+            const x = Math.random() * Math.max(0, viewportWidth - linkWidth - 40) + 20;
+            const y = Math.random() * Math.max(0, viewportHeight - linkHeight - 40) + 20;
+            backLink.style.left = `${x}px`;
+            backLink.style.top = `${y}px`;
+            return;
+        }
+        
+        // Pick a random safe zone
+        const randomZone = usableSafeZones[Math.floor(Math.random() * usableSafeZones.length)];
+        
+        // Generate random position within the chosen safe zone
+        const x = Math.random() * (randomZone.maxX - randomZone.minX) + randomZone.minX;
+        const y = Math.random() * (randomZone.maxY - randomZone.minY) + randomZone.minY;
+        
+        // Position the element
+        backLink.style.left = `${Math.max(0, x)}px`;
+        backLink.style.top = `${Math.max(0, y)}px`;
+        
+        console.log(`🔗 Back link positioned at (${Math.round(x)}, ${Math.round(y)})`);
     }
     
     // Cleanup

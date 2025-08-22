@@ -1,0 +1,1292 @@
+// Portfolio Pages - Nova Design System Recreation
+@import 'variables';
+
+// ===================================================================
+// CUSTOM NAVIGATION SYSTEM
+// ===================================================================
+// Complete custom navigation styles for portfolio pages
+// ===================================================================
+
+.custom-navigation {
+    // ===== MAIN GROUP CONTROLS =====
+    position: absolute;
+    top: 40px; // MAIN GROUP VERTICAL POSITION CONTROL - moves entire navigation
+    left: -15px; // MAIN GROUP HORIZONTAL POSITION CONTROL - moves entire navigation
+    z-index: 1000; // Keep above other content
+    transform: scale(1.0); // MAIN GROUP SIZE CONTROL - scales entire navigation
+    transform-origin: left top; // Scale from top-left corner
+    
+    // ===== NAVIGATION SKELETON IMAGE =====
+    .nav-skeleton {
+        position: relative;
+        
+        img {
+            width: auto;
+            height: auto;
+            max-width: 200px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+            transition: opacity 0.3s ease;
+            
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+    
+    // ===== NAVIGATION EXTENSION LINE =====
+    // Pure CSS line that wipes left-to-right on portfolio+ hover
+    .nav-skeleton-extension {
+        position: absolute;
+        top: 28px; // EXTENSION VERTICAL POSITION CONTROL - negative moves up, positive moves down
+        left: 187px; // EXTENSION HORIZONTAL POSITION CONTROL - negative moves left, positive moves right
+        width: 100px; // LINE LENGTH CONTROL - adjust line length
+        height: 2px; // LINE THICKNESS CONTROL - adjust line thickness
+        background: $neo-blue; // LINE COLOR CONTROL - matches navigation theme
+        opacity: 1; // Always visible for wipe effect
+        transform: rotate(-35deg); // LINE ANGLE CONTROL - adjust line rotation
+        clip-path: inset(0 100% 0 0); // Hidden state - clipped from right
+        transition: clip-path 0.4s ease; // EXTENSION ANIMATION SPEED CONTROL - left-to-right wipe timing
+        
+        // Optional: Add rounded ends to the line
+        border-radius: 2px;
+        
+        // Optional: Add subtle shadow
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        
+        // Hide the img element since we're not using it
+        img {
+            display: none;
+        }
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 0; // Position relative to skeleton
+        left: 0; // Position relative to skeleton
+    }
+    
+    // ===== INDIVIDUAL NAVIGATION LINKS =====
+    // Each link has independent positioning, sizing, and color controls
+    .nav-link {
+        position: absolute;
+        font-family: Arial, sans-serif;
+        font-weight: 700; // BOLDER FONT WEIGHT
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        
+        // Individual link positioning and styling
+        &.nav-link-1 { // home
+            top: -10px; // LINK 1 VERTICAL POSITION CONTROL
+            left: 35px; // LINK 1 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // LINK 1 SIZE CONTROL
+            color: $neo-blue; // LINK 1 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.nav-link-2 { // portfolio+
+            top: 49px; // LINK 2 VERTICAL POSITION CONTROL
+            left: 117px; // LINK 2 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // LINK 2 SIZE CONTROL
+            color: $neo-blue; // LINK 2 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover - no position animation
+                transition: color 0.1s ease; // Fast color transition only
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.nav-link-3 { // store
+            top: 192px; // LINK 3 VERTICAL POSITION CONTROL
+            left: 120px; // LINK 3 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // LINK 3 SIZE CONTROL
+            color: $neo-blue; // LINK 3 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.nav-link-4 { // about
+            top: 140px; // LINK 4 VERTICAL POSITION CONTROL
+            left: 26px; // LINK 4 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // LINK 4 SIZE CONTROL
+            color: $neo-blue; // LINK 4 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.nav-link-5 { // contact
+            top: 112px; // LINK 5 VERTICAL POSITION CONTROL
+            left: 135px; // LINK 5 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // LINK 5 SIZE CONTROL
+            color: $neo-blue; // LINK 5 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+    }
+    
+    // ===== PORTFOLIO SUBPAGES SYSTEM =====
+    // Container for portfolio subpage links - hidden by default, animated on portfolio+ hover
+    .portfolio-pages {
+        position: absolute;
+        top: -60px; // PORTFOLIO GROUP VERTICAL POSITION CONTROL - moves entire portfolio group
+        left: 35px; // PORTFOLIO GROUP HORIZONTAL POSITION CONTROL - moves entire portfolio group
+    }
+    
+    // ===== INDIVIDUAL PORTFOLIO LINKS =====
+    // Each subpage link with independent controls, staggered animations, and smart hover
+    .portfolio-link {
+        position: absolute;
+        font-family: Arial, sans-serif;
+        font-weight: 700; // Same bold weight as main nav
+        text-decoration: none;
+        cursor: pointer;
+        white-space: nowrap; // Keep two-word links on same line
+        opacity: 0; // Hidden by default
+        transform: translateY(-5px); // Start slightly above for top-to-bottom animation
+        transition: color 0.1s ease, transform 0.6s ease, opacity 0.3s ease; // Fast color transitions for instant hover
+        // Note: transition-delay is set individually for each portfolio link in the animation section
+        pointer-events: none; // Disable interaction when hidden
+        
+        // Individual portfolio link positioning and styling
+        &.portfolio-link-1 { // directing
+            top: 50px; // PORTFOLIO LINK 1 VERTICAL POSITION CONTROL
+            left: 250px; // PORTFOLIO LINK 1 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // PORTFOLIO LINK 1 SIZE CONTROL
+            color: $neo-blue; // PORTFOLIO LINK 1 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.portfolio-link-2 { // videography
+            top: 75px; // PORTFOLIO LINK 2 VERTICAL POSITION CONTROL
+            left: 250px; // PORTFOLIO LINK 2 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // PORTFOLIO LINK 2 SIZE CONTROL
+            color: $neo-blue; // PORTFOLIO LINK 2 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.portfolio-link-3 { // photography
+            top: 100px; // PORTFOLIO LINK 3 VERTICAL POSITION CONTROL
+            left: 250px; // PORTFOLIO LINK 3 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // PORTFOLIO LINK 3 SIZE CONTROL
+            color: $neo-blue; // PORTFOLIO LINK 3 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.portfolio-link-4 { // video editing
+            top: 125px; // PORTFOLIO LINK 4 VERTICAL POSITION CONTROL
+            left: 250px; // PORTFOLIO LINK 4 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // PORTFOLIO LINK 4 SIZE CONTROL
+            color: $neo-blue; // PORTFOLIO LINK 4 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+        
+        &.portfolio-link-5 { // graphic design
+            top: 150px; // PORTFOLIO LINK 5 VERTICAL POSITION CONTROL
+            left: 250px; // PORTFOLIO LINK 5 HORIZONTAL POSITION CONTROL
+            font-size: 16px; // PORTFOLIO LINK 5 SIZE CONTROL
+            color: $neo-blue; // PORTFOLIO LINK 5 COLOR CONTROL
+            
+            &:hover {
+                color: $white; // Turn white on hover
+                transform: translateY(0) translateX(5px); // Combine both transforms
+                transition: color 0.1s ease, transform 0.1s ease; // Fast transition on hover
+                transition-delay: 0s !important; // Override any existing delays for instant hover
+            }
+        }
+    }
+    
+}
+
+// ===================================================================
+// PORTFOLIO+ ANIMATION SYSTEM
+// ===================================================================
+// JavaScript-controlled class-based system for portfolio+ hover effects
+// Includes: extension line wipe, staggered subpage animations, reverse animations
+// ===================================================================
+
+// ===== FORWARD ANIMATIONS (.portfolio-hover) =====
+.custom-navigation.portfolio-hover .nav-skeleton-extension {
+    transform: rotate(-35deg); // Maintain rotation
+    clip-path: inset(0 0 0 0); // Show entire line (left-to-right reveal)
+}
+
+// ===== STAGGERED PORTFOLIO LINK ANIMATIONS =====
+// Each link fades in one after the other with instant hover responsiveness
+.custom-navigation.portfolio-hover .portfolio-link {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; // Enable interaction when visible
+    
+    // Fast transitions for instant hover feedback (no delays for hover interactions)
+    transition: color 0.1s ease, transform 0.6s ease, opacity 0.3s ease;
+    transition-delay: 0s; // No delays for hover - this ensures instant fade-out
+    
+    // ===== INDIVIDUAL STAGGERED DELAYS =====
+    // NOTE: Only opacity/transform have delays, color is always instant (0.1s)
+    // TIMING PATTERN: 0.3s → 0.5s → 0.7s → 0.9s → 1.1s (0.2s intervals)
+    
+    &.portfolio-link-1 { // directing - first to appear
+        transition: color 0.1s ease, transform 0.6s ease 0.3s, opacity 0.3s ease 0.3s;
+        // LINK 1 ANIMATION DELAY: 0.3s (after 0.3s buffer from extension completion)
+    }
+    
+    &.portfolio-link-2 { // videography - second
+        transition: color 0.1s ease, transform 0.6s ease 0.5s, opacity 0.3s ease 0.5s;
+        // LINK 2 ANIMATION DELAY: 0.5s (0.2s after link 1)
+    }
+    
+    &.portfolio-link-3 { // photography - third
+        transition: color 0.1s ease, transform 0.6s ease 0.7s, opacity 0.3s ease 0.7s;
+        // LINK 3 ANIMATION DELAY: 0.7s (0.2s after link 2)
+    }
+    
+    &.portfolio-link-4 { // video editing - fourth
+        transition: color 0.1s ease, transform 0.6s ease 0.9s, opacity 0.3s ease 0.9s;
+        // LINK 4 ANIMATION DELAY: 0.9s (0.2s after link 3)
+    }
+    
+    &.portfolio-link-5 { // graphic design - fifth/last
+        transition: color 0.1s ease, transform 0.6s ease 1.1s, opacity 0.3s ease 1.1s;
+        // LINK 5 ANIMATION DELAY: 1.1s (0.2s after link 4)
+    }
+}
+
+// ===== REVERSE ANIMATIONS (.portfolio-hiding) =====
+// Bottom-to-top staggered fade-out and right-to-left line wipe
+.custom-navigation.portfolio-hiding {
+    .nav-skeleton-extension {
+        // Create right-to-left wipe using clip-path
+        transform: rotate(-35deg);
+        clip-path: inset(0 100% 0 0); // Clip from right to hide the line
+        transition: clip-path 0.4s ease; // EXTENSION HIDE SPEED CONTROL
+        transition-delay: 0.6s; // EXTENSION HIDE DELAY CONTROL - Wait for subpages to fade out first
+    }
+    
+    .portfolio-link {
+        opacity: 0;
+        transform: translateY(-5px);
+        
+        // ===== REVERSE STAGGERED DELAYS =====
+        // TIMING PATTERN: 0s → 0.1s → 0.2s → 0.3s → 0.4s (bottom-to-top sequence)
+        // NOTE: Extension waits 0.6s after last link (0.4s) starts fading = 1.0s total
+        
+        &.portfolio-link-5 { // graphic design - first to disappear (bottom-to-top)
+            transition-delay: 0s; // REVERSE DELAY 1: Immediate (last item fades first)
+        }
+        
+        &.portfolio-link-4 { // video editing - second
+            transition-delay: 0.1s; // REVERSE DELAY 2: 0.1s after previous
+        }
+        
+        &.portfolio-link-3 { // photography - third
+            transition-delay: 0.2s; // REVERSE DELAY 3: 0.1s after previous
+        }
+        
+        &.portfolio-link-2 { // videography - fourth
+            transition-delay: 0.3s; // REVERSE DELAY 4: 0.1s after previous
+        }
+        
+        &.portfolio-link-1 { // directing - last to disappear
+            transition-delay: 0.4s; // REVERSE DELAY 5: 0.1s after previous (first item fades last)
+        }
+    }
+}
+
+// ===================================================================
+// END CUSTOM NAVIGATION SYSTEM
+// ===================================================================
+
+// Import technical mono font
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+// Custom Color Palette - Clean Technical
+$accent-pink: #ff00f6;
+$nova-bg: #fafafa;
+$nova-card-bg: #ffffff;
+$nova-text: #1a1a1a;
+$nova-text-muted: #6b7280;
+$nova-border: #e5e7eb;
+$nova-hover: #f3f4f6;
+
+// Clean Foundation - Nova's Technical Aesthetic
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: $nova-bg;
+    color: $nova-text;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative; // Allow absolute positioning to scroll with content
+}
+
+// Nova-style Loading Screen
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $nova-bg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    
+    &.loaded {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .loading-text {
+        font-family: 'IBM Plex Mono', monospace;
+        color: $accent-pink;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        animation: fadeInOut 1.5s ease-in-out infinite;
+    }
+}
+
+// Nova-style Navigation - Clean Technical Style
+.floating-nav {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    
+    .nav-trigger {
+        width: 44px;
+        height: 44px;
+        display: none; /* Hidden for custom nav implementation */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: $nova-card-bg;
+                border: 1px solid $nova-border;
+        
+        &:hover {
+            background: $nova-hover;
+            border-color: $accent-pink;
+        }
+        
+        .trigger-line {
+            width: 16px;
+            height: 1px;
+            background: $nova-text;
+            transition: all 0.2s ease;
+            transform-origin: center;
+            
+            &:nth-child(2) {
+                width: 12px;
+            }
+        }
+        
+        &.active .trigger-line {
+            &:nth-child(1) {
+                transform: rotate(45deg) translate(3px, 3px);
+            }
+            
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            
+            &:nth-child(3) {
+                transform: rotate(-45deg) translate(3px, -3px);
+            }
+        }
+    }
+    
+    .nav-content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 320px;
+        height: 100vh;
+        background: $nova-card-bg;
+        color: $nova-text;
+        padding: 32px 24px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        border-left: 1px solid $nova-border;
+        
+        &.active {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $nova-border;
+            
+            .nav-title {
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 11px;
+                color: $nova-text-muted;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: lowercase;
+            }
+            
+            .nav-close {
+                font-size: 20px;
+                color: $nova-text-muted;
+                cursor: pointer;
+                transition: color 0.2s ease;
+                
+                &:hover {
+                    color: $accent-pink;
+                }
+            }
+        }
+        
+        .nav-links {
+            .nav-link {
+                display: flex;
+                align-items: center;
+                padding: 12px 0;
+                text-decoration: none;
+                color: $nova-text;
+                border-bottom: 1px solid $nova-border;
+                transition: all 0.2s ease;
+                font-family: Arial, sans-serif;
+                
+                &:hover {
+                    color: $accent-pink;
+                }
+                
+                .link-number {
+                    font-family: Arial, sans-serif;
+                    font-size: 10px;
+                    color: $nova-text-muted;
+                    min-width: 28px;
+                    font-weight: 500;
+                }
+                
+                .link-text {
+                    font-size: 14px;
+                    flex: 1;
+                    margin-left: 12px;
+                    font-weight: 500;
+                }
+                
+                .link-arrow {
+                    font-size: 14px;
+                    color: $nova-text-muted;
+                    opacity: 0;
+                    transform: translateX(-8px);
+                    transition: all 0.2s ease;
+                }
+                
+                &:hover .link-arrow {
+                    opacity: 1;
+                    transform: translateX(0);
+                    color: $accent-pink;
+                }
+            }
+        }
+        
+        .nav-footer {
+            position: absolute;
+            bottom: 32px;
+            left: 24px;
+            right: 24px;
+            
+            .nav-status {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                
+                .status-dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: $nova-text-muted;
+                    
+                    &.active {
+                        background: $accent-pink;
+                    }
+                }
+                
+                .status-text {
+                    font-family: 'IBM Plex Mono', monospace;
+                    font-size: 9px;
+                    color: $nova-text-muted;
+                    text-transform: lowercase;
+                    letter-spacing: 0.1em;
+                }
+            }
+        }
+    }
+}
+
+// Main Portfolio Composition - Nova Style
+.directing-composition {
+    min-height: 100vh;
+    position: relative;
+    background: $nova-bg;
+}
+
+// Nova-style Archive Header - Clean Technical Layout
+.archive-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 32px 20px 24px;
+        gap: 24px;
+    }
+    
+    .header-content {
+        flex: 1;
+        
+        .breadcrumb-placeholder {
+            margin-bottom: 12px;
+            min-height: 16px;
+            // Future breadcrumb navigation will go here
+        }
+        
+        .discipline-title {
+            font-family: Arial, sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: $nova-text;
+            margin-bottom: 16px;
+            letter-spacing: 0.15em;
+        }
+        
+        .discipline-statement {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: $nova-text-muted;
+            line-height: 1.5;
+            max-width: 400px;
+            font-weight: 300;
+        }
+    }
+    
+    .archive-meta {
+        min-width: 280px;
+        
+        @media (max-width: 768px) {
+            min-width: auto;
+            width: 100%;
+        }
+        
+        .meta-label {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: $nova-text-muted;
+            text-transform: lowercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        
+        .meta-data {
+            .meta-line {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                padding: 8px 0;
+                border-bottom: 1px solid $nova-border;
+                
+                .meta-key {
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    color: $nova-text-muted;
+                    font-weight: 400;
+                }
+                
+                .meta-value {
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    color: $nova-text;
+                    text-align: right;
+                    font-weight: 500;
+                    
+                    &.active {
+                        color: $accent-pink;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Nova-style Portfolio Header
+.portfolio-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
+    
+    @media (max-width: 768px) {
+        padding: 32px 20px 24px;
+    }
+    
+    .portfolio-title {
+        font-family: Arial, sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 600;
+        line-height: 1.2;
+        color: $nova-text;
+        margin-bottom: 8px;
+        letter-spacing: 0.15em;
+    }
+    
+    .portfolio-subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: $nova-text-muted;
+        margin-bottom: 0;
+        font-weight: 300;
+    }
+}
+
+// Nova-style Portfolio Overview Section
+.portfolio-overview {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    
+    @media (max-width: 768px) {
+        padding: 0 20px 32px;
+    }
+}
+
+// Nova-style Portfolio Grid
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+// Nova-style Portfolio Cards - Full Clickable Cards
+.portfolio-card {
+    background: $nova-card-bg;
+    border: 1px solid $nova-border;
+    padding: 24px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    
+    &:hover {
+        transform: translateY(-2px);
+        border-color: $accent-pink;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    &:focus {
+        outline: 2px solid $accent-pink;
+        outline-offset: 2px;
+    }
+    
+    &:hover .explore-link::after {
+        transform: translateX(2px);
+    }
+    
+    .card-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+        
+        .card-title {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: $nova-text;
+            margin-bottom: 8px;
+            letter-spacing: 0.08em;
+            line-height: 1.3;
+        }
+        
+        .card-description {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: $nova-text-muted;
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+    }
+    
+    .card-icon {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        
+        .category-icon {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+            filter: brightness(0) saturate(100%) invert(43%) sepia(7%) saturate(347%) hue-rotate(202deg) brightness(95%) contrast(85%);
+            display: block;
+        }
+    }
+    
+    &:hover .category-icon {
+        opacity: 1;
+        transform: scale(1.05);
+        filter: brightness(0) saturate(100%) invert(6%) sepia(100%) saturate(7498%) hue-rotate(293deg) brightness(200%) contrast(90%);
+    }
+}
+
+// Special styling for directing card with full background image
+.portfolio-card.directing-card {
+    position: relative;
+    overflow: hidden;
+    
+    .card-background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/src/assets/images/icons/directing-for-pcard.png');
+        background-size: cover;
+        background-position: center 12%;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        z-index: 0;
+        transition: all 0.3s ease;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0);
+            mix-blend-mode: multiply;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+    }
+    
+    .card-content {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-radius: 0;
+        padding: 16px;
+        margin: 8px;
+        transition: all 0.3s ease;
+        height: calc(100% - 16px);
+        
+        .card-title {
+            color: $nova-text;
+            text-shadow: none;
+            font-weight: 600;
+            margin-bottom: 0;
+            position: relative;
+        }
+        
+        .card-description {
+            color: $nova-text;
+            text-shadow: none;
+            font-weight: 600;
+            margin: 0;
+            position: absolute;
+            bottom: -16px;
+            left: 16px;
+            right: 16px;
+        }
+    }
+    
+    &:hover {
+        border-color: #ff0000;
+        
+        .card-background-image {
+            transform: scale(1.05);
+            opacity: 0.9;
+            
+            &::after {
+                background: rgba(255, 0, 0, 0.4);
+            }
+        }
+        
+        .card-content {
+            background: transparent;
+            transform: translateY(-2px);
+            
+            .card-title,
+            .card-description {
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+// Nova-style Portfolio Archive Grid
+.portfolio-archive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    
+    @media (max-width: 768px) {
+        padding: 24px 20px 32px;
+    }
+    
+    .archive-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        
+        .project-block {
+            background: $nova-card-bg;
+            border: 1px solid $nova-border;
+                        overflow: hidden;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            min-height: 320px;
+            position: relative;
+            
+            &:hover {
+                transform: translateY(-2px);
+                border-color: $accent-pink;
+            }
+            
+            &.feature {
+                grid-column: span 2;
+                min-height: 400px;
+                
+                @media (max-width: 768px) {
+                    grid-column: span 1;
+                    min-height: 320px;
+                }
+            }
+            
+            .placeholder-content {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                
+                .placeholder-pattern {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 60%;
+                    background: $nova-hover;
+                    
+                    &.blue-diagonal {
+                        background: linear-gradient(45deg, $nova-hover 0%, lighten($accent-pink, 30%) 100%);
+                    }
+                    
+                    &.blue-gradient {
+                        background: linear-gradient(135deg, $accent-pink 0%, lighten($accent-pink, 20%) 100%);
+                    }
+                    
+                    &.blue-blocks {
+                        background: $accent-pink;
+                        opacity: 0.1;
+                    }
+                    
+                    &.black-lines,
+                    &.black-solid {
+                        background: $nova-text;
+                        opacity: 0.05;
+                    }
+                    
+                    &.alternating {
+                        background: repeating-linear-gradient(
+                            45deg,
+                            $nova-hover,
+                            $nova-hover 10px,
+                            transparent 10px,
+                            transparent 20px
+                        );
+                    }
+                }
+                
+                .project-overlay {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: $nova-card-bg;
+                    padding: 24px;
+                    border-top: 1px solid $nova-border;
+                    
+                    .project-number {
+                        font-family: Arial, sans-serif;
+                        font-size: 10px;
+                        color: $nova-text-muted;
+                        text-transform: lowercase;
+                        letter-spacing: 0.1em;
+                        margin-bottom: 8px;
+                    }
+                    
+                    .project-title {
+                        font-family: Arial, sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: $nova-text;
+                        margin-bottom: 12px;
+                        letter-spacing: 0.08em;
+                        line-height: 1.3;
+                    }
+                    
+                    .project-meta {
+                        display: flex;
+                        gap: 8px;
+                        margin-bottom: 12px;
+                        
+                        .project-format,
+                        .project-year {
+                            font-family: Arial, sans-serif;
+                            font-size: 9px;
+                            color: $nova-text-muted;
+                            padding: 4px 8px;
+                            background: $nova-hover;
+                                                        text-transform: lowercase;
+                            letter-spacing: 0.05em;
+                        }
+                    }
+                    
+                    .project-description {
+                        font-family: Arial, sans-serif;
+                        font-size: 12px;
+                        color: $nova-text-muted;
+                        line-height: 1.4;
+                        font-weight: 300;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Copyright Mark
+.copyright-mark {
+    position: absolute;
+    bottom: $space-8;
+    left: $space-8;
+    z-index: 10;
+    
+    span {
+        @include text-thick();
+        font-size: 9px;
+        color: $off-grey;
+        opacity: 0.6;
+        
+        &:hover {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+    }
+}
+
+// Avant-garde Background Composition
+.background-composition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    
+    .composition-element {
+        position: absolute;
+        background: $off-white;
+        opacity: 0.2;
+        
+        &.element-1 {
+            top: 25%;
+            right: 30%;
+            width: 180px;
+            height: 1px;
+            transform: rotate(35deg);
+        }
+        
+        &.element-2 {
+            bottom: 35%;
+            left: 20%;
+            width: 1px;
+            height: 140px;
+            background: $neo-blue;
+            opacity: 0.15;
+        }
+        
+        &.element-3 {
+            top: 65%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+            border: 1px solid $off-grey;
+            background: transparent;
+            transform: rotate(45deg);
+            opacity: 0.1;
+        }
+    }
+}
+
+// Nova-style Animations
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Scroll-based animations
+.project-block,
+.manifesto-text,
+.process-stages,
+.archive-meta {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+// Mobile Responsive - Maintain Brutalist Integrity
+@media (max-width: $tablet) {
+    .archive-header {
+        .discipline-title {
+            font-size: clamp(3.5rem, 15vw, 7rem);
+        }
+    }
+    
+    .floating-nav {
+        top: $space-4;
+        right: $space-4;
+        
+        .nav-content {
+            width: 100vw;
+            padding: $space-8 $space-4;
+        }
+    }
+    
+    .archive-meta {
+        .meta-data .meta-line {
+            min-width: auto;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .archive-header {
+        .discipline-title {
+            font-size: clamp(2.8rem, 18vw, 5.5rem);
+            line-height: 0.9;
+        }
+    }
+    
+    .portfolio-archive .archive-grid {
+        gap: $space-3;
+    }
+    
+    .process-fragment .process-stages {
+        grid-template-columns: 1fr;
+        gap: $space-6;
+    }
+}
+
+// Nova-style Footer
+.realm-footer {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    padding: 32px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid $nova-border;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+        padding: 24px 20px;
+    }
+    
+    .footer-logo {
+        justify-self: start;
+        
+        .footer-logo-img {
+            height: 60px;
+            width: auto;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .footer-socials {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-self: center;
+        
+        @media (max-width: 768px) {
+            gap: 12px;
+        }
+        
+        .scroll-link {
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: $nova-text-muted;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            
+            &:hover {
+                color: $accent-pink;
+                transform: translateY(-1px);
+                
+                img {
+                    filter: brightness(0) saturate(100%) invert(13%) sepia(100%) saturate(7498%) hue-rotate(293deg) brightness(200%) contrast(90%); /* Maximum bright #ff00f6 magenta-pink */
+                }
+            }
+            
+            svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
+            }
+            
+            img {
+                width: 120%; /* 20% larger than other icons */
+                height: 120%; /* 20% larger than other icons */
+                object-fit: contain;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 1; /* Remove transparency - color will be controlled by filter */
+                transition: opacity 0.2s ease; /* Only transition opacity, not filter */
+                filter: brightness(0) saturate(100%) invert(43%) sepia(7%) saturate(347%) hue-rotate(202deg) brightness(95%) contrast(85%); /* Match exact grey of SVG icons */
+                
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    
+    .copyright {
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+        color: $nova-text-muted;
+        text-transform: lowercase;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        justify-self: end;
+        
+        @media (max-width: 768px) {
+            order: -1;
+            justify-self: center;
+        }
+    }
+}

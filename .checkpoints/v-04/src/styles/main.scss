@@ -1,0 +1,84 @@
+// main.scss - Neo-Brutalist Design System
+@import 'variables';
+
+// Base Reset with approved palette
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+body {
+    font-family: $font-system;
+    background: $bg-primary;
+    color: $white;
+    position: relative;
+    font-weight: $font-normal;
+    line-height: 1.4;
+}
+
+// ASCII Animation Canvas support
+#asciiCanvas {
+    background-color: $neo-blue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+}
+
+// Background context classes using approved palette
+.bg-primary {
+    background: $bg-primary;
+    color: $white;
+}
+
+.bg-content {
+    background: $bg-content;
+    color: $black;
+}
+
+.bg-content-alt {
+    background: $bg-content-alt;
+    color: $black;
+}
+
+.bg-content-accent {
+    background: $bg-content-accent;
+    color: $black;
+}
+
+// Typography system classes
+.text-thin {
+    @include text-thin();
+}
+
+.text-thick {
+    @include text-thick();
+}
+
+// Letter spacing utility classes
+.tracking--wide {
+    letter-spacing: $tracking-wide !important;
+}
+
+.tracking--xwide {
+    letter-spacing: $tracking-xwide !important;
+}
+
+// Strategic background transitions
+.section-split {
+    @include section-split($neo-blue, $off-white);
+}
+
+.brutal-divider {
+    @include brutal-divider();
+}
